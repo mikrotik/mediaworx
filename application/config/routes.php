@@ -83,4 +83,8 @@ $route['knowledge-base']  = "clients/knowledge_base";
 $route['knowledge-base/(:any)']  = "clients/knowledge_base/$1";
 
 /* API */
-$route['service']  = "service/v1/chatbot/init"; // Fall into Error
+
+/*
+ * All dialogs goes through dialog controller
+ */
+$route['mediaworx/v1']  = "mediaworx/v1/dialog";

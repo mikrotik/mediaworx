@@ -608,3 +608,16 @@ function current_full_url()
     $url = $CI->config->site_url($CI->uri->uri_string());
     return $_SERVER['QUERY_STRING'] ? $url . '?' . $_SERVER['QUERY_STRING'] : $url;
 }
+
+function getAgentList($userid){
+    $CI =& get_instance();
+
+    $CI->db->where('userid',$userid);
+    $agents = $CI->db->get('tblagents')->result_array();
+
+    if ($agents) {
+        return $agents;
+    }
+
+    return false;
+}

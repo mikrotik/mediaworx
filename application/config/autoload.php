@@ -114,6 +114,7 @@ $autoload['helper'] = array(
         'perfex_themes',
         'perfex_theme_style',
         'perfex_constants',
+        'perfex_uuid'
     );
 
 if(file_exists(APPPATH.'helpers/my_functions_helper.php')){

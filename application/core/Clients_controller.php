@@ -10,10 +10,15 @@ class Clients_controller extends CRM_Controller
     public $add_scripts = true;
     public $use_submenu = true;
     public $use_navigation = true;
+    public $wt_agent;
 
     function __construct()
     {
         parent::__construct();
+
+        $session = $this->session->get_userdata();
+
+        $this->wt_agent = $session['wt_agent'];
 
         $language = load_client_language();
 

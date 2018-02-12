@@ -26,7 +26,7 @@
 		 <?php if(get_option('use_recaptcha_customers_area') == 1 && get_option('recaptcha_secret_key') != '' && get_option('recaptcha_site_key') != '' && is_connected('google.com')){ ?>
           <div class="g-recaptcha" data-sitekey="<?php echo get_option('recaptcha_site_key'); ?>"></div>
           <?php echo form_error('g-recaptcha-response'); ?>
-      <?php } ?>
+      		<?php } ?>
 		<div class="checkbox">
 		<input type="checkbox" name="remember" id="remember">
 			<label for="remember">
