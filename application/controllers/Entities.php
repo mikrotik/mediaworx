@@ -100,7 +100,7 @@ class Entities extends Clients_controller
                     if ($success) {
                         set_alert('success', _l('updated_successfuly', _l('entities')));
                     }
-                    redirect(site_url('entities/'));
+                    redirect(site_url('entities/entity/'.$id));
                 }
             }
         }

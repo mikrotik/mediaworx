@@ -107,7 +107,6 @@ class Intents_model extends CRM_Model
 
     public function update($data = array(),$id = ""){
 
-
         unset($data['events']);
 
         $this->db->where('id', $id);
@@ -132,9 +131,12 @@ class Intents_model extends CRM_Model
                 );
                 $this->db->insert('tblintentsusersays',$usersayData);
                 $usersayid = $this->db->insert_id();
-                $this->setParameters($data['parameters'][$key],$data['action'],$usersayid,$id);
+                $this->setParameters($data['parameters'][$key],$usersayid,$id);
             }
         }
+
+//        exit();
+
 
         if (isset($data['actions'])){
 
@@ -165,9 +167,12 @@ class Intents_model extends CRM_Model
 
     }
 
-    private function setParameters($data,$action,$usersayid,$id){
+    private function setParameters($data,$usersayid,$id){
+
 
         if (isset($data)){
+//            echo '<pre>';
+            $parameterData = array();
 
             foreach ($data as $parameter){
                     $parameterData = array(
@@ -178,6 +183,8 @@ class Intents_model extends CRM_Model
                         'entity'=>$parameter['entity'],
                         'resolved_value'=>$parameter['resolved_value'],
                     );
+
+//                print_r($parameterData);
                     $this->db->insert('tblintentsusersaysparameters',$parameterData);
             }
 

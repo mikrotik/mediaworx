@@ -1779,6 +1779,27 @@ function getUsersayParameters($id){
     return false;
 }
 
+function getUsersaysParameters($usersayid){
+
+    $sql = 'SELECT ius.id,ius.intentid,ius.usersay,iusp.parameter_name,iusp.entity,iusp.resolved_value FROM mediaworx.tblintentsusersays ius LEFT JOIN
+mediaworx.tblintentsusersaysparameters iusp ON (ius.id = iusp.usersayid) WHERE ius.id = '.$usersayid;
+
+    $CI = & get_instance();
+
+    foreach ($CI->db->query($sql)->result_array() as $usersay){
+
+        $usersays[] = array(
+            'parameter_name'=>$usersay['parameter_name'],
+            'entity'=>$usersay['entity'],
+            'resolved_value'=>$usersay['resolved_value']
+        );
+    }
+
+
+    return $usersays;
+
+}
+
 function getIntentActions($action){
     $CI = & get_instance();
 

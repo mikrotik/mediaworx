@@ -108,7 +108,7 @@ class Intents extends Clients_controller
                     if ($success) {
                         set_alert('success', _l('updated_successfuly', _l('intents')));
                     }
-                    redirect(site_url('intents/'));
+                    redirect(site_url('intents/intent/'.$id));
                 }
             }
         }
