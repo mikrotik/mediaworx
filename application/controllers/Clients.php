@@ -17,6 +17,7 @@ class Clients extends Clients_controller
         $this->load->model('reports_model');
         $data['payments_years'] = $this->reports_model->get_distinct_customer_invoices_years();
 
+        $data['bodyclass'] = 'sidebar-mini skin-blue-light';
         $data['title'] = get_option('companyname');
         $this->data    = $data;
         $this->view    = 'home';
@@ -1162,7 +1163,7 @@ class Clients extends Clients_controller
         } else {
             $data['title'] = _l('clients_login_heading_no_register');
         }
-        $data['bodyclass'] = 'customers_login';
+        $data['bodyclass'] = 'customers_login login-page';
         $this->data        = $data;
         $this->view        = 'login';
         $this->layout();

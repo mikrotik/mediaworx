@@ -28,6 +28,8 @@ define('STAFF_PROFILE_IMAGES_FOLDER',FCPATH .'uploads/staff_profile_images' . '/
 define('CONTACT_PROFILE_IMAGES_FOLDER',FCPATH .'uploads/client_profile_images' . '/');
 // Newsfeed attachments
 define('NEWSFEED_FOLDER',FCPATH . 'uploads/newsfeed' . '/');
+// Agent images folder
+define('AGENT_IMAGES_FOLDER',FCPATH .'uploads/agent_images' . '/');
 // Contracts attachments
 define('CONTRACTS_UPLOADS_FOLDER',FCPATH . 'uploads/contracts' . '/');
 // Tasks attachments
@@ -46,3 +48,5 @@ define('LEAD_ATTACHMENTS_FOLDER',FCPATH . 'uploads/leads' . '/');
 define('PROJECT_ATTACHMENTS_FOLDER',FCPATH . 'uploads/projects' . '/');
 // Project discussions attachments
 define('PROJECT_DISCUSSION_ATTACHMENT_FOLDER',FCPATH . 'uploads/discussions' . '/');
+// Vendor
+define('VENDOR_FOLDER',FCPATH . 'vendor' . '/');

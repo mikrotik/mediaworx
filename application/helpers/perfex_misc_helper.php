@@ -1733,3 +1733,77 @@ function get_weekdays_between_dates($start_time,$end_time){
 
     return $weeks;
 }
+function checkSpeechContentParameters($speech,$agentid){
+
+    $CI = & get_instance();
+
+    $CI->db->select('tblentities.entity_name,tblentitiesreferences.reference,tblentitiesreferences.synonym');
+    $CI->db->from('tblentitiesreferences');
+    $CI->db->join('tblentities', 'tblentities.id = tblentitiesreferences.entityid');
+    $CI->db->where('tblentitiesreferences.agentid',$agentid);
+    $synonyms = $CI->db->get()->result_array();
+
+    $parameters=array();
+    foreach ($synonyms as $synonym){
+
+        $words = explode(',',$synonym['synonym']);
+
+        foreach ($words as $word){
+
+            if (strstr(strtolower($speech), strtolower($word))){
+
+                $parameters[] = array(
+                   'parameter_name' => $synonym['entity_name'],
+                    'entity' => '@'.$synonym['entity_name'],
+                   'resolved_value' => $word,
+                );
+            }
+        }
+    }
+
+    return $parameters;
+}
+
+function getUsersayParameters($id){
+
+    $CI = & get_instance();
+
+    if (is_numeric($id)){
+
+        $CI->db->where('usersayid',$id);
+        $intentsusersaysparameters = $CI->db->get('tblintentsusersaysparameters')->result_array();
+
+        return $intentsusersaysparameters;
+    }
+
+    return false;
+}
+
+function getIntentActions($action){
+    $CI = & get_instance();
+
+    $CI->db->where('action',$action);
+    $actions =  $CI->db->get('tblintentsaction')->result_array();
+
+    if ($action) {
+        return $actions;
+    }
+
+    return false;
+
+}
+
+function getParametersByName($parameter_name){
+
+    $CI = & get_instance();
+
+    $CI->db->where('parameter_name',substr($parameter_name,1));
+    $CI->db->limit(1);
+    $parameter =  $CI->db->get('tblintentsusersaysparameters')->row();
+
+    if ($parameter){
+        return $parameter;
+    }
+
+    return false;
+}

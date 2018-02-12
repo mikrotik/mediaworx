@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-define('APP_BASE_URL','http://dev.mediaworx.io/');
+define('APP_BASE_URL','http://18.195.189.153/');
 
 /*
 |--------------------------------------------------------------------------
