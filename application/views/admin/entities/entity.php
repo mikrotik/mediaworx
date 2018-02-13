@@ -66,8 +66,7 @@
                                                             <td><?php echo $value['synonym']?>
                                                                 <input type="hidden" name="entity[<?php echo $rowvalues?>][synonym]" value="<?php echo $value['synonym']?>">
                                                             </td>
-                                                            <td><button class="btn btn-info btn-icon btnedit-values" type="button" onclick="editValues('<?php echo $rowvalues?>');" id="btnedit-values"><i class="fa fa-edit"></i> Edit</td>
-                                                            <td><button class="btn btn-danger btn-icon btnremove-values" type="button" onclick="removeValues('<?php echo $rowvalues?>'); " id="btnremove-values"><i class="fa fa-minus-square-o"></i> Remove</td>
+                                                            <td><button class="btn btn-info btn-icon btnedit-values" type="button" onclick="editValues('<?php echo $rowvalues?>');" id="btnedit-values"><i class="fa fa-edit"></i> Edit | <button class="btn btn-danger btn-icon btnremove-values" type="button" onclick="removeValues('<?php echo $rowvalues?>'); " id="btnremove-values"><i class="fa fa-minus-square-o"></i> Remove</td>
                                                         </tr>
                                                         <?php $rowvalues++;} ?>
                                                 <?php } ?>
@@ -102,8 +101,7 @@
                 html = "<tr id='reference-" + rowvalues + "'>";
                 html += '<td>' + reference + '<input type="hidden" name="entity['+rowvalues+'][reference]" value="'+reference+'"></td>';
                 html += '<td>' + synonyms + '<input type="hidden" name="entity['+rowvalues+'][synonym]" value="'+synonyms+'"></td>';
-                html += '<td class=""><button class="btn btn-info btn-icon btnedit-values" type="button" onclick="editValues(\''+rowvalues+'\');"><i class="fa fa-edit"></i> Edit</td>';
-                html += '<td class=""><button class="btn btn-danger btn-icon btnremove-values" type="button" onclick="removeValues(\''+rowvalues+'\');"><i class="fa fa-minus-square-o"></i> Remove</td>';
+                html += '<td class=""><button class="btn btn-info btn-icon btnedit-values" type="button" onclick="editValues(\''+rowvalues+'\');"><i class="fa fa-edit"></i> Edit | <button class="btn btn-danger btn-icon btnremove-values" type="button" onclick="removeValues(\''+rowvalues+'\');"><i class="fa fa-minus-square-o"></i> Remove</td>';
                 html += '</tr>';
 
                 $('.entity_values tbody').append(html);
