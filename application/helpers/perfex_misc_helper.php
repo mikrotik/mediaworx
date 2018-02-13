@@ -1130,6 +1130,13 @@ function get_permission_conditions()
             'create' => true,
             'delete' => true
         ),
+        'dialogflow' => array(
+            'view' => true,
+            'view_own' => false,
+            'edit' => true,
+            'create' => true,
+            'delete' => true
+        ),
         'email_templates' => array(
             'view' => true,
             'view_own' => false,
@@ -1742,6 +1749,15 @@ function checkSpeechContentParameters($speech,$agentid){
     $CI->db->join('tblentities', 'tblentities.id = tblentitiesreferences.entityid');
     $CI->db->where('tblentitiesreferences.agentid',$agentid);
     $synonyms = $CI->db->get()->result_array();
+
+    if (!$synonyms){
+
+        $CI->db->select('tblentities.entity_name,tblentitiesreferences.reference,tblentitiesreferences.synonym');
+        $CI->db->from('tblentitiesreferences');
+        $CI->db->join('tblentities', 'tblentities.id = tblentitiesreferences.entityid');
+        $CI->db->where('tblentitiesreferences.agentid',0);
+        $synonyms = $CI->db->get()->result_array();
+    }
 
     $parameters=array();
     foreach ($synonyms as $synonym){
