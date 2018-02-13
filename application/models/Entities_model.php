@@ -59,7 +59,7 @@ class Entities_model extends CRM_Model
         foreach ($entityreferences as $reference){
             $referenceData = array(
                 'entityid'=>$entityid,
-                'agentid'=>$this->wt_agent,
+                'agentid'=>(isset($this->wt_agent) ? $this->wt_agent : 0),
                 'reference'=>$reference['reference'],
                 'synonym'=>$reference['synonym']
             );
