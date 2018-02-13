@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9274056-e247-49ca-ac8d-4bd0d79f2f19" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/admin/Entities.php" afterPath="$PROJECT_DIR$/application/controllers/admin/Entities.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/libraries/Perfex_base.php" afterPath="$PROJECT_DIR$/application/libraries/Perfex_base.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/helpers/perfex_misc_helper.php" afterPath="$PROJECT_DIR$/application/helpers/perfex_misc_helper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/entities/entity.php" afterPath="$PROJECT_DIR$/application/views/admin/entities/entity.php" />
     </list>
     <ignored path="mediaworx.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,14 +34,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="perfex_misc_helper.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/helpers/perfex_misc_helper.php">
+      <file leaf-file-name="entity.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/admin/entities/entity.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.736">
-              <caret line="1134" column="32" selection-start-line="1134" selection-start-column="32" selection-end-line="1134" selection-end-column="32" />
-              <folding>
-                <marker date="1518514333723" expanded="true" signature="57207:57434" placeholder="SELECT ius.i..tblintentsusersays..." />
-              </folding>
+            <state vertical-scroll-proportion="0.544">
+              <caret line="105" column="93" selection-start-line="105" selection-start-column="93" selection-end-line="105" selection-end-column="93" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -110,11 +106,11 @@
         <option value="$PROJECT_DIR$/application/views/admin/tables/entities.php" />
         <option value="$PROJECT_DIR$/application/views/admin/staff/member.php" />
         <option value="$PROJECT_DIR$/application/views/admin/includes/scripts.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/entities/entity.php" />
         <option value="$PROJECT_DIR$/application/models/Entities_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/admin/Entities.php" />
         <option value="$PROJECT_DIR$/application/libraries/Perfex_base.php" />
         <option value="$PROJECT_DIR$/application/helpers/perfex_misc_helper.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/entities/entity.php" />
       </list>
     </option>
   </component>
@@ -204,7 +200,55 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="helpers" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mediaworx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mediaworx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mediaworx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mediaworx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entities" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -567,14 +611,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/tables/entities.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.504">
-          <caret line="21" column="105" selection-start-line="21" selection-start-column="105" selection-end-line="21" selection-end-column="105" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Staff_model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36">
@@ -655,14 +691,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/entities/entity.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-51.041668">
-          <caret line="124" column="9" selection-start-line="124" selection-start-column="9" selection-end-line="124" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Intents.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6576">
@@ -703,6 +731,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/helpers/perfex_misc_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.736">
+          <caret line="1134" column="32" selection-start-line="1134" selection-start-column="32" selection-end-line="1134" selection-end-column="32" />
+          <folding>
+            <marker date="1518514333723" expanded="true" signature="-1:-1" placeholder="SELECT ius.i..tblintentsusersays..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/tables/entities.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48">
+          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="100" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/admin/Entities.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.541667">
@@ -711,13 +757,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/helpers/perfex_misc_helper.php">
+    <entry file="file://$PROJECT_DIR$/application/views/admin/entities/entity.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.736">
-          <caret line="1134" column="32" selection-start-line="1134" selection-start-column="32" selection-end-line="1134" selection-end-column="32" />
-          <folding>
-            <marker date="1518514333723" expanded="true" signature="57207:57434" placeholder="SELECT ius.i..tblintentsusersays..." />
-          </folding>
+        <state vertical-scroll-proportion="0.544">
+          <caret line="105" column="93" selection-start-line="105" selection-start-column="93" selection-end-line="105" selection-end-column="93" />
+          <folding />
         </state>
       </provider>
     </entry>

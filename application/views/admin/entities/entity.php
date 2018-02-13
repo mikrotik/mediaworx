@@ -66,7 +66,8 @@
                                                             <td><?php echo $value['synonym']?>
                                                                 <input type="hidden" name="entity[<?php echo $rowvalues?>][synonym]" value="<?php echo $value['synonym']?>">
                                                             </td>
-                                                            <td><button class="btn btn-danger btn-icon" type="button" onclick="removeValues('<?php echo $rowvalues?>');"id="btnremove-values"><i class="fa fa-minus-square-o"></i> Remove</td>
+                                                            <td><button class="btn btn-info btn-icon btnedit-values" type="button" onclick="editValues('<?php echo $rowvalues?>');" id="btnedit-values"><i class="fa fa-edit"></i> Edit</td>
+                                                            <td><button class="btn btn-danger btn-icon btnremove-values" type="button" onclick="removeValues('<?php echo $rowvalues?>'); " id="btnremove-values"><i class="fa fa-minus-square-o"></i> Remove</td>
                                                         </tr>
                                                         <?php $rowvalues++;} ?>
                                                 <?php } ?>
@@ -93,12 +94,16 @@
             var reference = $('input[name=\'reference\']').val();
             var synonyms = $('input[name=\'synonyms\']').val();
 
+            $('.btnedit-values').removeAttr('disabled');
+            $('.btnremove-values').removeAttr('disabled');
+
             if (reference != '') {
 
                 html = "<tr id='reference-" + rowvalues + "'>";
                 html += '<td>' + reference + '<input type="hidden" name="entity['+rowvalues+'][reference]" value="'+reference+'"></td>';
                 html += '<td>' + synonyms + '<input type="hidden" name="entity['+rowvalues+'][synonym]" value="'+synonyms+'"></td>';
-                html += '<td class=""><button class="btn btn-danger btn-icon" type="button" onclick="removeValues(\''+rowvalues+'\');"id="btnremove-values"><i class="fa fa-minus-square-o"></i> Remove</td>';
+                html += '<td class=""><button class="btn btn-info btn-icon btnedit-values" type="button" onclick="editValues(\''+rowvalues+'\');"><i class="fa fa-edit"></i> Edit</td>';
+                html += '<td class=""><button class="btn btn-danger btn-icon btnremove-values" type="button" onclick="removeValues(\''+rowvalues+'\');"><i class="fa fa-minus-square-o"></i> Remove</td>';
                 html += '</tr>';
 
                 $('.entity_values tbody').append(html);
@@ -115,6 +120,25 @@
     function removeValues(id){
 
         if (id){
+            $('#reference-'+id).remove();
+            return true
+        }
+
+        return false;
+
+    }
+
+    function editValues(id){
+
+        var reference = $('input[name=\'entity['+id+'][reference]\']').val();
+        var synonyms = $('input[name=\'entity['+id+'][synonym]\']').val();
+
+
+        if (id){
+            $('.btnedit-values').attr('disabled','disabled');
+            $('.btnremove-values').attr('disabled','disabled');
+            $('input[name=\'reference\']').val(reference);
+            $('input[name=\'synonyms\']').tagsinput('add', synonyms);
             $('#reference-'+id).remove();
             return true
         }
