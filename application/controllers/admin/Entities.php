@@ -10,8 +10,8 @@ class Entities extends Admin_controller
 
     public function index(){
 
-        if (!has_permission('entities', '', 'view')) {
-            access_denied('entities');
+        if (!has_permission('dialogflow', '', 'view')) {
+            access_denied('dialogflow');
         }
         if ($this->input->is_ajax_request()) {
             $this->perfex_base->get_table_data('entities');
@@ -30,8 +30,8 @@ class Entities extends Admin_controller
             $data['userid']=0;
 
             if ($id == '') {
-                if (!has_permission('entities', '', 'create')) {
-                    access_denied('entities');
+                if (!has_permission('dialogflow', '', 'create')) {
+                    access_denied('dialogflow');
                 }
                 $id = $this->entities_model->add($data);
                 if ($id) {
@@ -39,8 +39,8 @@ class Entities extends Admin_controller
                     redirect(admin_url('entities/entity/' . $id));
                 }
             } else {
-                if (!has_permission('entities', '', 'edit')) {
-                    access_denied('entities');
+                if (!has_permission('dialogflow', '', 'edit')) {
+                    access_denied('dialogflow');
                 }
 
                 $success = $this->entities_model->update($data, $id);
@@ -68,8 +68,8 @@ class Entities extends Admin_controller
 
     public function delete($id = ""){
 
-        if (!has_permission('entities', '', 'delete')) {
-            access_denied('entities');
+        if (!has_permission('dialogflow', '', 'delete')) {
+            access_denied('dialogflow');
         }
 
         if ($this->input->is_ajax_request()) {

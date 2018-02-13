@@ -1130,6 +1130,13 @@ function get_permission_conditions()
             'create' => true,
             'delete' => true
         ),
+        'dialogflow' => array(
+            'view' => true,
+            'view_own' => false,
+            'edit' => true,
+            'create' => true,
+            'delete' => true
+        ),
         'email_templates' => array(
             'view' => true,
             'view_own' => false,
