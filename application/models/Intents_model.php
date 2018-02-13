@@ -171,7 +171,6 @@ class Intents_model extends CRM_Model
 
 
         if (isset($data)){
-//            echo '<pre>';
             $parameterData = array();
 
             foreach ($data as $parameter){
@@ -184,7 +183,6 @@ class Intents_model extends CRM_Model
                         'resolved_value'=>$parameter['resolved_value'],
                     );
 
-//                print_r($parameterData);
                     $this->db->insert('tblintentsusersaysparameters',$parameterData);
             }
 

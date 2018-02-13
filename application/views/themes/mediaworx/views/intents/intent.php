@@ -176,6 +176,7 @@
                                                 <th>VALUE</th>
                                                 <th class="text_center">IS LIST</th>
                                                 <th>PROMPTS</th>
+                                                <th></th>
                                             </thead>
                                                 <tbody>
                                                 <?php $actionData = array()?>
@@ -195,13 +196,14 @@
                                                         actions.push(<?php echo json_encode($actionData)?>);
                                                     </script>
                                                 <?php } ?>
-                                                    <tr id="<?php echo $parameter->parameter_name?>">
+                                                    <tr id="action-<?php echo $key?>">
                                                         <td class="text-center"><input type="checkbox" value="1" name="actions[<?php echo $key?>][is_required]" <?php echo ($action['is_required'] ? "checked" : "")?>></td>
                                                         <td data-key="parameter_name"><?php echo $parameter->parameter_name?><input value="<?php echo $parameter->parameter_name?>" type="hidden" name="actions[<?php echo $key?>][parameter_name]"></td>
                                                         <td><?php echo $parameter->entity?><input value="<?php echo $parameter->entity?>" type="hidden" name="actions[<?php echo $key?>][entity]"></td>
                                                         <td><?php echo $action['value']?><input value="<?php echo $action['value']?>" type="hidden" name="actions[<?php echo $key?>][resolved_value]"></td>
                                                         <td class="text-center"><input type="checkbox" value="1" name="actions[<?php echo $key?>][is_list]" <?php echo ($action['is_list'] ? "checked" : "")?>></td>
                                                         <td><div id="prompt"></div></td>
+                                                        <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#action-'+<?php echo $key?>).remove()"><i class="fa fa-close"></i></button> </td>
                                                     </tr>
                                                 <?php } ?>
                                                 </tbody>
@@ -339,7 +341,7 @@
                 });
                 if (matchingItems.length === 0){
                     actions.push(e);
-                    html = '<tr id="'+actions[i].parameter_name+'">';
+                    html = '<tr id="action-'+key+'">';
                     html += '<td class="text-center">';
                     html += '<input type="checkbox" value="1" name="actions['+key+'][is_required]">';
                     html +='</td>';
@@ -358,6 +360,7 @@
                     html += '<td>';
                     html += '<td><div id="prompt"></div></td>';
                     html += '</td>';
+                    html += '<td><button type="button" class="btn btn-danger btn-icon" onclick="$(\'#action-'+key+'\').remove()"><i class="fa fa-close"></i></button></td>';
                     html += '</tr>';
 
                     $('.action_table tbody').append(html);

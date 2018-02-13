@@ -3414,3 +3414,6 @@ $lang['sales_string'] = 'Sales';
 $lang['no_project_members'] = 'No members for this project';
 $lang['search_by_tags'] = 'Use # + tagname to search by tags';
 $lang['project_status_5'] = 'Cancelled';
+
+/*Dialogflow*/
+$lang['als_entities'] = 'Entities';

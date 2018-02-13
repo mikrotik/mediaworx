@@ -7,8 +7,14 @@ class Entities_model extends CRM_Model
         parent::__construct();
     }
 
-    public function get($id = '')
+    public function get($id = '',$system = '',$where = array())
     {
+
+        if (is_int($system)) {
+            $this->db->where('is_system', $system);
+        }
+
+        $this->db->where($where);
 
         if (is_numeric($id)) {
             $this->db->where('id', $id);
@@ -62,7 +68,7 @@ class Entities_model extends CRM_Model
 
         if($entityid){
             logActivity('New Entity Created [ID:'.$entityid.']');
-            return true;
+            return $entityid;
         }
 
         return false;
@@ -82,6 +88,14 @@ class Entities_model extends CRM_Model
         unset($data['synonyms']);
         unset($data['reference']);
 
+        if (!isset($data['automatedExpansion'])){
+            $data['automatedExpansion'] = 0;
+        }
+
+        if (!isset($data['isOverridable'])){
+            $data['isOverridable'] = 0;
+        }
+
 
         $this->db->where('id', $id);
         $this->db->update('tblentities', $data);
@@ -89,7 +103,7 @@ class Entities_model extends CRM_Model
         foreach ($entityreferences as $reference){
             $referenceData = array(
                 'entityid'=>$id,
-                'agentid'=>$this->wt_agent,
+                'agentid'=>(isset($this->wt_agent) ? $this->wt_agent : 0),
                 'reference'=>$reference['reference'],
                 'synonym'=>$reference['synonym']
             );
