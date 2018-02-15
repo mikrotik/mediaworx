@@ -14,7 +14,17 @@
                         <div class="panel-body">
                             <?php echo form_open_multipart($this->uri->uri_string(),array('class'=>'intent-form','autocomplete'=>'off')); ?>
                             <input type="hidden" name="is_default" value="1"/>
-
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="intent_name"><?php echo _l('intent_name'); ?></label>
+                                        <input type="text" class="form-control" name="intent_name" id="intent_name" value="<?php echo set_value('intent_name',$intent->intent_name); ?>">
+                                        <?php echo form_error('intent_name'); ?>
+                                    </div>
+                                    <br/>
+                                    <h3>Context</h3>
+                                </div>
+                            </div>
                             <?php echo form_close(); ?>
                         </div>
                     </div>

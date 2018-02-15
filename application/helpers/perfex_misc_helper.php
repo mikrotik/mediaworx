@@ -1844,3 +1844,97 @@ function getParametersByName($parameter_name){
 
     return false;
 }
+
+function setDefaultFallbackIntentsResponses($agentid,$userid){
+
+    $CI = & get_instance();
+
+    /*
+     * Set default fallback intent
+     */
+
+    $fallbackData = array(
+        'agentid'=>$agentid,
+        'userid'=>$userid,
+        'parentid'=>0,
+        'intent_name'=>'Default Fallback Intent',
+        'action'=>'input.unknown',
+        'is_default'=>1,
+        'active'=>1
+    );
+
+    $CI->db->insert('tblintents',$fallbackData);
+    $intentid = $CI->db->insert_id();
+
+    $responses = array(
+        "I didn't get that. Can you say it again?",
+        "I missed what you said. Say it again?",
+        "Sorry, could you say that again?",
+        "Sorry, can you say that again?",
+        "Can you say that again?",
+        "Sorry, I didn't get that.",
+        "Sorry, what was that?",
+        "One more time?",
+        "What was that?",
+        "Say that again?",
+        "I didn't get that.",
+        "I missed that."
+    );
+
+    foreach ($responses as $response){
+        $responseData = array(
+            'agentid'=>$agentid,
+            'userid'=>$userid,
+            'intentid'=>$intentid,
+            'response'=>$response
+        );
+
+        $CI->db->insert('tblintentsresponses',$responseData);
+    }
+
+
+
+}
+
+function setDefaultWelcomIntentsResponses($agentid,$userid){
+
+    $CI = & get_instance();
+
+    /*
+     * Set default fallback intent
+     */
+
+    $fallbackData = array(
+        'agentid'=>$agentid,
+        'userid'=>$userid,
+        'parentid'=>0,
+        'intent_name'=>'Default Welcome Intent',
+        'action'=>'input.welcome',
+        'is_default'=>0,
+        'active'=>0
+    );
+
+    $CI->db->insert('tblintents',$fallbackData);
+    $intentid = $CI->db->insert_id();
+
+    $responses = array(
+        "Hi!",
+        "Hello!",
+        "Good day!",
+        "Greetings"
+    );
+
+    foreach ($responses as $response){
+        $responseData = array(
+            'agentid'=>$agentid,
+            'userid'=>$userid,
+            'intentid'=>$intentid,
+            'response'=>$response
+        );
+
+        $CI->db->insert('tblintentsresponses',$responseData);
+    }
+
+
+
+}

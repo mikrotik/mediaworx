@@ -32,6 +32,32 @@ class Intents_model extends CRM_Model
         return false;
     }
 
+    public function get_responses($id = ''){
+
+        if (is_numeric($id)){
+
+            $this->db->where('intentid',$id);
+            $intentresponses = $this->db->get('tblintentsresponses')->result_array();
+
+            return $intentresponses;
+        }
+
+        return false;
+    }
+
+    public function get_followupintent($id = ''){
+
+        if (is_numeric($id)){
+
+            $this->db->where('parentid',$id);
+            $intentfollowup = $this->db->get('tblintents')->result_array();
+
+            return $intentfollowup;
+        }
+
+        return false;
+    }
+
     public function get_intentsusersaysparameters($id = ''){
 
         if (is_numeric($id)){
@@ -45,7 +71,10 @@ class Intents_model extends CRM_Model
         return false;
     }
 
-    public function add($data=array()){
+    public function add($data=array(),$parentid = 0){
+
+        unset($data['events']);
+        unset($data['response']);
 
         // First check for all cases if the email exists.
         $this->db->where('intent_name', $data['intent_name']);
@@ -57,6 +86,8 @@ class Intents_model extends CRM_Model
         if (!$data['action']){
             $data['action'] = $data['intent_name'];
         }
+
+        $data['parentid'] = $parentid;
 
         $this->db->insert('tblintents', $data);
         $intentid = $this->db->insert_id();
@@ -94,6 +125,24 @@ class Intents_model extends CRM_Model
             }
         }
 
+        if (isset($data['textresponse'])){
+
+            foreach ($data['textresponse'] as $reponse) {
+
+                $responseData = array(
+                    'userid'=>get_client_user_id(),
+                    'agentid'=>$this->wt_agent,
+                    'intentid'=>$intentid,
+                    'response'=>$reponse,
+                );
+
+
+
+                $this->db->insert('tblintentsresponses',$responseData);
+
+            }
+        }
+
         if($intentid){
 
             logActivity('New Intent Created [ID:'.$intentid.']');
@@ -108,6 +157,7 @@ class Intents_model extends CRM_Model
     public function update($data = array(),$id = ""){
 
         unset($data['events']);
+        unset($data['response']);
 
         $this->db->where('id', $id);
         $this->db->update('tblintents', $data);
@@ -117,6 +167,9 @@ class Intents_model extends CRM_Model
 
         $this->db->where('intentid', $id);
         $this->db->delete('tblintentsusersaysparameters');
+
+        $this->db->where('intentid', $id);
+        $this->db->delete('tblintentsresponses');
 
         $this->db->where('action', $data['action']);
         $this->db->delete('tblintentsaction');
@@ -135,9 +188,6 @@ class Intents_model extends CRM_Model
             }
         }
 
-//        exit();
-
-
         if (isset($data['actions'])){
 
             foreach ($data['actions'] as $action) {
@@ -154,6 +204,24 @@ class Intents_model extends CRM_Model
 
 
                 $this->db->insert('tblintentsaction',$actionData);
+
+            }
+        }
+
+        if (isset($data['textresponse'])){
+
+            foreach ($data['textresponse'] as $reponse) {
+
+                $responseData = array(
+                    'userid'=>get_client_user_id(),
+                    'agentid'=>$this->wt_agent,
+                    'intentid'=>$id,
+                    'response'=>$reponse,
+                );
+
+
+
+                $this->db->insert('tblintentsresponses',$responseData);
 
             }
         }

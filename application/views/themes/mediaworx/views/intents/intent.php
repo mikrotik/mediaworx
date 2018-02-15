@@ -67,7 +67,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-comment-o"></i></span>
+                                    <span class="input-group-addon"><i class="fa fa-quote-right"></i></span>
                                     <input class="form-control" placeholder="Usersays" type="text" name="usersays">
                                     <span class="input-group-btn">
                                       <button type="button" class="btn btn-info btn-flat btn-add"><i class="fa fa-plus"></i></button>
@@ -167,6 +167,7 @@
                                     <?php $value = (isset($intent) ? $intent->action : "")?>
                                     <input type="text" name="action" class="form-control" value="<?php echo $value?>" placeholder="Intent action">
                                     <?php echo form_error('action'); ?>
+                                    <br/>
                                     <div class="table">
                                         <table class="table table-responsive table-hover action_table">
                                             <thead class="alert-info" style="font-weight: bold">
@@ -231,9 +232,35 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <select name="contexts" class="form-control select2" multiple="multiple" data-placeholder="Select context"
-                                        style="width: 100%;">
-                                </select>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-comments-o"></i></span>
+                                    <input class="form-control" placeholder="Text response" type="text" name="response">
+                                    <span class="input-group-btn">
+                                      <button type="button" class="btn btn-info btn-flat btn-add-response"><i class="fa fa-plus"></i></button>
+                                    </span>
+                                </div>
+                                <br/>
+                                <?php $responserow = 0;?>
+                                <div class="table">
+                                    <table class="table table-responsive table-hover response_table">
+                                        <thead class="alert-info" style="font-weight: bold">
+                                        <th>Text Response</th>
+                                        <th></th>
+                                        </thead>
+                                        <?php if ($intentresponses) { ?>
+                                        <tbody>
+                                            <?php foreach ($intentresponses as $intentresponse) { ?>
+                                                    <tr id="response-<?php echo $responserow?>">
+                                                        <td><?php echo $intentresponse['response']?>
+                                                            <input value="<?php echo $intentresponse['response']?>" type="hidden" name="textresponse[<?php echo $responserow?>]">
+                                                        </td>
+                                                        <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#response-'+<?php echo $responserow?>).remove()"><i class="fa fa-close"></i></button></td>
+                                                    </tr>
+                                            <?php $responserow++; } ?>
+                                        </tbody>
+                                        <?php } ?>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -248,6 +275,7 @@
 <script>
     var rowvalues = <?php echo $rowvalues?>;
     var rows = <?php echo $rows?>;
+    var responserows = <?php echo $responserow?>;
 
     $('.btn-add').on('click', function () {
         var usersays = $('input[name=\'usersays\']').val();
@@ -377,4 +405,17 @@
             });
 
     }
+
+    $('.btn-add-response').on('click', function () {
+
+        var response = $('input[name=\'response\']').val();
+
+        html = '<tr id="response-'+responserows+'">';
+        html +='<td>'+response+'<input value="' + response + '" type="hidden" name="textresponse['+responserows+']"></td>';
+        html +='<td><button type="button" class="btn btn-danger btn-icon" onclick="$(\'#response-'+responserows+'\').remove()"><i class="fa fa-close"></i></button></td>';
+        html +='</tr>';
+
+        $('.response_table tbody').append(html);
+        responserows++;
+    });
 </script>
