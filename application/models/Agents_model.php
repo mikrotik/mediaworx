@@ -34,6 +34,8 @@ class Agents_model extends CRM_Model
 
             logActivity('New Agent Created [ID:'.$agentid.']');
             $this->session->set_userdata(array('wt_agent'=>$agentid));
+            setDefaultFallbackIntentsResponses($agentid,get_client_user_id());
+            setDefaultWelcomIntentsResponses($agentid,get_client_user_id());
 
             return true;
         }
@@ -73,6 +75,10 @@ class Agents_model extends CRM_Model
             // Delete all intents of agent
             $this->db->where('agentid',$id);
             $this->db->delete('tblintents');
+
+            // Delete all intents responses of agent
+            $this->db->where('agentid',$id);
+            $this->db->delete('tblintentsresponses');
 
             // Delete all intents usersays of agent
             $this->db->where('agentid',$id);

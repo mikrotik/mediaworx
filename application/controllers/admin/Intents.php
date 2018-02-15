@@ -54,13 +54,43 @@ class Intents extends Admin_controller
         if ($id == '') {
             $title                  = _l('clients_entity_create');
         } else {
-            $entity = $this->intents_model->get($id);
+            $intent = $this->intents_model->get($id);
 
-            $data['entity'] = $entity;
+            $data['intent'] = $intent;
             $title = _l('edit_intent');
         }
 
         $data['title']       = $title;
         $this->load->view('admin/intents/intent', $data);
+    }
+
+    public function delete($id = ""){
+
+        if (!has_permission('dialogflow', '', 'delete')) {
+            access_denied('dialogflow');
+        }
+
+        if ($this->input->is_ajax_request()) {
+
+            if (is_numeric($id)){
+
+                $success = $this->intents_model->delete($id);
+                $message = '';
+                if ($success == true) {
+                    $message = _l('deleted', _l('intents'));
+                    echo json_encode(array(
+                        'success' => $success,
+                        'message' => $message
+                    ));
+                } else {
+                    $message =  _l('problem_deleting', _l('intents'));
+                    echo json_encode(array(
+                        'success' => $success,
+                        'message' => $message
+                    ));
+                }
+            }
+
+        }
     }
 }
