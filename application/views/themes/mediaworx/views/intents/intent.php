@@ -41,8 +41,12 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <select name="contexts" class="form-control select2" multiple="multiple" data-placeholder="Select context"
+                                <select name="context[]" class="form-control select2" multiple="multiple" data-placeholder="Select context"
                                         style="width: 100%;">
+                                        <option value="<?php echo $intent->intent_name?>-followup"><?php echo $intent->intent_name?>-followup</option>
+                                    <?php foreach ($followups as $followup) { ?>
+                                        <option value="<?php echo $followup['intent_name']?>-followup"><?php echo $followup['intent_name']?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>
@@ -272,7 +276,23 @@
         </div>
     </div>
 </section>
+
+<?php $contexts = explode(',',$intent->context);
+
+foreach ($contexts as $context){
+    $contextArr[] = "'".$context."'";
+}
+
+$selectContextArr = implode(',',$contextArr);
+
+?>
+
 <script>
+
+    $(function(){
+
+        $('select[name=\'context[]\']').val([<?php echo $selectContextArr ?>]); $('select[name=\'context[]\']').trigger('change');
+    });
     var rowvalues = <?php echo $rowvalues?>;
     var rows = <?php echo $rows?>;
     var responserows = <?php echo $responserow?>;

@@ -45,7 +45,6 @@ render_datatable($table_data, 'intents');
             if ( row.child.isShown() ) {
                 row.child.hide();
                 tr.removeClass('shown');
-//                tr.removeClass('alert-info');
                 $(this).find('i').removeClass('fa-minus');
                 $(this).find('i').addClass('fa-plus');
             }
@@ -54,7 +53,6 @@ render_datatable($table_data, 'intents');
                 tr.addClass('shown');
                 $(this).find('i').removeClass('fa-plus');
                 $(this).find('i').addClass('fa-minus');
-//                tr.addClass('alert-info');
             }
         } );
     });
@@ -92,12 +90,12 @@ render_datatable($table_data, 'intents');
 
     function getDetails(element,intentid){
 
-        var activeRowCount = $('tr.active').length;
+        var activeRowCount = $('tr.active-'+intentid).length;
         var div = $('<div/>').addClass( 'table child-'+intentid );
 
         if (activeRowCount){
 
-            $('.child-row-'+intentid).removeClass('active');
+            $('.child-row-'+intentid).removeClass('active-'+intentid);
             $('#row-'+intentid).html('<td colspan="3"></td>');
 
             $(element).find('i.control').removeClass('fa-minus');
@@ -118,7 +116,7 @@ render_datatable($table_data, 'intents');
                     html +=     '</table>';
                     div.html(html);
 
-                    $('.child-row-'+intentid).addClass('active');
+                    $('.child-row-'+intentid).addClass('active-'+intentid);
 
 
                     $.each(json, function (i, e) {

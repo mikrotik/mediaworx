@@ -58,6 +58,18 @@ class Intents_model extends CRM_Model
         return false;
     }
 
+    public function get_followups(){
+
+        $this->db->where('parentid >', 0);
+        $followups = $this->db->get('tblintents')->result_array();
+
+        if ($followups) {
+            return $followups;
+        }
+
+        return false;
+    }
+
     public function get_intentsusersaysparameters($id = ''){
 
         if (is_numeric($id)){
@@ -88,6 +100,12 @@ class Intents_model extends CRM_Model
         }
 
         $data['parentid'] = $parentid;
+
+        if (!empty($data['context'])){
+            $data['context'] = implode(',',$data['context']);
+        } else {
+            $data['context'] = null;
+        }
 
         $this->db->insert('tblintents', $data);
         $intentid = $this->db->insert_id();
@@ -158,6 +176,12 @@ class Intents_model extends CRM_Model
 
         unset($data['events']);
         unset($data['response']);
+
+        if (!empty($data['context'])){
+            $data['context'] = implode(',',$data['context']);
+        } else {
+            $data['context'] = null;
+        }
 
         $this->db->where('id', $id);
         $this->db->update('tblintents', $data);
