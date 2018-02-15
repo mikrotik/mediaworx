@@ -132,6 +132,7 @@ class Intents extends Clients_controller
             $intentresponses = $this->intents_model->get_responses($id);
 
             $data['intent'] = $intent;
+            $data['followups'] = $this->intents_model->get_followups();
             $data['intentusersays'] = $intentusersays;
             $data['intentsusersaysparameters'] = $intentsusersaysparameters;
             $data['intentresponses'] = $intentresponses;
