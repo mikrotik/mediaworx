@@ -92,6 +92,10 @@ class Agents_model extends CRM_Model
             $this->db->where('agentid', $id);
             $this->db->delete('tblintentsaction');
 
+            // Delete all intents prompts of actions
+            $this->db->where('agentid', $id);
+            $this->db->delete('tblintentactionprompts');
+
             logActivity('Agent Delete [ID:'.$id.']');
 
             $this->session->unset_userdata('wt_agent');

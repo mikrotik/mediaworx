@@ -70,6 +70,18 @@ class Intents_model extends CRM_Model
         return false;
     }
 
+    public function get_actionprompts($id = ''){
+
+        $this->db->where('actionid', $id);
+        $prompts = $this->db->get('tblintentactionprompts')->result_array();
+
+        if ($prompts) {
+            return $prompts;
+        }
+
+        return false;
+    }
+
     public function get_intentsusersaysparameters($id = ''){
 
         if (is_numeric($id)){
@@ -87,11 +99,13 @@ class Intents_model extends CRM_Model
 
         unset($data['events']);
         unset($data['response']);
+        unset($data['prompt']);
 
         $dataIntent = '';
         $dataParameters = '';
         $dataActions = '';
         $dataTextresponse = '';
+        $dataPrompts = '';
 
         if (isset($data['intent'])){
             $dataIntent = $data['intent'];
@@ -111,6 +125,11 @@ class Intents_model extends CRM_Model
         if (isset($data['textresponse'])){
             $dataTextresponse = $data['textresponse'];
             unset($data['textresponse']);
+        }
+
+        if (isset($data['prompts'])){
+            $dataPrompts = $data['prompts'];
+            unset($data['prompts']);
         }
 
         // First check for all cases if the email exists.
@@ -170,10 +189,30 @@ class Intents_model extends CRM_Model
                     'value'=>'$'.$action['parameter_name'],
                     'is_required'=>(isset($action['_is_required']) ? $action['is_required'] : 0),
                     'is_list'=>(isset($action['is_list']) ? $action['is_list'] : 0),
-                    'prompt'=>(isset($action['prompt']) ? serialize($action['prompt']) : null)
                 );
 
                 $this->db->insert('tblintentsaction',$actionData);
+                $actionid = $this->db->insert_id();
+
+                if (isset($dataPrompts)) {
+                    foreach ($dataPrompts as $key=>$dataPrompt) {
+
+                        if ($action['parameter_name'] == $key){
+
+                            foreach ($dataPrompt as $prompt) {
+                                $promptData = array(
+                                    'intentid' => $intentid,
+                                    'agentid' => $this->wt_agent,
+                                    'userid' => get_client_user_id(),
+                                    'actionid' => $actionid,
+                                    'prompt' => $prompt
+                                );
+
+                                $this->db->insert('tblintentactionprompts', $promptData);
+                            }
+                        }
+                    }
+                }
 
             }
         }
@@ -211,11 +250,14 @@ class Intents_model extends CRM_Model
 
         unset($data['events']);
         unset($data['response']);
+        unset($data['prompt']);
 
         $dataIntent = '';
         $dataParameters = '';
         $dataActions = '';
         $dataTextresponse = '';
+        $dataPrompts = '';
+
 
         if (isset($data['intent'])){
             $dataIntent = $data['intent'];
@@ -237,6 +279,11 @@ class Intents_model extends CRM_Model
             unset($data['textresponse']);
         }
 
+        if (isset($data['prompts'])){
+            $dataPrompts = $data['prompts'];
+            unset($data['prompts']);
+        }
+
         if (!empty($data['context'])){
             $data['context'] = implode(',',$data['context']);
         } else {
@@ -254,6 +301,9 @@ class Intents_model extends CRM_Model
 
         $this->db->where('intentid', $id);
         $this->db->delete('tblintentsresponses');
+
+        $this->db->where('intentid', $id);
+        $this->db->delete('tblintentactionprompts');
 
         $this->db->where('action', $data['action']);
         $this->db->delete('tblintentsaction');
@@ -282,12 +332,30 @@ class Intents_model extends CRM_Model
                     'value'=>'$'.$action['parameter_name'],
                     'is_required'=>(isset($action['is_required']) ? $action['is_required'] : 0),
                     'is_list'=>(isset($action['is_list']) ? $action['is_list'] : 0),
-                    'prompt'=>(isset($action['prompt']) ? serialize($action['prompt']) : null)
                 );
 
-
-
                 $this->db->insert('tblintentsaction',$actionData);
+                $actionid = $this->db->insert_id();
+
+                if (isset($dataPrompts)) {
+                    foreach ($dataPrompts as $key=>$dataPrompt) {
+
+                        if ($action['parameter_name'] == $key){
+
+                            foreach ($dataPrompt as $prompt) {
+                                $promptData = array(
+                                    'intentid' => $id,
+                                    'agentid' => $this->wt_agent,
+                                    'userid' => get_client_user_id(),
+                                    'actionid' => $actionid,
+                                    'prompt' => $prompt
+                                );
+
+                                $this->db->insert('tblintentactionprompts', $promptData);
+                            }
+                        }
+                    }
+                }
 
             }
         }

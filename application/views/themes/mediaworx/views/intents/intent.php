@@ -209,7 +209,7 @@
                                                         <td><?php echo $parameter->entity?><input value="<?php echo $parameter->entity?>" type="hidden" name="actions[<?php echo $key?>][entity]"></td>
                                                         <td><?php echo $action['value']?><input value="<?php echo $action['value']?>" type="hidden" name="actions[<?php echo $key?>][resolved_value]"></td>
                                                         <td class="text-center"><input type="checkbox" value="1" name="actions[<?php echo $key?>][is_list]" <?php echo ($action['is_list'] ? "checked" : "")?>></td>
-                                                        <td><div id="prompt-<?php echo $key?>"><?php echo ($action['is_required'] ? "<button type='button' class='btn btn-link'>Define prompts...</button>" : "...")?></div></td>
+                                                        <td><div id="prompt-<?php echo $key?>"><?php echo ($action['is_required'] ? "<button type='button' class='btn btn-link' data-parameter='".$parameter->parameter_name."' data-entity='".$parameter->entity."' data-value='".$action['value']."' data-id='".$action['id']."' data-toggle='modal' data-target='#promptModal'>Define prompts...</button>" : "...")?></div></td>
                                                         <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#action-'+<?php echo $key?>).remove()"><i class="fa fa-close"></i></button> </td>
                                                     </tr>
                                                 <?php } ?>
@@ -275,6 +275,60 @@
                 </div>
             </div>
             <!-- /,response -->
+            <!-- Modal -->
+            <div class="modal fade" id="promptModal" tabindex="-1" role="dialog" aria-labelledby="promptModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="promptModalLabel">Prompts for '<span class="target-action">delivery-pickup</span>'</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="parameter_name">NAME</label>
+                                    <input type="text" class="form-control" name="parameter_name" id="parameter_name" value="" disabled>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="entity">ENTITY</label>
+                                    <input type="text" class="form-control" name="entity" id="entity" value="" disabled>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="value">VALUE</label>
+                                    <input type="text" class="form-control" name="value" id="value" value="" disabled>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-terminal"></i></span>
+                                    <input class="form-control" placeholder="Enter a prompt variant" type="text" name="prompt">
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-info btn-flat btn-add-prompt"><i class="fa fa-plus"></i></button>
+                        </span>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="table">
+                                <table class="table table-hover tblprompt">
+                                    <thead>
+                                    <th>PROMPTS</th>
+                                    <th></th>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <?php echo form_close(); ?>
         </div>
     </div>
@@ -305,6 +359,69 @@ $selectContextArr = implode(',',$contextArr);
             } else {
                 $('#prompt-'+this.id).html('<button type="button" class="btn btn-link btn-icon">Define prompts...</button>');
             }
+        });
+
+        $('#promptModal').on('show.bs.modal', function(e) {
+
+            var invoker = $(e.relatedTarget);
+            var actionid = $(invoker).data('id');
+            var parameter_name = $(invoker).data('parameter');
+            var entity = $(invoker).data('entity');
+            var value = $(invoker).data('value');
+
+            $('#promptModal input[name="parameter_name"]').val(parameter_name);
+            $('#promptModal input[name="entity"]').val(entity);
+            $('#promptModal input[name="value"]').val(value);
+
+            $('.target-action').html(parameter_name);
+
+            $.ajax({
+                type: 'GET',
+                url: site_url + 'intents/getactionprompts/'+actionid,
+                dataType: 'json',
+                success: function (json) {
+
+                    $.each(json, function (i, e) {
+
+                        html ='<tr>';
+                        html +='<td>'+ e.prompt+'<input type="hidden" name="prompts['+parameter_name+'][]" value="'+ e.prompt+'"></td>';
+                        html +='<td><button type="button" class="btn btn-danger btn-icon" onclick="$(this).closest(\'tr\').remove();"><i class="fa fa-minus-square-o"></i></button></td>';
+                        html +='</tr>';
+
+                        $('.tblprompt tbody').append(html);
+                    });
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status != 0) {
+                        alert(xhr.status + "\r\n" + thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                }
+
+            });
+
+
+
+        });
+
+        $('#promptModal').on('hidden.bs.modal', function () {
+
+            $('.tblprompt tbody').html('');
+
+            
+        });
+
+        $('.btn-add-prompt').on('click',function(){
+
+            var prompt = $('input[name=\'prompt\']').val();
+            var value = $('#promptModal input[name="parameter_name"]').val();
+
+            html ='<tr>';
+            html +='<td>'+prompt+'<input type="hidden" name="prompts['+value+'][]" value="'+prompt+'"></td>';
+            html +='<td><button type="button" class="btn btn-danger btn-icon" onclick="$(this).closest(\'tr\').remove();"><i class="fa fa-minus-square-o"></i></button></td>';
+            html +='</tr>';
+
+            $('.tblprompt tbody').append(html);
+            $('input[name=\'prompt\']').val('');
         });
     });
 
