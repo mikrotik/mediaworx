@@ -238,4 +238,14 @@ class Intents extends Clients_controller
             echo json_encode($followup);
         }
     }
+
+    public function getactionprompts($actionid){
+
+        if (is_numeric($actionid) && $this->input->is_ajax_request()){
+
+            $followup = $this->intents_model->get_actionprompts($actionid);
+
+            echo json_encode($followup);
+        }
+    }
 }
