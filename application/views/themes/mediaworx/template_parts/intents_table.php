@@ -70,9 +70,16 @@ render_datatable($table_data, 'intents');
                 html +=     '</table>';
                 div.html(html);
 
+                var ctrbtn;
+
                 $.each(json, function (i, e) {
+
+                    if (e.has_followup == 1){
+                        ctrbtn = 'fa fa-plus control';
+                    }
+
                     htmlRow =     '<tr class="child-row-'+e.id+' details_control details_control_id-'+intentid+'-'+i+'" data-id="'+ e.id+'" role="row">';
-                    htmlRow +=     '<td onclick="getDetails(this,\''+ e.id+'\')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus control"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-level-down text-info"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-circle-thin text-info"></i>&nbsp;&nbsp;'+e.intent_name+'</td>';
+                    htmlRow +=     '<td onclick="getDetails(this,\''+ e.id+'\')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="'+ctrbtn+'"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-level-down text-info"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-circle-thin text-info"></i>&nbsp;&nbsp;'+e.intent_name+'</td>';
                     htmlRow +=     '<td><a href="<?php echo site_url().'intents/followup/'?>'+e.id+'" class="btn btn-warning btn-icon"><i class="fa fa-random"></i></a> ' ;
                     htmlRow +=     '<a href="<?php echo site_url().'intents/intent/'?>'+e.id+'" class="btn btn-default btn-icon"><i class="fa fa-pencil-square-o"></i></a> ' ;
                     htmlRow +=    '<a href="#" class="btn btn-danger btn-icon" data-id="'+e.id+'" data-url="<?php echo site_url().'intents/delete'?>" onclick="deleteIntent(this)"><i class="fa fa-remove"></i></a></td>';
@@ -117,11 +124,16 @@ render_datatable($table_data, 'intents');
                     div.html(html);
 
                     $('.child-row-'+intentid).addClass('active-'+intentid);
-
+                    var ctrbtn;
 
                     $.each(json, function (i, e) {
+
+                        if (e.has_followup == 1){
+                            ctrbtn = 'fa fa-plus control';
+                        }
+
                         htmlRow =     '<tr class="child-row-'+e.id+' details_control details_control_id-'+intentid+'-'+i+'" data-id="'+ e.id+'" role="row">';
-                        htmlRow +=     '<td onclick="getDetails(this,\''+ e.id+'\')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus control"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-level-down text-info"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-circle-thin text-info"></i>&nbsp;&nbsp;'+e.intent_name+'</td>';
+                        htmlRow +=     '<td onclick="getDetails(this,\''+ e.id+'\')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="'+ctrbtn+'"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-level-down text-info"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-circle-thin text-info"></i>&nbsp;&nbsp;'+e.intent_name+'</td>';
                         htmlRow +=     '<td><a href="<?php echo site_url().'intents/followup/'?>'+e.id+'" class="btn btn-warning btn-icon"><i class="fa fa-random"></i></a> ' ;
                         htmlRow +=     '<a href="<?php echo site_url().'intents/intent/'?>'+e.id+'" class="btn btn-default btn-icon"><i class="fa fa-pencil-square-o"></i></a> ' ;
                         htmlRow +=    '<a href="#" class="btn btn-danger btn-icon" data-id="'+e.id+'" data-url="<?php echo site_url().'intents/delete'?>" onclick="deleteIntent(this)"><i class="fa fa-remove"></i></a></td>';

@@ -66,7 +66,7 @@
                                                             <td><?php echo $value['synonym']?>
                                                                 <input type="hidden" name="entity[<?php echo $rowvalues?>][synonym]" value="<?php echo $value['synonym']?>">
                                                             </td>
-                                                            <td><button class="btn btn-info btn-icon btnedit-values" type="button" onclick="editValues('<?php echo $rowvalues?>');" id="btnedit-values"><i class="fa fa-edit"></i> Edit | <button class="btn btn-danger btn-icon btnremove-values" type="button" onclick="removeValues('<?php echo $rowvalues?>'); " id="btnremove-values"><i class="fa fa-minus-square-o"></i> Remove</td>
+                                                            <td><button class="btn btn-info btn-icon btnedit-values" type="button" onclick="editValues('<?php echo $rowvalues?>');" id="btnedit-values"><i class="fa fa-edit"></i> Edit </button> <button class="btn btn-danger btn-icon btnremove-values" type="button" onclick="removeValues('<?php echo $rowvalues?>'); " id="btnremove-values"><i class="fa fa-minus-square-o"></i> Remove</td>
                                                         </tr>
                                                         <?php $rowvalues++;} ?>
                                                 <?php } ?>
