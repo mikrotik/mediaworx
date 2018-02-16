@@ -88,6 +88,31 @@ class Intents_model extends CRM_Model
         unset($data['events']);
         unset($data['response']);
 
+        $dataIntent = '';
+        $dataParameters = '';
+        $dataActions = '';
+        $dataTextresponse = '';
+
+        if (isset($data['intent'])){
+            $dataIntent = $data['intent'];
+            unset($data['intent']);
+        }
+
+        if (isset($data['parameters'])){
+            $dataParameters = $data['parameters'];
+            unset($data['parameters']);
+        }
+
+        if (isset($data['actions'])){
+            $dataActions = $data['actions'];
+            unset($data['actions']);
+        }
+
+        if (isset($data['textresponse'])){
+            $dataTextresponse = $data['textresponse'];
+            unset($data['textresponse']);
+        }
+
         // First check for all cases if the email exists.
         $this->db->where('intent_name', $data['intent_name']);
         $intent = $this->db->get('tblintents')->row();
@@ -107,12 +132,22 @@ class Intents_model extends CRM_Model
             $data['context'] = null;
         }
 
+        if ($parentid > 0){
+            $this->db->where('id',$parentid);
+            $this->db->update('tblintents', array('has_followup'=>1));
+        } else {
+            $data['has_followup'] = 0;
+        }
+
+        $data['active'] = 0;
+
+
         $this->db->insert('tblintents', $data);
         $intentid = $this->db->insert_id();
 
-        if (isset($data['intent'])){
+        if (isset($dataIntent)){
 
-            foreach ($data['intent'] as $key=>$usersay){
+            foreach ($dataIntent as $key=>$usersay){
                 $usersayData = array(
                     'intentid'=>$intentid,
                     'agentid'=>$this->wt_agent,
@@ -121,19 +156,19 @@ class Intents_model extends CRM_Model
                 );
                 $this->db->insert('tblintentsusersays',$usersayData);
                 $usersayid = $this->db->insert_id();
-                $this->setParameters($data['parameters'][$key],$data['action'],$usersayid,$intentid);
+                $this->setParameters($dataParameters[$key],$data['action'],$usersayid,$intentid);
             }
         }
 
-        if (isset($data['actions'])){
+        if (isset($dataActions)){
 
-            foreach ($data['actions'] as $action) {
+            foreach ($dataActions as $action) {
 
                 $actionData = array(
                     'action'=>$data['action'],
                     'agentid'=>$this->wt_agent,
                     'value'=>'$'.$action['parameter_name'],
-                    'is_required'=>(isset($action['_is_required']) ? $action['is_requires'] : 0),
+                    'is_required'=>(isset($action['_is_required']) ? $action['is_required'] : 0),
                     'is_list'=>(isset($action['is_list']) ? $action['is_list'] : 0),
                     'prompt'=>(isset($action['prompt']) ? serialize($action['prompt']) : null)
                 );
@@ -143,9 +178,9 @@ class Intents_model extends CRM_Model
             }
         }
 
-        if (isset($data['textresponse'])){
+        if (isset($dataTextresponse)){
 
-            foreach ($data['textresponse'] as $reponse) {
+            foreach ($dataTextresponse as $reponse) {
 
                 $responseData = array(
                     'userid'=>get_client_user_id(),
@@ -177,6 +212,31 @@ class Intents_model extends CRM_Model
         unset($data['events']);
         unset($data['response']);
 
+        $dataIntent = '';
+        $dataParameters = '';
+        $dataActions = '';
+        $dataTextresponse = '';
+
+        if (isset($data['intent'])){
+            $dataIntent = $data['intent'];
+            unset($data['intent']);
+        }
+
+        if (isset($data['parameters'])){
+            $dataParameters = $data['parameters'];
+            unset($data['parameters']);
+        }
+
+        if (isset($data['actions'])){
+            $dataActions = $data['actions'];
+            unset($data['actions']);
+        }
+
+        if (isset($data['textresponse'])){
+            $dataTextresponse = $data['textresponse'];
+            unset($data['textresponse']);
+        }
+
         if (!empty($data['context'])){
             $data['context'] = implode(',',$data['context']);
         } else {
@@ -198,8 +258,8 @@ class Intents_model extends CRM_Model
         $this->db->where('action', $data['action']);
         $this->db->delete('tblintentsaction');
 
-        if (isset($data['intent'])){
-            foreach ($data['intent'] as $key=>$usersay){
+        if (isset($dataIntent)){
+            foreach ($dataIntent as $key=>$usersay){
                 $usersayData = array(
                     'intentid'=>$id,
                     'agentid'=>$this->wt_agent,
@@ -208,13 +268,13 @@ class Intents_model extends CRM_Model
                 );
                 $this->db->insert('tblintentsusersays',$usersayData);
                 $usersayid = $this->db->insert_id();
-                $this->setParameters($data['parameters'][$key],$usersayid,$id);
+                $this->setParameters($dataParameters[$key],$usersayid,$id);
             }
         }
 
-        if (isset($data['actions'])){
+        if (isset($dataActions)){
 
-            foreach ($data['actions'] as $action) {
+            foreach ($dataActions as $action) {
 
                 $actionData = array(
                     'action'=>$data['action'],
@@ -232,9 +292,9 @@ class Intents_model extends CRM_Model
             }
         }
 
-        if (isset($data['textresponse'])){
+        if (isset($dataTextresponse)){
 
-            foreach ($data['textresponse'] as $reponse) {
+            foreach ($dataTextresponse as $reponse) {
 
                 $responseData = array(
                     'userid'=>get_client_user_id(),

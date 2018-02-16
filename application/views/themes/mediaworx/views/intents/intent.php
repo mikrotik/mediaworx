@@ -43,7 +43,9 @@
                             <div class="form-group">
                                 <select name="context[]" class="form-control select2" multiple="multiple" data-placeholder="Select context"
                                         style="width: 100%;">
+                                    <?php if ($intent) { ?>
                                         <option value="<?php echo $intent->intent_name?>-followup"><?php echo $intent->intent_name?>-followup</option>
+                                    <?php } ?>
                                     <?php foreach ($followups as $followup) { ?>
                                         <option value="<?php echo $followup['intent_name']?>-followup"><?php echo $followup['intent_name']?></option>
                                     <?php } ?>
@@ -179,7 +181,7 @@
                                                 <th>PARAMETER NAME</th>
                                                 <th>ENTITY</th>
                                                 <th>VALUE</th>
-                                                <th class="text_center">IS LIST</th>
+                                                <th class="text-center">IS LIST</th>
                                                 <th>PROMPTS</th>
                                                 <th></th>
                                             </thead>
@@ -202,17 +204,18 @@
                                                     </script>
                                                 <?php } ?>
                                                     <tr id="action-<?php echo $key?>">
-                                                        <td class="text-center"><input type="checkbox" value="1" name="actions[<?php echo $key?>][is_required]" <?php echo ($action['is_required'] ? "checked" : "")?>></td>
+                                                        <td class="text-center"><input type="checkbox" class="is_required" id="<?php echo $key?>" value="1" name="actions[<?php echo $key?>][is_required]" <?php echo ($action['is_required'] ? "checked" : "")?>></td>
                                                         <td data-key="parameter_name"><?php echo $parameter->parameter_name?><input value="<?php echo $parameter->parameter_name?>" type="hidden" name="actions[<?php echo $key?>][parameter_name]"></td>
                                                         <td><?php echo $parameter->entity?><input value="<?php echo $parameter->entity?>" type="hidden" name="actions[<?php echo $key?>][entity]"></td>
                                                         <td><?php echo $action['value']?><input value="<?php echo $action['value']?>" type="hidden" name="actions[<?php echo $key?>][resolved_value]"></td>
                                                         <td class="text-center"><input type="checkbox" value="1" name="actions[<?php echo $key?>][is_list]" <?php echo ($action['is_list'] ? "checked" : "")?>></td>
-                                                        <td><div id="prompt"></div></td>
+                                                        <td><div id="prompt-<?php echo $key?>"><?php echo ($action['is_required'] ? "<button type='button' class='btn btn-link'>Define prompts...</button>" : "...")?></div></td>
                                                         <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#action-'+<?php echo $key?>).remove()"><i class="fa fa-close"></i></button> </td>
                                                     </tr>
                                                 <?php } ?>
                                                 </tbody>
                                         </table>
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>
@@ -251,8 +254,8 @@
                                         <th>Text Response</th>
                                         <th></th>
                                         </thead>
-                                        <?php if ($intentresponses) { ?>
                                         <tbody>
+                                        <?php if ($intentresponses) { ?>
                                             <?php foreach ($intentresponses as $intentresponse) { ?>
                                                     <tr id="response-<?php echo $responserow?>">
                                                         <td><?php echo $intentresponse['response']?>
@@ -261,8 +264,8 @@
                                                         <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#response-'+<?php echo $responserow?>).remove()"><i class="fa fa-close"></i></button></td>
                                                     </tr>
                                             <?php $responserow++; } ?>
-                                        </tbody>
                                         <?php } ?>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -292,7 +295,20 @@ $selectContextArr = implode(',',$contextArr);
     $(function(){
 
         $('select[name=\'context[]\']').val([<?php echo $selectContextArr ?>]); $('select[name=\'context[]\']').trigger('change');
+
+        $( ".is_required" ).on('ifChanged',function() {
+
+            var chckValue = $(this).iCheck('update')[0].checked;
+
+            if (chckValue === false) {
+                $('#prompt-'+this.id).html('...');
+            } else {
+                $('#prompt-'+this.id).html('<button type="button" class="btn btn-link btn-icon">Define prompts...</button>');
+            }
+        });
     });
+
+
     var rowvalues = <?php echo $rowvalues?>;
     var rows = <?php echo $rows?>;
     var responserows = <?php echo $responserow?>;
@@ -437,5 +453,7 @@ $selectContextArr = implode(',',$contextArr);
 
         $('.response_table tbody').append(html);
         responserows++;
+
+        $('input[name=\'response\']').val('');
     });
 </script>
