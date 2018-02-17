@@ -213,8 +213,8 @@
                                                         <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#action-'+<?php echo $key?>).remove()"><i class="fa fa-close"></i></button> </td>
                                                     </tr>
                                                     <?php foreach (getActionPrompts($action['id']) as $pkey=>$prompt) { ?>
-                                                        <tr id="prompt-<?php echo $pkey?>">
-                                                            <td colspan="7"><input type="text" name="prompts[<?php echo $parameter->parameter_name?>][]" value="<?php echo $prompt['prompt']?>"></td>
+                                                        <tr id="prompt-<?php echo $prompt['id']?>" style="display:none">
+                                                            <td colspan="7"><input type="hidden" name="prompts[<?php echo $parameter->parameter_name?>][]" value="<?php echo $prompt['prompt']?>"></td>
                                                         </tr>
                                                     <?php } ?>
                                                 <?php } ?>
@@ -292,7 +292,11 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <input type="hidden" name="actionid" value=""/>
+                                <?php $session = $this->session->get_userdata(); ?>
+                                <input type="text" name="id" value=""/>
+                                <input type="text" name="actionid" value=""/>
+                                <input type="text" name="agentid" value="<?php echo $session['wt_agent']?>"/>
+                                <input type="text" name="userid" value="<?php echo get_client_user_id()?>"/>
                                 <div class="col-md-4">
                                     <label for="parameter_name">NAME</label>
                                     <input type="text" class="form-control" name="parameter_name" id="parameter_name" value="" disabled>
@@ -379,7 +383,8 @@ $selectContextArr = implode(',',$contextArr);
             $('#promptModal input[name="parameter_name"]').val(parameter_name);
             $('#promptModal input[name="entity"]').val(entity);
             $('#promptModal input[name="value"]').val(value);
-            $('#promptModal input[name="actionid"]').val(role);
+            $('#promptModal input[name="id"]').val(role);
+            $('#promptModal input[name="actionid"]').val(actionid);
 
             $('.target-action').html(parameter_name);
 
@@ -393,7 +398,7 @@ $selectContextArr = implode(',',$contextArr);
 
                         html ='<tr>';
                         html +='<td>'+ e.prompt+'<input type="hidden" name="prompts['+parameter_name+'][]" value="'+ e.prompt+'"></td>';
-                        html +='<td><button type="button" class="btn btn-danger btn-icon" onclick="$(this).closest(\'tr\').remove();"><i class="fa fa-minus-square-o"></i></button></td>';
+                        html +='<td><button type="button" class="btn btn-danger btn-icon" onclick="$(this).closest(\'tr\').remove();removePrompt(\''+ actionid+'\',\''+ e.id+'\');"><i class="fa fa-minus-square-o"></i></button></td>';
                         html +='</tr>';
 
                         $('.tblprompt tbody').append(html);
@@ -422,7 +427,10 @@ $selectContextArr = implode(',',$contextArr);
 
             var prompt = $('input[name=\'prompt\']').val();
             var value = $('#promptModal input[name="parameter_name"]').val();
+            var id = $('#promptModal input[name="id"]').val();
             var actionid = $('#promptModal input[name="actionid"]').val();
+            var agentid = $('#promptModal input[name="agentid"]').val();
+            var userid = $('#promptModal input[name="userid"]').val();
 
             html ='<tr>';
             html +='<td>'+prompt+'</td>';
@@ -436,7 +444,21 @@ $selectContextArr = implode(',',$contextArr);
             htmlAction +='</tr>';
 
             $('input[name=\'prompt\']').val('');
-            $('#action-'+actionid).after(htmlAction);
+            $('#action-'+id).after(htmlAction);
+
+            var data = "agentid="+agentid+"&userid="+userid+"&actionid="+actionid+"&intentid=<?php echo $intent->id?>&prompt="+prompt;
+
+            $.ajax({
+                type: 'POST',
+                url: site_url + 'intents/updateprompts',
+                data : data,
+                dataType: 'json',
+                success: function (json) {
+                    $('#prompt-'+ actionid).remove();
+                }
+            });
+
+            return false;
 
 
         });
@@ -504,6 +526,22 @@ $selectContextArr = implode(',',$contextArr);
 
         return false;
     });
+
+    function removePrompt(actionid,id){
+
+        $.ajax({
+            type: 'GET',
+            url: site_url + 'intents/deleteprompt/'+id,
+            dataType: 'json',
+            success: function (json) {
+                $('#prompt-'+ id).remove();
+            }
+        });
+
+        return false;
+    }
+
+
 
     function details(id){
 

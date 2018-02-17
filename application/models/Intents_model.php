@@ -427,4 +427,32 @@ class Intents_model extends CRM_Model
 
         return false;
     }
+
+    public function delete_prompt($id){
+
+        $this->db->where('id',$id);
+        $this->db->delete('tblintentactionprompts');
+
+        if($this->db->affected_rows() > 0){
+            logActivity('Prompt Delete [ID:'.$id.']');
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public function addprompt($data=array()){
+
+        $this->db->insert('tblintentactionprompts',$data);
+        $id = $this->db->insert_id();
+
+        if($this->db->affected_rows() > 0){
+            logActivity('Prompt Add [ID:'.$id.']');
+
+            return true;
+        }
+
+        return false;
+    }
 }

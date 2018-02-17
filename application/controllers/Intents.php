@@ -248,4 +248,30 @@ class Intents extends Clients_controller
             echo json_encode($followup);
         }
     }
+
+    public function deleteprompt($prompt=""){
+
+            if (is_numeric($prompt) && $this->input->is_ajax_request()){
+
+                $this->intents_model->delete_prompt($prompt);
+                return true;
+            }
+    }
+
+    public function updateprompts(){
+
+        if ($this->input->is_ajax_request()){
+
+            $data = $this->input->post(NULL, FALSE);
+
+            $prompt = $this->intents_model->addprompt($data);
+
+            if ($prompt){
+                return true;
+            }
+            return false;
+        }
+
+        return false;
+    }
 }
