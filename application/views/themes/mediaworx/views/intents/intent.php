@@ -43,8 +43,10 @@
                             <div class="form-group">
                                 <select name="context[]" class="form-control select2" multiple="multiple" data-placeholder="Select context"
                                         style="width: 100%;">
-                                    <?php if ($intent) { ?>
-                                        <option value="<?php echo $intent->intent_name?>-followup"><?php echo $intent->intent_name?>-followup</option>
+                                    <?php if ($intents) { ?>
+                                        <?php foreach ($intents as $int) { ?>
+                                        <option value="<?php echo $int['intent_name']?>-followup"><?php echo $int['intent_name']?>-followup</option>
+                                        <?php } ?>
                                     <?php } ?>
                                     <?php foreach ($followups as $followup) { ?>
                                         <option value="<?php echo $followup['intent_name']?>-followup"><?php echo $followup['intent_name']?></option>
@@ -203,15 +205,20 @@
                                                         actions.push(<?php echo json_encode($actionData)?>);
                                                     </script>
                                                 <?php } ?>
-                                                    <tr id="action-<?php echo $key?>">
+                                                    <tr id="action-<?php echo $key?>" role="<?php echo $action['id']?>">
                                                         <td class="text-center"><input type="checkbox" class="is_required" id="<?php echo $key?>" value="1" name="actions[<?php echo $key?>][is_required]" <?php echo ($action['is_required'] ? "checked" : "")?>></td>
                                                         <td data-key="parameter_name"><?php echo $parameter->parameter_name?><input value="<?php echo $parameter->parameter_name?>" type="hidden" name="actions[<?php echo $key?>][parameter_name]"></td>
                                                         <td><?php echo $parameter->entity?><input value="<?php echo $parameter->entity?>" type="hidden" name="actions[<?php echo $key?>][entity]"></td>
                                                         <td><?php echo $action['value']?><input value="<?php echo $action['value']?>" type="hidden" name="actions[<?php echo $key?>][resolved_value]"></td>
                                                         <td class="text-center"><input type="checkbox" value="1" name="actions[<?php echo $key?>][is_list]" <?php echo ($action['is_list'] ? "checked" : "")?>></td>
-                                                        <td><div id="prompt-<?php echo $key?>"><?php echo ($action['is_required'] ? "<button type='button' class='btn btn-link' data-parameter='".$parameter->parameter_name."' data-entity='".$parameter->entity."' data-value='".$action['value']."' data-id='".$action['id']."' data-toggle='modal' data-target='#promptModal'>Define prompts...</button>" : "...")?></div></td>
+                                                        <td><div id="prompt-<?php echo $key?>"><?php echo ($action['is_required'] ? "<button type='button' class='btn btn-link' data-parameter='".$parameter->parameter_name."' data-entity='".$parameter->entity."' data-value='".$action['value']."' data-id='".$action['id']."' data-role = '".$key."' data-toggle='modal' data-target='#promptModal'>Define prompts...</button>" : "...")?></div></td>
                                                         <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#action-'+<?php echo $key?>).remove()"><i class="fa fa-close"></i></button> </td>
                                                     </tr>
+                                                    <?php foreach (getActionPrompts($action['id']) as $pkey=>$prompt) { ?>
+                                                        <tr id="prompt-<?php echo $action['id']?>-<?php echo $pkey?>" style="display:none">
+                                                            <td colspan="7">prompt-<?php echo $action['id']?>-<?php echo $pkey?><input type="hidden" name="prompts[<?php echo $parameter->parameter_name?>][]" value="<?php echo $prompt['prompt']?>"></td>
+                                                        </tr>
+                                                    <?php } ?>
                                                 <?php } ?>
                                                 </tbody>
                                         </table>
@@ -287,6 +294,11 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
+                                <?php $session = $this->session->get_userdata(); ?>
+                                <input type="hidden" name="id" value=""/>
+                                <input type="hidden" name="actionid" value=""/>
+                                <input type="hidden" name="agentid" value="<?php echo $session['wt_agent']?>"/>
+                                <input type="hidden" name="userid" value="<?php echo get_client_user_id()?>"/>
                                 <div class="col-md-4">
                                     <label for="parameter_name">NAME</label>
                                     <input type="text" class="form-control" name="parameter_name" id="parameter_name" value="" disabled>
@@ -353,25 +365,37 @@ $selectContextArr = implode(',',$contextArr);
         $( ".is_required" ).on('ifChanged',function() {
 
             var chckValue = $(this).iCheck('update')[0].checked;
+            var tr = $(this).closest('tr');
+
+            var parameter_name = tr.children().eq(1).text();
+            var entity = tr.children().eq(2).text();
+            var value = tr.children().eq(3).text();
+            var trid = $(this).closest('tr').attr('id');
+            var role = trid.split('-');
+            var actionid = $(this).closest('tr').attr('role');
+
 
             if (chckValue === false) {
                 $('#prompt-'+this.id).html('...');
             } else {
-                $('#prompt-'+this.id).html('<button type="button" class="btn btn-link btn-icon">Define prompts...</button>');
+                $('#prompt-'+this.id).html('<button type="button" class="btn btn-link btn-icon" data-toggle="modal" data-target="#promptModal" data-parameter="'+parameter_name+'" data-entity="'+entity+'" data-value="'+value+'" data-id="'+actionid+'" data-role = "'+role[1]+'">Define prompts...</button>');
             }
         });
 
         $('#promptModal').on('show.bs.modal', function(e) {
-
+            
             var invoker = $(e.relatedTarget);
             var actionid = $(invoker).data('id');
             var parameter_name = $(invoker).data('parameter');
             var entity = $(invoker).data('entity');
             var value = $(invoker).data('value');
+            var role = $(invoker).data('role');
 
             $('#promptModal input[name="parameter_name"]').val(parameter_name);
             $('#promptModal input[name="entity"]').val(entity);
             $('#promptModal input[name="value"]').val(value);
+            $('#promptModal input[name="id"]').val(role);
+            $('#promptModal input[name="actionid"]').val(actionid);
 
             $('.target-action').html(parameter_name);
 
@@ -385,10 +409,11 @@ $selectContextArr = implode(',',$contextArr);
 
                         html ='<tr>';
                         html +='<td>'+ e.prompt+'<input type="hidden" name="prompts['+parameter_name+'][]" value="'+ e.prompt+'"></td>';
-                        html +='<td><button type="button" class="btn btn-danger btn-icon" onclick="$(this).closest(\'tr\').remove();"><i class="fa fa-minus-square-o"></i></button></td>';
+                        html +='<td><button type="button" class="btn btn-danger btn-icon" onclick="$(this).closest(\'tr\').remove();removePrompt(\''+ actionid+'\',\''+ i+'\',\''+ e.id+'\');"><i class="fa fa-minus-square-o"></i></button></td>';
                         html +='</tr>';
 
                         $('.tblprompt tbody').append(html);
+
                     });
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -406,22 +431,48 @@ $selectContextArr = implode(',',$contextArr);
         $('#promptModal').on('hidden.bs.modal', function () {
 
             $('.tblprompt tbody').html('');
+            window.location.reload();
 
-            
         });
 
         $('.btn-add-prompt').on('click',function(){
 
             var prompt = $('input[name=\'prompt\']').val();
             var value = $('#promptModal input[name="parameter_name"]').val();
+            var id = $('#promptModal input[name="id"]').val();
+            var actionid = $('#promptModal input[name="actionid"]').val();
+            var agentid = $('#promptModal input[name="agentid"]').val();
+            var userid = $('#promptModal input[name="userid"]').val();
 
             html ='<tr>';
-            html +='<td>'+prompt+'<input type="hidden" name="prompts['+value+'][]" value="'+prompt+'"></td>';
+            html +='<td>'+prompt+'</td>';
             html +='<td><button type="button" class="btn btn-danger btn-icon" onclick="$(this).closest(\'tr\').remove();"><i class="fa fa-minus-square-o"></i></button></td>';
             html +='</tr>';
 
             $('.tblprompt tbody').append(html);
+
+            htmlAction = '<tr style="display: none">';
+            htmlAction +='<td colspan="7"><input type="hidden" name="prompts['+value+'][]" value="'+prompt+'"></td>';
+            htmlAction +='</tr>';
+
             $('input[name=\'prompt\']').val('');
+            $('#action-'+id).after(htmlAction);
+
+            var data = "agentid="+agentid+"&userid="+userid+"&actionid="+actionid+"&intentid=<?php echo $intent->id?>&prompt="+prompt;
+
+            $.ajax({
+                type: 'POST',
+                url: site_url + 'intents/updateprompts',
+                data : data,
+                dataType: 'json',
+                success: function (json) {
+                    $('#prompt-'+ actionid).remove();
+                }
+            });
+
+            return false;
+
+
         });
     });
 
@@ -487,6 +538,22 @@ $selectContextArr = implode(',',$contextArr);
 
         return false;
     });
+
+    function removePrompt(actionid,id,promptid){
+
+        $.ajax({
+            type: 'GET',
+            url: site_url + 'intents/deleteprompt/'+promptid,
+            dataType: 'json',
+            success: function (json) {
+
+            }
+        });
+
+        return false;
+    }
+
+
 
     function details(id){
 

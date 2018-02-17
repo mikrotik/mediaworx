@@ -100,6 +100,8 @@ class Intents_model extends CRM_Model
         unset($data['events']);
         unset($data['response']);
         unset($data['prompt']);
+        unset($data['id']);
+        unset($data['actionid']);
 
         $dataIntent = '';
         $dataParameters = '';
@@ -251,6 +253,8 @@ class Intents_model extends CRM_Model
         unset($data['events']);
         unset($data['response']);
         unset($data['prompt']);
+        unset($data['id']);
+        unset($data['actionid']);
 
         $dataIntent = '';
         $dataParameters = '';
@@ -421,6 +425,37 @@ class Intents_model extends CRM_Model
             $this->db->delete('tblintentsusersays');
 
             logActivity('Intent Delete [ID:'.$id.']');
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public function delete_prompt($id){
+
+        $this->db->where('id',$id);
+        $this->db->delete('tblintentactionprompts');
+
+        if($this->db->affected_rows() > 0){
+            logActivity('Prompt Delete [ID:'.$id.']');
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public function addprompt($data=array()){
+
+        $this->db->where('id',$data['actionid']);
+        $this->db->update('tblintentsaction',array('is_required'=>1));
+
+        $this->db->insert('tblintentactionprompts',$data);
+        $id = $this->db->insert_id();
+
+        if($this->db->affected_rows() > 0){
+            logActivity('Prompt Add [ID:'.$id.']');
 
             return true;
         }

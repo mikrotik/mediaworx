@@ -1485,3 +1485,18 @@ function get_tasks_where_string()
     $_tasks_where .= ' OR is_public = 1)';
     return $_tasks_where;
 }
+
+function getActionPrompts($actionid)
+{
+
+    $CI = & get_instance();
+
+    if (is_numeric($actionid)){
+        $CI->db->where('actionid',$actionid);
+        $prompts = $CI->db->get('tblintentactionprompts')->result_array();
+
+        return $prompts;
+    }
+
+    return false;
+}
