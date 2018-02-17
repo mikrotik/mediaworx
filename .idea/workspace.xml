@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9274056-e247-49ca-ac8d-4bd0d79f2f19" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Agents_model.php" afterPath="$PROJECT_DIR$/application/models/Agents_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Intents.php" afterPath="$PROJECT_DIR$/application/controllers/Intents.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Intents_model.php" afterPath="$PROJECT_DIR$/application/models/Intents_model.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/themes/mediaworx/views/intents/intent.php" afterPath="$PROJECT_DIR$/application/views/themes/mediaworx/views/intents/intent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/helpers/perfex_db_helper.php" afterPath="$PROJECT_DIR$/application/helpers/perfex_db_helper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mediaworx.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,8 +29,8 @@
       <file leaf-file-name="Intents_model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Intents_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="8.333333">
-              <caret line="74" column="40" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="293" column="47" selection-start-line="293" selection-start-column="47" selection-end-line="294" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -40,8 +39,20 @@
       <file leaf-file-name="intent.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/themes/mediaworx/views/intents/intent.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.544">
-              <caret line="409" column="12" selection-start-line="409" selection-start-column="12" selection-end-line="409" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.424">
+              <caret line="395" column="126" selection-start-line="395" selection-start-column="126" selection-end-line="395" selection-end-column="126" />
+              <folding>
+                <marker date="1518871384020" expanded="true" signature="24793:24806" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="perfex_db_helper.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/helpers/perfex_db_helper.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-24.791666">
+              <caret line="1497" column="24" selection-start-line="1497" selection-start-column="24" selection-end-line="1497" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -50,7 +61,7 @@
       <file leaf-file-name="intents_table.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/themes/mediaworx/template_parts/intents_table.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.125">
+            <state vertical-scroll-proportion="0.0">
               <caret line="128" column="20" selection-start-line="128" selection-start-column="20" selection-end-line="128" selection-end-column="50" />
               <folding />
             </state>
@@ -60,7 +71,7 @@
       <file leaf-file-name="Intents.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Intents.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.416666">
+            <state vertical-scroll-proportion="0.0">
               <caret line="241" column="36" selection-start-line="241" selection-start-column="20" selection-end-line="241" selection-end-column="36" />
               <folding />
             </state>
@@ -83,7 +94,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/views/themes/mediaworx/views/login.php" />
         <option value="$PROJECT_DIR$/application/controllers/Clients.php" />
         <option value="$PROJECT_DIR$/application/views/themes/mediaworx/footer.php" />
         <option value="$PROJECT_DIR$/application/views/themes/mediaworx/views/home.php" />
@@ -133,6 +143,7 @@
         <option value="$PROJECT_DIR$/application/models/Agents_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/Intents.php" />
         <option value="$PROJECT_DIR$/application/models/Intents_model.php" />
+        <option value="$PROJECT_DIR$/application/helpers/perfex_db_helper.php" />
         <option value="$PROJECT_DIR$/application/views/themes/mediaworx/views/intents/intent.php" />
       </list>
     </option>
@@ -176,7 +187,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -224,108 +234,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mediaworx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mediaworx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mediaworx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mediaworx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mediaworx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mediaworx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mediaworx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mediaworx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="template_parts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mediaworx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mediaworx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
+              <option name="myItemId" value="helpers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -428,13 +343,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/themes/mediaworx/views/profile.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/themes/mediaworx/template_parts/header.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6304">
@@ -742,7 +650,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-22.916666">
           <caret line="145" column="5" selection-start-line="128" selection-start-column="4" selection-end-line="145" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -750,7 +657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.952">
           <caret line="145" column="5" selection-start-line="145" selection-start-column="5" selection-end-line="145" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -758,39 +664,48 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6976">
           <caret line="94" column="34" selection-start-line="94" selection-start-column="34" selection-end-line="94" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/themes/mediaworx/template_parts/intents_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.125">
+        <state vertical-scroll-proportion="0.0">
           <caret line="128" column="20" selection-start-line="128" selection-start-column="20" selection-end-line="128" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Intents_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="8.333333">
-          <caret line="74" column="40" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Intents.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.416666">
+        <state vertical-scroll-proportion="0.0">
           <caret line="241" column="36" selection-start-line="241" selection-start-column="20" selection-end-line="241" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Intents_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="293" column="47" selection-start-line="293" selection-start-column="47" selection-end-line="294" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/helpers/perfex_db_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.791666">
+          <caret line="1497" column="24" selection-start-line="1497" selection-start-column="24" selection-end-line="1497" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/themes/mediaworx/views/intents/intent.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.544">
-          <caret line="409" column="12" selection-start-line="409" selection-start-column="12" selection-end-line="409" selection-end-column="12" />
-          <folding />
+        <state vertical-scroll-proportion="0.424">
+          <caret line="395" column="126" selection-start-line="395" selection-start-column="126" selection-end-line="395" selection-end-column="126" />
+          <folding>
+            <marker date="1518871384020" expanded="true" signature="24793:24806" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

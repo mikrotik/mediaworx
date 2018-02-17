@@ -209,9 +209,14 @@
                                                         <td><?php echo $parameter->entity?><input value="<?php echo $parameter->entity?>" type="hidden" name="actions[<?php echo $key?>][entity]"></td>
                                                         <td><?php echo $action['value']?><input value="<?php echo $action['value']?>" type="hidden" name="actions[<?php echo $key?>][resolved_value]"></td>
                                                         <td class="text-center"><input type="checkbox" value="1" name="actions[<?php echo $key?>][is_list]" <?php echo ($action['is_list'] ? "checked" : "")?>></td>
-                                                        <td><div id="prompt-<?php echo $key?>"><?php echo ($action['is_required'] ? "<button type='button' class='btn btn-link' data-parameter='".$parameter->parameter_name."' data-entity='".$parameter->entity."' data-value='".$action['value']."' data-id='".$action['id']."' data-toggle='modal' data-target='#promptModal'>Define prompts...</button>" : "...")?></div></td>
+                                                        <td><div id="prompt-<?php echo $key?>"><?php echo ($action['is_required'] ? "<button type='button' class='btn btn-link' data-parameter='".$parameter->parameter_name."' data-entity='".$parameter->entity."' data-value='".$action['value']."' data-id='".$action['id']."' data-role = '".$key."' data-toggle='modal' data-target='#promptModal'>Define prompts...</button>" : "...")?></div></td>
                                                         <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#action-'+<?php echo $key?>).remove()"><i class="fa fa-close"></i></button> </td>
                                                     </tr>
+                                                    <?php foreach (getActionPrompts($action['id']) as $pkey=>$prompt) { ?>
+                                                        <tr id="prompt-<?php echo $pkey?>">
+                                                            <td colspan="7"><input type="text" name="prompts[<?php echo $parameter->parameter_name?>][]" value="<?php echo $prompt['prompt']?>"></td>
+                                                        </tr>
+                                                    <?php } ?>
                                                 <?php } ?>
                                                 </tbody>
                                         </table>
@@ -287,6 +292,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
+                                <input type="hidden" name="actionid" value=""/>
                                 <div class="col-md-4">
                                     <label for="parameter_name">NAME</label>
                                     <input type="text" class="form-control" name="parameter_name" id="parameter_name" value="" disabled>
@@ -362,16 +368,18 @@ $selectContextArr = implode(',',$contextArr);
         });
 
         $('#promptModal').on('show.bs.modal', function(e) {
-
+            
             var invoker = $(e.relatedTarget);
             var actionid = $(invoker).data('id');
             var parameter_name = $(invoker).data('parameter');
             var entity = $(invoker).data('entity');
             var value = $(invoker).data('value');
+            var role = $(invoker).data('role');
 
             $('#promptModal input[name="parameter_name"]').val(parameter_name);
             $('#promptModal input[name="entity"]').val(entity);
             $('#promptModal input[name="value"]').val(value);
+            $('#promptModal input[name="actionid"]').val(role);
 
             $('.target-action').html(parameter_name);
 
@@ -389,6 +397,7 @@ $selectContextArr = implode(',',$contextArr);
                         html +='</tr>';
 
                         $('.tblprompt tbody').append(html);
+
                     });
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -407,21 +416,29 @@ $selectContextArr = implode(',',$contextArr);
 
             $('.tblprompt tbody').html('');
 
-            
         });
 
         $('.btn-add-prompt').on('click',function(){
 
             var prompt = $('input[name=\'prompt\']').val();
             var value = $('#promptModal input[name="parameter_name"]').val();
+            var actionid = $('#promptModal input[name="actionid"]').val();
 
             html ='<tr>';
-            html +='<td>'+prompt+'<input type="hidden" name="prompts['+value+'][]" value="'+prompt+'"></td>';
+            html +='<td>'+prompt+'</td>';
             html +='<td><button type="button" class="btn btn-danger btn-icon" onclick="$(this).closest(\'tr\').remove();"><i class="fa fa-minus-square-o"></i></button></td>';
             html +='</tr>';
 
             $('.tblprompt tbody').append(html);
+
+            htmlAction = '<tr style="display: none">';
+            htmlAction +='<td colspan="7"><input type="hidden" name="prompts['+value+'][]" value="'+prompt+'"></td>';
+            htmlAction +='</tr>';
+
             $('input[name=\'prompt\']').val('');
+            $('#action-'+actionid).after(htmlAction);
+
+
         });
     });
 
