@@ -43,8 +43,10 @@
                             <div class="form-group">
                                 <select name="context[]" class="form-control select2" multiple="multiple" data-placeholder="Select context"
                                         style="width: 100%;">
-                                    <?php if ($intent) { ?>
-                                        <option value="<?php echo $intent->intent_name?>-followup"><?php echo $intent->intent_name?>-followup</option>
+                                    <?php if ($intents) { ?>
+                                        <?php foreach ($intents as $int) { ?>
+                                        <option value="<?php echo $int['intent_name']?>-followup"><?php echo $int['intent_name']?>-followup</option>
+                                        <?php } ?>
                                     <?php } ?>
                                     <?php foreach ($followups as $followup) { ?>
                                         <option value="<?php echo $followup['intent_name']?>-followup"><?php echo $followup['intent_name']?></option>
@@ -203,7 +205,7 @@
                                                         actions.push(<?php echo json_encode($actionData)?>);
                                                     </script>
                                                 <?php } ?>
-                                                    <tr id="action-<?php echo $key?>">
+                                                    <tr id="action-<?php echo $key?>" role="<?php echo $action['id']?>">
                                                         <td class="text-center"><input type="checkbox" class="is_required" id="<?php echo $key?>" value="1" name="actions[<?php echo $key?>][is_required]" <?php echo ($action['is_required'] ? "checked" : "")?>></td>
                                                         <td data-key="parameter_name"><?php echo $parameter->parameter_name?><input value="<?php echo $parameter->parameter_name?>" type="hidden" name="actions[<?php echo $key?>][parameter_name]"></td>
                                                         <td><?php echo $parameter->entity?><input value="<?php echo $parameter->entity?>" type="hidden" name="actions[<?php echo $key?>][entity]"></td>
@@ -213,8 +215,8 @@
                                                         <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#action-'+<?php echo $key?>).remove()"><i class="fa fa-close"></i></button> </td>
                                                     </tr>
                                                     <?php foreach (getActionPrompts($action['id']) as $pkey=>$prompt) { ?>
-                                                        <tr id="prompt-<?php echo $prompt['id']?>" style="display:none">
-                                                            <td colspan="7"><input type="hidden" name="prompts[<?php echo $parameter->parameter_name?>][]" value="<?php echo $prompt['prompt']?>"></td>
+                                                        <tr id="prompt-<?php echo $action['id']?>-<?php echo $pkey?>" style="display:none">
+                                                            <td colspan="7">prompt-<?php echo $action['id']?>-<?php echo $pkey?><input type="hidden" name="prompts[<?php echo $parameter->parameter_name?>][]" value="<?php echo $prompt['prompt']?>"></td>
                                                         </tr>
                                                     <?php } ?>
                                                 <?php } ?>
@@ -293,10 +295,10 @@
                         <div class="modal-body">
                             <div class="row">
                                 <?php $session = $this->session->get_userdata(); ?>
-                                <input type="text" name="id" value=""/>
-                                <input type="text" name="actionid" value=""/>
-                                <input type="text" name="agentid" value="<?php echo $session['wt_agent']?>"/>
-                                <input type="text" name="userid" value="<?php echo get_client_user_id()?>"/>
+                                <input type="hidden" name="id" value=""/>
+                                <input type="hidden" name="actionid" value=""/>
+                                <input type="hidden" name="agentid" value="<?php echo $session['wt_agent']?>"/>
+                                <input type="hidden" name="userid" value="<?php echo get_client_user_id()?>"/>
                                 <div class="col-md-4">
                                     <label for="parameter_name">NAME</label>
                                     <input type="text" class="form-control" name="parameter_name" id="parameter_name" value="" disabled>
@@ -363,11 +365,20 @@ $selectContextArr = implode(',',$contextArr);
         $( ".is_required" ).on('ifChanged',function() {
 
             var chckValue = $(this).iCheck('update')[0].checked;
+            var tr = $(this).closest('tr');
+
+            var parameter_name = tr.children().eq(1).text();
+            var entity = tr.children().eq(2).text();
+            var value = tr.children().eq(3).text();
+            var trid = $(this).closest('tr').attr('id');
+            var role = trid.split('-');
+            var actionid = $(this).closest('tr').attr('role');
+
 
             if (chckValue === false) {
                 $('#prompt-'+this.id).html('...');
             } else {
-                $('#prompt-'+this.id).html('<button type="button" class="btn btn-link btn-icon">Define prompts...</button>');
+                $('#prompt-'+this.id).html('<button type="button" class="btn btn-link btn-icon" data-toggle="modal" data-target="#promptModal" data-parameter="'+parameter_name+'" data-entity="'+entity+'" data-value="'+value+'" data-id="'+actionid+'" data-role = "'+role[1]+'">Define prompts...</button>');
             }
         });
 
@@ -398,7 +409,7 @@ $selectContextArr = implode(',',$contextArr);
 
                         html ='<tr>';
                         html +='<td>'+ e.prompt+'<input type="hidden" name="prompts['+parameter_name+'][]" value="'+ e.prompt+'"></td>';
-                        html +='<td><button type="button" class="btn btn-danger btn-icon" onclick="$(this).closest(\'tr\').remove();removePrompt(\''+ actionid+'\',\''+ e.id+'\');"><i class="fa fa-minus-square-o"></i></button></td>';
+                        html +='<td><button type="button" class="btn btn-danger btn-icon" onclick="$(this).closest(\'tr\').remove();removePrompt(\''+ actionid+'\',\''+ i+'\',\''+ e.id+'\');"><i class="fa fa-minus-square-o"></i></button></td>';
                         html +='</tr>';
 
                         $('.tblprompt tbody').append(html);
@@ -420,6 +431,7 @@ $selectContextArr = implode(',',$contextArr);
         $('#promptModal').on('hidden.bs.modal', function () {
 
             $('.tblprompt tbody').html('');
+            window.location.reload();
 
         });
 
@@ -527,14 +539,14 @@ $selectContextArr = implode(',',$contextArr);
         return false;
     });
 
-    function removePrompt(actionid,id){
+    function removePrompt(actionid,id,promptid){
 
         $.ajax({
             type: 'GET',
-            url: site_url + 'intents/deleteprompt/'+id,
+            url: site_url + 'intents/deleteprompt/'+promptid,
             dataType: 'json',
             success: function (json) {
-                $('#prompt-'+ id).remove();
+
             }
         });
 

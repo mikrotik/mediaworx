@@ -123,6 +123,9 @@ class Intents extends Clients_controller
             }
         }
 
+        $intents = $this->intents_model->get();
+        $data['intents'] = $intents;
+
         if ($id == '') {
             $data['title']                  = _l('clients_intent_create');
         } else {
@@ -174,6 +177,9 @@ class Intents extends Clients_controller
                 }
             }
         }
+
+        $intents = $this->intents_model->get();
+        $data['intents'] = $intents;
 
         $data['title']                  = _l('clients_intent_create');
 

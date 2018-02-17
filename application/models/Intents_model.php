@@ -100,6 +100,8 @@ class Intents_model extends CRM_Model
         unset($data['events']);
         unset($data['response']);
         unset($data['prompt']);
+        unset($data['id']);
+        unset($data['actionid']);
 
         $dataIntent = '';
         $dataParameters = '';
@@ -251,6 +253,8 @@ class Intents_model extends CRM_Model
         unset($data['events']);
         unset($data['response']);
         unset($data['prompt']);
+        unset($data['id']);
+        unset($data['actionid']);
 
         $dataIntent = '';
         $dataParameters = '';
@@ -443,6 +447,9 @@ class Intents_model extends CRM_Model
     }
 
     public function addprompt($data=array()){
+
+        $this->db->where('id',$data['actionid']);
+        $this->db->update('tblintentsaction',array('is_required'=>1));
 
         $this->db->insert('tblintentactionprompts',$data);
         $id = $this->db->insert_id();
