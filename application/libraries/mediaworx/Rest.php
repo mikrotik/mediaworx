@@ -10,7 +10,7 @@ class Rest
 {
 
     public $_allow = array();
-    public $_content_type = "application/json";
+    public $_content_type = "json";
     public $_request = array();
     private $_method = "";
     private $_code = 200;
@@ -81,7 +81,7 @@ class Rest
 
     private function set_headers() {
         header("HTTP/1.1 " . $this->_code . " " . $this->get_rest_status_message());
-        header("Content-Type:" . $this->_content_type);
+        header("Content-Type: application/" . $this->_content_type);
     }
 
     public function get_rest_status_message() {
