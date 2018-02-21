@@ -53,6 +53,9 @@ class Dialog extends Mediaworx_controller
 
             $this->_MLSettings = new $matchmode($this->_agent,$this->_request);
 
+            print_r($this->_request);
+            exit();
+
             // Perform Request
             $this->$action($this->_request);
 
@@ -67,9 +70,6 @@ class Dialog extends Mediaworx_controller
         /*
          * check ongoing dialog
          */
-
-        print_r($this->_request);
-        exit();
 
         $dialog = $this->checkDialogflow($data);
 
