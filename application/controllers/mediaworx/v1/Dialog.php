@@ -48,8 +48,7 @@ class Dialog extends Mediaworx_controller
             } else {
                 $this->_agent = apiAccess($accessToken,$accessType);
             }
-            print_r($this->_request);
-            exit();
+
 
             $this->load->library('mediaworx_'.$this->_agent->matchmode);
             $matchmode = 'Mediaworx_'.ucfirst($this->_agent->matchmode);
