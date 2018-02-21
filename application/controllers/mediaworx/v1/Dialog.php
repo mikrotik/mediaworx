@@ -41,20 +41,19 @@ class Dialog extends Mediaworx_controller
                 $this->_api->process(array(), 403, true, $this->_format);
             }
 
-//          ====================================================
             // Check Access Token & Access Type are matched
             if (!apiAccess($accessToken,$accessType)){
                 $this->_api->process(array(), 401, true, $this->_format);
             } else {
                 $this->_agent = apiAccess($accessToken,$accessType);
             }
-            print_r($this->_request);
-            exit();
-            
+
             $this->load->library('mediaworx_'.$this->_agent->matchmode);
             $matchmode = 'Mediaworx_'.ucfirst($this->_agent->matchmode);
 
-//            ===============================
+            print_r($this->_request);
+            exit();
+
 
             $this->_MLSettings = new $matchmode($this->_agent,$this->_request);
 
