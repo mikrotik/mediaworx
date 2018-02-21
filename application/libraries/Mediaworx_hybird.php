@@ -133,7 +133,7 @@ class Mediaworx_Hybird
         $this->clearDialog($this->_request['session']);
         $this->_actionComplete = true;
         $response['actionIncomplete'] = $this->_actionComplete;
-        
+
         return $response;
     }
 

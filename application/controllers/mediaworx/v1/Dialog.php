@@ -1,10 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-use DialogFlow\Client;
-use DialogFlow\Model\Query;
-use DialogFlow\Method\QueryApi;
-
 
 class Dialog extends Mediaworx_controller
 {
@@ -24,6 +20,9 @@ class Dialog extends Mediaworx_controller
     }
 
     public function index($action){
+
+        print_r($action);
+        exit();
 
         // grab the request
         $this->_request = array();
