@@ -33,6 +33,9 @@ class Dialog extends Mediaworx_controller
                 $this->_api->process(array(), 412, true, $this->_format);
             }
 
+            print_r($this->_request);
+            exit();
+
             $accessToken = $this->_request['access_token'];
             $accessType = $this->_request['type'];
 
@@ -51,8 +54,7 @@ class Dialog extends Mediaworx_controller
             $this->load->library('mediaworx_'.$this->_agent->matchmode);
             $matchmode = 'Mediaworx_'.ucfirst($this->_agent->matchmode);
 
-            print_r($this->_request);
-            exit();
+//            ===============================
 
             $this->_MLSettings = new $matchmode($this->_agent,$this->_request);
 
