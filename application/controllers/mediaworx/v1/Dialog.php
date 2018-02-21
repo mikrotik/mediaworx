@@ -33,8 +33,6 @@ class Dialog extends Mediaworx_controller
                 $this->_api->process(array(), 412, true, $this->_format);
             }
 
-            print_r($this->_request);
-            exit();
 
             $accessToken = $this->_request['access_token'];
             $accessType = $this->_request['type'];
@@ -43,6 +41,9 @@ class Dialog extends Mediaworx_controller
             if (!UUID::is_valid($accessToken)){
                 $this->_api->process(array(), 403, true, $this->_format);
             }
+
+            print_r($this->_request);
+            exit();
 
             // Check Access Token & Access Type are matched
             if (!apiAccess($accessToken,$accessType)){
