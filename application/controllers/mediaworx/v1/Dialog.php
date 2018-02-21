@@ -25,8 +25,6 @@ class Dialog extends Mediaworx_controller
         $this->_request = array();
         parse_str(file_get_contents('php://input'), $this->_request);
 
-        print_r($this->_request);
-        exit();
 
         if (is_array($this->_request) && isset($this->_request['session'])) {
             $this->_format = $this->_request['format'];
@@ -69,6 +67,9 @@ class Dialog extends Mediaworx_controller
         /*
          * check ongoing dialog
          */
+
+        print_r($this->_request);
+        exit();
 
         $dialog = $this->checkDialogflow($data);
 
