@@ -50,12 +50,14 @@ class Dialog extends Mediaworx_controller
             }
 
 
-            $this->load->library('mediaworx_'.$this->_agent->matchmode);
-            $matchmode = 'Mediaworx_'.ucfirst($this->_agent->matchmode);
+//            $this->load->library('mediaworx_'.$this->_agent->matchmode);
+//            $matchmode = 'Mediaworx_'.ucfirst($this->_agent->matchmode);
+
+            $this->load->library('mediaworx_hybird');
 
 //            ===============================
 
-            $this->_MLSettings = new $matchmode($this->_agent,$this->_request);
+            $this->_MLSettings = new Mediaworx_Hybird($this->_agent,$this->_request);
 
             // Perform Request
             $this->$action($this->_request);
