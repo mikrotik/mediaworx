@@ -589,6 +589,7 @@ $selectContextArr = implode(',',$contextArr);
                 });
                 if (matchingItems.length === 0){
                     actions.push(e);
+                    key++;
                     html = '<tr id="action-'+key+'">';
                     html += '<td class="text-center">';
                     html += '<input type="checkbox" value="1" name="actions['+key+'][is_required]">';
@@ -596,7 +597,7 @@ $selectContextArr = implode(',',$contextArr);
                     $.each(this, function (index, value) {
 
                         if (index == 'resolved_value'){
-                            var varvalue = '$'+actions[key].parameter_name;
+                            var varvalue = '$'+actions[i].parameter_name;
                         } else {
                             var varvalue = value;
                         }
@@ -605,9 +606,7 @@ $selectContextArr = implode(',',$contextArr);
                     html += '<td class="text-center">';
                     html += '<input type="checkbox" value="1" name="actions['+key+'][is_list]">';
                     html +='</td>';
-                    html += '<td>';
                     html += '<td><div id="prompt"></div></td>';
-                    html += '</td>';
                     html += '<td><button type="button" class="btn btn-danger btn-icon" onclick="$(\'#action-'+key+'\').remove()"><i class="fa fa-close"></i></button></td>';
                     html += '</tr>';
 

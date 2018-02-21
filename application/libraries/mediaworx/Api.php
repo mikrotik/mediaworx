@@ -9,11 +9,12 @@
 class Api extends Rest
 {
     private $_arraytoxml;
+    protected $_objDateTime;
 
     public function __construct(){
 
         parent::__construct();
-        $this->_arraytoxml = new ArrayToXML();
+        $this->_objDateTime = new DateTime('NOW');
 
     }
 
@@ -24,7 +25,42 @@ class Api extends Rest
         $this->setCode($code);
         $this->_content_type = $format;
 
-        $this->response($this->$format($data), $code);
+        if (isset($data['session'])){
+            $data['session'] = $data['session'];
+        } else {
+            $data['session'] = session_id();
+        }
+
+        $response = (object)array(
+            "MediaworxModelBasedata" => array(
+                "id" => UUID::v5(APP_ENC_KEY, UUID::random_key(16)),
+                "timestamp" => $this->_objDateTime->format(DateTime::ISO8601),
+                "lang" => "english",
+                "result" => (object)array(
+                    "source"=> $data[0]['source'],
+                    "resolvedQuery"=> $data['usersay'],
+                    "resolvedParameters"=>$data[0]['resolvedParameters'],
+                    "action"=>$data[0]['action'],
+                    "actionIncomplete"=>$data[0]['actionIncomplete'],
+                ),
+                "context"=>(object) array(
+                    "name"=>$data[0]['context']['name'],
+                    "parameters"=>$data[0]['context']['parameters'],
+                    "requiredParameters"=>$data[0]['context']['requiredParameters']
+                ),
+                "fulfillment"=>(object) array(
+                    "speech"=>$data[0]['fulfillment']['speech']
+                ),
+                "status" => (object)array(
+                    "has_error"=>$hasError,
+                    "code" => $code,
+                    "message"=>$this->get_rest_status_message()
+                ),
+                "sessionId" => $data['session'],
+            )
+        );
+
+        $this->response($this->$format($response), $code);
 
     }
 

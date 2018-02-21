@@ -9,54 +9,117 @@ use DialogFlow\Method\QueryApi;
 class Dialog extends Mediaworx_controller
 {
 
+    private $_request = array();
+    private $_agent = array();
+    private $_MLSettings;
+
     protected $_objDateTime;
 
     function __construct()
     {
         parent::__construct();
         $this->_objDateTime = new DateTime('NOW');
+
+        $this->_format='json';
     }
 
-    public function index($operation,$action){
+    public function index($action){
 
-        $this->$action();
-    }
+        // grab the request
+        $this->_request = array();
+        parse_str(file_get_contents('php://input'), $this->_request);
 
-    public function dialogflow(){
+        if (is_array($this->_request) && isset($this->_request['session'])) {
+            $this->_format = $this->_request['format'];
 
-        require_once VENDOR_FOLDER.'/dialogflow/autoload.php';
+            if (!$this->_request) {
+                $this->_api->process(array(), 412, true, $this->_format);
+            }
 
-        try {
-            $client = new Client('c627b703b44e4d60be5f54637b58fe6f');
-            $queryApi = new QueryApi($client);
+            $accessToken = $this->_request['access_token'];
+            $accessType = $this->_request['type'];
 
-            $meaning = $queryApi->extractMeaning('Hi', [
-                'sessionId' => md5('1234567890'),
-                'lang' => 'en',
-            ]);
-            $response = new Query($meaning);
+            // Validate Access Token
+            if (!UUID::is_valid($accessToken)){
+                $this->_api->process(array(), 403, true, $this->_format);
+            }
 
-            return $this->_api->process($response,200,false,'xml');
+            // Check Access Token & Access Type are matched
+            if (!apiAccess($accessToken,$accessType)){
+                $this->_api->process(array(), 401, true, $this->_format);
+            } else {
+                $this->_agent = apiAccess($accessToken,$accessType);
+            }
 
-        } catch (\Exception $error) {
+            $this->load->library('mediaworx_'.$this->_agent->matchmode);
+            $matchmode = 'Mediaworx_'.ucfirst($this->_agent->matchmode);
 
-            echo $error->getMessage();
+            $this->_MLSettings = new $matchmode($this->_agent,$this->_request);
+
+            // Perform Request
+            $this->$action($this->_request);
+
+        } else {
+
+            $this->_api->process(array(), 412, true, $this->_format);
         }
     }
 
-    public function speech(){
+    public function speech($data){
 
-        $response = (object) array(
-            "MediaworxModelBasedata"=>array(
-                "id"=>UUID::v5(APP_ENC_KEY,UUID::random_key(16)),
-                "timestamp"=>$this->_objDateTime->format(DateTime::ISO8601),
-                "lang"=>"em",
-                "result"=>(object) array(),
-                "status"=>(object) array(),
-                "sessionId"=>session_id()
-            )
-        );
+        /*
+         * check ongoing dialog
+         */
 
-        return $this->_api->process($response,200,false,'xml');
+        $dialog = $this->checkDialogflow($data);
+
+        if (!$dialog){
+
+            $this->setDialog($data);
+
+        } else {
+
+            $data['usersay'] = $dialog->usersay.' '.$data['usersay'];
+            $this->setDialog($data);
+        }
+
+        $data[] = $this->_MLSettings->process();
+
+        return $this->_api->process($data,200,false,$this->_format);
+    }
+
+    protected function checkDialogflow($data){
+
+        if ($data){
+
+            $this->db->where('client_session_id',$data['session']);
+            $this->db->order_by('id','desc');
+            $this->db->limit(1);
+            $dialog = $this->db->get('tbldialogsessions')->row();
+
+            if ($dialog){
+
+                return $dialog;
+            }
+
+            return false;
+        }
+    }
+
+    protected function setDialog($data){
+
+        if ($data){
+
+            $this->db->where('client_session_id',$data['session']);
+            $this->db->delete('tbldialogsessions');
+
+            $dialogData = array(
+
+                'client_session_id'=>$data['session'],
+                'usersay'=>$data['usersay'],
+            );
+
+            $this->db->insert('tbldialogsessions',$dialogData);
+        }
     }
 }

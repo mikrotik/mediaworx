@@ -621,3 +621,25 @@ function getAgentList($userid){
 
     return false;
 }
+
+function apiAccess($access_token,$type){
+
+    $CI = & get_instance();
+
+    if ($type == '1'){
+        $field = 'client_access_token';
+    } else if ($type == '2'){
+        $field = '2';
+    }
+
+    $CI->db->where($field,$access_token);
+    $agent = $CI->db->get('tblagents')->row();
+
+    if ($agent){
+
+        return $agent;
+    }
+
+    return false;
+
+}

@@ -13,6 +13,6 @@ class CRM_Model extends CI_Model {
 
         $session = $this->session->get_userdata();
 
-        $this->wt_agent = $session['wt_agent'];
+        $this->wt_agent = (isset($session['wt_agent']) ? $session['wt_agent'] : 0);
   }
 }

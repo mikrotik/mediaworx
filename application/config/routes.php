@@ -87,4 +87,4 @@ $route['knowledge-base/(:any)']  = "clients/knowledge_base/$1";
 /*
  * All dialogs goes through dialog controller
  */
-$route['mediaworx/v1/(:any)/(:any)']  = "mediaworx/v1/$1/$2";
+$route['mediaworx/v1/(:any)/(:any)']  = "mediaworx/v1/$1/index/$2";
