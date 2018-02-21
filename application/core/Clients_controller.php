@@ -18,7 +18,7 @@ class Clients_controller extends CRM_Controller
 
         $session = $this->session->get_userdata();
 
-        $this->wt_agent = $session['wt_agent'];
+        $this->wt_agent = (isset($session['wt_agent']) ? $session['wt_agent'] : 0);
 
         $language = load_client_language();
 

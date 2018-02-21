@@ -177,7 +177,7 @@ class Intents_model extends CRM_Model
                 );
                 $this->db->insert('tblintentsusersays',$usersayData);
                 $usersayid = $this->db->insert_id();
-                $this->setParameters($dataParameters[$key],$data['action'],$usersayid,$intentid);
+                $this->setParameters($dataParameters[$key],$usersayid,$intentid);
             }
         }
 
@@ -404,7 +404,7 @@ class Intents_model extends CRM_Model
                         'agentid'=>$this->wt_agent,
                         'parameter_name'=>$parameter['parameter_name'],
                         'entity'=>$parameter['entity'],
-                        'resolved_value'=>$parameter['resolved_value'],
+                        'resolved_value'=>trim($parameter['resolved_value']),
                     );
 
                     $this->db->insert('tblintentsusersaysparameters',$parameterData);
@@ -415,14 +415,30 @@ class Intents_model extends CRM_Model
 
     public function delete($id){
 
+        // Get intent
+        $this->db->where('id',$id);
+        $intent = $this->db->get('tblintents')->row();
+
         $this->db->where('id',$id);
         $this->db->delete('tblintents');
 
         if($this->db->affected_rows() > 0){
 
-            // Delete all entities of agent
+            // Delete all usersays of intent
             $this->db->where('intentid',$id);
             $this->db->delete('tblintentsusersays');
+
+            // Delete all responses of intent
+            $this->db->where('intentid',$id);
+            $this->db->delete('tblintentsresponses');
+
+            // Delete all parameters of intent
+            $this->db->where('intentid',$id);
+            $this->db->delete('tblintentsusersaysparameters');
+
+            // Delete all actions of intent
+            $this->db->where('action',$intent->action);
+            $this->db->delete('tblintentsaction');
 
             logActivity('Intent Delete [ID:'.$id.']');
 
