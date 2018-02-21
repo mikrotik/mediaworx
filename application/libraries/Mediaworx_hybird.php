@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require_once VENDOR_FOLDER . 'ml/autoload.php';
 
 class Mediaworx_Hybird
 {
@@ -133,6 +132,13 @@ class Mediaworx_Hybird
         $this->clearDialog($this->_request['session']);
         $this->_actionComplete = true;
         $response['actionIncomplete'] = $this->_actionComplete;
+
+
+        /*
+        * check if follow up exist
+        */
+
+
 
         return $response;
     }
