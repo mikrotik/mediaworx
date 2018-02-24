@@ -50,3 +50,5 @@ define('PROJECT_ATTACHMENTS_FOLDER',FCPATH . 'uploads/projects' . '/');
 define('PROJECT_DISCUSSION_ATTACHMENT_FOLDER',FCPATH . 'uploads/discussions' . '/');
 // Vendor
 define('VENDOR_FOLDER',FCPATH . 'vendor' . '/');
+// ChatBot
+define('CHATBOT_FOLDER',FCPATH . 'chatbot' . '/');

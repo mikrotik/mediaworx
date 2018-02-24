@@ -1,415 +1,259 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+require_once VENDOR_FOLDER.'/matcher/autoload.php';
+require_once VENDOR_FOLDER.'/stringfy/autoload.php';
 
 class Mediaworx_Hybird
 {
-    private $_CI;
-    protected $_agent = array();
-    protected $_request = array();
-    protected $_actionComplete = false;
-    protected $_usersays = array();
-    protected $redis;
+    /** @var array  */
+    protected $intent = [];
 
-    function __construct($agent, $request)
+    /** @var array  */
+    protected $contexts = [];
+
+    /** @var array  */
+    protected $events = [];
+
+    /** @var   */
+    protected $action;
+
+    /** @var array  */
+    protected $currentConversationData = [];
+
+    /** @var array  */
+    protected $parameters = [];
+
+    /**
+     * The fallback message to use, if no match
+     * could be heard.
+     * @var callable|null
+     */
+    protected $fallbackMessage;
+
+    /** @var array */
+    protected $matches = [];
+
+    /** @var array */
+    protected $request = [];
+
+    /** @var array  */
+    protected $agent = [];
+
+    /** @var array  */
+    protected $usersays = [];
+
+    /** @var  Instance of Codeigniter */
+    protected $CI;
+
+    /** @var int  */
+    protected $score = 0;
+
+    /** @var array|bool  */
+    protected $defaultIntents = [];
+
+    /** @var array  */
+    protected $stringfy = [];
+
+    /** @var array  */
+    protected $intentResponses = [];
+
+    /** @var bool  */
+    protected $actionInComplete = false;
+
+    /** @var array  */
+    protected $chatBot = [];
+
+    /**
+     * Mediaworx Hybird constructor.
+     * @param array $request
+     */
+
+    public function __construct($agent,$request)
     {
-        $this->_CI = &get_instance();
 
-        $this->_agent = $agent;
-        $this->_request = $request;
+        /** @var  CI */
+        $this->CI = &get_instance();
 
-        $this->_CI->db->where('agentid',$this->_agent->agentid);
-        $this->_usersays = $this->_CI->db->get('tblintentsusersays')->result_array();
-        $this->_CI->load->library('redis');
-        $this->redis = new Redis();
+        $this->stringfy = new DDTextCompare\Comparator\Cosine();
+
+        /** @var  request */
+        $this->request = $request;
+
+        /** @var  agent */
+        $this->agent= $agent;
+
+        /**
+         *  standardize the userSay from the request
+         */
+
+        $this->request['usersay'] = strtolower($this->request['usersay']);
+
+        /**
+         *  Set default intents
+         */
+
+        $this->defaultIntents = getDefaultIntents();
+
     }
 
-    public function process(){
-
-        /*
-         * check for ongoing dialog
+    public function listen()
+    {
+        /**
+         * Get all predefined user says
+         * that matches with the request
          */
 
-        $dialog = $this->checkDialogflow($this->_request);
+        $this->usersays = getUserSays($this->request['usersay']);
 
+        $this->chatBot = $this->retriveChatBot();
 
-        if (!$this->_actionComplete){
-            $response['context']['name'] = UUID::v5(APP_ENC_KEY,$this->_request['session'])."_id_dialog_context";
-        }
+        return $this->process();
+    }
 
-        $response['actionIncomplete'] = $this->_actionComplete; // set true when all set
-
-        $response['source'] = strtolower($this->_agent->agent_name);
-        /*
-         * get parameters of usersay
+    /** ChatBot processing all information */
+    protected function process()
+    {
+            /**
+         * Trigger string matcher to find the
+         * predicted intent and
+         * check if predicted match is correct and applies the confidence of bot
          */
-
-        $resolvedUserParameters  = checkSpeechContentParameters($dialog->usersay,$this->_agent->agentid);
-
-        /*
-         * get entities of resolvedParameters
-         */
-
-        foreach ($resolvedUserParameters as $resolvedUserParameter){
-
-            $resolvedParameters[] = array(
-                'parameter_name'=>$resolvedUserParameter['parameter_name'],
-                'entity'=>$resolvedUserParameter['entity'],
-                'resolved_value'=>$resolvedUserParameter['resolved_value'],
-                'resolved_entity'=>$this->getEntitiesofParameters($resolvedUserParameter['parameter_name'])
-            );
-        }
-
-        $response['resolvedParameters'] = $resolvedParameters;
-
-        /*
-         * resolve intent id by usersay
-         */
-        $predictions = array();
-        foreach ($this->_usersays as $intentUsersay) {
-            $distance = $this->LevenshteinDistance($intentUsersay['usersay'],$dialog->usersay);
-
-            $predictions[$distance] = array(
-                "intentid"=>$intentUsersay['intentid'],
-                "intentUsersay"=>$intentUsersay['usersay'],
-                "score"=>$distance
-            );
-        }
-
-
+        $predictions = getIntentPredictions($this->usersays,$this->request['usersay']);
         $score = array_column($predictions, 'score');
-        $intentid = $predictions[min($score)]['intentid'];
+        $predicted = $predictions[min($score)];
 
-        /*
-         * get intent and action
-         */
-        $intent = $this->getIntent($intentid);
+        $this->score = round($this->stringfy->compare($predicted['usersay'],$this->request['usersay']) , 1, PHP_ROUND_HALF_UP);
 
-        if ($intent){
+        if ($this->score >= $this->agent->threshold)
+        {
+            $this->action = $predicted['action'];
 
-            $response['action'] = $intent->action;
-        }
 
-        /*
-         * get intent actions and original values
-         */
+            $chatBotParameters = unserialize($this->chatBot->parameters);
+            
+            /**
+             * check forrequest parameters
+             */
+            $requestedParameters = checkSpeechContentParameters($this->request['usersay'],$this->agent->agentid);
 
-        $response['context']['parameters'] = $this->getIntentActions($intent->action,$response['resolvedParameters']);
+            // TODO - Remove this later
+            $this->currentConversationData['requestedParameters'] = $requestedParameters;
 
-        /*
-         * get list required actions
-         */
+            /**
+             * check if action has required parameters
+             */
+            $requiredParameters = getParameters($this->action,true,false,$requestedParameters,$this->stringfy,$chatBotParameters);
 
-        $response['context']['requiredParameters'] = $this->getRequiredParameters();
+            // TODO - Remove this later
+            $this->currentConversationData['requiredParameters'] = $requiredParameters;
 
-        /*
-         * check if required parameters are filled
-         */
+            if ($requiredParameters && !$requestedParameters)
+            {
+                $this->actionInComplete = true;
+            }
+            /** @var  parameters
+             * list of parameters passed
+             */
 
-        foreach($this->getRequiredParameters() as $requiredParamenter){
+            $this->parameters = getParameters($this->action, false, true, $requestedParameters, $this->stringfy,$chatBotParameters);
 
-            if (array_key_exists($requiredParamenter,$response['context']['parameters']) && empty($response['context']['parameters'][$requiredParamenter])){
+            if ($requiredParameters) {
 
-                $action = $this->getAction('$'.$requiredParamenter,$intent->action);
-
-                $prompt = $this->getActionPrompt($action->id);
-
-                $response['fulfillment']['speech'] = $prompt->prompt;
-
-                /*
-                 * add response to dialogflow
+                /**
+                 * TODO
+                 * predicted response and check for prompt and check if all requirements a filled
                  */
 
-                $this->addResponse($prompt->prompt);
-
-                return $response;
-            }
-        }
-
-        $response['fulfillment']['speech'] = $this->getResponse($intent,$response);
-
-        // clear the dialog session
-        $this->clearDialog($this->_request['session']);
-        $this->_actionComplete = true;
-        $response['actionIncomplete'] = $this->_actionComplete;
-
-
-        /*
-        * check if follow up exist
-        */
-
-
-
-        return $response;
-    }
-
-    protected function clearDialog($sessionid){
-
-        $this->_CI->db->where('client_session_id',$sessionid);
-        $this->_CI->db->delete('tbldialogsessions');
-
-    }
-
-    protected function addResponse($response){
-
-        if ($response){
-
-            $this->_CI->db->where('client_session_id',$this->_request['session']);
-            $this->_CI->db->update('tbldialogsessions',array('response'=>$response));
-        }
-
-        return false;
-
-    }
-
-    protected function getResponse($intent,$responseData){
-
-        $response = array();
-
-        $this->_CI->db->where('intentid', $intent->id);
-        $responses = $this->_CI->db->get('tblintentsresponses')->result_array();
-
-        $parameters = $this->generateParameters($responseData['context']['parameters']);
-
-        $totalParameters = count($parameters);
-
-        $stringParameters = array();
-
-        foreach ($responses as $intentResponse){
-
-            $countFindings = 0;
-
-            $string = $intentResponse['response'];
-            $countParamaeters = 0;
-
-            $regex = '~(:\w+)~';
-            if (preg_match_all($regex, str_replace("$",":",$string), $matches, PREG_PATTERN_ORDER)) {
-                foreach ($matches[1] as $word) {
-                    $countParamaeters++;
-                }
+                $prompt = getIntentActionPrompt($this->action, $predicted['intentid'], $this->parameters);
             }
 
-                foreach ($parameters as $key=>$parameter){
-                    if (strpos($string, '$'.$key)!==false) {
+            if ($prompt){
 
-                        $stringParameters["@".$key] = $parameter;
+                $this->intentResponses['response'] = $prompt;
 
-                        $countFindings++;
+            } else {
 
-                        if ($totalParameters == $countParamaeters){
-                            return strtr(str_replace('$','@',$string),$stringParameters);
-                        }
-                    }
-                };
+                $this->intentResponses['response'] = getIntentResponses($predicted['intentid'], $this->parameters, $requestedParameters, $requiredParameters)['response'];
             }
 
-
-
-        $this->_CI->db->where('intentid', $intent->id);
-        $this->_CI->db->order_by('id', 'RANDOM');
-        $this->_CI->db->limit(1);
-        $response = $this->_CI->db->get('tblintentsresponses')->row();
-
-        return $response->response;
-    }
-
-    protected function generateParameters($parameters){
-
-        $generatedData = array();
-
-        foreach ($parameters as $key=>$parameter){
-
-            if (!empty($parameter)) {
-                $generatedData[$key] = $parameter;
-            }
-
+        } else {
+            $this->intentResponses['response'] = $this->getDefaultFallbackResponse()['response']->response;
         }
 
-        return $generatedData;
+        /** Returns the final response */
+        return $this->getResponse();
     }
 
-    protected function getActionPrompt($actionid){
-
-        if (is_numeric($actionid)){
-
-            $this->_CI->db->where('actionid',$actionid);
-            $intentActionPrompt = $this->_CI->db->get('tblintentactionprompts')->row();
-
-            return $intentActionPrompt;
-        }
-        return false;
-    }
-
-    protected function getAction($actionValue,$action){
-
-        if (is_string($actionValue)){
-
-            $this->_CI->db->where('value',$actionValue);
-            $this->_CI->db->where('action',$action);
-            $intentAction = $this->_CI->db->get('tblintentsaction')->row();
-
-            return $intentAction;
-        }
-        return false;
-    }
-
-    protected function getIntent($intentid){
-
-        if (is_numeric($intentid)){
-
-            $this->_CI->db->where('id',$intentid);
-            $intent = $this->_CI->db->get('tblintents')->row();
-
-            return $intent;
-        }
-        return false;
-    }
-
-    protected function getEntitiesofParameters($parameter_name){
-
-        if (is_string($parameter_name) && !empty($parameter_name)){
-
-            $this->_CI->db->where('entity_name',trim($parameter_name," "));
-            $entity = $this->_CI->db->get('tblentities')->row();
-
-            if ($entity){
-
-                unset($entity->agentid);
-                unset($entity->userid);
-
-                return $entity;
-            }
-
-            return false;
-        }
-
-        return false;
-
-    }
-
-    protected function getIntentActions($action,$resolvedParameters = array())
+    protected function getResponse()
     {
-        $parameters = array();
-        $value = "";
-        $key = 0;
-        if (is_string($action)){
+        $this->currentConversationData['actionIncomplete'] = $this->actionInComplete;
+        $this->currentConversationData['source'] = strtolower($this->agent->agent_name);
+        $this->currentConversationData['action'] = $this->action;
+        $this->currentConversationData['parameters'] = $this->parameters;
 
-            $this->_CI->db->where('action', $action);
-            $actions = $this->_CI->db->get('tblintentsaction')->result_array();
+        $this->currentConversationData['fulfillment']['speech'] = $this->intentResponses['response'];
 
-            foreach ($actions as $actionList){
+        /**
+         * TODO- Save it to chatlog
+         */
 
-                if ($resolvedParameters){
+        $this->invokeChatBot();
 
-                    if ($resolvedParameters[$key]['parameter_name'] == trim($actionList['value'],'$')){
-                        $value = $resolvedParameters[$key]['resolved_value'];
-                        $key++;
-
-                    }
-                }
-
-                $parameters[trim($actionList['value'],'$')] = $value;
-                $value = "";
-            }
-
-            return $parameters;
-        }
-
-        return false;
+        return $this->currentConversationData;
     }
 
-    protected function getRequiredParameters(){
-
-        $this->_CI->db->where('is_required','1');
-        $requiredParameters = $this->_CI->db->get('tblintentsaction')->result_array();
-
-        if ($requiredParameters){
-
-            foreach ($requiredParameters as $requiredParameter ) {
-
-                $parameters[] = trim($requiredParameter['value'],"$");
-            }
-
-            return $parameters;
-
-        }
-
-        return false;
-    }
-
-    protected function LevenshteinDistance($s1, $s2)
+    protected function invokeChatBot()
     {
-        $sLeft = (strlen($s1) > strlen($s2)) ? $s1 : $s2;
-        $sRight = (strlen($s1) > strlen($s2)) ? $s2 : $s1;
-        $nLeftLength = strlen($sLeft);
-        $nRightLength = strlen($sRight);
-        if ($nLeftLength == 0)
-            return $nRightLength;
-        else if ($nRightLength == 0)
-            return $nLeftLength;
-        else if ($sLeft === $sRight)
-            return 0;
-        else if (($nLeftLength < $nRightLength) && (strpos($sRight, $sLeft) !== FALSE))
-            return $nRightLength - $nLeftLength;
-        else if (($nRightLength < $nLeftLength) && (strpos($sLeft, $sRight) !== FALSE))
-            return $nLeftLength - $nRightLength;
-        else {
-            $nsDistance = range(1, $nRightLength + 1);
-            for ($nLeftPos = 1; $nLeftPos <= $nLeftLength; ++$nLeftPos)
-            {
-                $cLeft = $sLeft[$nLeftPos - 1];
-                $nDiagonal = $nLeftPos - 1;
-                $nsDistance[0] = $nLeftPos;
-                for ($nRightPos = 1; $nRightPos <= $nRightLength; ++$nRightPos)
-                {
-                    $cRight = $sRight[$nRightPos - 1];
-                    $nCost = ($cRight == $cLeft) ? 0 : 1;
-                    $nNewDiagonal = $nsDistance[$nRightPos];
-                    $nsDistance[$nRightPos] =
-                        min($nsDistance[$nRightPos] + 1,
-                            $nsDistance[$nRightPos - 1] + 1,
-                            $nDiagonal + $nCost);
-                    $nDiagonal = $nNewDiagonal;
-                }
-            }
-            return $nsDistance[$nRightLength];
+        if (!empty($this->currentConversationData['fulfillment']['speech'])) {
+
+            $chatLog = array(
+                "sessionid" => $this->request['session'],
+                "usersay" => $this->request['usersay'],
+                "response" => $this->currentConversationData['fulfillment']['speech'],
+                "parameters" => serialize($this->currentConversationData['parameters']),
+                "is_complete" => $this->currentConversationData['actionIncomplete'],
+                "is_engaged" => 1,
+                "has_followup" => 0,
+                'datetime' => date('Y-m-d H:s:i')
+            );
+
+            $this->CI->db->insert("tblchatlog", $chatLog);
         }
+
+        return false;
     }
 
+    protected function retriveChatBot()
+    {
+
+        $this->CI->db->where('sessionid',$this->request['session']);
+        $this->CI->db->where('is_complete',0);
+        $this->CI->db->where('is_engaged',1);
+        $this->CI->db->limit(1);
+        $this->CI->db->order_by('id','DESC');
+        $chatBot = $this->CI->db->get('tblchatlog')->row();
+
+        if ($chatBot){
+            return $chatBot;
+        }
+
+        return false;
+    }
     protected function getDefaultFallbackResponse(){
 
-        $this->_CI->db->where('intent_name','Default Fallback Intent');
-        $defaultFallbackIntent = $this->_CI->db->get('tblintents')->row();
+        $this->CI->db->where('intent_name','Default Fallback Intent');
+        $defaultFallbackIntent = $this->CI->db->get('tblintents')->row();
 
-        $this->_CI->db->where('intentid', $defaultFallbackIntent->id);
-        $this->_CI->db->order_by('id', 'RANDOM');
-        $this->_CI->db->limit(1);
-        $defaultFallback = $this->_CI->db->get('tblintentsresponses')->row();
+        $this->CI->db->where('intentid', $defaultFallbackIntent->id);
+        $this->CI->db->order_by('id', 'RANDOM');
+        $this->CI->db->limit(1);
+        $defaultFallback = $this->CI->db->get('tblintentsresponses')->row();
 
-        return $defaultFallback;
-
-    }
-
-    protected function checkDialogflow($data){
-
-        if ($data){
-
-            $this->_CI->db->where('client_session_id',$data['session']);
-            $this->_CI->db->order_by('id','desc');
-            $this->_CI->db->limit(1);
-            $dialog = $this->_CI->db->get('tbldialogsessions')->row();
-
-            if ($dialog){
-
-                return $dialog;
-            }
-
-            return false;
-        }
-    }
-
-    protected function getPrompt()
-    {
+        return array(
+            'intent'=>$defaultFallbackIntent,
+            'response'=>$defaultFallback
+        );
 
     }
 }

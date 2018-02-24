@@ -1769,9 +1769,9 @@ function checkSpeechContentParameters($speech,$agentid){
             if (strstr(strtolower($speech), strtolower($word))){
 
                 $parameters[] = array(
-                   'parameter_name' => $synonym['entity_name'],
+                    'parameter_name' => $synonym['entity_name'],
                     'entity' => '@'.$synonym['entity_name'],
-                   'resolved_value' => $word,
+                    'resolved_value' => $word,
                 );
             }
         }
@@ -1793,6 +1793,13 @@ function getUsersayParameters($id){
     }
 
     return false;
+}
+
+function getDefaultEvents()
+{
+    return array(
+        "welcome"=>"welcome"
+    );
 }
 
 function getUsersaysParameters($usersayid){
@@ -1937,4 +1944,69 @@ function setDefaultWelcomIntentsResponses($agentid,$userid){
 
 
 
+}
+
+function stringCompare($string1,$string2)
+{
+    $words1 = explode(' ',$string1);
+    $words2 = explode(' ',$string2);
+    $nbWords1 = count($words1);
+    $stringSimilarity = 0;
+
+    foreach($words1 as $word1){
+        $max = null;
+        $similarity = null;
+        foreach($words2 as $word2){
+            similar_text($word1, $word2, $similarity);
+            $textComp = similar_text($string1,$string2,$percent);
+            if($similarity > $max){ //1)
+                $max = $similarity;
+            }
+        }
+        $stringSimilarity += $max; //2)
+    }
+
+    // do calculation
+    $similarityScore = (($stringSimilarity/100) * ($textComp/10));
+
+    return round($similarityScore,2); //3)
+}
+
+function LevenshteinDistance($s1, $s2)
+{
+    $sLeft = (strlen($s1) > strlen($s2)) ? $s1 : $s2;
+    $sRight = (strlen($s1) > strlen($s2)) ? $s2 : $s1;
+    $nLeftLength = strlen($sLeft);
+    $nRightLength = strlen($sRight);
+    if ($nLeftLength == 0)
+        return $nRightLength;
+    else if ($nRightLength == 0)
+        return $nLeftLength;
+    else if ($sLeft === $sRight)
+        return 0;
+    else if (($nLeftLength < $nRightLength) && (strpos($sRight, $sLeft) !== FALSE))
+        return $nRightLength - $nLeftLength;
+    else if (($nRightLength < $nLeftLength) && (strpos($sLeft, $sRight) !== FALSE))
+        return $nLeftLength - $nRightLength;
+    else {
+        $nsDistance = range(1, $nRightLength + 1);
+        for ($nLeftPos = 1; $nLeftPos <= $nLeftLength; ++$nLeftPos)
+        {
+            $cLeft = $sLeft[$nLeftPos - 1];
+            $nDiagonal = $nLeftPos - 1;
+            $nsDistance[0] = $nLeftPos;
+            for ($nRightPos = 1; $nRightPos <= $nRightLength; ++$nRightPos)
+            {
+                $cRight = $sRight[$nRightPos - 1];
+                $nCost = ($cRight == $cLeft) ? 0 : 1;
+                $nNewDiagonal = $nsDistance[$nRightPos];
+                $nsDistance[$nRightPos] =
+                    min($nsDistance[$nRightPos] + 1,
+                        $nsDistance[$nRightPos - 1] + 1,
+                        $nDiagonal + $nCost);
+                $nDiagonal = $nNewDiagonal;
+            }
+        }
+        return $nsDistance[$nRightLength];
+    }
 }

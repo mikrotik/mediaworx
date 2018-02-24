@@ -39,23 +39,32 @@ class Api extends Rest
                 "result" => (object)array(
                     "source"=> $data[0]['source'],
                     "resolvedQuery"=> $data['usersay'],
-                    "resolvedParameters"=>$data[0]['resolvedParameters'],
                     "action"=>$data[0]['action'],
                     "actionIncomplete"=>$data[0]['actionIncomplete'],
-                ),
-                "context"=>(object) array(
-                    "name"=>$data[0]['context']['name'],
-                    "parameters"=>$data[0]['context']['parameters'],
-                    "requiredParameters"=>$data[0]['context']['requiredParameters']
-                ),
-                "fulfillment"=>(object) array(
-                    "speech"=>$data[0]['fulfillment']['speech']
+                    "parameters"=>$data[0]['parameters'],
+                    "contexts"=>(object) array(
+                        "name"=>"",
+                        "parameters"=>"",
+                        "lifespan"=>0
+                    ),
+                    "metadata"=>array(
+                        "intentId"=> "",
+                        "webhookUsed"=> false,
+                        "webhookForSlotFillingUsed"=> false,
+                        "intentName"=> ""
+                    ),
+                    "fulfillment"=>array(
+                        "speech"=>$data[0]['fulfillment']['speech'],
+                    ),
+                    'score'=>$data[0]['score']
                 ),
                 "status" => (object)array(
                     "has_error"=>$hasError,
                     "code" => $code,
                     "message"=>$this->get_rest_status_message()
                 ),
+                "requestedParameters"=>$data[0]['requestedParameters'],
+                "requiredParameters"=>$data[0]['requiredParameters'],
                 "sessionId" => $data['session'],
             )
         );

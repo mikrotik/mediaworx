@@ -50,3 +50,6 @@ define('APP_DB_NAME','mediaworx');
 
 define('SESS_DRIVER','database');
 define('SESS_SAVE_PATH','tblsessions');
+
+/** APP Version */
+define('APP_VERSION','02.24.18');

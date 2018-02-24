@@ -97,7 +97,6 @@ class Intents_model extends CRM_Model
 
     public function add($data=array(),$parentid = 0){
 
-        unset($data['events']);
         unset($data['response']);
         unset($data['prompt']);
         unset($data['id']);
@@ -151,6 +150,12 @@ class Intents_model extends CRM_Model
             $data['context'] = implode(',',$data['context']);
         } else {
             $data['context'] = null;
+        }
+
+        if (!empty($data['events'])){
+            $data['events'] = implode(',',$data['events']);
+        } else {
+            $data['events'] = null;
         }
 
         if ($parentid > 0){
@@ -250,7 +255,6 @@ class Intents_model extends CRM_Model
 
     public function update($data = array(),$id = ""){
 
-        unset($data['events']);
         unset($data['response']);
         unset($data['prompt']);
         unset($data['id']);
@@ -292,6 +296,12 @@ class Intents_model extends CRM_Model
             $data['context'] = implode(',',$data['context']);
         } else {
             $data['context'] = null;
+        }
+
+        if (!empty($data['events'])){
+            $data['events'] = implode(',',$data['events']);
+        } else {
+            $data['events'] = null;
         }
 
         $this->db->where('id', $id);
@@ -398,16 +408,19 @@ class Intents_model extends CRM_Model
             $parameterData = array();
 
             foreach ($data as $parameter){
+
+                if (!empty($parameter['parameter_name'])) {
                     $parameterData = array(
-                        'usersayid'=>$usersayid,
-                        'intentid'=>$id,
-                        'agentid'=>$this->wt_agent,
-                        'parameter_name'=>$parameter['parameter_name'],
-                        'entity'=>$parameter['entity'],
-                        'resolved_value'=>trim($parameter['resolved_value']),
+                        'usersayid' => $usersayid,
+                        'intentid' => $id,
+                        'agentid' => $this->wt_agent,
+                        'parameter_name' => $parameter['parameter_name'],
+                        'entity' => $parameter['entity'],
+                        'resolved_value' => trim($parameter['resolved_value']),
                     );
 
-                    $this->db->insert('tblintentsusersaysparameters',$parameterData);
+                    $this->db->insert('tblintentsusersaysparameters', $parameterData);
+                }
             }
 
         }

@@ -143,8 +143,11 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <select name="contexts" class="form-control select2" multiple="multiple" data-placeholder="Select context"
+                                <select name="events[]" class="form-control select2" multiple="multiple" data-placeholder="Select context"
                                         style="width: 100%;">
+                                    <?php foreach (getDefaultEvents() as $key=>$event) { ?>
+                                        <option value="<?php echo $key?>"><?php echo strtoupper($event)?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>
@@ -346,7 +349,9 @@
     </div>
 </section>
 
-<?php $contexts = explode(',',$intent->context);
+<?php
+/** @var  $contexts */
+$contexts = explode(',',$intent->context);
 
 foreach ($contexts as $context){
     $contextArr[] = "'".$context."'";
@@ -354,6 +359,14 @@ foreach ($contexts as $context){
 
 $selectContextArr = implode(',',$contextArr);
 
+/** @var  $events */
+$events = explode(',',$intent->events);
+
+foreach ($events as $event){
+    $eventArr[] = "'".$event."'";
+}
+
+$selectEventArr= implode(',',$eventArr);
 ?>
 
 <script>
@@ -361,6 +374,7 @@ $selectContextArr = implode(',',$contextArr);
     $(function(){
 
         $('select[name=\'context[]\']').val([<?php echo $selectContextArr ?>]); $('select[name=\'context[]\']').trigger('change');
+        $('select[name=\'events[]\']').val([<?php echo $selectEventArr ?>]); $('select[name=\'events[]\']').trigger('change');
 
         $( ".is_required" ).on('ifChanged',function() {
 

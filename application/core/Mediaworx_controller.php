@@ -33,6 +33,7 @@ abstract class Mediaworx_controller extends CRM_Controller
 
         $this->load->helper('xml_value_prep');
         $this->load->helper('perfex_string_compare');
+        $this->load->helper('api');
 
         if (isset($format)){
             $this->_format = $this->input->get('format');
