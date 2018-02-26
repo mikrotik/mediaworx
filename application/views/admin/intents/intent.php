@@ -60,37 +60,39 @@
                                 <div class="table">
                                     <table class="table stripped-table-data table-hover table-usersays">
                                         <thead class="usersays-thead">
-                                            <th><?php echo _l('training_phrases')?></th>
+                                            <th colspan="2"><?php echo _l('training_phrases')?></th>
                                             <th><?php echo _l('options')?></th>
                                         </thead>
                                         <?php if ($intentusersays) { ?>
                                             <?php foreach ($intentusersays as $key=>$intentusersay) { ?>
-                                                <tbody class="usersays-tbody">
+                                                <tbody id="usersay-<?php echo $usersay_row ?>">
                                                 <?php $parameters = json_decode($intentusersay['parameters']); ?>
                                                 <?php if ($parameters) { ?>
                                                     <?php $btn_detail = "<i class='fa fa-plus btn-details' onclick='userSayDetails(this,".$usersay_row.")'></i>&nbsp;&nbsp;"?>
                                                 <?php } ?>
-                                                <tr id="usersay-<?php echo $usersay_row?>">
-                                                    <td><?php echo $btn_detail ?><?php echo $intentusersay['usersay']?>
+                                                <tr>
+                                                    <td colspan="2"><?php echo $btn_detail ?><?php echo $intentusersay['usersay']?>
                                                         <input value="<?php echo $intentusersay['usersay']?>" type="hidden" name="usersays[<?php echo $usersay_row?>][usersay]">
                                                     </td>
                                                     <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#usersay-'+<?php echo $usersay_row?>).remove()"><i class="fa fa-close"></i></button></td>
                                                 </tr>
+                                                </tbody>
                                                 <?php if ($intentusersay['parameters']) { ?>
-                                                    <tr id="usersay-parameters-<?php echo $usersay_row?>" style="display:none" class="alert-info">
+                                                    <tbody id="usersay-parameters-<?php echo $usersay_row?>" style="display : none">
+                                                    <tr class="alert-info">
                                                         <th><?php echo _l('intents_parameter_name')?></th>
                                                         <th><?php echo _l('entity')?></th>
                                                         <th><?php echo _l('intents_resolved_value')?></th>
                                                     </tr>
                                                     <?php foreach ($parameters as $parameter) { ?>
-                                                    <tr id="parameters-<?php echo $usersay_row?>" style="display:none">
+                                                    <tr>
                                                         <?php foreach ($parameter as $pkey=>$value) { ?>
                                                             <td><?php echo $value?><input value="<?php echo $value?>" type="hidden" name="parameters[<?php echo $usersay_row?>][<?php echo $parameter_rows?>][<?php echo $pkey?>]"></td>
                                                         <?php } ?>
                                                     </tr>
                                                     <?php $parameter_rows++;} ?>
+                                                    </tbody>
                                                 <?php } ?>
-                                                </tbody>
                                                 <?php $usersay_row++; } ?>
                                         <?php } ?>
                                     </table>
@@ -119,7 +121,6 @@
                                         <tbody>
                                         <?php
                                             $action_parameters = json_decode($intent->action_parameters);
-                                            $action_prompts = json_decode($intent->action_prompts);
                                         ?>
                                         <?php if ($action_parameters) { ?>
                                         <?php foreach ($action_parameters as $key=>$action_parameter) { ?>
@@ -133,20 +134,13 @@
                                                     <?php
                                                     $btn_prompt = "...";
 
-                                                    if ($action_parameter->is_required == 1){
-                                                        $btn_prompt = '<button type="button" class="btn btn-link btn-icon" data-toggle="modal" data-target="#promptModal" data-parameter="'.$action_parameter->parameter_name.'" data-entity="'.$action_parameter->entity.'" data-value="'.$action_parameter->resolved_value.'" data-row="'.$action_row.'">'.substr($action_prompts[$action_row][$key], 0, 17) . '...'.'</button>';
+                                                    if ($action_parameter->is_required){
+                                                        $btn_prompt = '<button type="button" class="btn btn-link btn-icon" data-toggle="modal" data-target="#promptModal" data-parameter="'.$action_parameter->parameter_name.'" data-entity="'.$action_parameter->entity.'" data-value="'.$action_parameter->resolved_value.'" data-row="'.$action_row.'">'._l('define_prompts').'</button>';
                                                     }
                                                     ?>
                                                     <td><div id="prompt"><?php echo $btn_prompt?></div></td>
                                                     <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#action-<?php echo $action_row?>').remove();$('#action-prompt-<?php echo $action_row?>').remove()"><i class="fa fa-close"></i></button></td>
                                                 </tr>
-                                                <?php if (isset($action_prompts[$action_row])) { ?>
-                                                    <?php foreach ($action_prompts[$action_row] as $prompt) { ?>
-                                                        <tr class="action-prompt-<?php echo $action_row?>" style="display: none">
-                                                            <td><input type="hidden" name="prompts[<?php echo $action_row?>][]" value="<?php echo $prompt?>"></td>
-                                                        </tr>
-                                                    <?php } ?>
-                                                <?php } ?>
                                         <?php $action_row++;} ?>
                                         <?php } ?>
 
@@ -154,7 +148,7 @@
                                     </table>
                                 </div>
                                 <div class="buttons">
-                                    <button type="button" class="btn btn-link"><i class="fa fa-plus"></i> <?php echo _l('add_new_parameter')?></button>
+                                    <button type="button" class="btn btn-link btn-add-parameter"><i class="fa fa-plus"></i> <?php echo _l('add_new_parameter')?></button>
                                 </div>
                                 <br/>
                                 <!-- /actions -->
@@ -251,7 +245,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" onclick="removePrompts($('input[name=\'action_row\']').val())" class="btn btn-secondary"><?php echo _l('close')?></button>
+                <button type="button"  data-dismiss="modal" class="btn btn-secondary"><?php echo _l('close')?></button>
                 <button type="button" class="btn btn-info" data-dismiss="modal"><?php echo _l('add'); ?></button>
             </div>
         </div>
@@ -266,6 +260,7 @@
     var usersay_row = <?php echo $usersay_row?>;
     var response_row = <?php echo $response_row?>;
     var parameter_rows = <?php echo $parameter_rows?>;
+    var action_row = <?php echo $action_row;?>;
 
     $(function(){
 
@@ -274,6 +269,23 @@
         _validate_form($('.intent-form'),
             {intent_name:'required'}
         );
+
+        $('.btn-add-parameter').on('click',function(){
+
+            action_row++;
+
+            html ='<tr id="action-'+action_row+'" data-row="'+action_row+'">';
+            html +='<td class="text-center"><input value="1" class="is_required" name="actions['+action_row+'][is_required]" type="checkbox"></td>';
+            html +='<td><input type="text" class="form-control" name="actions['+action_row+'][parameter_name]" value=""/></td>';
+            html +='<td><input type="text" class="form-control" name="actions['+action_row+'][entity]" value=""/></td>';
+            html +='<td><input type="text" class="form-control" name="actions['+action_row+'][resolved_value]" value=""/></td>';
+            html +='<td class="text-center"><input value="1" class="is_list" name="actions['+action_row+'][is_list]" type="checkbox"></td>';
+            html += '<td><div id="prompt"></div></td>';
+            html += '<td><button type="button" class="btn btn-danger btn-icon" onclick="$(\'#action-'+action_row+'\').remove()"><i class="fa fa-close"></i></button></td>';
+
+
+            $('.table-actions tbody').append(html);
+        });
 
         $( ".is_required" ).on('change',function() {
 
@@ -309,14 +321,30 @@
             $('#promptModal input[name="action_row"]').val(row);
             $('#promptModal .target-action').html(parameter_name);
 
-            var values = <?php echo (!empty($intent->action_prompts) ? $intent->action_prompts : json_encode(array()))?>;
-            $.each(values[row], function (index, prompt) {
-                html ='<tr>';
-                html +='<td>'+prompt+'</td>';
-                html +='<td><button type="button" class="btn btn-danger btn-icon" onclick="$(this).closest(\'tr\').remove();$(\'.action-prompt-\'+row).remove();"><i class="fa fa-minus-square-o"></i></button></td>';
-                html +='</tr>';
+            $('.target-action').html(parameter_name);
 
-                $('.tblprompt tbody').append(html);
+            $.ajax({
+                type: 'GET',
+                url: admin_url + 'intents/get_prompts/'+entity,
+                dataType: 'json',
+                success: function (json) {
+                    console.log(json);
+                    $.each(json, function (i, e) {
+
+                        html ='<tr>';
+                        html +='<td>'+ e.prompt+'<input type="hidden" name="prompts['+parameter_name+'][]" value="'+ e.prompt+'"></td>';
+                        html +='<td><button type="button" class="btn btn-danger btn-icon" onclick="$(this).closest(\'tr\').remove();removePrompt(\''+ e.id+'\');"><i class="fa fa-minus-square-o"></i></button></td>';
+                        html +='</tr>';
+
+                        $('.tblprompt tbody').append(html);
+
+                    });
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status != 0) {
+                        alert(xhr.status + "\r\n" + thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                }
 
             });
 
@@ -325,6 +353,7 @@
         $('#promptModal').on('hidden.bs.modal', function () {
 
             $('.tblprompt tbody').html('');
+            $('.intent-form').submit();
 
         });
 
@@ -333,11 +362,12 @@
             var prompt = $('input[name=\'prompt\']').val();
             var value = $('#promptModal input[name="parameter_name"]').val();
             var id = $('#promptModal input[name="id"]').val();
+            var entity = $('#promptModal input[name="entity"]').val();
             var row = $('#promptModal input[name="action_row"]').val();
 
             html ='<tr>';
             html +='<td>'+prompt+'</td>';
-            html +='<td><button type="button" class="btn btn-danger btn-icon" onclick="$(this).closest(\'tr\').remove();$(\'.action-prompt-\'+row).remove();"><i class="fa fa-minus-square-o"></i></button></td>';
+            html +='<td><button type="button" class="btn btn-danger btn-icon" onclick="$(this).closest(\'tr\').remove();"><i class="fa fa-minus-square-o"></i></button></td>';
             html +='</tr>';
 
             $('.tblprompt tbody').append(html);
@@ -350,7 +380,7 @@
             $('input[name=\'prompt\']').val('');
             $('#action-'+id).after(htmlAction);
 
-            var data = "row="+row+"&prompt="+prompt+"&intentid=<?php echo $intent->id?>";
+            var data = "entity="+entity+"&prompt="+prompt+"&intentid=<?php echo $intent->id?>";
 
             $.ajax({
                 type: 'POST',
@@ -382,6 +412,7 @@
                     dataType: 'json',
                     success: function (json) {
 
+                        console.log(json);
                         if (json.parameters.length > 0){
 
                             btn_details = '<i class="fa fa-plus btn-details" onclick="userSayDetails(this,\''+usersay_row+'\')"></i>&nbsp;&nbsp;';
@@ -390,7 +421,7 @@
 
                         usersayHtml = '<tbody id="usersay-'+usersay_row+'" >';
                         usersayHtml += '<tr>';
-                        usersayHtml +='<td>'+btn_details+usersays+'<input type="hidden" name="usersays['+usersay_row+'][usersay]" value="'+usersays+'"></td>';
+                        usersayHtml +='<td colspan="2">'+btn_details+usersays+'<input type="hidden" name="usersays['+usersay_row+'][usersay]" value="'+usersays+'"></td>';
                         usersayHtml +='<td><button class="btn btn-danger btn-icon" type="button" onclick="removeUsersay(\''+usersay_row+'\');"><i class="fa fa-close"></i></td>';
                         usersayHtml +='</tr>';
                         usersayHtml += '</tbody>';
@@ -404,9 +435,9 @@
                             usersayHtml += '</tr>';
 
                             $.each(json.parameters, function (i, e) {
+
                                 usersayHtml += '<tr>';
                                 $.each(this, function (k, v) {
-                                    console.log(k+'---'+v);
                                     usersayHtml += '<td>' + v + '<input value="' + v + '" type="hidden" name="parameters[' + usersay_row + '][' + parameter_rows + '][' + k + ']"></td>';
 
                                 });
@@ -414,7 +445,7 @@
                                 parameter_rows++;
 
                             });
-                            html += '</tbody>';
+                            usersayHtml += '</tbody>';
                         }
 
                         $('input[name=\'usersays\']').val("");
@@ -456,10 +487,14 @@
         });
     });
 
-    function removePrompts(row){
-
-        $('#promptModal').modal('hide');
-//        $('.action-prompt-'+row).remove();
+    function removePrompt(id){
+        $.ajax({
+            type: 'GET',
+            url: admin_url + 'intents/delete_prompt/'+id,
+            dataType: 'json',
+            success: function (json) {
+            }
+        });
     }
 
     function userSayDetails(element,row){
@@ -508,8 +543,6 @@
 
     function addAction(parameters)
     {
-        var action_row = <?php echo $action_row;?>;
-
         if (!action_row){
 
             $.each(parameters, function (i, e) {

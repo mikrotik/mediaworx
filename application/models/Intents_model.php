@@ -36,6 +36,26 @@ class Intents_model extends CRM_Model
         return false;
     }
 
+    public function get_prompts($entity="")
+    {
+        if (is_string($entity)){
+
+            $this->db->where('entity_name', trim($entity,'@'));
+            $entity = $this->db->get('tblentities')->row();
+
+            if ($entity){
+
+                $this->db->where('entityid',$entity->id);
+                $prompts = $this->db->get('tblintentactionprompts')->result_array();
+
+                return $prompts;
+            }
+            return false;
+
+        }
+        return false;
+    }
+
     public function get_responses($id="")
     {
         if (is_numeric($id)){
@@ -131,16 +151,20 @@ class Intents_model extends CRM_Model
                 $data['action_parameters'] = json_encode($data['actions']);
             }
 
-            if (!isset($data['prompts'])){
-                $data['action_prompts'] = NULL;
-            } else {
-                $data['action_prompts'] = json_encode($data['prompts']);
-            }
 
             unset($data['actions']);
-            unset($data['prompts']);
+
 
             $data['is_system'] = $this->is_admin;
+
+            /** @var $prompts
+             * Set $prompts and exclude array
+             * from @var $data
+             */
+            if (isset($data['prompts'])) {
+                $prompts = $data['prompts'];
+                unset($data['prompts']);
+            }
 
             /** @var $usersays
              * Set $usersays and exclude array
@@ -240,6 +264,9 @@ class Intents_model extends CRM_Model
             $this->db->where('intentid',$id);
             $this->db->delete('tblintentresponses');
 
+            $this->db->where('intentid',$id);
+            $this->db->delete('tblintentactionprompts');
+
             /** Delete Intent */
             $this->db->where('id',$id);
             $this->db->delete('tblintents');
@@ -251,6 +278,47 @@ class Intents_model extends CRM_Model
             }
 
             return false;
+
+        }
+
+        return false;
+    }
+
+    public function delete_prompt($id)
+    {
+        if (is_numeric($id))
+        {
+
+            $this->db->where('id',$id);
+            $this->db->delete('tblintentactionprompts');
+
+            if($this->db->affected_rows() > 0){
+                logActivity('Intent Delete [ID:'.$id.']');
+
+                return true;
+            }
+
+            return false;
+
+        }
+
+        return false;
+    }
+
+    public function update_prompts($data=array()){
+
+        $this->db->where('entity_name',trim($data['entity'],"@"));
+        $entity = $this->db->get('tblentities')->row();
+
+        if ($entity){
+
+            $data = array(
+                'intentid'=>$data['intentid'],
+                'entityid'=>$entity->id,
+                'prompt'=>$data['prompt']
+            );
+
+            $this->db->insert('tblintentactionprompts',$data);
 
         }
 

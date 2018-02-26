@@ -113,6 +113,14 @@ $lang['als_echelon'] = 'Echelon AI';
 $lang['als_intents'] = 'Intents';
 $lang['als_entities'] = 'Entities';
 
+# Agents
+$lang['agents']                               = 'Agents';
+$lang['agent']                                = 'Agent';
+$lang['new_agent']                            = 'New Agent';
+$lang['update_agent']                            = 'Update Agent';
+$lang['agent_lowercase']                      = 'agent';
+$lang['agents_agent_name']                   = 'Agent Name';
+
 # Entities
 $lang['entities']                               = 'Entities';
 $lang['entity']                                = 'Entity';

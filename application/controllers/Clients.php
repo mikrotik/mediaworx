@@ -17,6 +17,7 @@ class Clients extends Clients_controller
         $this->load->model('reports_model');
         $data['payments_years'] = $this->reports_model->get_distinct_customer_invoices_years();
 
+        $data['bodyclass'] = 'skin-blue sidebar-mini';
         $data['title'] = get_option('companyname');
         $this->data    = $data;
         $this->view    = 'home';

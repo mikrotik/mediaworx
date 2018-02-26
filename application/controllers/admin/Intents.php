@@ -131,9 +131,28 @@ class Intents extends Admin_controller
 
             echo json_encode(array(
                     'usersay'=>$usersay['usersay'],
-                    'parameters'=>$parameters
+                    'parameters'=>array_unique($parameters)
                 )
             );
+        }
+    }
+
+    public function get_prompts($entity){
+
+        if ($this->input->is_ajax_request()){
+
+            $prompts = $this->intents_model->get_prompts($entity);
+
+            echo json_encode($prompts);
+        }
+    }
+
+    public function delete_prompt($id){
+
+        if ($this->input->is_ajax_request()){
+
+            $this->intents_model->delete_prompt($id);
+
         }
     }
 
@@ -141,7 +160,9 @@ class Intents extends Admin_controller
 
         if($this->input->is_ajax_request()) {
 
-            $postData = $this->input->post(NULL, FALSE);
+            $data = $this->input->post(NULL, FALSE);
+
+            $this->intents_model->update_prompts($data);
 
         }
     }
