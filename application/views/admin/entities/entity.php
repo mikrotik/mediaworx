@@ -22,13 +22,13 @@
                                 <div class="checkbox checkbox-primary checkbox-inline">
                                     <input type="checkbox" name="isOverridable" value="1" <?php echo ($entity->isOverridable == 1) ? 'checked' : ''?>>
                                     <label for="contact_primary">
-                                        Define synonyms
+                                        <?php echo _l('define_synonyms')?>
                                     </label>
                                 </div>
                                 <div class="checkbox checkbox-primary checkbox-inline">
                                     <input type="checkbox" name="automatedExpansion" value="1" <?php echo ($entity->automatedExpansion == 1) ? 'checked' : ''?>>
                                     <label for="contact_primary">
-                                        Allow automated expansion
+                                        <?php echo _l('allow_automated_expansion')?>
                                     </label>
                                 </div>
                             </div>

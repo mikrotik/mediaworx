@@ -107,6 +107,20 @@ class Intents extends Admin_controller
         }
     }
 
+    public function change_intent_status($id,$status)
+    {
+        if (is_numeric($id) && is_numeric($status) && $this->input->is_ajax_request())
+        {
+            if (has_permission('intents', '', 'edit')) {
+                if ($this->input->is_ajax_request()) {
+                    $this->intents_model->change_intent_status($id, $status);
+                }
+            }
+        }
+
+        return false;
+    }
+
     public function usersayparameters(){
 
         if($this->input->is_ajax_request()) {
@@ -120,6 +134,15 @@ class Intents extends Admin_controller
                     'parameters'=>$parameters
                 )
             );
+        }
+    }
+
+    public function update_prompts(){
+
+        if($this->input->is_ajax_request()) {
+
+            $postData = $this->input->post(NULL, FALSE);
+
         }
     }
 }

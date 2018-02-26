@@ -87,6 +87,14 @@ class Intents_model extends CRM_Model
 
         if (is_numeric($id))
         {
+
+            unset($data['usersay']);
+            unset($data['response']);
+            unset($data['onoffswitch']);
+            unset($data['prompt']);
+            unset($data['action_row']);
+
+
             /** Delete all intent related information
              * We will insert new ones
              */
@@ -95,6 +103,44 @@ class Intents_model extends CRM_Model
 
             $this->db->where('intentid',$id);
             $this->db->delete('tblintentresponses');
+
+
+            if (!isset($data['is_public'])){
+                $data['is_public'] = 0;
+            }
+
+            if (!isset($data['agentid'])){
+                $data['agentid'] = 0;
+            }
+
+            if (!isset($data['userid'])){
+                $data['userid'] = 0;
+            }
+
+            if (!isset($data['is_default'])){
+                $data['is_default'] = 0;
+            }
+
+            if (!isset($data['action'])){
+                $data['action'] = NULL;
+            }
+
+            if (!isset($data['actions'])){
+                $data['action_parameters'] = NULL;
+            } else {
+                $data['action_parameters'] = json_encode($data['actions']);
+            }
+
+            if (!isset($data['prompts'])){
+                $data['action_prompts'] = NULL;
+            } else {
+                $data['action_prompts'] = json_encode($data['prompts']);
+            }
+
+            unset($data['actions']);
+            unset($data['prompts']);
+
+            $data['is_system'] = $this->is_admin;
 
             /** @var $usersays
              * Set $usersays and exclude array
@@ -121,6 +167,24 @@ class Intents_model extends CRM_Model
             if (isset($data['parameters'])) {
                 $parameters = $data['parameters'];
                 unset($data['parameters']);
+            }
+
+            /** @var $contexts
+             * Set $contexts and exclude array
+             * from @var $data
+             */
+            if (isset($data['contexts'])) {
+                $parameters = $data['contexts'];
+                unset($data['contexts']);
+            }
+
+            /** @var $events
+             * Set $events and exclude array
+             * from @var $data
+             */
+            if (isset($data['events'])) {
+                $parameters = $data['events'];
+                unset($data['events']);
             }
 
             if ($usersays)
@@ -190,6 +254,25 @@ class Intents_model extends CRM_Model
 
         }
 
+        return false;
+    }
+
+    public function change_intent_status($id,$status)
+    {
+        $hook_data['id']     = $id;
+        $hook_data['status'] = $status;
+        $hook_data           = do_action('    ', $hook_data);
+        $status              = $hook_data['status'];
+        $id                  = $hook_data['id'];
+
+        $this->db->where('id', $id);
+        $this->db->update('tblintents', array(
+            'status' => $status
+        ));
+        if ($this->db->affected_rows() > 0) {
+            logActivity('Intent Status Changed [IntentID: ' . $id . ' Status(Active/Inactive): ' . $status . ']');
+            return true;
+        }
         return false;
     }
 }

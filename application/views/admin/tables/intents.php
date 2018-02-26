@@ -9,7 +9,7 @@ $sTable       = 'tblintents';
 $where = array();
 array_push($where,' AND agentid = 0'.' AND userid = 0'. ' AND parentid = 0 AND is_system = 1');
 
-$result  = data_tables_init($aColumns, $sIndexColumn, $sTable,array(),array(),array('id','status'));
+$result  = data_tables_init($aColumns, $sIndexColumn, $sTable,array(),array(),array('id','status','is_default'));
 $output  = $result['output'];
 $rResult = $result['rResult'];
 
@@ -17,7 +17,7 @@ foreach ($rResult as $aRow) {
     $row = array();
     for ($i = 0; $i < count($aColumns); $i++) {
 
-        $_data = '<i class="fa fa-circle-thin text-'.($aRow["status"] ? "info" : "danger" ).'"></i>&nbsp;&nbsp;'.$aRow[$aColumns[$i]];
+        $_data = '<i class="fa fa-'.($aRow["is_default"] ? "bookmark" : "circle-thin" ).' text-'.($aRow["status"] ? "info" : "danger" ).'"></i>&nbsp;&nbsp;'.$aRow[$aColumns[$i]];
         $row[] = $_data;
     }
 

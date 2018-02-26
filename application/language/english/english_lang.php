@@ -108,6 +108,11 @@ $lang['clients_notes_table_dateadded_heading']   = 'Date Added';
 $lang['clients_list_full_name']   = 'Full Name';
 $lang['clients_list_last_login']  = 'Last Login';
 
+# ECHELON
+$lang['als_echelon'] = 'Echelon AI';
+$lang['als_intents'] = 'Intents';
+$lang['als_entities'] = 'Entities';
+
 # Entities
 $lang['entities']                               = 'Entities';
 $lang['entity']                                = 'Entity';
@@ -115,6 +120,8 @@ $lang['new_entity']                            = 'New Entity';
 $lang['update_entity']                            = 'Update Entity';
 $lang['entity_lowercase']                      = 'entity';
 $lang['entity_name']                   = 'Entity Name';
+$lang['define_synonyms']='Define synonyms';
+$lang['allow_automated_expansion']='Allow automated expansion';
 $lang['entities_entity_name']                   = 'Entity Name';
 $lang['entities_entity_reference']                   = 'Reference';
 $lang['entities_entity_synonyms']                   = 'Synonyms';
@@ -125,13 +132,26 @@ $lang['intent']                                = 'Intent';
 $lang['new_intent']                            = 'New Intent';
 $lang['update_intent']                            = 'Update Intent';
 $lang['intent_lowercase']                      = 'intent';
+$lang['intent_public']='Make this intent public';
+$lang['intent_default']='Make this intent default';
 $lang['intent_name']                   = 'Intent Name';
 $lang['intents_intent_name']                   = 'Intent Name';
-$lang['usersays']='User says';
+$lang['training_phrases']='Training phrases';
+$lang['training_phrases_help'] = 'Optional way to trigger an intent, without the need for matched text or spoken input.';
 $lang['response']='Response';
-$lang['actions']='Actions';
+$lang['response_help']='Text, spoken and media rich responses the agent will deliver to a user.';
+$lang['actions_parameters']='Action and parameters';
+$lang['actions_parameters_help']='Actions are sent to fulfillment, once an intent is triggered. Parameters are specific words or phrases you’re trying to collect from users, in order to complete a task.';
 $lang['intents_parameter_name']                   = 'Parameter Name';
 $lang['intents_resolved_value']                   = 'Resolved Value';
+$lang['actions_required']                   = 'Required';
+$lang['actions_value']                   = 'Value';
+$lang['actions_is_list']                   = 'Is list';
+$lang['actions_prompt']                   = 'Prompt';
+$lang['add_new_parameter'] = 'Add new parameters';
+$lang['define_prompts'] = 'Define prompts...';
+$lang['prompt_variant'] = 'Enter a prompt variant';
+$lang['prompt_variants'] = 'Prompt variants';
 
 # Contracts
 $lang['contracts']                = 'Contracts';
