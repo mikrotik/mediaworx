@@ -46,3 +46,5 @@ define('LEAD_ATTACHMENTS_FOLDER',FCPATH . 'uploads/leads' . '/');
 define('PROJECT_ATTACHMENTS_FOLDER',FCPATH . 'uploads/projects' . '/');
 // Project discussions attachments
 define('PROJECT_DISCUSSION_ATTACHMENT_FOLDER',FCPATH . 'uploads/discussions' . '/');
+// Vendor Folder
+define('VENDOR_FOLDER',FCPATH . 'vendor' . '/');

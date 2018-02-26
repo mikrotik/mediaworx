@@ -20,6 +20,8 @@ $lang['go_back']              = 'Go Back';
 $lang['error_uploading_file'] = 'Error uploading file';
 $lang['load_more']            = 'Load More';
 $lang['cant_delete_default']  = 'Cant delete default %s';
+$lang['confirmation'] = 'Are you sure?';
+$lang['delete_warning'] = 'You will not be able to recover this %s !';
 
 # Invoice General
 $lang['invoice_status_paid']                = 'Paid';
@@ -105,6 +107,31 @@ $lang['clients_notes_table_addedfrom_heading']   = 'Added From';
 $lang['clients_notes_table_dateadded_heading']   = 'Date Added';
 $lang['clients_list_full_name']   = 'Full Name';
 $lang['clients_list_last_login']  = 'Last Login';
+
+# Entities
+$lang['entities']                               = 'Entities';
+$lang['entity']                                = 'Entity';
+$lang['new_entity']                            = 'New Entity';
+$lang['update_entity']                            = 'Update Entity';
+$lang['entity_lowercase']                      = 'entity';
+$lang['entity_name']                   = 'Entity Name';
+$lang['entities_entity_name']                   = 'Entity Name';
+$lang['entities_entity_reference']                   = 'Reference';
+$lang['entities_entity_synonyms']                   = 'Synonyms';
+
+# Intents
+$lang['intents']                               = 'Intents';
+$lang['intent']                                = 'Intent';
+$lang['new_intent']                            = 'New Intent';
+$lang['update_intent']                            = 'Update Intent';
+$lang['intent_lowercase']                      = 'intent';
+$lang['intent_name']                   = 'Intent Name';
+$lang['intents_intent_name']                   = 'Intent Name';
+$lang['usersays']='User says';
+$lang['response']='Response';
+$lang['actions']='Actions';
+$lang['intents_parameter_name']                   = 'Parameter Name';
+$lang['intents_resolved_value']                   = 'Resolved Value';
 
 # Contracts
 $lang['contracts']                = 'Contracts';

@@ -608,3 +608,9 @@ function current_full_url()
     $url = $CI->config->site_url($CI->uri->uri_string());
     return $_SERVER['QUERY_STRING'] ? $url . '?' . $_SERVER['QUERY_STRING'] : $url;
 }
+
+function dumpData($data){
+
+    echo '<pre>';
+    print_r($data);
+}

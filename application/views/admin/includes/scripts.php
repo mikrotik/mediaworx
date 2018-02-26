@@ -13,6 +13,8 @@
 <script src="<?php echo base_url('assets/plugins/datatables/datatables.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/plugins/app-build/metis-tagit-areyousure-bootstrapcolorpicker-dropzone-datetimepicker.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/plugins/app-build/moment.min.js'); ?>"></script>
+<!-- Sweetalert -->
+<script src="<?php echo base_url('/assets/plugins/sweetalert/sweetalert.js')?>"></script>
 <?php app_select_plugin_js($locale); ?>
 <script src="<?php echo base_url('assets/plugins/tinymce/tinymce.min.js'); ?>"></script>
 <?php app_jquery_validation_plugin_js($locale); ?>
@@ -55,6 +57,7 @@
 <?php } ?>
 <?php echo app_script('assets/js','calendar.js'); ?>
 <?php } ?>
+<script src="<?php echo base_url('assets/js/taginput.js')?>"></script>
 <?php echo app_script('assets/js','main.js'); ?>
 <?php echo get_custom_fields_hyperlink_js_function(); ?>
 <?php do_action('after_js_scripts_render'); ?>
