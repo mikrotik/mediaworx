@@ -10,10 +10,15 @@ class Clients_controller extends CRM_Controller
     public $add_scripts = true;
     public $use_submenu = true;
     public $use_navigation = true;
+    public $agent_scope = '';
 
     function __construct()
     {
         parent::__construct();
+        if ($_COOKIE['agent'])
+        {
+            $this->agent_scope = $_COOKIE['agent'];
+        }
 
         $language = load_client_language();
 

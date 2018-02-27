@@ -7,11 +7,11 @@
             <h3 class="box-title"><?php if (isset($title)){ echo $title; } ?></h3>
 
             <div class="box-tools pull-right">
-                <a href="<?php echo site_url('agents/agent'); ?>" class="btn btn-info"><?php echo _l('new_agent'); ?></a>
+                <a href="<?php echo site_url('entities/entity'); ?>" class="btn btn-info"><?php echo _l('new_entity'); ?></a>
             </div>
         </div>
         <div class="box-body">
-            <?php get_template_part('agents_table'); ?>
+            <?php get_template_part('entities_table'); ?>
         </div>
         <!-- /.box-body -->
     </div>

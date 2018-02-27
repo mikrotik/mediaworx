@@ -1485,3 +1485,65 @@ function get_tasks_where_string()
     $_tasks_where .= ' OR is_public = 1)';
     return $_tasks_where;
 }
+
+/**
+ *  Get Public Intents.
+ *  This will be used when client creates Agent
+ *  Public Intents are intents for common use. Client can edit once
+ *  they are imported on new created agent.
+ */
+
+function getPublicIntents()
+{
+    $CI = & get_instance();
+
+    $CI->db->where('is_system',1);
+    $CI->db->where('is_public',1);
+    $results = $CI->db->get('tblintents')->result_array();
+
+    if ($results){
+
+        return $results;
+    }
+
+    return false;
+}
+/**
+ *  Get Public Intents Responses.
+ *  This will be used when client creates Agent
+ *  Public Intents responses are responses for common use. Client can edit once
+ *  they are imported on new created agent.
+ */
+function getPublicIntentResponses($id)
+{
+    $CI = & get_instance();
+
+    $CI->db->where('intentid',$id);
+    $results = $CI->db->get('tblintentresponses')->result_array();
+
+    if ($results){
+
+        return $results;
+    }
+
+    return false;
+}
+
+/**
+ * Get all client agents to define the portal agent scope
+ */
+
+function getClientAgents($client_id){
+
+    $CI = & get_instance();
+
+    $CI->db->where('userid',$client_id);
+    $results = $CI->db->get('tblagents')->result_array();
+
+    if ($results){
+
+        return $results;
+    }
+
+    return false;
+}

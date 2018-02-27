@@ -26,6 +26,8 @@ define('TICKET_ATTACHMENTS_FOLDER',FCPATH .'uploads/ticket_attachments' . '/');
 define('COMPANY_FILES_FOLDER',FCPATH .'uploads/company' . '/');
 // Staff profile images
 define('STAFF_PROFILE_IMAGES_FOLDER',FCPATH .'uploads/staff_profile_images' . '/');
+// Agent images folder
+define('AGENT_IMAGES_FOLDER',FCPATH .'uploads/agent_images' . '/');
 // Contact profile images
 define('CONTACT_PROFILE_IMAGES_FOLDER',FCPATH .'uploads/client_profile_images' . '/');
 // Newsfeed attachments

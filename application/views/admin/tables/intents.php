@@ -7,9 +7,9 @@ $sIndexColumn = "id";
 $sTable       = 'tblintents';
 
 $where = array();
-array_push($where,' AND agentid = 0'.' AND userid = 0'. ' AND parentid = 0 AND is_system = 1');
+array_push($where,' AND agentid = 0');
 
-$result  = data_tables_init($aColumns, $sIndexColumn, $sTable,array(),array(),array('id','status','is_default'));
+$result  = data_tables_init($aColumns, $sIndexColumn, $sTable,array(),$where,array('id','status','is_default','agentid'));
 $output  = $result['output'];
 $rResult = $result['rResult'];
 

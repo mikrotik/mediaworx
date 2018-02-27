@@ -26,6 +26,7 @@ class Agents extends Clients_controller
         $this->layout();
     }
 
+    /** List all agents */
     public function list_agents(){
 
         if (!is_client_logged_in()) {
@@ -73,15 +74,14 @@ class Agents extends Clients_controller
         }
 
         if ($this->input->post()) {
-            $this->form_validation->set_rules('agent_name', _l('agents_name'), 'required');
+            $this->form_validation->set_rules('agent_name', _l('agent_name'), 'required');
             $this->form_validation->set_rules('default_timezone', _l('settings_localization_default_timezone'), 'required');
-
+            $this->form_validation->set_rules('default_language', _l('localization_default_language'), 'required');
             if ($this->form_validation->run() !== FALSE) {
-                handle_agent_image_upload($id);
+
                 $data = $this->input->post(NULL, FALSE);
 
                 if ($id == '') {
-                    $this->form_validation->set_rules('default_language', _l('localization_default_language'), 'required');
 
                     $data['client_access_token'] = UUID::v5(APP_ENC_KEY,UUID::trxid(16));
                     $data['developer_access_token'] = UUID::v5(APP_ENC_KEY,UUID::trxid(8));
@@ -90,13 +90,12 @@ class Agents extends Clients_controller
                     $success = $this->agents_model->add($data);
                     if ($success) {
                         set_alert('success', _l('updated_successfuly', _l('agents')));
-                        redirect(site_url('intents/'));
+                        redirect(site_url('agents'));
 
-                    } else {
-                        set_alert('warning', _l('agent_exist'));
                     }
-                } else {
 
+                } else {
+                    handle_agent_image_upload($id);
                     $success = $this->agents_model->update($data, $id);
                     if ($success) {
                         set_alert('success', _l('updated_successfuly', _l('agents')));

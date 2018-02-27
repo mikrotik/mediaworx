@@ -47,6 +47,17 @@ class Entities_model extends CRM_Model
                 unset($data['entity']);
             }
 
+            unset($data['synonym']);
+            unset($data['reference']);
+
+            if (!isset($data['automatedExpansion'])){
+                $data['automatedExpansion'] = 0;
+            }
+
+            if (!isset($data['isOverridable'])){
+                $data['isOverridable'] = 0;
+            }
+
             /**
              * TODO - Assign AgentID and UserID for entries from Portal
              * Add some additional variables
@@ -58,6 +69,9 @@ class Entities_model extends CRM_Model
 
                 $data['userid'] = 0;
                 $data['agentid'] = 0;
+            } else {
+                $data['userid'] = get_client_user_id();
+                $data['agentid'] = $this->agent_scope;
             }
 
             $data['is_system'] = $this->is_admin;
@@ -100,6 +114,10 @@ class Entities_model extends CRM_Model
             $this->db->where('entityid',$id);
             $this->db->delete('tblentityreferences');
 
+
+            unset($data['synonym']);
+            unset($data['reference']);
+
             /** @var $entity
              * Set $entity and exclude array
              * from @var $data
@@ -116,6 +134,24 @@ class Entities_model extends CRM_Model
             if (!isset($data['isOverridable'])){
                 $data['isOverridable'] = 0;
             }
+
+            /**
+             * TODO - Assign AgentID and UserID for entries from Portal
+             * Add some additional variables
+             * regarding to admin or client
+             * @userid
+             * @agentid
+             */
+            if ($this->is_admin){
+
+                $data['userid'] = 0;
+                $data['agentid'] = 0;
+            } else {
+                $data['userid'] = get_client_user_id();
+                $data['agentid'] = $this->agent_scope;
+            }
+
+            $data['is_system'] = $this->is_admin;
 
             /** Set new references tp an Entity */
             if ($entity){

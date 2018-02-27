@@ -69,7 +69,7 @@ class Intents_model extends CRM_Model
         return false;
     }
 
-    public function add($data=array())
+    public function add($data=array(),$id = "")
     {
         if ($data){
 
@@ -80,14 +80,107 @@ class Intents_model extends CRM_Model
              * @userid
              * @agentid
              */
+
+            if (!isset($data['is_public'])){
+                $data['is_public'] = 0;
+            }
+
+            if (!isset($data['agentid'])){
+                $data['agentid'] = 0;
+            }
+
+            if (!isset($data['userid'])){
+                $data['userid'] = 0;
+            }
+
+            if (!isset($data['is_default'])){
+                $data['is_default'] = 0;
+            }
+
+            if (!isset($data['action'])){
+                $data['action'] = NULL;
+            }
+
+            if (!isset($data['actions'])){
+                $data['action_parameters'] = NULL;
+            } else {
+                $data['action_parameters'] = json_encode($data['actions']);
+            }
+
+            if ($id){
+                $data['parentid'] = $id;
+            }
+
+
+            unset($data['actions']);
+
             if ($this->is_admin){
 
                 $data['userid'] = 0;
                 $data['agentid'] = 0;
+
+            } else {
+
+                $data['userid'] = get_client_user_id();
+                $data['agentid'] = $this->agent_scope;
             }
 
+
             $data['is_system'] = $this->is_admin;
-            $data['status'] = 1;
+
+            /** @var $prompts
+             * Set $prompts and exclude array
+             * from @var $data
+             */
+            if (isset($data['prompts'])) {
+                $prompts = $data['prompts'];
+                unset($data['prompts']);
+            }
+
+            /** @var $usersays
+             * Set $usersays and exclude array
+             * from @var $data
+             */
+            if (isset($data['usersays'])) {
+                $usersays = $data['usersays'];
+                unset($data['usersays']);
+            }
+
+            /** @var $responses
+             * Set $responses and exclude array
+             * from @var $data
+             */
+            if (isset($data['responses'])) {
+                $responses = $data['responses'];
+                unset($data['responses']);
+            }
+
+            /** @var $parameters
+             * Set $parameters and exclude array
+             * from @var $data
+             */
+            if (isset($data['parameters'])) {
+                $parameters = $data['parameters'];
+                unset($data['parameters']);
+            }
+
+            /** @var $contexts
+             * Set $contexts and exclude array
+             * from @var $data
+             */
+            if (isset($data['contexts'])) {
+                $parameters = $data['contexts'];
+                unset($data['contexts']);
+            }
+
+            /** @var $events
+             * Set $events and exclude array
+             * from @var $data
+             */
+            if (isset($data['events'])) {
+                $parameters = $data['events'];
+                unset($data['events']);
+            }
 
             $this->db->insert('tblintents',$data);
             $intentid = $this->db->insert_id();
@@ -125,6 +218,10 @@ class Intents_model extends CRM_Model
             $this->db->delete('tblintentresponses');
 
 
+            if (!isset($data['status'])){
+                $data['status'] = 0;
+            }
+
             if (!isset($data['is_public'])){
                 $data['is_public'] = 0;
             }
@@ -154,6 +251,17 @@ class Intents_model extends CRM_Model
 
             unset($data['actions']);
 
+
+            if ($this->is_admin){
+
+                $data['userid'] = 0;
+                $data['agentid'] = 0;
+
+            } else {
+
+                $data['userid'] = get_client_user_id();
+                $data['agentid'] = $this->agent_scope;
+            }
 
             $data['is_system'] = $this->is_admin;
 
@@ -341,6 +449,19 @@ class Intents_model extends CRM_Model
             logActivity('Intent Status Changed [IntentID: ' . $id . ' Status(Active/Inactive): ' . $status . ']');
             return true;
         }
+        return false;
+    }
+
+    public function get_followupintent($id = ''){
+
+        if (is_numeric($id)){
+
+            $this->db->where('parentid',$id);
+            $intentfollowup = $this->db->get('tblintents')->result_array();
+
+            return $intentfollowup;
+        }
+
         return false;
     }
 }

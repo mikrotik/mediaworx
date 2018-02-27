@@ -6,7 +6,7 @@
                 <div class="panel_s">
                     <div class="panel-body _buttons">
                         <?php if (has_permission('intents','','create')) { ?>
-                            <a href="#" onclick="new_intent()" data-toggle="modal" data-target="#new-intent" class="btn btn-info mright5 test pull-left display-block">
+                            <a href="#" data-toggle="modal" data-target="#new-intent" class="btn btn-info mright5 test pull-left display-block">
                                 <?php echo _l('new_intent'); ?></a>
                         <?php } ?>
                     </div>

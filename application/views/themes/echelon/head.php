@@ -12,6 +12,7 @@
     <?php if(!isset($exclude_reset_css)){ ?>
         <?php echo app_stylesheet('assets/css','reset.css'); ?>
     <?php } ?>
+    <?php echo app_stylesheet(template_assets_path().'/css','custom.css'); ?>
     <!-- Bootstrap 3.3.7 -->
     <?php echo app_stylesheet(template_assets_path().'/bower_components/bootstrap/dist/css','bootstrap.min.css'); ?>
     <!-- Font Awesome -->
@@ -37,11 +38,11 @@
     <link rel="stylesheet" href="<?php echo base_url(template_assets_path().'/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')?>">
     <?php render_custom_styles(array('general','tabs','buttons','customers','modals')); ?>
     <?php $isRTL = (is_rtl(true) ? 'true' : 'false'); ?>
+    <!-- jQuery 3 -->
+    <?php echo app_script(template_assets_path().'/bower_components/jquery/dist','jquery.min.js'); ?>
     <script>
         var client_id = '<?php echo get_client_user_id()?>';
     </script>
-    <!-- jQuery 3 -->
-    <?php echo app_script(template_assets_path().'/bower_components/jquery/dist','jquery.min.js'); ?>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
