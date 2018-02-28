@@ -42,14 +42,14 @@
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('intents'); ?>"><i class="fa fa-commenting fa-fw"></i> <span>Intents</span>
+                <a href="<?php echo site_url('intents'); ?>"><i class="fa fa-commenting fa-fw"></i> <span><?php echo _l('intents');?></span>
                     <span class="pull-right-container">
                       <i class="fa fa-plus pull-right"></i>
                     </span>
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('entities'); ?>"><i class="fa fa-sitemap fa-fw"></i> <span>Entities</span>
+                <a href="<?php echo site_url('entities'); ?>"><i class="fa fa-sitemap fa-fw"></i> <span><?php echo _l('entities');?></span>
                     <span class="pull-right-container">
                       <i class="fa fa-plus pull-right"></i>
                     </span>
@@ -77,10 +77,11 @@
                 <a href="<?php echo site_url('entities'); ?>"><i class="fa fa-flash fa-fw"></i> <span>Fullfillment</span>
                 </a>
             </li>
-            <li class="header">LABELS</li>
-            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+            <li class="header"></li>
+            <li>
+                <a href="<?php echo site_url('smalltalk'); ?>"><i class="fa fa-comments-o fa-fw"></i> <span><?php echo _l('intent_small_talk');?></span>
+                </a>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

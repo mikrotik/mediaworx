@@ -73,8 +73,27 @@ class Intents extends Admin_controller
             $title = _l('update_intent');
         }
 
-        $data['title'] = $title;
-        $this->load->view('admin/intents/intent', $data);
+        if ($id) {
+            $data['title'] = $title;
+            $this->load->view('admin/intents/intent', $data);
+        } else {
+            redirect(admin_url('intents'));
+        }
+    }
+
+    public function followup($id=""){
+
+        if ($this->input->post()) {
+
+            $data = $this->input->post(NULL, FALSE);
+
+            $id = $this->intents_model->add($data,$id);
+            if ($id) {
+                set_alert('success', _l('updated_successfuly', _l('intents')));
+                redirect(admin_url('intents/intent/' . $id));
+
+            }
+        }
     }
 
     public function delete($id = ""){
@@ -137,6 +156,16 @@ class Intents extends Admin_controller
         }
     }
 
+    public function getfollowupintent($id){
+
+        if (is_numeric($id) && $this->input->is_ajax_request()){
+
+            $followup = $this->intents_model->get_followupintent($id);
+
+            echo json_encode($followup);
+        }
+    }
+
     public function get_prompts($entity){
 
         if ($this->input->is_ajax_request()){
@@ -164,6 +193,18 @@ class Intents extends Admin_controller
 
             $this->intents_model->update_prompts($data);
 
+        }
+    }
+
+    public function parse_string()
+    {
+        if ($this->input->is_ajax_request()){
+
+            $data = $this->input->post(NULL, FALSE);
+
+            $parse = parseString($data['string']);
+
+            echo json_encode($parse);
         }
     }
 }

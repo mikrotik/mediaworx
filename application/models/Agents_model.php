@@ -87,11 +87,25 @@ class Agents_model extends CRM_Model
 
         if($this->db->affected_rows() > 0){
 
+
+            /** Get All intents belongs to the agent */
+            $this->db->where('agentid',$id);
+            $intents = $this->db->get('tblintents')->result_array();
+
             $this->db->where('agentid',$id);
             $this->db->delete('tblintents');
 
-            $this->db->where('agentid',$id);
-            $this->db->delete('tblintentresponses');
+            if ($intents){
+
+                foreach ($intents as$intent){
+
+                    $this->db->where('intentid',$intent['id']);
+                    $this->db->delete('tblintentusersays');
+
+                    $this->db->where('intentid',$intent['id']);
+                    $this->db->delete('tblintentresponses');
+                }
+            }
 
             logActivity('Agent Delete [ID:'.$id.']');
             return true;

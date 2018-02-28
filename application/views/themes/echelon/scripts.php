@@ -17,6 +17,8 @@
     <?php echo app_script(template_assets_path().'/js','custom.js'); ?>
     <!-- AdminLTE for demo purposes -->
     <?php //echo app_script(template_assets_path().'/dist/js','demo.js'); ?>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.6.0/src/loadingoverlay.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.6.0/extras/loadingoverlay_progress/loadingoverlay_progress.min.js"></script>
     <!-- Sweetalert -->
     <script src="<?php echo base_url('/assets/plugins/sweetalert/sweetalert.js')?>"></script>
     <!-- DataTables -->

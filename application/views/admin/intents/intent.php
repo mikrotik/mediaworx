@@ -27,10 +27,16 @@
                                     <?php echo _l('intent_default')?>
                                 </label>
                             </div>
+                            <div class="checkbox checkbox-primary checkbox-inline">
+                                <input type="checkbox" name="merge" value="1" <?php echo ($intent->merge == 1) ? 'checked' : ''?>>
+                                <label for="contact_primary">
+                                    <?php echo _l('intent_merge')?>
+                                </label>
+                            </div>
                             <div class="pull-right">
                                 <?php $checked = ($intent->status == 1) ? 'checked' : ''?>
                                 <div class="onoffswitch" data-toggle="tooltip" data-title="<?php echo _l('customer_active_inactive_help')?>">
-                                    <input type="checkbox" data-switch-url="<?php echo admin_url().'intents/change_intent_status'?>" name="onoffswitch" class="onoffswitch-checkbox" id="<?php echo $intent->id?>" data-id="<?php echo $intent->id?>" <?php echo $checked?>>
+                                    <input type="checkbox" value="1" name="status" data-switch-url="<?php echo admin_url().'intents/change_intent_status'?>" name="onoffswitch" class="onoffswitch-checkbox" id="<?php echo $intent->id?>" data-id="<?php echo $intent->id?>" <?php echo $checked?>>
                                     <label class="onoffswitch-label" for="<?php echo $intent->id?>"></label>
                                 </div>
                             </div>
@@ -72,7 +78,11 @@
                                                 <?php } ?>
                                                 <tr>
                                                     <td colspan="2"><?php echo $btn_detail ?><?php echo $intentusersay['usersay']?>
+                                                        <?php
+                                                            $parse = json_decode($intentusersay['parse']);
+                                                        ?>
                                                         <input value="<?php echo $intentusersay['usersay']?>" type="hidden" name="usersays[<?php echo $usersay_row?>][usersay]">
+                                                        <input type="hidden" name="usersays[<?php echo $usersay_row?>][parse]" value="<?php echo htmlspecialchars(json_encode($parse)); ?>"/>
                                                     </td>
                                                     <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#usersay-'+<?php echo $usersay_row?>).remove()"><i class="fa fa-close"></i></button></td>
                                                 </tr>
@@ -261,6 +271,7 @@
     var response_row = <?php echo $response_row?>;
     var parameter_rows = <?php echo $parameter_rows?>;
     var action_row = <?php echo $action_row;?>;
+    var parse = new Array();
 
     $(function(){
 
@@ -404,7 +415,8 @@
             var btn_details = '';
 
             if (usersays != ""){
-
+                // Show full page LoadingOverlay
+                $.LoadingOverlay("show");
                 $.ajax({
                     type: 'POST',
                     url: admin_url + 'intents/usersayparameters/',
@@ -412,7 +424,6 @@
                     dataType: 'json',
                     success: function (json) {
 
-                        console.log(json);
                         if (json.parameters.length > 0){
 
                             btn_details = '<i class="fa fa-plus btn-details" onclick="userSayDetails(this,\''+usersay_row+'\')"></i>&nbsp;&nbsp;';
@@ -421,7 +432,7 @@
 
                         usersayHtml = '<tbody id="usersay-'+usersay_row+'" >';
                         usersayHtml += '<tr>';
-                        usersayHtml +='<td colspan="2">'+btn_details+usersays+'<input type="hidden" name="usersays['+usersay_row+'][usersay]" value="'+usersays+'"></td>';
+                        usersayHtml +='<td colspan="2">'+btn_details+usersays+'<input type="hidden" name="usersays['+usersay_row+'][usersay]" value="'+usersays+'"><input type="hidden" name="usersays['+usersay_row+'][parse]" value=""/></td>';
                         usersayHtml +='<td><button class="btn btn-danger btn-icon" type="button" onclick="removeUsersay(\''+usersay_row+'\');"><i class="fa fa-close"></i></td>';
                         usersayHtml +='</tr>';
                         usersayHtml += '</tbody>';
@@ -453,7 +464,10 @@
 
                         $('.usersays-thead').after(usersayHtml);
 
+                        parse_string(usersays.toString(),usersay_row);
                         usersay_row++;
+
+
 
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
@@ -486,6 +500,27 @@
             }
         });
     });
+
+    function parse_string(string,row)
+    {
+        $.ajax({
+            type: 'POST',
+            url: admin_url + 'intents/parse_string/',
+            data: "string=" + string.toString(),
+            dataType: 'json',
+            success: function (json) {
+
+                $('input[name=\'usersays['+row+'][parse]\']').val(JSON.stringify(json[0]));
+                $.LoadingOverlay("hide");
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                if (xhr.status != 0) {
+                    alert(xhr.status + "\r\n" + thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            }
+        });
+
+    }
 
     function removePrompt(id){
         $.ajax({

@@ -97,6 +97,14 @@ class Intents_model extends CRM_Model
                 $data['is_default'] = 0;
             }
 
+            if (!isset($data['merge'])){
+                $data['merge'] = 0;
+            }
+
+            if (!isset($data['status'])){
+                $data['status'] = 0;
+            }
+
             if (!isset($data['action'])){
                 $data['action'] = NULL;
             }
@@ -238,6 +246,14 @@ class Intents_model extends CRM_Model
                 $data['is_default'] = 0;
             }
 
+            if (!isset($data['merge'])){
+                $data['merge'] = 0;
+            }
+
+            if (!isset($data['status'])){
+                $data['status'] = 0;
+            }
+
             if (!isset($data['action'])){
                 $data['action'] = NULL;
             }
@@ -326,7 +342,8 @@ class Intents_model extends CRM_Model
                     $usersayData = array(
                         'intentid'=>$id,
                         'usersay'=>strtolower($usersay['usersay']),
-                        'parameters'=>($parameters ? json_encode($parameters[$key]) : NULL)
+                        'parameters'=>($parameters ? json_encode($parameters[$key]) : NULL),
+                        'parse'=>$usersay['parse']
                     );
 
                     $this->db->insert('tblintentusersays',$usersayData);

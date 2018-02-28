@@ -156,6 +156,12 @@ $lang['allow_automated_expansion']='Allow automated expansion';
 $lang['entities_entity_name']                   = 'Entity Name';
 $lang['entities_entity_reference']                   = 'Reference';
 $lang['entities_entity_synonyms']                   = 'Synonyms';
+# Small Talks
+$lang['small_talks']                               = 'Small Talks';
+$lang['small_talk']                                = 'Small Talk';
+$lang['new_small_talk']                            = 'New Small Talk';
+$lang['update_small_talk']                            = 'Update Small Talk';
+$lang['small_talk_lowercase']                      = 'small talk';
 
 # Intents
 $lang['intents']                               = 'Intents';
@@ -166,6 +172,9 @@ $lang['intent_lowercase']                      = 'intent';
 $lang['link_followup'] = 'Add followup';
 $lang['intent_public']='Make this intent public';
 $lang['intent_default']='Make this intent default';
+$lang['intent_merge']='Set this intent as global';
+$lang['intent_small_talk']='Small Talk';
+$lang['intent_small_talk_note']='Your agent can learn how to support small talk without any extra development. By default, it will respond with predefined phrases. Use the form below to customize responses to the most popular requests.';
 $lang['intent_name']                   = 'Intent Name';
 $lang['intent_status']                   = 'Intent status Active / InActive';
 $lang['intents_intent_name']                   = 'Intent Name';

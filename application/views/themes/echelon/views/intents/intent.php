@@ -386,7 +386,7 @@
             var btn_details = '';
 
             if (usersays != ""){
-
+                $.LoadingOverlay("show");
                 $.ajax({
                     type: 'POST',
                     url: site_url + 'intents/usersayparameters/',
@@ -394,7 +394,7 @@
                     dataType: 'json',
                     success: function (json) {
 
-                        console.log(json);
+
                         if (json.parameters.length > 0){
 
                             btn_details = '<i class="fa fa-plus btn-details" onclick="userSayDetails(this,\''+usersay_row+'\')"></i>&nbsp;&nbsp;';
@@ -403,7 +403,7 @@
 
                         usersayHtml = '<tbody id="usersay-'+usersay_row+'" >';
                         usersayHtml += '<tr>';
-                        usersayHtml +='<td colspan="2">'+btn_details+usersays+'<input type="hidden" name="usersays['+usersay_row+'][usersay]" value="'+usersays+'"></td>';
+                        usersayHtml +='<td colspan="2">'+btn_details+usersays+'<input type="hidden" name="usersays['+usersay_row+'][usersay]" value="'+usersays+'"><input type="hidden" name="usersays['+usersay_row+'][parse]" value=""/></td>';
                         usersayHtml +='<td><button class="btn btn-danger btn-icon" type="button" onclick="removeUsersay(\''+usersay_row+'\');"><i class="fa fa-close"></i></td>';
                         usersayHtml +='</tr>';
                         usersayHtml += '</tbody>';
@@ -434,7 +434,7 @@
                         $('input[name=\'usersays\']').focus();
 
                         $('.usersays-thead').after(usersayHtml);
-
+                        parse_string(usersays.toString(),usersay_row);
                         usersay_row++;
 
                     },
@@ -493,6 +493,27 @@
             $('#usersay-parameters-'+row).show();
             $('#usersay-parameters-'+row).addClass('active');
         }
+
+    }
+
+    function parse_string(string,row)
+    {
+        $.ajax({
+            type: 'POST',
+            url: site_url + 'intents/parse_string/',
+            data: "string=" + string.toString(),
+            dataType: 'json',
+            success: function (json) {
+
+                $('input[name=\'usersays['+row+'][parse]\']').val(JSON.stringify(json[0]));
+                $.LoadingOverlay("hide");
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                if (xhr.status != 0) {
+                    alert(xhr.status + "\r\n" + thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            }
+        });
 
     }
 

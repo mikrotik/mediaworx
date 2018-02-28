@@ -1286,4 +1286,38 @@ class Clients extends Clients_controller
     {
         return do_recaptcha_validation($str);
     }
+
+    public  function chatbot()
+    {
+        require_once VENDOR_FOLDER.'mediaworx/mediaworx_autoload.php';
+
+        try
+        {
+
+            $client = new Mediaworx_Client(Mediaworx_Client::ENV_TEST);
+
+            $speech = new Mediaworx_Dialogflow_Speech();
+
+            $speech->setAccessToken('350da101-0648-5263-aee7-b432ac84d719');
+            $speech->setType(1); // "1"-Client Access Token "2"->Developer Access Token
+            $speech->setFormat('json');
+            $speech->setSession(md5('12345567'));
+            $speech->setResponseFormat();
+
+            $speech->setUsersay($_POST['usersay']);
+
+            $client->call($speech);
+
+            $res = array(
+                'speech'=>$speech->getResultObject()->result->fulfillment->speech,
+                'obj'=>json_encode($speech->getResultObject())
+            );
+
+            echo json_encode($res);
+
+        } catch (Mediaworx_Exception $e)
+        {
+            echo $e->getMessage();
+        }
+    }
 }

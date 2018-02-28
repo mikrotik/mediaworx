@@ -10,6 +10,8 @@ class CRM_Model extends CI_Model {
         if ($_COOKIE['agent'])
         {
             $this->agent_scope = $_COOKIE['agent'];
+        } else {
+            $this->agent_scope = 0;
         }
           $this->db->reconnect();
           $timezone = get_option('default_timezone');

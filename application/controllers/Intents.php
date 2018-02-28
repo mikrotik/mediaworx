@@ -240,4 +240,16 @@ class Intents extends Clients_controller
 
         }
     }
+
+    public function parse_string()
+    {
+        if ($this->input->is_ajax_request()){
+
+            $data = $this->input->post(NULL, FALSE);
+
+            $parse = parseString($data['string']);
+
+            echo json_encode($parse);
+        }
+    }
 }

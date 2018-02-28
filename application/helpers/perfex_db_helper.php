@@ -1547,3 +1547,25 @@ function getClientAgents($client_id){
 
     return false;
 }
+
+function apiAccess($access_token,$type){
+
+    $CI = & get_instance();
+
+    if ($type == '1'){
+        $field = 'client_access_token';
+    } else if ($type == '2'){
+        $field = 'developer_access_token';
+    }
+
+    $CI->db->where($field,$access_token);
+    $agent = $CI->db->get('tblagents')->row();
+
+    if ($agent){
+
+        return $agent;
+    }
+
+    return false;
+
+}

@@ -64,7 +64,8 @@ $autoload['libraries'] = array(
     'email',
     'encoding_lib',
     'action_hooks',
-    'perfex_base'
+    'perfex_base',
+    'mediaworx_core'
 );
 $CI = &get_instance();
 
@@ -122,7 +123,9 @@ $autoload['helper'] = array(
         'perfex_theme_style',
         'perfex_constants',
         'perfex_speech',
-        'perfex_uuid'
+        'perfex_uuid',
+        'perfex_string_parser',
+        'perfex_string_compare'
     );
 
 if(file_exists(APPPATH.'helpers/my_functions_helper.php')){
