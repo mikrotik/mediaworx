@@ -187,7 +187,7 @@ class Entities_model extends CRM_Model
         if (is_numeric($id))
         {
             /** Delete Entity all references */
-            $this->db->where('id',$id);
+            $this->db->where('entityid',$id);
             $this->db->delete('tblentityreferences');
 
             /** Delete Entity */

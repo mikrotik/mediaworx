@@ -12,20 +12,19 @@ class Entities extends Clients_controller
         $this->load->model("entities_model");
         do_action('after_clients_area_init');
 
-        if (!isset($this->agent_scope) || empty($this->agent_scope)){
+        if (!$this->agent_scope){
             redirect(site_url('agents/agent'));
         }
 
     }
 
     public function index(){
-
         if (!is_client_logged_in()) {
             redirect(site_url('clients/login'));
         }
 
         $data['bodyclass'] = $this->bodyclass;
-        $data['title'] = get_option('entities');
+        $data['title'] = _l('entities');
         $this->data    = $data;
         $this->view    = 'entities/manage';
         $this->layout();

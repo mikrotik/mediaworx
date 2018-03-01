@@ -101,6 +101,10 @@ class Intents_model extends CRM_Model
                 $data['merge'] = 0;
             }
 
+            if (!isset($data['is_end'])){
+                $data['is_end'] = 0;
+            }
+
             if (!isset($data['status'])){
                 $data['status'] = 0;
             }
@@ -236,6 +240,10 @@ class Intents_model extends CRM_Model
 
             if (!isset($data['agentid'])){
                 $data['agentid'] = 0;
+            }
+
+            if (!isset($data['is_end'])){
+                $data['is_end'] = 0;
             }
 
             if (!isset($data['userid'])){

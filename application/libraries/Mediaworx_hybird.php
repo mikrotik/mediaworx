@@ -50,7 +50,7 @@ class Mediaworx_Hybird extends Mediaworx_Core
          * that matches with the request
          */
 
-        $this->usersays = getUserSays();
+        $this->usersays = getUserSays($this->agent);
 
     }
 
@@ -68,16 +68,46 @@ class Mediaworx_Hybird extends Mediaworx_Core
          * check if predicted match is correct and applies the confidence of bot
          */
         $predictions = getIntentPredictions($this->agent,$this->usersays,$this->request['usersay'],$this->stringfy);
-        $distance = array_column($predictions, 'distance');
-        $predicted = $predictions[min($distance)];
 
-        /** @var  action */
-        $this->action = $predicted['action'];
-        /** @var  score */
-        $this->score = $predicted['score'];
+        /**
+         * TODO
+         *  Remove these outputs later
+         */
+//        $this->currentConversationData['predictions'] = $predictions;
+//        $this->currentConversationData['usersays'] = $this->usersays;
+        if ($predictions) {
+            $distance = array_column($predictions, 'distance');
+            $predicted = $predictions[min($distance)];
 
-        $this->intentResponses['response'] = intentResponse($predicted['intentid'],'Echelon')['response'];
+            /** @var  action */
+            $this->action = $predicted['action'];
+            /** @var  score */
+            $this->score = $predicted['score'];
 
+
+            /**
+             * check if any parameter is required
+             */
+            $this->currentConversationData['required_parameters'] = getRequiredParameters($predicted['parameters']);
+
+
+            /**
+             *  Check if conversation ended
+             */
+            if ($predicted['is_end']) {
+
+                $this->intentResponses['response'] = ucfirst(intentResponse($predicted['intentid'], $this->agent)['response']);
+            } else {
+
+                /**
+                 *  Check Intent Followups
+                 */
+
+                $this->intentResponses['response'] = ucfirst(intentResponse($predicted['intentid'], $this->agent)['response']);
+            }
+        } else {
+            $this->intentResponses['response'] = ucfirst(getDefaultFallbackResponse()['response']->response);
+        }
 
         /** Returns the final response */
         return $this->getResponse();

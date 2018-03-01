@@ -159,9 +159,14 @@ $lang['entities_entity_synonyms']                   = 'Synonyms';
 # Small Talks
 $lang['small_talks']                               = 'Small Talks';
 $lang['small_talk']                                = 'Small Talk';
+$lang['small_talk_name']                   = 'Small Talk Name';
 $lang['new_small_talk']                            = 'New Small Talk';
 $lang['update_small_talk']                            = 'Update Small Talk';
 $lang['small_talk_lowercase']                      = 'small talk';
+$lang['small_talk_question']                   = 'Question';
+$lang['small_talk_answer']                   = 'Answer';
+$lang['small_talk_status']                   = 'Small Talk status Active / InActive';
+
 
 # Intents
 $lang['intents']                               = 'Intents';
@@ -177,6 +182,7 @@ $lang['intent_small_talk']='Small Talk';
 $lang['intent_small_talk_note']='Your agent can learn how to support small talk without any extra development. By default, it will respond with predefined phrases. Use the form below to customize responses to the most popular requests.';
 $lang['intent_name']                   = 'Intent Name';
 $lang['intent_status']                   = 'Intent status Active / InActive';
+$lang['intent_end']                   = 'Set this intent as end of conversation';
 $lang['intents_intent_name']                   = 'Intent Name';
 $lang['training_phrases']='Training phrases';
 $lang['training_phrases_help'] = 'Optional way to trigger an intent, without the need for matched text or spoken input.';

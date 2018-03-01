@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Clients extends Clients_controller
 {
+    public $bodyclass= "skin-blue sidebar-mini";
+
     function __construct()
     {
         parent::__construct();
@@ -17,7 +19,7 @@ class Clients extends Clients_controller
         $this->load->model('reports_model');
         $data['payments_years'] = $this->reports_model->get_distinct_customer_invoices_years();
 
-        $data['bodyclass'] = 'skin-blue sidebar-mini';
+        $data['bodyclass'] = $this->bodyclass;
         $data['title'] = get_option('companyname');
         $this->data    = $data;
         $this->view    = 'home';
@@ -28,6 +30,7 @@ class Clients extends Clients_controller
         if (!is_client_logged_in()) {
             redirect(site_url('clients/login'));
         }
+        $data['bodyclass'] = $this->bodyclass;
         $data['title']         = _l('announcements');
         $data['announcements'] = $this->announcements_model->get();
         $this->data            = $data;
@@ -39,6 +42,7 @@ class Clients extends Clients_controller
         if (!is_client_logged_in()) {
             redirect(site_url('clients/login'));
         }
+        $data['bodyclass'] = $this->bodyclass;
         $data['announcement'] = $this->announcements_model->get($id);
         $data['title']        = $data['announcement']->name;
         $this->data           = $data;
@@ -50,6 +54,7 @@ class Clients extends Clients_controller
         if (!is_client_logged_in()) {
             redirect(site_url('clients/login'));
         }
+        $data['bodyclass'] = $this->bodyclass;
         $data['title'] = _l('calendar');
         $this->load->model('utilities_model');
         $data['calendar_data'] = $this->utilities_model->get_calendar_data(get_user_id_by_contact_id(get_contact_user_id()), get_contact_user_id());
@@ -76,6 +81,7 @@ class Clients extends Clients_controller
             $where['status'] = $status;
         }
 
+        $data['bodyclass'] = $this->bodyclass;
         $data['projects']         = $this->projects_model->get('', $where);
         $data['project_statuses'] = $this->projects_model->get_project_statuses();
         $data['title']            = _l('clients_my_projects');
@@ -279,6 +285,7 @@ class Clients extends Clients_controller
             ));
         }
 
+        $data['bodyclass'] = $this->bodyclass;
         $data['tasks_statuses'] = $this->tasks_model->get_statuses();
 
         $data['project_tasks'] = $this->projects_model->get_tasks($id);
@@ -298,6 +305,7 @@ class Clients extends Clients_controller
 
         $files = $this->clients_model->get_customer_files(get_client_user_id(), $files_where);
 
+        $data['bodyclass'] = $this->bodyclass;
         $data['files'] = $files;
         $this->data    = $data;
         $this->view    = 'files';
@@ -469,7 +477,7 @@ class Clients extends Clients_controller
         $this->use_submenu    = false;
         $data['title']        = $proposal->subject;
         $data['proposal']     = do_action('proposal_html_pdf_data', $proposal);
-        $data['bodyclass']    = 'proposal proposal-view';
+        $data['bodyclass']    = 'proposal proposal-view '.$this->bodyclass;;
         $data['comments']     = $this->proposals_model->get_comments($id);
         add_views_tracking('proposal', $id);
         do_action('proposal_html_viewed', $id);
@@ -495,6 +503,7 @@ class Clients extends Clients_controller
             $where .= ' OR rel_type="lead" AND rel_id=' . $client->leadid;
         }
 
+        $data['bodyclass'] = $this->bodyclass;
         $data['proposals'] = $this->proposals_model->get('', $where);
         $data['title']     = _l('proposals');
         $this->data        = $data;
@@ -535,6 +544,7 @@ class Clients extends Clients_controller
             }
         }
         $data                   = array();
+        $data['bodyclass'] = $this->bodyclass;
         $data['latest_tickets'] = $this->tickets_model->get_client_latests_ticket();
         $data['projects']       = $this->projects_model->get_projects_for_ticket(get_client_user_id());
         $data['title']          = _l('new_ticket');
@@ -568,6 +578,7 @@ class Clients extends Clients_controller
         if ($data['ticket']->userid != get_client_user_id()) {
             redirect(site_url());
         }
+        $data['bodyclass'] = $this->bodyclass;
         $data['ticket_replies'] = $this->tickets_model->get_ticket_replies($id);
         $data['title']          = $data['ticket']->subject;
         $this->data             = $data;
@@ -590,6 +601,7 @@ class Clients extends Clients_controller
             'trash' => 0
         ));
 
+        $data['bodyclass'] = $this->bodyclass;
         $data['contracts_by_type_chart'] = json_encode($this->contracts_model->get_contracts_types_chart_data());
         $data['title']                   = _l('clients_contracts');
         $this->data                      = $data;
@@ -643,6 +655,7 @@ class Clients extends Clients_controller
             }
         }
 
+        $data['bodyclass'] = $this->bodyclass;
         $data['invoices'] = $this->invoices_model->get('', $where);
         $data['title']    = _l('clients_my_invoices');
         $this->data       = $data;
@@ -690,6 +703,7 @@ class Clients extends Clients_controller
         $this->load->library('numberword', array(
             'clientid' => $invoice->clientid
         ));
+        $data['bodyclass'] = $this->bodyclass;
         $this->load->model('payment_modes_model');
         $this->load->model('payments_model');
         $data['payments']      = $this->payments_model->get_invoice_payments($id);
@@ -749,6 +763,7 @@ class Clients extends Clients_controller
         $this->load->library('numberword', array(
             'clientid' => $estimate->clientid
         ));
+        $data['bodyclass'] = $this->bodyclass;
         $data['title']        = format_estimate_number($estimate->id);
         $this->use_navigation = false;
         $this->use_submenu    = false;
@@ -786,6 +801,7 @@ class Clients extends Clients_controller
                 $where['status !='] = 1;
             }
         }
+        $data['bodyclass'] = $this->bodyclass;
         $data['estimates'] = $this->estimates_model->get('', $where);
         $data['title']     = _l('clients_my_estimates');
         $this->data        = $data;
@@ -835,6 +851,7 @@ class Clients extends Clients_controller
                 redirect($default_redirect);
             }
         }
+        $data['bodyclass'] = $this->bodyclass;
         $this->use_navigation = false;
         $this->use_submenu    = false;
         $data['survey']       = $survey;
@@ -877,6 +894,7 @@ class Clients extends Clients_controller
                 redirect(site_url('clients/company'));
             }
         }
+        $data['bodyclass'] = $this->bodyclass;
         $data['title'] = _l('client_company_info');
         $this->data    = $data;
         $this->view    = 'company_profile';
@@ -927,6 +945,7 @@ class Clients extends Clients_controller
                 redirect(site_url('clients/profile'));
             }
         }
+        $data['bodyclass'] = $this->bodyclass;
         $data['title'] = _l('clients_profile_heading');
         $this->data    = $data;
         $this->view    = 'profile';
@@ -1016,6 +1035,7 @@ class Clients extends Clients_controller
             }
         }
 
+        $data['bodyclass'] = $this->bodyclass;
         $data['title'] = _l('clients_register_heading');
         $this->data    = $data;
         $this->view    = 'register';
@@ -1043,6 +1063,7 @@ class Clients extends Clients_controller
                 redirect(site_url('clients/forgot_password'));
             }
         }
+        $data['bodyclass'] = $this->bodyclass;
         $data['title'] = _l('customer_forgot_password');
         $this->data    = $data;
         $this->view    = 'forgot_password';
@@ -1080,6 +1101,7 @@ class Clients extends Clients_controller
                 redirect(site_url('clients/login'));
             }
         }
+        $data['bodyclass'] = $this->bodyclass;
         $this->view = 'reset_password';
         $this->layout();
     }
@@ -1122,6 +1144,7 @@ class Clients extends Clients_controller
                 }
             }
             $this->data = $data;
+            $data['bodyclass'] = $this->bodyclass;
             $this->layout();
         } else {
             redirect(site_url());
@@ -1163,7 +1186,7 @@ class Clients extends Clients_controller
         } else {
             $data['title'] = _l('clients_login_heading_no_register');
         }
-        $data['bodyclass'] = 'customers_login';
+        $data['bodyclass'] = 'customers_login '. $this->bodyclass;
         $this->data        = $data;
         $this->view        = 'login';
         $this->layout();
@@ -1298,7 +1321,7 @@ class Clients extends Clients_controller
 
             $speech = new Mediaworx_Dialogflow_Speech();
 
-            $speech->setAccessToken('350da101-0648-5263-aee7-b432ac84d719');
+            $speech->setAccessToken('e55d612b-9ad9-5b5a-bf0c-4499887efe30');
             $speech->setType(1); // "1"-Client Access Token "2"->Developer Access Token
             $speech->setFormat('json');
             $speech->setSession(md5('12345567'));

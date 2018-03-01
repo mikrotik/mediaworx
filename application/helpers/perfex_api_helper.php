@@ -1,6 +1,6 @@
 <?php
 
-function getUserSays()
+function getUserSays($agent)
 {
     $CI = & get_instance();
 
@@ -14,14 +14,14 @@ function getUserSays()
 
     $userSaysList = array();
 
-    $sqlClientUserSays = "SELECT i.id,i.userid,i.intent_name,i.action,ius.usersay,ius.parameters,iur.response FROM tblintents i
+    $sqlClientUserSays = "SELECT i.id,i.is_end,i.userid,i.intent_name,i.action,i.action_parameters,ius.usersay,ius.parameters,iur.response FROM tblintents i
             LEFT JOIN tblintentusersays ius ON(i.id = ius.intentid)
             LEFT JOIN tblintentresponses iur ON(i.id = iur.intentid)
-            WHERE i.agentid > 0 AND i.parentid = 0 AND i.status = 1 AND i.userid = '".get_client_user_id()."'";
+            WHERE i.agentid = '".$agent->agentid."' AND i.parentid = 0 AND i.status = 1 AND i.userid = '".$agent->userid."'";
 
     $clientUserSays = $CI->db->query($sqlClientUserSays)->result_array();
 
-    $sqlMergedUserSays = "SELECT i.id,i.userid,i.intent_name,i.action,ius.usersay,ius.parameters,iur.response FROM tblintents i
+    $sqlMergedUserSays = "SELECT i.id,i.is_end,i.userid,i.intent_name,i.action,i.action_parameters,ius.usersay,ius.parameters,iur.response FROM tblintents i
                 LEFT JOIN tblintentusersays ius ON(i.id = ius.intentid)
                 LEFT JOIN tblintentresponses iur ON(i.id = iur.intentid)
                 WHERE i.parentid = 0 AND i.status = 1 AND i.userid = 0 AND i.is_default = 0 AND i.merge = 1";
@@ -29,6 +29,38 @@ function getUserSays()
     $clientMergeSays = $CI->db->query($sqlMergedUserSays)->result_array();
 
     $userSaysList = array_merge($clientUserSays,$clientMergeSays);
+
+    /**
+     * Check if Small Talks are enabled
+     * if so override the response
+     */
+
+    if ($agent->small_talk){
+
+        $sqlClientSmallTalk = "SELECT st.id,st.small_talk_name,st.action,str.id AS smalltalk,str.question,str.answer FROM tblsmalltalks st
+            LEFT JOIN tblsmalltalkreferences str ON (st.id = str.smalltalkid)
+            WHERE st.agentid = '".$agent->agentid."' AND st.userid = '".$agent->userid."'";
+
+        $agentSmallTalks = $CI->db->query($sqlClientSmallTalk)->result_array();
+
+        foreach ($agentSmallTalks as $agentSmallTalk) {
+
+            if (!empty($agentSmallTalk['answer'])) {
+                $smallTalk = array(
+                    "id" => $agentSmallTalk['smalltalk'],
+                    "userid" => $agent->userid,
+                    "intent_name" => $agentSmallTalk['small_talk_name'],
+                    "action" => $agentSmallTalk['action'],
+                    "usersay" => $agentSmallTalk['question'],
+                    "parameters" => null,
+                    "response" => $agentSmallTalk['answer'],
+                    'is_end'=>0
+                );
+
+                array_push($userSaysList, $smallTalk);
+            }
+        }
+    }
 
     return $userSaysList;
 }
@@ -50,8 +82,10 @@ function getIntentPredictions($agent,$usersays = array(),$request="",$stringfy)
                     "intentid" => $usersay['id'],
                     "action" => $usersay['action'],
                     "usersay" => $usersay['usersay'],
+                    "parameters"=>$usersay['action_parameters'],
                     "distance" => $distance,
                     "score" => $score,
+                    'is_end'=>$usersay['is_end']
                 );
             }
         }
@@ -62,7 +96,7 @@ function getIntentPredictions($agent,$usersays = array(),$request="",$stringfy)
     return false;
 }
 
-function intentResponse($id){
+function intentResponse($id,$agent){
 
     $CI = & get_instance();
 
@@ -70,12 +104,54 @@ function intentResponse($id){
 
         $CI->db->where('intentid', $id);
         $intentResponses = $CI->db->get('tblintentresponses')->result_array();
+
+        if (!$intentResponses && $agent->small_talk){
+
+            $CI->db->where('id', $id);
+            $intentResponses = $CI->db->get('tblsmalltalkreferences')->row();
+
+            return array("response"=>$intentResponses->answer);
+        }
     }
 
     if ($intentResponses) {
 
         return $intentResponses[array_rand($intentResponses)];
     }
+}
+
+function getDefaultFallbackResponse(){
+
+    $CI = & get_instance();
+
+
+    $CI->db->where('intent_name','Default Fallback Intent');
+    $defaultFallbackIntent = $CI->db->get('tblintents')->row();
+
+    $CI->db->where('intentid', $defaultFallbackIntent->id);
+    $CI->db->order_by('id', 'RANDOM');
+    $CI->db->limit(1);
+    $defaultFallback = $CI->db->get('tblintentresponses')->row();
+
+    return array(
+        'intent'=>$defaultFallbackIntent,
+        'response'=>$defaultFallback
+    );
+
+}
+
+function getRequiredParameters($parameters)
+{
+    $CI = & get_instance();
+
+    $parameters = json_decode($parameters);
+
+
+}
+
+function getRequestedParameters($usersay)
+{
+    $CI = & get_instance();
 }
 
 function LevenshteinDistance($s1, $s2)

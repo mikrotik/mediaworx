@@ -12,7 +12,7 @@ class Smalltalk extends Clients_controller
         $this->load->model("smalltalk_model");
         do_action('after_clients_area_init');
 
-        if (!isset($this->agent_scope) || empty($this->agent_scope)){
+        if (!$this->agent_scope){
             redirect(site_url('agents/agent'));
         }
     }
@@ -39,7 +39,7 @@ class Smalltalk extends Clients_controller
 
         if ($this->input->is_ajax_request()) {
 
-            $aColumns = array('name');
+            $aColumns = array('small_talk_name');
 
             $sIndexColumn = "id";
             $sTable = 'tblsmalltalks';
@@ -71,14 +71,14 @@ class Smalltalk extends Clients_controller
         }
     }
 
-    public function small_talk(){
+    public function small_talk($id = ""){
 
         if (!is_client_logged_in()) {
             redirect(site_url('clients/login'));
         }
 
         if ($this->input->post()) {
-            $this->form_validation->set_rules('small_talk', _l('small_talk'), 'required');
+            $this->form_validation->set_rules('small_talk_name', _l('small_talk_name'), 'required');
 
             if ($this->form_validation->run() !== FALSE) {
 
@@ -97,7 +97,7 @@ class Smalltalk extends Clients_controller
                     if ($success) {
                         set_alert('success', _l('updated_successfuly', _l('small_talks')));
                     }
-                    redirect(site_url('smalltalk/smalltalk/'.$id));
+                    redirect(site_url('smalltalk/small_talk/'.$id));
                 }
             }
         }
@@ -105,11 +105,11 @@ class Smalltalk extends Clients_controller
         if ($id == '') {
             $data['title']                  = _l('new_small_talk');
         } else {
-            $entity = $this->entities_model->get($id);
-            $entity_references = $this->entities_model->get_references($id);
+            $small_talk = $this->smalltalk_model->get($id);
+            $small_talk_references = $this->smalltalk_model->get_references($id);
 
-            $data['entity'] = $entity;
-            $data['entity_references'] = $entity_references;
+            $data['small_talk'] = $small_talk;
+            $data['small_talk_references'] = $small_talk_references;
             $data['title'] = _l('update_small_talk');
         }
 
@@ -117,5 +117,35 @@ class Smalltalk extends Clients_controller
         $this->data    = $data;
         $this->view    = 'smalltalk/smalltalk';
         $this->layout();
+    }
+
+    public function delete($id = ""){
+
+        if (!is_client_logged_in()) {
+            redirect(site_url('clients/login'));
+        }
+
+        if ($this->input->is_ajax_request()) {
+
+            if (is_numeric($id)){
+
+                $success = $this->smalltalk_model->delete($id);
+                $message = '';
+                if ($success == true) {
+                    $message = _l('deleted', _l('small_talks'));
+                    echo json_encode(array(
+                        'success' => $success,
+                        'message' => $message
+                    ));
+                } else {
+                    $message =  _l('problem_deleting', _l('small_talks'));
+                    echo json_encode(array(
+                        'success' => $success,
+                        'message' => $message
+                    ));
+                }
+            }
+
+        }
     }
 }

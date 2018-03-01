@@ -21,6 +21,10 @@ class Agents_model extends CRM_Model
 
     public function add($data=array()){
 
+        if (!isset($data['small_talk'])){
+            $data['small_talk'] = 0;
+        }
+
         $this->db->insert('tblagents', $data);
         $id = $this->db->insert_id();
         if($id){
@@ -69,6 +73,10 @@ class Agents_model extends CRM_Model
 
     public function update($data = array(),$id = ""){
 
+        if (!isset($data['small_talk'])){
+            $data['small_talk'] = 0;
+        }
+
         $this->db->where('agentid', $id);
         $this->db->update('tblagents', $data);
 
@@ -104,6 +112,40 @@ class Agents_model extends CRM_Model
 
                     $this->db->where('intentid',$intent['id']);
                     $this->db->delete('tblintentresponses');
+                }
+            }
+
+            /** Get All entities belongs to the agent */
+            $this->db->where('agentid',$id);
+            $entities = $this->db->get('tblentities')->result_array();
+
+            $this->db->where('agentid',$id);
+            $this->db->delete('tblentities');
+
+            if ($entities){
+
+                foreach ($entities as$entity){
+
+                    $this->db->where('entityid',$entity['id']);
+                    $this->db->delete('tblentityreferences');
+
+                }
+            }
+
+            /** Get All small talks belongs to the agent */
+            $this->db->where('agentid',$id);
+            $small_talks = $this->db->get('tblsmalltalks')->result_array();
+
+            $this->db->where('agentid',$id);
+            $this->db->delete('tblsmalltalks');
+
+            if ($small_talks){
+
+                foreach ($small_talks as$small_talk){
+
+                    $this->db->where('smalltalkid',$small_talk['id']);
+                    $this->db->delete('tblsmalltalkreferences');
+
                 }
             }
 

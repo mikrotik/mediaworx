@@ -33,16 +33,18 @@
 <script>
     $(function () {
 
-        var agent = $.cookie("agent");
-
-        $('#asidebar_dropdown').val(agent);
-        $('#asidebar_dropdown').trigger('change');
-
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
             increaseArea: '20%' /* optional */
         });
+        <?php if (get_client_user_id()) { ?>
+
+        var agent = $.cookie("agent");
+
+        $('#asidebar_dropdown').val(agent);
+        $('#asidebar_dropdown').trigger('change');
+
         $('.sidebar-menu').tree();
 
         $('#asidebar_dropdown').on('change',function(){
@@ -56,5 +58,6 @@
                 window.location = site_url+'/'+value;
             }
         });
+        <?php } ?>
     });
 </script>

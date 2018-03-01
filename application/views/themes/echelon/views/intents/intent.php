@@ -173,6 +173,19 @@
                         </table>
                     </div>
                     <!-- /responses -->
+                    <div class="form-group">
+                        <?php
+                        if (isset($intent) && $intent->is_end){
+                            $checked = 'checked';
+                        } else {
+                            $checked = "";
+                        }
+                        ?>
+                        <input type="checkbox"  value="1" name="is_end" class="checkbox"   <?php echo $checked?>>
+                        <label for="contact_primary">
+                            <?php echo _l('intent_end')?>
+                        </label>
+                    </div>
                 </div>
                 <div class="col-md-4"></div>
             </div>

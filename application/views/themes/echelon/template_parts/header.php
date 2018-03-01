@@ -1,6 +1,6 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="../../index2.html" class="logo">
+    <a href="/" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>M</b><span style="color : #F26539 ">WX</span></span>
         <!-- logo for regular state and mobile devices -->
@@ -32,7 +32,7 @@
                                 <li><!-- start message -->
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="<?php echo template_assets_path()?>/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                            <img src="<?php echo contact_profile_image_url($contact->id,'thumb'); ?>" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
                                             Support Team
@@ -104,17 +104,17 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?php echo template_assets_path()?>/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <img src="<?php echo contact_profile_image_url($contact->id,'thumb'); ?>" class="user-image" alt="User Image">
+                        <span class="hidden-xs"><?php echo $contact->firstname . ' ' .$contact->lastname; ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="<?php echo template_assets_path()?>/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img src="<?php echo contact_profile_image_url($contact->id,'thumb'); ?>" class="img-circle" alt="User Image">
 
                             <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
+                                <?php echo $contact->firstname . ' ' .$contact->lastname; ?>
+                                <small><?php echo $client->company; ?></small>
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -135,10 +135,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="<?php echo site_url('clients/profile'); ?>" class="btn btn-default btn-flat"><?php echo _l('clients_nav_profile'); ?></a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="<?php echo site_url('clients/logout'); ?>" class="btn btn-default btn-flat"><?php echo _l('clients_nav_logout'); ?></a>
                             </div>
                         </li>
                     </ul>

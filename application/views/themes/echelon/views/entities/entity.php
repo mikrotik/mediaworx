@@ -138,7 +138,6 @@
         var reference = $('input[name=\'entity['+id+'][reference]\']').val();
         var synonym = $('input[name=\'entity['+id+'][synonym]\']').val();
 
-        console.log(synonym);
 
         if (id){
             $('.btnedit-values').attr('disabled','disabled');

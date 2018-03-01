@@ -12,7 +12,7 @@ class Intents extends Clients_controller
         $this->load->model("intents_model");
         do_action('after_clients_area_init');
 
-        if (!isset($this->agent_scope) || empty($this->agent_scope)){
+        if (!$this->agent_scope){
             redirect(site_url('agents/agent'));
         }
     }
@@ -24,7 +24,7 @@ class Intents extends Clients_controller
         }
 
         $data['bodyclass'] = $this->bodyclass;
-        $data['title'] = _l('agents');
+        $data['title'] = _l('intents');
         $this->data    = $data;
         $this->view    = 'intents/manage';
         $this->layout();

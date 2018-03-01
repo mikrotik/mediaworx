@@ -13,7 +13,7 @@ render_datatable($table_data, 'small-talks');
                 processing: '<div class="dt-loader">Loading...</div>'
             },
             columns: [
-                { 'aaData': 'name' },
+                { 'aaData': 'small_talk_name' },
                 { 'aaData': 'options' }
             ],
             "autoWidth": false,

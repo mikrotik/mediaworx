@@ -50,6 +50,15 @@
                         <input type="hidden" name="userid" value="<?php echo get_client_user_id(); ?>"/>
                         <input type="hidden" name="agentid" value="<?php echo set_value('agentid',$agent->agentid); ?>"/>
                         <div class="form-input">
+                            <label class="checkbox-inline">
+                                <div class="checkbox icheck">
+                                    <label>
+                                        <input type="checkbox" name="small_talk" value="1" <?php echo ($agent->small_talk == 1) ? 'checked' : ''?>> <?php echo _l('small_talk_status')?>
+                                    </label>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="form-input">
                             <label for="agent_name"><?php echo _l('agent_name'); ?></label>
                             <input type="text" class="form-control" name="agent_name" id="agent_name" value="<?php echo set_value('agent_name',$agent->agent_name); ?>">
                             <?php echo form_error('agent_name'); ?>
