@@ -55,6 +55,11 @@ class Api extends Rest
                     ),
                     "fulfillment"=>array(
                         "speech"=>$data[0]['fulfillment']['speech'],
+                        "messages"=>array(
+                            "type"=>"simple_response",
+                            "platform"=>"google",
+                            "textToSpeech"=>$data[0]['fulfillment']['suggestions']
+                        )
                     ),
                     'score'=>$data[0]['score']
                 ),
@@ -68,7 +73,9 @@ class Api extends Rest
                 "sessionId" => $data['session'],
                 "DATA-USERSAYS"=>$data[0]['usersays'],
                 "DATA-PREDICYIONS"=>$data[0]['predictions'],
-                "DATA-REQUIRED"=>$data[0]['required_parameters']
+                "DATA-REQUIRED"=>$data[0]['required_parameters'],
+                "DATA-REQUESTED"=>$data[0]['requested_parameters'],
+                "DATA-PREDICTIONS"=>$data[0]['predictions']
             )
         );
 

@@ -28,6 +28,9 @@ class Mediaworx_Hybird extends Mediaworx_Core
     /** @var array  */
     private $score = 0;
 
+    /** @var array  */
+    private $suggestions = [];
+
     public function __construct($agent,$request)
     {
 
@@ -75,6 +78,21 @@ class Mediaworx_Hybird extends Mediaworx_Core
          */
 //        $this->currentConversationData['predictions'] = $predictions;
 //        $this->currentConversationData['usersays'] = $this->usersays;
+        $this->currentConversationData['predictions'] = $predictions;
+
+        /**
+         * TODO
+         * if no predictions
+         * give a last try with suggestions
+         */
+
+        $this->suggestions = getKeywordSuggestionsFromGoogle($this->request['usersay']);
+
+        if (!$predictions){
+
+            $predictions = getIntentPredictions($this->agent,$this->usersays,$this->suggestions[0],$this->stringfy);
+        }
+
         if ($predictions) {
             $distance = array_column($predictions, 'distance');
             $predicted = $predictions[min($distance)];
@@ -88,8 +106,13 @@ class Mediaworx_Hybird extends Mediaworx_Core
             /**
              * check if any parameter is required
              */
-            $this->currentConversationData['required_parameters'] = getRequiredParameters($predicted['parameters']);
+            $requestedParameters = $this->currentConversationData['requested_parameters'] = getRequestedParameters($this->request['usersay'],$this->agent);
 
+
+            /**
+             * check if any parameter is required
+             */
+            $requiredParameters = $this->currentConversationData['required_parameters'] = getRequiredParameters($predicted['parameters'],$requestedParameters);
 
             /**
              *  Check if conversation ended
@@ -106,6 +129,8 @@ class Mediaworx_Hybird extends Mediaworx_Core
                 $this->intentResponses['response'] = ucfirst(intentResponse($predicted['intentid'], $this->agent)['response']);
             }
         } else {
+
+
             $this->intentResponses['response'] = ucfirst(getDefaultFallbackResponse()['response']->response);
         }
 
@@ -118,6 +143,7 @@ class Mediaworx_Hybird extends Mediaworx_Core
         $this->currentConversationData['source'] = strtolower($this->agent->agent_name);
         $this->currentConversationData['action'] = $this->action;
         $this->currentConversationData['parameters'] = $this->parameters;
+        $this->currentConversationData['fulfillment']['suggestions'] = $this->suggestions;
         $this->currentConversationData['score'] = $this->score;
         $this->currentConversationData['fulfillment']['speech'] = $this->intentResponses['response'];
         return $this->currentConversationData;

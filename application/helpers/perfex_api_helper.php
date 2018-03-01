@@ -140,18 +140,72 @@ function getDefaultFallbackResponse(){
 
 }
 
-function getRequiredParameters($parameters)
+function getRequiredParameters($parameters,$requestedParameters = array())
 {
     $CI = & get_instance();
+
+    $requiredParameters = array();
 
     $parameters = json_decode($parameters);
 
+        foreach ($parameters as $parameter)
+        {
+            if ($parameter->is_required) {
+                $requiredParameters[$parameter->parameter_name] = $requestedParameters[$parameter->parameter_name];
+                $requiredParameters[$parameter->parameter_name . '.original'] = "";
+            }
+        }
 
+    return $requiredParameters;
 }
 
-function getRequestedParameters($usersay)
+function getRequestedParameters($usersay,$agent)
 {
     $CI = & get_instance();
+
+    $requestedParameters = array();
+
+    $CI->db->select('tblentities.entity_name,tblentityreferences.reference,tblentityreferences.synonyms');
+    $CI->db->from('tblentityreferences');
+    $CI->db->join('tblentities', 'tblentities.id = tblentityreferences.entityid');
+    $CI->db->where('tblentities.agentid',$agent->agentid);
+    $synonyms = $CI->db->get()->result_array();
+
+    if (!$synonyms){
+
+        $CI->db->select('tblentities.entity_name,tblentityreferences.reference,tblentityreferences.synonyms');
+        $CI->db->from('tblentityreferences');
+        $CI->db->join('tblentities', 'tblentities.id = tblentityreferences.entityid');
+        $CI->db->where('tblentities.agentid',0);
+        $synonyms = $CI->db->get()->result_array();
+    }
+
+    $parameters=array();
+    foreach ($synonyms as $synonym){
+
+        $words = explode(',',$synonym['synonyms']);
+
+        foreach ($words as $word){
+
+            if (strstr(strtolower($usersay), strtolower($word))){
+
+                $parameters[] = array(
+                    'parameter_name' => $synonym['entity_name'],
+                    'entity' => '@'.$synonym['entity_name'],
+                    'resolved_value' => $word,
+                );
+            }
+        }
+    }
+
+    if ($parameters){
+
+        foreach ($parameters as $parameter)
+        {
+            $requestedParameters[$parameter['parameter_name']] = $parameter['resolved_value'];
+        }
+    }
+    return $requestedParameters;
 }
 
 function LevenshteinDistance($s1, $s2)
@@ -191,4 +245,14 @@ function LevenshteinDistance($s1, $s2)
         }
         return $nsDistance[$nRightLength];
     }
+}
+
+function getKeywordSuggestionsFromGoogle($keyword) {
+    $keywords = array();
+    $data = file_get_contents('http://suggestqueries.google.com/complete/search?output=firefox&client=firefox&hl=en-US&q='.urlencode($keyword));
+    if (($data = json_decode($data, true)) !== null) {
+        $keywords = $data[1];
+    }
+
+    return $keywords;
 }
