@@ -118,7 +118,7 @@
                                             <div class=""><input value="1" class="is_required" name="actions[<?php echo $action_row?>][is_required]" type="checkbox" <?php echo ($action_parameter->is_required ? 'checked' : '')?>></div></td>
                                         <td><?php echo $action_parameter->parameter_name?><input value="<?php echo $action_parameter->parameter_name?>" name="actions[<?php echo $action_row?>][parameter_name]" type="hidden"></td>
                                         <td><?php echo $action_parameter->entity?> <input value="<?php echo $action_parameter->entity?>" name="actions[<?php echo $action_row?>][entity]" type="hidden"></td>
-                                        <td><?php echo $action_parameter->resolved_value?><input value="<?php echo $action_parameter->resolved_value?>" name="actions[<?php echo $action_row?>][resolved_value]" type="hidden"></td>
+                                        <td>$<?php echo $action_parameter->parameter_name?><input value="$<?php echo $action_parameter->parameter_name?>" name="actions[<?php echo $action_row?>][resolved_value]" type="hidden"></td>
                                         <td class="text-center"><div class=""><input value="1" name="actions[<?php echo $action_row?>][is_list]" type="checkbox" <?php echo ($action_parameter->is_list ? 'checked' : '')?>></div></td>
                                         <?php
                                         $btn_prompt = "...";
@@ -128,7 +128,7 @@
                                         }
                                         ?>
                                         <td><div id="prompt"><?php echo $btn_prompt?></div></td>
-                                        <td><button type="button" class="btn btn-danger btn-icon" onclick="removeAction(\''.<?php echo $action_row?>.'\'');$('#action-prompt-<?php echo $action_row?>').remove()"><i class="fa fa-close"></i></button></td>
+                                        <td><button type="button" class="btn btn-danger btn-icon" onclick="removeAction('<?php echo $action_row?>');$('#action-prompt-<?php echo $action_row?>').remove()"><i class="fa fa-close"></i></button></td>
                                     </tr>
                                     <?php $action_row++;} ?>
                             <?php } ?>
@@ -256,7 +256,7 @@
 <script>
 
     //creating new array
-    var actions = new Array();
+    var actions = $.parseJSON('<?php echo $intent->action_parameters?>');
 
     var usersay_row = <?php echo $usersay_row?>;
     var response_row = <?php echo $response_row?>;
@@ -280,9 +280,14 @@
 
 
             $('.table-actions tbody').append(html);
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
         });
 
-        $( ".is_required" ).on('change',function() {
+        $( ".is_required" ).on('ifChanged',function() {
 
             $('.target-action').html('');
             var checked = $(this).is(":checked");
@@ -591,6 +596,12 @@
                     html += '</tr>';
 
                     $('.table-actions tbody').append(html);
+
+                    $('input').iCheck({
+                        checkboxClass: 'icheckbox_square-blue',
+                        radioClass: 'iradio_square-blue',
+                        increaseArea: '20%' /* optional */
+                    });
                 }
             });
     }

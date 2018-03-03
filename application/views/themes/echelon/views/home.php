@@ -76,6 +76,10 @@
 <script>
     $(function(){
 
+        $('input[name=\'usersay\']').enterKey(function () {
+            $('.btn-sm').trigger('click');
+        });
+
         $('.btn-sm').on('click',function(){
 
             var usersay = $('input[name=\'usersay\']').val();
@@ -141,5 +145,16 @@
             }
         });
     });
+
+    $.fn.enterKey = function (fnc) {
+        return this.each(function () {
+            $(this).keypress(function (ev) {
+                var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+                if (keycode == '13') {
+                    fnc.call(this, ev);
+                }
+            })
+        })
+    }
 
 </script>

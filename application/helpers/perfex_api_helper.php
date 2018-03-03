@@ -140,11 +140,9 @@ function getDefaultFallbackResponse(){
 
 }
 
-function getRequiredParameters($parameters,$requestedParameters = array())
+function getRequiredParameters($stringfy,$parameters,$requestedParameters = array())
 {
     $CI = & get_instance();
-
-    $requiredParameters = array();
 
     $parameters = json_decode($parameters);
 
@@ -152,11 +150,34 @@ function getRequiredParameters($parameters,$requestedParameters = array())
         {
             if ($parameter->is_required) {
                 $requiredParameters[$parameter->parameter_name] = $requestedParameters[$parameter->parameter_name];
-                $requiredParameters[$parameter->parameter_name . '.original'] = "";
+                $requiredParameters[$parameter->parameter_name . '.original'] = getParameterOriginal($stringfy,$requestedParameters[$parameter->parameter_name]);
             }
         }
 
     return $requiredParameters;
+}
+
+function getParameterOriginal($stringfy,$value){
+
+    $CI = & get_instance();
+
+    if ($value) {
+        $CI->db->like('synonyms', strtolower($value), 'both');
+        $entities = $CI->db->get('tblentityreferences')->result_array();
+
+        foreach ($entities as $entity){
+
+            $scored = round($stringfy->compare($entity['reference'],$value) , 1, PHP_ROUND_HALF_UP);
+            $entitiesArray[$scored] = array(
+                "score"=>$scored,
+                "reference"=>$entity['reference']
+            );
+        }
+        $score = array_column($entitiesArray, 'score');
+        return $entitiesArray[max($score)]['reference'];
+    }
+
+    return false;
 }
 
 function getRequestedParameters($usersay,$agent)
@@ -206,6 +227,59 @@ function getRequestedParameters($usersay,$agent)
         }
     }
     return $requestedParameters;
+}
+
+function getIntentPrompt($agent,$parameter){
+
+    $CI = & get_instance();
+
+    $sql = "SELECT i.id,i.action,e.entity_name,iap.prompt FROM tblintents i
+          LEFT JOIN tblintentactionprompts iap ON (i.id = iap.intentid)
+          LEFT JOIN tblentities e ON(e.id = iap.entityid) WHERE i.agentid = '".$agent->agentid."' AND i.userid = '".$agent->userid."' AND e.entity_name = '".$parameter."'";
+
+    $prompt = $CI->db->query($sql)->row();
+
+    return $prompt->prompt;
+}
+
+function getParameters($session)
+{
+    $CI = & get_instance();
+
+    $CI->db->where('session_id',$session);
+    $CI->db->order_by('timestamp','desc');
+    $CI->db->limit(1);
+    $conversation_log = $CI->db->get("tblconversation_log")->row();
+
+    return unserialize($conversation_log->parameters);
+}
+
+function getUserSay($session)
+{
+    $CI = & get_instance();
+
+    $CI->db->where('session_id',$session);
+    $CI->db->order_by('timestamp','desc');
+    $CI->db->limit(1);
+    $conversation_log = $CI->db->get("tblconversation_log")->row();
+
+    return $conversation_log->pattern;
+}
+
+function addConversationLog($data = array())
+{
+    $CI = & get_instance();
+
+    $conversationData = array(
+        "session_id"=>$data['session'],
+        "pattern"=>$data['pattern'],
+        "response"=>$data['fulfillment']['speech'],
+        "parameters"=>serialize($data['parameters']),
+        "agentid"=>$data['agentid'],
+        "timestamp"=>date('Y-m-d H:i:s')
+    );
+
+    $CI->db->insert('tblconversation_log',$conversationData);
 }
 
 function LevenshteinDistance($s1, $s2)

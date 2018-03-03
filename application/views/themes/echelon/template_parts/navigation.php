@@ -56,25 +56,25 @@
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('entities'); ?>"><i class="fa fa-graduation-cap fa-fw"></i> <span>Training</span>
+                <a href="<?php echo site_url('training'); ?>"><i class="fa fa-graduation-cap fa-fw"></i> <span><?php echo _l('training');?></span>
                     <span class="pull-right-container">
                       <small class="label pull-right bg-navy-active">beta</small>
                     </span>
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('entities'); ?>"><i class="fa fa-refresh fa-fw"></i> <span>Integrations</span>
+                <a href="<?php echo site_url('integrations'); ?>"><i class="fa fa-refresh fa-fw"></i> <span><?php echo _l('integrations');?></span>
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('entities'); ?>"><i class="fa fa-area-chart fa-fw"></i> <span>Analytics</span>
+                <a href="<?php echo site_url('analytics'); ?>"><i class="fa fa-area-chart fa-fw"></i> <span><?php echo _l('analytics');?></span>
                     <span class="pull-right-container">
                       <small class="label pull-right bg-red">new</small>
                     </span>
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('entities'); ?>"><i class="fa fa-flash fa-fw"></i> <span>Fullfillment</span>
+                <a href="<?php echo site_url('fulfillment'); ?>"><i class="fa fa-flash fa-fw"></i> <span><?php echo _l('fulfillment');?></span>
                 </a>
             </li>
             <li class="header"></li>

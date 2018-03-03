@@ -58,6 +58,8 @@
                 window.location = site_url+'/'+value;
             }
         });
+
+        $('[data-toggle="tooltip"]').tooltip();
         <?php } ?>
     });
 </script>

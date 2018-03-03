@@ -64,9 +64,7 @@ $autoload['libraries'] = array(
     'email',
     'encoding_lib',
     'action_hooks',
-    'perfex_base',
-    'mediaworx_core'
-);
+    'perfex_base');
 $CI = &get_instance();
 
 array_unshift($autoload['libraries'],'database');
@@ -80,6 +78,16 @@ foreach($gateways as $gateway){
         array_push($autoload['libraries'],'gateways/'.strtolower($pathinfo['filename']));
     }
 }
+/** Load Algorithms */
+//$algorithms = list_files(APPPATH.'/libraries/algorithms');
+//foreach($algorithms as $algorithm){
+//    $pathinfo =  pathinfo($algorithms);
+//    // Check if file is .php and do not starts with .dot
+//    // Offen happens Mac os user to have underscore prefixed files while unzipping the zip file.
+//    if($pathinfo['extension'] == 'php' && 0 !== strpos($algorithms, '.')){
+//        array_push($autoload['libraries'],'algorithms/'.strtolower($pathinfo['filename']));
+//    }
+//}
 /*
 | -------------------------------------------------------------------
 |  Auto-load Drivers

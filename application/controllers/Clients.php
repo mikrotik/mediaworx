@@ -1324,7 +1324,7 @@ class Clients extends Clients_controller
             $speech->setAccessToken('e55d612b-9ad9-5b5a-bf0c-4499887efe30');
             $speech->setType(1); // "1"-Client Access Token "2"->Developer Access Token
             $speech->setFormat('json');
-            $speech->setSession(md5('12345567'));
+            $speech->setSession();
             $speech->setResponseFormat();
 
             $speech->setUsersay($_POST['usersay']);

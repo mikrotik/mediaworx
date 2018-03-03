@@ -70,12 +70,7 @@ class Api extends Rest
                 ),
                 "requestedParameters"=>$data[0]['requestedParameters'],
                 "requiredParameters"=>$data[0]['requiredParameters'],
-                "sessionId" => $data['session'],
-                "DATA-USERSAYS"=>$data[0]['usersays'],
-                "DATA-PREDICYIONS"=>$data[0]['predictions'],
-                "DATA-REQUIRED"=>$data[0]['required_parameters'],
-                "DATA-REQUESTED"=>$data[0]['requested_parameters'],
-                "DATA-PREDICTIONS"=>$data[0]['predictions']
+                "session" => $data['session'],
             )
         );
 

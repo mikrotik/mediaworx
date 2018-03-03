@@ -58,7 +58,7 @@
                                 <td><?php echo $small_talk_reference['answer']?>
                                     <input type="hidden" name="dialog[<?php echo $dialog_row?>][answer]" value="<?php echo $small_talk_reference['answer']?>">
                                 </td>
-                                <td><button class="btn btn-info btn-icon btnedit-values" type="button" onclick="editDialog('<?php echo $dialog_row?>');" id="btnedit-values"><i class="fa fa-edit"></i> Edit </button> <button class="btn btn-danger btn-icon btnremove-values" type="button" onclick="removeReference('<?php echo $reference_row?>'); " id="btnremove-values"><i class="fa fa-minus-square-o"></i> Remove</td>
+                                <td><button class="btn btn-info btn-icon btnedit-values" type="button" onclick="editDialog('<?php echo $dialog_row?>');" id="btnedit-values"><i class="fa fa-edit"></i> Edit </button> <button class="btn btn-danger btn-icon btnremove-values" type="button" onclick="removeDialog('<?php echo $dialog_row?>'); " id="btnremove-values"><i class="fa fa-minus-square-o"></i> Remove</td>
                             </tr>
                             <?php $dialog_row++;} ?>
                     <?php } ?>
