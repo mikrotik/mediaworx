@@ -187,7 +187,8 @@ class Echelon_Core
             "pattern"=>trim($data['pattern']),
             "response"=>$data['fulfillment']['speech'],
             "timestamp"=>date("Y-m-d H:i:s"),
-            "parameters"=>json_encode($this->action_parameters)
+            "parameters"=>json_encode($this->action_parameters),
+            "is_end"=>$this->intent["is_end"]
         );
 
         $CI->db->insert("tblconversation_log",$conversationData);
@@ -404,7 +405,7 @@ class Echelon_Core
     {
         $CI = &get_instance();
 
-        $sql = "SELECT * FROM tblconversation_log WHERE session_id='".$this->request["session"]."' order by timestamp desc";
+        $sql = "SELECT * FROM tblconversation_log WHERE session_id='".$this->request["session"]."' AND is_end = 0 order by timestamp desc";
 
         $last_conversation_data = $CI->db->query($sql)->row();
 
@@ -432,10 +433,31 @@ class Echelon_Core
          * Check parameters
          */
         $intent_parameters = json_decode($this->intent["action_parameters"]);
+
+        foreach ($intent_parameters as $intent_parameter){
+
+            if ($intent_parameter->is_required && empty($this->action_parameters[$intent_parameter->parameter_name])){
+
+                $sql = "SELECT i.id,i.action,e.entity_name,iap.prompt FROM tblintents i
+          LEFT JOIN tblintentactionprompts iap ON (i.id = iap.intentid)
+          LEFT JOIN tblentities e ON(e.id = iap.entityid) WHERE i.agentid = '".$this->agent->agentid."' AND i.userid = '".$this->agent->userid."' AND e.entity_name = '".$intent_parameter->parameter_name."'";
+
+                $prompt = $CI->db->query($sql)->row();
+
+                $this->has_prompt = true;
+                $this->prompt = $prompt->prompt;
+
+                return $this->_echelonResponse($this->intent["id"]);
+            }
+        }
     }
 
     public function _intentFollowup()
     {
+        /**
+         * TODO
+         * load intent follow ups
+         */
 
         return $this->_echelonResponse($this->intent["id"]);
     }
@@ -469,7 +491,18 @@ class Echelon_Core
 
             if ($intentResponses) {
 
-                $speech = $intentResponses[array_rand($intentResponses)]["response"];
+                $pre_speech = $intentResponses[array_rand($intentResponses)]["response"];
+
+                $pre_speech = str_replace("$","@",$pre_speech);
+
+                if (substr_count($pre_speech,"@")){
+
+                    $speech = $pre_speech.substr_count($pre_speech,"@");
+
+                } else {
+
+                    $speech = $pre_speech;
+                }
 
             } else {
                 $speech = $this->getDefaultFallbackResponse();
