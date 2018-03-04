@@ -5,15 +5,6 @@ class Echelon extends  Echelon_Core
 {
     private $debug_mode = false;
 
-    /** @var array $request */
-    private $request = [];
-
-    /** @var array $intent */
-    private $intent = [];
-
-    /** @var array $action_parameters */
-    private $action_parameters = [];
-
     /** @var array CI */
     private $CI = [];
 
@@ -23,6 +14,7 @@ class Echelon extends  Echelon_Core
         $this->request = $request;
 
         $this->CI->load->library('session');
+        $this->CI->session->set_userdata('session_id',$this->request['session']);
     }
 
     public function _setDebugMode($mode){
@@ -45,32 +37,50 @@ class Echelon extends  Echelon_Core
          * @score - similarity score
          * @is_end - (true/false) shows that if this intent is the end of the coversation
          */
-        $this->intent = $this->UserSays($this->request['usersay']);
+        $this->intent = $this->UserSays(trim($this->request['usersay']));
 
         /** Get intent action parameters */
         $this->action_parameters = $this->getIntentParameters($this->intent['action_parameters']);
 
+        /** Get action required parameters */
+        $this->required_action_parameters = $this->getRequiredParameters($this->intent['action']);
 
+        /** Get action requested parameters */
+        $this->requested_action_parameters = $this->getRequestedParameters($this->request['usersay']);
 
         return $this->_response();
     }
     public function _response()
     {
+        /**
+         * TODO
+         * Check if intent capture all required parameter.
+         * if not, continue with intent action prompts
+         */
 
-        /** Prepare response Data */
-        $this->currentConversationData['session'] = $this->request['session'];
-        $this->currentConversationData['pattern'] = $this->request['usersay'];
-        $this->currentConversationData['action'] = $this->intent['action'];
-        $this->currentConversationData['score'] = $this->intent['score'];
-        $this->currentConversationData['parameters'] = $this->action_parameters;
-        $this->currentConversationData['actionIncomplete'] = ($this->intent['is_end'] ? false : true);
-        $this->currentConversationData['fulfillment']['suggestions'] = $this->getKeywordSuggestionsFromGoogle($this->request['usersay']);
-        $this->currentConversationData['fulfillment']['speech'] = __METHOD__;
+        /**
+         * TODO
+         * We fill up the parameters
+         */
+        $this->_fillParameters();
 
-        /** Set Conversation Log */
-        $this->setCoversationLog($this->currentConversationData);
+        /**
+         * TODO
+         * we check if all parameters are ok
+         */
+        $this->_intentActionPrompt();
 
-        return $this->currentConversationData;
+        /**
+         * TODO
+         * If intent is not end of conversation
+         * continue with followups
+         */
+        if (!$this->intent['is_end']){
+
+            return $this->_intentFollowup();
+        }
+
+        return $this->_echelonResponse($this->intent["id"]);
 
     }
 }

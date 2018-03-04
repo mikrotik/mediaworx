@@ -15,8 +15,28 @@ class Echelon_Core
     private $agent;
     private $confidence = 20;
 
+    /** @var array $request */
+    public $request = [];
+
+    /** @var array $intent */
+    public $intent = [];
+
+    /** @var array $action_parameters */
+    public $action_parameters = [];
+
+    /** @var array $required_action_parameters */
+    public $required_action_parameters = [];
+
+    /** @var array $requested_action_parameters */
+    public $requested_action_parameters = [];
+
     /** @var array  */
     public $currentConversationData = [];
+
+    /** @var bool  */
+    public $has_prompt = false;
+
+    public $prompt;
 
     public function _setAccessToken($token){
 
@@ -41,6 +61,13 @@ class Echelon_Core
     public function _getAgent()
     {
         return $this->agent;
+    }
+
+    public function _setIntentActionParameters($key,$value){
+
+        if (empty($this->action_parameters[$key])) {
+            $this->action_parameters[$key] = $value;
+        }
     }
 
     public function UserSays($usersay)
@@ -157,9 +184,10 @@ class Echelon_Core
         $conversationData = array(
             "session_id"=>$data['session'],
             "agentid"=>$this->agent->agentid,
-            "pattern"=>$data['pattern'],
+            "pattern"=>trim($data['pattern']),
             "response"=>$data['fulfillment']['speech'],
-            "timestamp"=>date("Y-m-d H:i:s")
+            "timestamp"=>date("Y-m-d H:i:s"),
+            "parameters"=>json_encode($this->action_parameters)
         );
 
         $CI->db->insert("tblconversation_log",$conversationData);
@@ -287,5 +315,210 @@ class Echelon_Core
         }
 
         return false;
+    }
+
+    public function getRequiredParameters($action){
+
+        $CI = & get_instance();
+
+        $sql = "SELECT i.id,i.action_parameters FROM tblintents i
+            WHERE i.action = '".$action."'";
+
+        $parameters = $CI->db->query($sql)->row();
+
+        $parameters = json_decode($parameters->action_parameters);
+
+        if ($parameters){
+
+            foreach ($parameters as $parameter)
+            {
+                if ($parameter->is_required) {
+                    $requiredParameters[$parameter->parameter_name] = "";
+                    $requiredParameters[$parameter->parameter_name . '.original'] = "";
+                }
+            }
+
+            return $requiredParameters;
+        }
+
+        return false;
+    }
+
+    public function addDataToSession($data){
+
+        $CI = & get_instance();
+
+
+    }
+
+    public function getRequestedParameters($usersay)
+    {
+        $CI = & get_instance();
+
+        $requestedParameters = array();
+
+        $CI->db->select('tblentities.entity_name,tblentityreferences.reference,tblentityreferences.synonyms');
+        $CI->db->from('tblentityreferences');
+        $CI->db->join('tblentities', 'tblentities.id = tblentityreferences.entityid');
+        $CI->db->where('tblentities.agentid',$this->agent->agentid);
+        $synonyms = $CI->db->get()->result_array();
+
+        if (!$synonyms){
+
+            $CI->db->select('tblentities.entity_name,tblentityreferences.reference,tblentityreferences.synonyms');
+            $CI->db->from('tblentityreferences');
+            $CI->db->join('tblentities', 'tblentities.id = tblentityreferences.entityid');
+            $CI->db->where('tblentities.agentid',0);
+            $synonyms = $CI->db->get()->result_array();
+        }
+
+        $parameters=array();
+        foreach ($synonyms as $synonym){
+
+            $words = explode(',',$synonym['synonyms']);
+
+            foreach ($words as $word){
+
+                if (strstr(strtolower($usersay), strtolower($word))){
+
+                    $parameters[] = array(
+                        'parameter_name' => $synonym['entity_name'],
+                        'entity' => '@'.$synonym['entity_name'],
+                        'resolved_value' => $word,
+                    );
+                }
+            }
+        }
+
+        if ($parameters){
+
+            foreach ($parameters as $parameter)
+            {
+                $requestedParameters[$parameter['parameter_name']] = $parameter['resolved_value'];
+            }
+        }
+        return $requestedParameters;
+    }
+
+    public function _fillParameters()
+    {
+        $CI = &get_instance();
+
+        $sql = "SELECT * FROM tblconversation_log WHERE session_id='".$this->request["session"]."' order by timestamp desc";
+
+        $last_conversation_data = $CI->db->query($sql)->row();
+
+        /**
+         * TODO
+         * Set intent parameter values
+         */
+        $conversation_parameters = json_decode($last_conversation_data->parameters);
+
+        foreach ($conversation_parameters as $key=>$parameter){
+            $this->_setIntentActionParameters($key,$parameter);
+        }
+
+        foreach ($this->requested_action_parameters as $key=>$params){
+            $this->_setIntentActionParameters($key,$this->requested_action_parameters[$key]);
+        }
+    }
+
+    public function _intentActionPrompt()
+    {
+
+        $CI = & get_instance();
+
+        /**
+         * Check parameters
+         */
+        $intent_parameters = json_decode($this->intent["action_parameters"]);
+    }
+
+    public function _intentFollowup()
+    {
+
+        return $this->_echelonResponse($this->intent["id"]);
+    }
+
+    public function _echelonResponse($id)
+    {
+
+        $CI = &get_instance();
+
+        if (is_numeric($id)) {
+
+            $CI->db->where('intentid', $id);
+            $intentResponses = $CI->db->get('tblintentresponses')->result_array();
+
+            if (!$intentResponses && $this->agent->small_talk) {
+
+                $CI->db->where('id', $id);
+                $intentResponses = $CI->db->get('tblsmalltalkreferences')->row();
+
+                return array("response" => $intentResponses->answer);
+            }
+        }
+
+        /**
+         * TODO
+         * If no response try suggestions
+         * and if still no response
+         * return Default Fallback
+         */
+        if (!$this->has_prompt) {
+
+            if ($intentResponses) {
+
+                $speech = $intentResponses[array_rand($intentResponses)]["response"];
+
+            } else {
+                $speech = $this->getDefaultFallbackResponse();
+            }
+        } else {
+            $speech = $this->prompt;
+        }
+
+        /** Prepare response Data */
+        $this->currentConversationData['session'] = $this->request['session'];
+        $this->currentConversationData['pattern'] = $this->request['usersay'];
+        $this->currentConversationData['action'] = $this->intent['action'];
+        $this->currentConversationData['score'] = $this->intent['score'];
+        $this->currentConversationData['parameters'] = $this->action_parameters;
+        $this->currentConversationData['required_parameters'] = $this->required_action_parameters;
+        $this->currentConversationData['requested_parameters'] = $this->requested_action_parameters;
+        $this->currentConversationData['actionIncomplete'] = ($this->intent['is_end'] ? false : true);
+        $this->currentConversationData['fulfillment']['suggestions'] = $this->getKeywordSuggestionsFromGoogle($this->request['usersay']);
+        $this->currentConversationData['fulfillment']['speech'] = ucfirst($speech);
+        $this->currentConversationData['session_data'] = $CI->session->userdata('parameters');
+
+        /** Set Conversation Log */
+        $this->setCoversationLog($this->currentConversationData);
+
+        return $this->currentConversationData;
+
+    }
+
+    public function getDefaultFallbackResponse(){
+
+        $CI = & get_instance();
+
+
+        $CI->db->where('intent_name','Default Fallback Intent');
+        $CI->db->where('agentid',$this->agent->agentid);
+        $defaultFallbackIntent = $CI->db->get('tblintents')->row();
+
+
+
+        $CI->db->where('intentid', $defaultFallbackIntent->id);
+        $CI->db->order_by('id', 'RANDOM');
+        $CI->db->limit(1);
+        $defaultFallback = $CI->db->get('tblintentresponses')->row();
+
+        $this->intent['action']=$defaultFallbackIntent->action;
+        $this->intent['is_end']=$defaultFallbackIntent->is_end;
+        $this->intent['score']=0;
+
+        return $defaultFallback->response;
+
     }
 }

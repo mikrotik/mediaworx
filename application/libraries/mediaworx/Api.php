@@ -68,9 +68,10 @@ class Api extends Rest
                     "code" => $code,
                     "message"=>$this->get_rest_status_message()
                 ),
-                "requestedParameters"=>$data[0]['requestedParameters'],
-                "requiredParameters"=>$data[0]['requiredParameters'],
+                "required_parameters"=>$data[0]['required_parameters'],
+                "requested_parameters"=>$data[0]['requested_parameters'],
                 "session" => $data['session'],
+                "SESS_DATA" => $data[0]['session_data'],
             )
         );
 

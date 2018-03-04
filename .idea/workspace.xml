@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9274056-e247-49ca-ac8d-4bd0d79f2f19" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/application/libraries/Mediaworx_core.php" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php" afterPath="$PROJECT_DIR$/application/libraries/Mediaworx_hybirdX.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/libraries/mediaworx/Api.php" afterPath="$PROJECT_DIR$/application/libraries/mediaworx/Api.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Clients.php" afterPath="$PROJECT_DIR$/application/controllers/Clients.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/mediaworx/v1/Dialog.php" afterPath="$PROJECT_DIR$/application/controllers/mediaworx/v1/Dialog.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/config/autoload.php" afterPath="$PROJECT_DIR$/application/config/autoload.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/themes/echelon/views/home.php" afterPath="$PROJECT_DIR$/application/views/themes/echelon/views/home.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/themes/echelon/views/intents/intent.php" afterPath="$PROJECT_DIR$/application/views/themes/echelon/views/intents/intent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/themes/echelon/template_parts/navigation.php" afterPath="$PROJECT_DIR$/application/views/themes/echelon/template_parts/navigation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/helpers/perfex_api_helper.php" afterPath="$PROJECT_DIR$/application/helpers/perfex_api_helper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/themes/echelon/scripts.php" afterPath="$PROJECT_DIR$/application/views/themes/echelon/scripts.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/themes/echelon/views/smalltalk/smalltalk.php" afterPath="$PROJECT_DIR$/application/views/themes/echelon/views/smalltalk/smalltalk.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/libraries/algorithms/Echelon.php" afterPath="$PROJECT_DIR$/application/libraries/algorithms/Echelon.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/libraries/algorithms/Echelon_core.php" afterPath="$PROJECT_DIR$/application/libraries/algorithms/Echelon_core.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mediaworx.iws" />
@@ -39,24 +30,9 @@
       <file leaf-file-name="Mediaworx_hybirdX.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/libraries/Mediaworx_hybirdX.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="211" column="12" selection-start-line="211" selection-start-column="12" selection-end-line="211" selection-end-column="84" />
+            <state vertical-scroll-proportion="-10.5">
+              <caret line="167" column="42" selection-start-line="167" selection-start-column="42" selection-end-line="167" selection-end-column="42" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="perfex_api_helper.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/helpers/perfex_api_helper.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="151" column="115" selection-start-line="151" selection-start-column="16" selection-end-line="151" selection-end-column="115" />
-              <folding>
-                <marker date="1519944650747" expanded="true" signature="250:641" placeholder="SELECT i.id,..tblintents..." />
-                <marker date="1519944650747" expanded="true" signature="746:1129" placeholder="SELECT i.id,..tblintents..." />
-                <marker date="1519944650747" expanded="true" signature="1430:1705" placeholder="SELECT st.id..tblsmalltalks..." />
-                <marker date="1519944650747" expanded="true" signature="7378:7684" placeholder="SELECT i.id,..tblintents..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -64,7 +40,7 @@
       <file leaf-file-name="Mediaworx_hybird.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-3.0357144">
               <caret line="39" column="55" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
               <folding />
             </state>
@@ -74,8 +50,18 @@
       <file leaf-file-name="Echelon.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/libraries/algorithms/Echelon.php">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.857142">
+              <caret line="64" column="26" selection-start-line="64" selection-start-column="26" selection-end-line="64" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Api.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/libraries/mediaworx/Api.php">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="67" column="76" selection-start-line="67" selection-start-column="76" selection-end-line="67" selection-end-column="76" />
+              <caret line="73" column="53" selection-start-line="73" selection-start-column="53" selection-end-line="73" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -84,12 +70,16 @@
       <file leaf-file-name="Echelon_core.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/libraries/algorithms/Echelon_core.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="160" column="52" selection-start-line="160" selection-start-column="52" selection-end-line="160" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.4554295">
+              <caret line="69" column="9" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
               <folding>
-                <marker date="1520070394841" expanded="true" signature="1215:1639" placeholder="SELECT i.id,..tblintents..." />
-                <marker date="1520070394841" expanded="true" signature="1752:2135" placeholder="SELECT i.id,..tblintents..." />
-                <marker date="1520070394841" expanded="true" signature="2474:2761" placeholder="SELECT st.id..tblsmalltalks..." />
+                <marker date="1520167126502" expanded="true" signature="1862:2286" placeholder="SELECT i.id,..tblintents..." />
+                <marker date="1520167126502" expanded="true" signature="2399:2782" placeholder="SELECT i.id,..tblintents..." />
+                <marker date="1520167126502" expanded="true" signature="3121:3408" placeholder="SELECT st.id..tblsmalltalks..." />
+                <marker date="1520167126502" expanded="true" signature="10543:10623" placeholder="SELECT i.id,..tblintents..." />
+                <marker date="1520167126502" expanded="true" signature="10543:10635" placeholder="SELECT i.id,..tblintents..." />
+                <marker date="1520167126502" expanded="true" signature="13039:13091" placeholder="SELECT * FRO..tblconversation_log..." />
+                <marker date="1520167126502" expanded="true" signature="13039:13145" placeholder="SELECT * FRO..tblconversation_log..." />
               </folding>
             </state>
           </provider>
@@ -150,9 +140,6 @@
         <option value="$PROJECT_DIR$/application/views/themes/echelon/views/intents/intent.php" />
         <option value="$PROJECT_DIR$/application/views/themes/echelon/views/home.php" />
         <option value="$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php" />
-        <option value="$PROJECT_DIR$/application/libraries/mediaworx/Api.php" />
-        <option value="$PROJECT_DIR$/application/libraries/algorithms/Echelon.php" />
-        <option value="$PROJECT_DIR$/application/libraries/algorithms/Echelon_core.php" />
         <option value="$PROJECT_DIR$/application/views/themes/echelon/template_parts/navigation.php" />
         <option value="$PROJECT_DIR$/application/controllers/Training.php" />
         <option value="$PROJECT_DIR$/application/models/Training_model.php" />
@@ -162,6 +149,9 @@
         <option value="$PROJECT_DIR$/application/models/Integrations_model.php" />
         <option value="$PROJECT_DIR$/application/models/Analytics_model.php" />
         <option value="$PROJECT_DIR$/application/models/Fulfillment_model.php" />
+        <option value="$PROJECT_DIR$/application/libraries/mediaworx/Api.php" />
+        <option value="$PROJECT_DIR$/application/libraries/algorithms/Echelon.php" />
+        <option value="$PROJECT_DIR$/application/libraries/algorithms/Echelon_core.php" />
       </list>
     </option>
   </component>
@@ -204,6 +194,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -250,18 +242,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
+              <option name="myItemId" value="libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mediaworx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mediaworx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mediaworx" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="/home/ahmet/Downloads/Backup_20171810/MediaWorx/mediaworx" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../chatbot" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="FullScreen" value="false" />
@@ -332,10 +344,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="156" width="1366" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28916544" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28916544" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -618,55 +630,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/helpers/perfex_api_helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="151" column="115" selection-start-line="151" selection-start-column="16" selection-end-line="151" selection-end-column="115" />
-          <folding>
-            <marker date="1519944650747" expanded="true" signature="250:641" placeholder="SELECT i.id,..tblintents..." />
-            <marker date="1519944650747" expanded="true" signature="746:1129" placeholder="SELECT i.id,..tblintents..." />
-            <marker date="1519944650747" expanded="true" signature="1430:1705" placeholder="SELECT st.id..tblsmalltalks..." />
-            <marker date="1519944650747" expanded="true" signature="7378:7684" placeholder="SELECT i.id,..tblintents..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="55" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/libraries/mediaworx/Api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6596434">
-          <caret line="72" column="34" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/libraries/Mediaworx_hybirdX.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="211" column="12" selection-start-line="211" selection-start-column="12" selection-end-line="211" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/libraries/algorithms/Echelon.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="76" selection-start-line="67" selection-start-column="76" selection-end-line="67" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/themes/echelon/template_parts/navigation.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.82333875">
           <caret line="76" column="57" selection-start-line="76" selection-start-column="57" selection-end-line="76" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -682,7 +649,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21555915">
           <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -690,7 +656,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33873582">
           <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -698,7 +663,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33873582">
           <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -706,7 +670,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33873582">
           <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -714,7 +677,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.061588332">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="8" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -722,7 +684,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.061588332">
           <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -730,7 +691,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.061588332">
           <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -738,18 +698,66 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.061588332">
           <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/libraries/mediaworx/Api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="53" selection-start-line="73" selection-start-column="53" selection-end-line="73" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.0357144">
+          <caret line="39" column="55" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/helpers/perfex_api_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5948136">
+          <caret line="239" column="42" selection-start-line="235" selection-start-column="4" selection-end-line="239" selection-end-column="42" />
+          <folding>
+            <marker date="1519944650747" expanded="true" signature="-1:-1" placeholder="SELECT i.id,..tblintents..." />
+            <marker date="1519944650747" expanded="true" signature="-1:-1" placeholder="SELECT i.id,..tblintents..." />
+            <marker date="1519944650747" expanded="true" signature="-1:-1" placeholder="SELECT st.id..tblsmalltalks..." />
+            <marker date="1519944650747" expanded="true" signature="-1:-1" placeholder="SELECT i.id,..tblintents..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/libraries/Mediaworx_hybirdX.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.5">
+          <caret line="167" column="42" selection-start-line="167" selection-start-column="42" selection-end-line="167" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/libraries/algorithms/Echelon.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.857142">
+          <caret line="64" column="26" selection-start-line="64" selection-start-column="26" selection-end-line="64" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/libraries/algorithms/Echelon_core.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="160" column="52" selection-start-line="160" selection-start-column="52" selection-end-line="160" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.4554295">
+          <caret line="69" column="9" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
           <folding>
-            <marker date="1520070394841" expanded="true" signature="1215:1639" placeholder="SELECT i.id,..tblintents..." />
-            <marker date="1520070394841" expanded="true" signature="1752:2135" placeholder="SELECT i.id,..tblintents..." />
-            <marker date="1520070394841" expanded="true" signature="2474:2761" placeholder="SELECT st.id..tblsmalltalks..." />
+            <marker date="1520167126502" expanded="true" signature="1862:2286" placeholder="SELECT i.id,..tblintents..." />
+            <marker date="1520167126502" expanded="true" signature="2399:2782" placeholder="SELECT i.id,..tblintents..." />
+            <marker date="1520167126502" expanded="true" signature="3121:3408" placeholder="SELECT st.id..tblsmalltalks..." />
+            <marker date="1520167126502" expanded="true" signature="10543:10623" placeholder="SELECT i.id,..tblintents..." />
+            <marker date="1520167126502" expanded="true" signature="10543:10635" placeholder="SELECT i.id,..tblintents..." />
+            <marker date="1520167126502" expanded="true" signature="13039:13091" placeholder="SELECT * FRO..tblconversation_log..." />
+            <marker date="1520167126502" expanded="true" signature="13039:13145" placeholder="SELECT * FRO..tblconversation_log..." />
           </folding>
         </state>
       </provider>
