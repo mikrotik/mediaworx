@@ -42,9 +42,6 @@ class Echelon extends  Echelon_Core
         /** Get intent action parameters */
         $this->action_parameters = $this->getIntentParameters($this->intent['action_parameters']);
 
-        /** Get action required parameters */
-        $this->required_action_parameters = $this->getRequiredParameters($this->intent['action']);
-
         /** Get action requested parameters */
         $this->requested_action_parameters = $this->getRequestedParameters($this->request['usersay']);
 

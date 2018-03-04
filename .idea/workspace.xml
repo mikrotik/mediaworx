@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9274056-e247-49ca-ac8d-4bd0d79f2f19" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/libraries/algorithms/Echelon.php" afterPath="$PROJECT_DIR$/application/libraries/algorithms/Echelon.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/libraries/algorithms/Echelon_core.php" afterPath="$PROJECT_DIR$/application/libraries/algorithms/Echelon_core.php" />
     </list>
     <ignored path="mediaworx.iws" />
@@ -37,8 +38,8 @@
       <file leaf-file-name="Echelon.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/libraries/algorithms/Echelon.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.071429">
-              <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
+            <state vertical-scroll-proportion="-5.607143">
+              <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -57,18 +58,16 @@
       <file leaf-file-name="Echelon_core.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/libraries/algorithms/Echelon_core.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.6414142">
-              <caret line="72" column="20" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.8652482">
+              <caret line="530" column="71" selection-start-line="530" selection-start-column="71" selection-end-line="530" selection-end-column="71" />
               <folding>
-                <marker date="1520169743550" expanded="true" signature="1862:2286" placeholder="SELECT i.id,..tblintents..." />
-                <marker date="1520169743550" expanded="true" signature="2399:2782" placeholder="SELECT i.id,..tblintents..." />
-                <marker date="1520169743550" expanded="true" signature="3121:3408" placeholder="SELECT st.id..tblsmalltalks..." />
-                <marker date="1520169743550" expanded="true" signature="10590:10670" placeholder="SELECT i.id,..tblintents..." />
-                <marker date="1520169743550" expanded="true" signature="10590:10682" placeholder="SELECT i.id,..tblintents..." />
-                <marker date="1520169743550" expanded="true" signature="13086:13138" placeholder="SELECT * FRO..tblconversation_log..." />
-                <marker date="1520169743550" expanded="true" signature="13086:13207" placeholder="SELECT * FRO..tblconversation_log..." />
-                <marker date="1520169743550" expanded="true" signature="14178:14481" placeholder="SELECT i.id,..tblintents..." />
-                <marker date="1520169743550" expanded="true" signature="14178:14519" placeholder="SELECT i.id,..tblintents..." />
+                <marker date="1520176369548" expanded="true" signature="1862:2286" placeholder="SELECT i.id,..tblintents..." />
+                <marker date="1520176369548" expanded="true" signature="2399:2782" placeholder="SELECT i.id,..tblintents..." />
+                <marker date="1520176369548" expanded="true" signature="3121:3408" placeholder="SELECT st.id..tblsmalltalks..." />
+                <marker date="1520176369548" expanded="true" signature="12270:12322" placeholder="SELECT * FRO..tblconversation_log..." />
+                <marker date="1520176369548" expanded="true" signature="12270:12391" placeholder="SELECT * FRO..tblconversation_log..." />
+                <marker date="1520176369548" expanded="true" signature="13362:13665" placeholder="SELECT i.id,..tblintents..." />
+                <marker date="1520176369548" expanded="true" signature="13362:13703" placeholder="SELECT i.id,..tblintents..." />
               </folding>
             </state>
           </provider>
@@ -374,13 +373,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/admin/intents/manage.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25589225">
-          <caret line="8" column="83" selection-start-line="8" selection-start-column="83" selection-end-line="8" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/admin/intents/intent.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.087542">
@@ -698,10 +690,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/libraries/algorithms/Echelon.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.607143">
+          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/helpers/perfex_api_helper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="164" column="38" selection-start-line="164" selection-start-column="34" selection-end-line="164" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.90909094">
+          <caret line="180" column="1" selection-start-line="159" selection-start-column="0" selection-end-line="180" selection-end-column="1" />
           <folding>
             <marker date="1519944650747" expanded="true" signature="-1:-1" placeholder="SELECT i.id,..tblintents..." />
             <marker date="1519944650747" expanded="true" signature="-1:-1" placeholder="SELECT i.id,..tblintents..." />
@@ -713,8 +713,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/libraries/Mediaworx_hybirdX.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3989899">
-          <caret line="188" column="66" selection-start-line="188" selection-start-column="66" selection-end-line="188" selection-end-column="66" />
+        <state vertical-scroll-proportion="0.41919193">
+          <caret line="137" column="39" selection-start-line="137" selection-start-column="39" selection-end-line="137" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -727,28 +727,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/libraries/algorithms/Echelon.php">
+    <entry file="file://$PROJECT_DIR$/vendor/stanford/dd/php-library-ddtextcompare/src/Comparator/Cosine.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.071429">
-          <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.34848484">
+          <caret line="79" column="20" selection-start-line="79" selection-start-column="20" selection-end-line="79" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/libraries/algorithms/Echelon_core.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6414142">
-          <caret line="72" column="20" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.8652482">
+          <caret line="530" column="71" selection-start-line="530" selection-start-column="71" selection-end-line="530" selection-end-column="71" />
           <folding>
-            <marker date="1520169743550" expanded="true" signature="1862:2286" placeholder="SELECT i.id,..tblintents..." />
-            <marker date="1520169743550" expanded="true" signature="2399:2782" placeholder="SELECT i.id,..tblintents..." />
-            <marker date="1520169743550" expanded="true" signature="3121:3408" placeholder="SELECT st.id..tblsmalltalks..." />
-            <marker date="1520169743550" expanded="true" signature="10590:10670" placeholder="SELECT i.id,..tblintents..." />
-            <marker date="1520169743550" expanded="true" signature="10590:10682" placeholder="SELECT i.id,..tblintents..." />
-            <marker date="1520169743550" expanded="true" signature="13086:13138" placeholder="SELECT * FRO..tblconversation_log..." />
-            <marker date="1520169743550" expanded="true" signature="13086:13207" placeholder="SELECT * FRO..tblconversation_log..." />
-            <marker date="1520169743550" expanded="true" signature="14178:14481" placeholder="SELECT i.id,..tblintents..." />
-            <marker date="1520169743550" expanded="true" signature="14178:14519" placeholder="SELECT i.id,..tblintents..." />
+            <marker date="1520176369548" expanded="true" signature="1862:2286" placeholder="SELECT i.id,..tblintents..." />
+            <marker date="1520176369548" expanded="true" signature="2399:2782" placeholder="SELECT i.id,..tblintents..." />
+            <marker date="1520176369548" expanded="true" signature="3121:3408" placeholder="SELECT st.id..tblsmalltalks..." />
+            <marker date="1520176369548" expanded="true" signature="12270:12322" placeholder="SELECT * FRO..tblconversation_log..." />
+            <marker date="1520176369548" expanded="true" signature="12270:12391" placeholder="SELECT * FRO..tblconversation_log..." />
+            <marker date="1520176369548" expanded="true" signature="13362:13665" placeholder="SELECT i.id,..tblintents..." />
+            <marker date="1520176369548" expanded="true" signature="13362:13703" placeholder="SELECT i.id,..tblintents..." />
           </folding>
         </state>
       </provider>

@@ -318,40 +318,6 @@ class Echelon_Core
         return false;
     }
 
-    public function getRequiredParameters($action){
-
-        $CI = & get_instance();
-
-        $sql = "SELECT i.id,i.action_parameters FROM tblintents i
-            WHERE i.action = '".$action."'";
-
-        $parameters = $CI->db->query($sql)->row();
-
-        $parameters = json_decode($parameters->action_parameters);
-
-        if ($parameters){
-
-            foreach ($parameters as $parameter)
-            {
-                if ($parameter->is_required) {
-                    $requiredParameters[$parameter->parameter_name] = "";
-                    $requiredParameters[$parameter->parameter_name . '.original'] = "";
-                }
-            }
-
-            return $requiredParameters;
-        }
-
-        return false;
-    }
-
-    public function addDataToSession($data){
-
-        $CI = & get_instance();
-
-
-    }
-
     public function getRequestedParameters($usersay)
     {
         $CI = & get_instance();
@@ -491,18 +457,18 @@ class Echelon_Core
 
             if ($intentResponses) {
 
-                $pre_speech = $intentResponses[array_rand($intentResponses)]["response"];
+//                $pre_speech = $intentResponses[array_rand($intentResponses)]["response"];
+//
+//                $pre_speech = str_replace("$","@",$pre_speech);
+//
+//                if (substr_count($pre_speech,"@")){
 
-                $pre_speech = str_replace("$","@",$pre_speech);
+                    $speech = $this->_stringMatch($intentResponses);
 
-                if (substr_count($pre_speech,"@")){
-
-                    $speech = $pre_speech.substr_count($pre_speech,"@");
-
-                } else {
-
-                    $speech = $pre_speech;
-                }
+//                } else {
+//
+//                    $speech = $pre_speech;
+//                }
 
             } else {
                 $speech = $this->getDefaultFallbackResponse();
@@ -517,8 +483,6 @@ class Echelon_Core
         $this->currentConversationData['action'] = $this->intent['action'];
         $this->currentConversationData['score'] = $this->intent['score'];
         $this->currentConversationData['parameters'] = $this->action_parameters;
-        $this->currentConversationData['required_parameters'] = $this->required_action_parameters;
-        $this->currentConversationData['requested_parameters'] = $this->requested_action_parameters;
         $this->currentConversationData['actionIncomplete'] = ($this->intent['is_end'] ? false : true);
         $this->currentConversationData['fulfillment']['suggestions'] = $this->getKeywordSuggestionsFromGoogle($this->request['usersay']);
         $this->currentConversationData['fulfillment']['speech'] = ucfirst($speech);
@@ -529,6 +493,81 @@ class Echelon_Core
 
         return $this->currentConversationData;
 
+    }
+
+    public function _stringMatch($responses)
+    {
+
+        $CI = & get_instance();
+
+        $predictions = array();
+
+        $conversationParameters = array();
+        foreach ($this->action_parameters as $key=>$parameter){
+            $conversationParameters['@'.$key] = $this->action_parameters[$key];
+        }
+
+        $target = array();
+        foreach ($conversationParameters as $parameters){
+
+            $target[] = $this->getParameterOriginal($parameters);
+
+        }
+
+        $targets = implode(" ",$target);
+
+        foreach ($responses as $response){
+
+            $distance = Echelon_Core::LevenshteinDistance($response["response"],'$'.$targets);
+            $predictions[$distance] = array(
+                "distance"=>$distance,
+                "response"=>$response["response"]
+            );
+        }
+
+        /**
+         * TODO
+         * try to find the exact match response
+         * #of variables of response and parameters passed has to match
+         */
+        $score = array_column($predictions, 'distance');
+        return strtr(str_replace('$','@',$predictions[min($score)]["response"]),$conversationParameters);
+    }
+
+    public function getParameterOriginal($value){
+
+        $CI = & get_instance();
+
+        $ddTextCompare = new DDTextCompare\Comparator\Cosine();
+
+        if ($value) {
+            $CI->db->like('synonyms', strtolower($value), 'both');
+            $entities = $CI->db->get('tblentityreferences')->result_array();
+
+            foreach ($entities as $entity){
+
+                $scored = round($ddTextCompare->compare($entity['reference'],$value) , 1, PHP_ROUND_HALF_UP);
+                $entitiesArray[$scored] = array(
+                    "score"=>$scored,
+                    "reference"=>$entity['reference'],
+                    "entity"=>strtolower($this->getEntity($entity["entityid"])->entity_name)
+                );
+            }
+            $score = array_column($entitiesArray, 'score');
+            return $entitiesArray[max($score)]['entity'];
+        }
+
+        return false;
+    }
+
+    public function getEntity($id)
+    {
+        $CI = & get_instance();
+
+        $CI->db->where("id",$id);
+        $entity = $CI->db->get("tblentities")->row();
+
+        return $entity;
     }
 
     public function getDefaultFallbackResponse(){
