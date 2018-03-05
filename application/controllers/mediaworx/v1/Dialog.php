@@ -52,7 +52,7 @@ class Dialog extends Mediaworx_controller
             $this->load->library('mediaworx_'.$this->_agent->matchmode);
             $matchmode = 'Mediaworx_'.ucfirst($this->_agent->matchmode);
 
-            $this->_MLSettings = new $matchmode($this->_request);
+            $this->_MLSettings = new $matchmode($this->_request,$this->_agent);
 
             // Perform Request
             $this->$action($this->_request);

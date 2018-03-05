@@ -71,7 +71,7 @@ class Api extends Rest
                         "message" => $this->get_rest_status_message()
                     ),
                     "session" => $data['session'],
-                    "DATA" => $data[0]["data"]
+                    "ECHELON_SESSION" => $data[0]["echelon_session"]
                 )
             );
         } else {

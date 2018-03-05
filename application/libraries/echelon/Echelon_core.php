@@ -37,6 +37,9 @@ class Echelon_Core
     protected $success;
 
     public function __construct($nodeCount) {
+
+        $CI = & get_instance();
+
         if (!is_array($nodeCount)) {
             $nodeCount = func_get_args();
         }
@@ -44,6 +47,9 @@ class Echelon_Core
 
         // store the number of layers
         $this->layerCount = count($this->nodeCount);
+
+        $CI->load->library("session");
+
     }
 
     public function setDebugMode($debug)
@@ -856,9 +862,39 @@ class Echelon_Core
         $this->responseData[$key] = $value;
     }
 
+    public function _getResponseData($key)
+    {
+
+        return $this->responseData[$key];
+    }
+
     public function _getResponse()
     {
+
+        if ($this->intent->score < $this->agent->threshold){
+
+            /*
+             * TODO - Google suggestions
+             * Also try google suggestions
+             * if then return fallback
+             */
+            $this->getDefaultFallbackResponse();
+
+        } else {
+            $this->_processor();
+        }
+
         return $this->responseData;
+    }
+
+    public function _processor()
+    {
+        $CI = & get_instance();
+
+        /** @var  $echelon_session */
+        $echelon_session = $CI->session->userdata();
+
+        $this->_addResponseData("echelon_session",$echelon_session[$this->request["session"]]);
     }
 
     public function _intentPrediction()
@@ -911,39 +947,36 @@ class Echelon_Core
 
         $prediction = $this->closest($data,"score",ARRAY_NEAREST_HIGHER);
 
-        /**
-         * TODO
-         * Get predicted Intent
-         */
-        $this->intent = $this->getIntent($prediction->id);
+            /**
+             * TODO
+             * Get predicted Intent
+             */
+            $this->intent = $this->getIntent($prediction->id);
+            $this->intent->score = $prediction->score;
 
-        /*
-         * TODO
-         * Set intent patterns
-         */
+            /*
+             * TODO
+             * Set intent patterns
+             */
 
-        $this->intentPatterns = $this->getIntentPatterns($prediction->id);
+            $this->intentPatterns = $this->getIntentPatterns($prediction->id);
 
-        /**
-         * TODO
-         * Get predicted Intent Agent
-         */
-        $this->agent = $this->getAgent($prediction->agent);
+            $this->_addResponseData("source", $this->agent->agent_name);
 
-        /** Set Intent Agent */
-        $this->_addResponseData("source",$this->agent->agent_name);
+            /** Set Intent id */
+            $this->_addResponseData("intent_id", $prediction->id);
 
-        /** Set Intent id */
-        $this->_addResponseData("intent_id",$prediction->id);
+            /** Set Intent action */
+            $this->_addResponseData("action", $prediction->action);
 
-        /** Set Intent action */
-        $this->_addResponseData("action",$prediction->action);
+            /** Set Intent name */
+            $this->_addResponseData("intent_name", $prediction->intent_name);
 
-        /** Set Intent name */
-        $this->_addResponseData("intent_name",$prediction->intent_name);
+            /** Set prediction score */
+            $this->_addResponseData("score", $prediction->score);
 
-        /** Set prediction score */
-        $this->_addResponseData("score",$prediction->score);
+            /** Tell echelon status of action */
+            $this->_addResponseData("actionIncomplete", ($prediction->is_end ? false : true));
     }
 
     public function closest($array, $member, $number) {
@@ -989,43 +1022,27 @@ class Echelon_Core
         return false;
     }
 
-    public function getAgent($id)
-    {
-        $CI = & get_instance();
-
-        if (is_numeric($id)){
-
-            $CI->db->where("agentid",$id);
-            $agent = $CI->db->get("tblagents")->row();
-
-            return $agent;
-
-        }
-
-        return false;
-    }
-
     public function getDefaultFallbackResponse(){
 
         $CI = & get_instance();
 
 
-//        $CI->db->where('intent_name','Default Fallback Intent');
-//        $CI->db->where('agentid',1);
-//        $defaultFallbackIntent = $CI->db->get('tblintents')->row();
-//
-//
-//
-//        $CI->db->where('intentid', $defaultFallbackIntent->id);
-//        $CI->db->order_by('id', 'RANDOM');
-//        $CI->db->limit(1);
-//        $defaultFallback = $CI->db->get('tblintentresponses')->row();
+        $CI->db->where('intent_name','Default Fallback Intent');
+        $CI->db->where('agentid',$this->agent->agentid);
+        $defaultFallbackIntent = $CI->db->get('tblintents')->row();
 
-//        $this->intent['action']=$defaultFallbackIntent->action;
-//        $this->intent['is_end']=$defaultFallbackIntent->is_end;
-//        $this->intent['score']=0;
 
-        return __METHOD__;
+
+        $CI->db->where('intentid', $defaultFallbackIntent->id);
+        $CI->db->order_by('id', 'RANDOM');
+        $CI->db->limit(1);
+        $defaultFallback = $CI->db->get('tblintentresponses')->row();
+
+        $this->_addResponseData("intent_id",$defaultFallbackIntent->id);
+        $this->_addResponseData("intent_name",$defaultFallbackIntent->intent_name);
+        $this->_addResponseData("action",$defaultFallbackIntent->action);
+        $this->_addResponseData("actionIncomplete",($defaultFallbackIntent->is_end ? false : true));
+        $this->_addResponseData("speech",$defaultFallback->response);
 
     }
 }

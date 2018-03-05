@@ -11,9 +11,11 @@ class Mediaworx_Hybird
     private $CI;
 
     /** @var array $request */
-    private $request = [];
+    public $request = [];
+    public $agent = [];
 
-    public function __construct($request)
+
+    public function __construct($request,$agent)
     {
         /** @var  CI - Load our instance */
         $this->CI = & get_instance();
@@ -22,6 +24,11 @@ class Mediaworx_Hybird
          * Set our $request
          */
         $this->request = $request;
+
+        /*
+         * Set our $agent
+         */
+        $this->agent = $agent;
 
         /*
          * TODO
@@ -37,7 +44,7 @@ class Mediaworx_Hybird
     {
         try {
 
-            $echelon = new Echelon($this->request);
+            $echelon = new Echelon($this->request,$this->agent);
 
             $echelon->_call();
 

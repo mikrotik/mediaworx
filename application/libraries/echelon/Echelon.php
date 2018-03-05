@@ -7,11 +7,15 @@ class Echelon extends Echelon_Core
 {
 
     public $request = [];
+    public $agent = [];
 
-    function __construct($request)
+    function __construct($request,$agent)
     {
+        $CI = & get_instance();
         $this->request = $request;
+        $this->agent = $agent;
 
+        $CI->session->set_userdata($request["session"],array());
         $this->_addResponseData("debug",DEBUG_MODE);
     }
 

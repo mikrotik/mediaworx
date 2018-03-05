@@ -323,10 +323,14 @@ class Intents_model extends CRM_Model
 
             if (isset($data['input_contexts'])) {
                 $data['input_contexts'] = json_encode($data['input_contexts']);
+            } else {
+                $data['input_contexts'] = null;
             }
 
             if (isset($data['output_contexts'])) {
                 $data['output_contexts'] = json_encode($data['output_contexts']);
+            } else {
+                $data['output_contexts'] = null;
             }
 
             if (isset($data['events'])) {
