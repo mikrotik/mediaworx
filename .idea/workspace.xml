@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c9274056-e247-49ca-ac8d-4bd0d79f2f19" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/libraries/echelon/Echelon_core.php" afterPath="$PROJECT_DIR$/application/libraries/echelon/Echelon_core.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php" afterPath="$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/libraries/echelon/helpers/Echelon_helper.php" afterPath="$PROJECT_DIR$/application/libraries/echelon/helpers/Echelon_helper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mediaworx.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,19 +39,24 @@
       <file leaf-file-name="Echelon_core.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/libraries/echelon/Echelon_core.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36026937">
-              <caret line="907" column="87" selection-start-line="907" selection-start-column="87" selection-end-line="907" selection-end-column="87" />
+            <state vertical-scroll-proportion="0.7171717">
+              <caret line="909" column="63" selection-start-line="909" selection-start-column="63" selection-end-line="909" selection-end-column="63" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Api.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/libraries/mediaworx/Api.php">
+      <file leaf-file-name="perfex_api_helper.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/helpers/perfex_api_helper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-27.857143">
-              <caret line="73" column="66" selection-start-line="73" selection-start-column="66" selection-end-line="73" selection-end-column="66" />
-              <folding />
+            <state vertical-scroll-proportion="-11.464286">
+              <caret line="119" column="5" selection-start-line="116" selection-start-column="4" selection-end-line="119" selection-end-column="5" />
+              <folding>
+                <marker date="1519944650747" expanded="true" signature="250:641" placeholder="SELECT i.id,..tblintents..." />
+                <marker date="1519944650747" expanded="true" signature="746:1129" placeholder="SELECT i.id,..tblintents..." />
+                <marker date="1519944650747" expanded="true" signature="1430:1705" placeholder="SELECT st.id..tblsmalltalks..." />
+                <marker date="1519944650747" expanded="true" signature="7378:7684" placeholder="SELECT i.id,..tblintents..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -58,8 +64,18 @@
       <file leaf-file-name="Echelon_helper.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/libraries/echelon/helpers/Echelon_helper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-21.714285">
-              <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
+            <state vertical-scroll-proportion="-14.428572">
+              <caret line="96" column="77" selection-start-line="96" selection-start-column="77" selection-end-line="96" selection-end-column="77" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Mediaworx_hybird.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-18.785715">
+              <caret line="52" column="35" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -528,14 +544,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/libraries/Mediaworx_hybirdX.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41919193">
-          <caret line="137" column="39" selection-start-line="137" selection-start-column="39" selection-end-line="137" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/stanford/dd/php-library-ddtextcompare/src/Comparator/Cosine.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34848484">
@@ -747,22 +755,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/helpers/perfex_api_helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.285715">
-          <caret line="228" column="32" selection-start-line="186" selection-start-column="4" selection-end-line="228" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44781145">
-          <caret line="39" column="8" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/libraries/echelon/Echelon.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.535714">
@@ -779,18 +771,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.785715">
+          <caret line="52" column="35" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/helpers/perfex_api_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.464286">
+          <caret line="119" column="5" selection-start-line="116" selection-start-column="4" selection-end-line="119" selection-end-column="5" />
+          <folding>
+            <marker date="1519944650747" expanded="true" signature="250:641" placeholder="SELECT i.id,..tblintents..." />
+            <marker date="1519944650747" expanded="true" signature="746:1129" placeholder="SELECT i.id,..tblintents..." />
+            <marker date="1519944650747" expanded="true" signature="1430:1705" placeholder="SELECT st.id..tblsmalltalks..." />
+            <marker date="1519944650747" expanded="true" signature="7378:7684" placeholder="SELECT i.id,..tblintents..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/libraries/Mediaworx_hybirdX.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26430976">
+          <caret line="188" column="66" selection-start-line="188" selection-start-column="66" selection-end-line="188" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/libraries/echelon/helpers/Echelon_helper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.714285">
-          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
+        <state vertical-scroll-proportion="-14.428572">
+          <caret line="96" column="77" selection-start-line="96" selection-start-column="77" selection-end-line="96" selection-end-column="77" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/libraries/echelon/Echelon_core.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36026937">
-          <caret line="907" column="87" selection-start-line="907" selection-start-column="87" selection-end-line="907" selection-end-column="87" />
+        <state vertical-scroll-proportion="0.7171717">
+          <caret line="909" column="63" selection-start-line="909" selection-start-column="63" selection-end-line="909" selection-end-column="63" />
           <folding />
         </state>
       </provider>

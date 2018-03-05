@@ -907,6 +907,9 @@ class Echelon_Core extends Echelon_Exception
         /** @var  $userParameters */
         $userParameters = Echelon_Helper::getUserParameters($this->request,$this->agent);
         $this->_addResponseData("parameters",$userParameters);
+        $CI->session->set_userdata("parameters",$userParameters);
+
+        $this->_addResponseData("speech",Echelon_Helper::getIntentResponse($this->intent->id));
     }
 
     public function _finalize()
@@ -917,7 +920,7 @@ class Echelon_Core extends Echelon_Exception
          */
 
         /** Destroy Echelon Session */
-        $CI->session->destory();
+        $CI->session->sess_destroy();
 
         return false;
     }
@@ -976,7 +979,7 @@ class Echelon_Core extends Echelon_Exception
              * TODO
              * Get predicted Intent
              */
-            $this->intent = $this->getIntent($prediction->id);
+            $this->intent = Echelon_Helper::getIntent($prediction->id);
             $this->intent->score = $prediction->score;
 
             /*
@@ -984,7 +987,7 @@ class Echelon_Core extends Echelon_Exception
              * Set intent patterns
              */
 
-            $this->intentPatterns = $this->getIntentPatterns($prediction->id);
+            $this->intentPatterns = Echelon_Helper::getIntentPatterns($prediction->id);
 
             $this->_addResponseData("source", $this->agent->agent_name);
 
@@ -1014,37 +1017,6 @@ class Echelon_Core extends Echelon_Exception
                 $closest = $item;
         $key = array_search($closest, $arr);
         return $array[$key];
-    }
-    public function getIntent($id)
-    {
-        $CI = & get_instance();
-
-        if (is_numeric($id)){
-
-            $CI->db->where("id",$id);
-            $intent = $CI->db->get("tblintents")->row();
-
-            return $intent;
-
-        }
-
-        return false;
-    }
-
-    public function getIntentPatterns($id){
-
-        $CI = & get_instance();
-
-        if (is_numeric($id)){
-
-            $CI->db->where("id",$id);
-            $patterns = $CI->db->get("tblintentusersays")->result_array();
-
-            return $patterns;
-
-        }
-
-        return false;
     }
 
     public function getDefaultFallbackResponse(){

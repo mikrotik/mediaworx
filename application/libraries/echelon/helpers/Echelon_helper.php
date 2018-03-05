@@ -50,4 +50,55 @@ class Echelon_Helper extends Echelon_Exception
         }
         return $requestedParameters;
     }
+
+    public static function getIntent($id)
+    {
+        $CI = & get_instance();
+
+        if (is_numeric($id)){
+
+            $CI->db->where("id",$id);
+            $intent = $CI->db->get("tblintents")->row();
+
+            return $intent;
+
+        }
+
+        return false;
+    }
+
+    public static function getIntentPatterns($id){
+
+        $CI = & get_instance();
+
+        if (is_numeric($id)){
+
+            $CI->db->where("id",$id);
+            $patterns = $CI->db->get("tblintentusersays")->result_array();
+
+            return $patterns;
+
+        }
+
+        return false;
+    }
+
+    public static function getIntentResponse($id)
+    {
+        $CI = & get_instance();
+
+        if (is_numeric($id)){
+
+            $CI->db->where("intentid",$id);
+            $responses = $CI->db->get("tblintentresponses")->result_array();
+
+            if ($responses) {
+
+                return ucfirst($responses[array_rand($responses)]["response"]);
+            }
+
+        }
+
+        return false;
+    }
 }
