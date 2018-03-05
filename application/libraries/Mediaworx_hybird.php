@@ -34,8 +34,9 @@ class Mediaworx_Hybird
          * TODO
          * load our algorithm Echelon
          */
-        $this->CI->load->library('echelon/echelon_core');
         $this->CI->load->library('echelon/echelon_exception');
+        $this->CI->load->library('echelon/echelon_core');
+        $this->CI->load->library('echelon/helpers/echelon_helper');
         $this->CI->load->library('echelon/echelon');
 
     }

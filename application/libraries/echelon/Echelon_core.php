@@ -5,7 +5,7 @@ define('ARRAY_NEAREST_LOWER',      0.9);
 define('ARRAY_NEAREST_HIGHER',     1);
 require_once VENDOR_FOLDER.'/stringfy/autoload.php';
 
-class Echelon_Core
+class Echelon_Core extends Echelon_Exception
 {
 
     protected $nodeCount = array ();
@@ -895,6 +895,31 @@ class Echelon_Core
         $echelon_session = $CI->session->userdata();
 
         $this->_addResponseData("echelon_session",$echelon_session[$this->request["session"]]);
+
+        /**
+         * TODO - End echelon session
+         */
+        if ($this->intent->is_end)
+        {
+            $this->_finalize();
+        }
+
+        /** @var  $userParameters */
+        $userParameters = Echelon_Helper::getUserParameters($this->request,$this->agent);
+        $this->_addResponseData("parameters",$userParameters);
+    }
+
+    public function _finalize()
+    {
+        $CI = & get_instance();
+        /**
+         * TODO - Finalize the conversation
+         */
+
+        /** Destroy Echelon Session */
+        $CI->session->destory();
+
+        return false;
     }
 
     public function _intentPrediction()
