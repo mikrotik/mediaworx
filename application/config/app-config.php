@@ -33,7 +33,7 @@ define('APP_BASE_URL','http://18.195.189.153/');
 | Auto updated added on install
 */
 
-define('APP_ENC_KEY','f4da8fce0a5bc9f0596209147150bb84');
+define('APP_ENC_KEY','f38a4108b9a46d9fcd728945dd1ba635');
 
 /* Database credentials - Auto added on install */
 
@@ -44,7 +44,7 @@ define('APP_DB_USERNAME','root');
 /* The password used to connect to the database */
 define('APP_DB_PASSWORD','ipower');
 /* The name of the database you want to connect to */
-define('APP_DB_NAME','mediaworx');
+define('APP_DB_NAME','echelon');
 
 /* Session Handler */
 

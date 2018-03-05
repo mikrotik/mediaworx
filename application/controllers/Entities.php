@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Entities extends Clients_controller
 {
+    public $bodyclass= "skin-blue sidebar-mini";
+
     function __construct()
     {
         parent::__construct();
@@ -10,25 +12,25 @@ class Entities extends Clients_controller
         $this->load->model("entities_model");
         do_action('after_clients_area_init');
 
-        if (!isset($this->wt_agent) || empty($this->wt_agent)){
+        if (!$this->agent_scope){
             redirect(site_url('agents/agent'));
         }
 
     }
 
     public function index(){
-
         if (!is_client_logged_in()) {
             redirect(site_url('clients/login'));
         }
 
-        $data['bodyclass'] = 'sidebar-mini skin-blue-light';
-        $data['title'] = get_option('entities');
+        $data['bodyclass'] = $this->bodyclass;
+        $data['title'] = _l('entities');
         $this->data    = $data;
         $this->view    = 'entities/manage';
         $this->layout();
     }
 
+    /** List all entities */
     public function list_entities(){
 
         if (!is_client_logged_in()) {
@@ -43,7 +45,7 @@ class Entities extends Clients_controller
             $sTable = 'tblentities';
 
             $where = array();
-            array_push($where,' AND agentid = '.$this->wt_agent.' AND userid ='.get_client_user_id());
+            array_push($where,' AND agentid = '.$this->agent_scope.' AND userid ='.get_client_user_id());
 
             $result = data_tables_init($aColumns,$sIndexColumn,$sTable,array(),$where,array('id','userid'));
             $output = $result['output'];
@@ -82,17 +84,12 @@ class Entities extends Clients_controller
 
                 $data = $this->input->post(NULL, FALSE);
 
-                $data['agentid']=$this->wt_agent;
-                $data['userid']=get_client_user_id();
-
                 if ($id == '') {
                     $success = $this->entities_model->add($data);
                     if ($success) {
                         set_alert('success', _l('updated_successfuly', _l('entities')));
                         redirect(site_url('entities/'));
 
-                    } else {
-                        set_alert('warning', _l('agent_exist'));
                     }
                 } else {
 
@@ -106,17 +103,17 @@ class Entities extends Clients_controller
         }
 
         if ($id == '') {
-            $data['title']                  = _l('clients_entity_create');
+            $data['title']                  = _l('new_entity');
         } else {
             $entity = $this->entities_model->get($id);
-            $entity_values = $this->entities_model->get_values($id);
+            $entity_references = $this->entities_model->get_references($id);
 
             $data['entity'] = $entity;
-            $data['entity_values'] = $entity_values;
-            $data['title'] = _l('edit_entity');
+            $data['entity_references'] = $entity_references;
+            $data['title'] = _l('update_entity');
         }
 
-        $data['bodyclass'] = 'sidebar-mini skin-blue-light';
+        $data['bodyclass'] = $this->bodyclass;
         $this->data    = $data;
         $this->view    = 'entities/entity';
         $this->layout();

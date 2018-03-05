@@ -2,46 +2,472 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Intents_model extends CRM_Model
 {
+    private $is_admin;
+
     function __construct()
     {
         parent::__construct();
+        $this->is_admin = is_admin();
     }
 
-    public function get($id = '')
+    public function get($id="")
     {
+        if (is_numeric($id)){
 
-        if (is_numeric($id)) {
             $this->db->where('id', $id);
-            $intents = $this->db->get('tblintents')->row();
-            return $intents;
+            $intent = $this->db->get('tblintents')->row();
+            return $intent;
+
         }
 
         return $this->db->get('tblintents')->result_array();
     }
 
-    public function get_usersays($id = ''){
-
+    public function get_usersays($id="")
+    {
         if (is_numeric($id)){
 
-            $this->db->where('intentid',$id);
-            $intentusersays = $this->db->get('tblintentsusersays')->result_array();
+            $this->db->where('intentid', $id);
+            $usersays = $this->db->get('tblintentusersays')->result_array();
 
-            return $intentusersays;
+            return $usersays;
+
+        }
+        return false;
+    }
+
+    public function get_prompts($entity="")
+    {
+        if (is_string($entity)){
+
+            $this->db->where('entity_name', trim($entity,'@'));
+            $entity = $this->db->get('tblentities')->row();
+
+            if ($entity){
+
+                $this->db->where('entityid',$entity->id);
+                $prompts = $this->db->get('tblintentactionprompts')->result_array();
+
+                return $prompts;
+            }
+            return false;
+
+        }
+        return false;
+    }
+
+    public function get_responses($id="")
+    {
+        if (is_numeric($id)){
+
+            $this->db->where('intentid', $id);
+            $responses = $this->db->get('tblintentresponses')->result_array();
+
+            return $responses;
+
+        }
+        return false;
+    }
+
+    public function get_context($context_name="")
+    {
+        if ($context_name){
+
+            $this->db->where('context_name', $context_name);
+            $context = $this->db->get('tblcontexts')->row();
+
+            return $context;
+
+        }
+        $contexts = $this->db->get('tblcontexts')->result_array();
+        return $contexts;
+    }
+
+    public function add($data=array(),$id = "")
+    {
+        if ($data){
+
+            /**
+             * TODO - Assign AgentID and UserID for entries from Portal
+             * Add some additional variables
+             * regarding to admin or client
+             * @userid
+             * @agentid
+             */
+
+            if (!isset($data['is_public'])){
+                $data['is_public'] = 0;
+            }
+
+            if (!isset($data['agentid'])){
+                $data['agentid'] = 0;
+            }
+
+            if (!isset($data['userid'])){
+                $data['userid'] = 0;
+            }
+
+            if (!isset($data['is_default'])){
+                $data['is_default'] = 0;
+            }
+
+            if (!isset($data['merge'])){
+                $data['merge'] = 0;
+            }
+
+            if (!isset($data['is_end'])){
+                $data['is_end'] = 0;
+            }
+
+            if (!isset($data['status'])){
+                $data['status'] = 0;
+            }
+
+            if (!isset($data['action'])){
+                $data['action'] = NULL;
+            }
+
+            if (!isset($data['actions'])){
+                $data['action_parameters'] = NULL;
+            } else {
+                $data['action_parameters'] = json_encode($data['actions']);
+            }
+
+            if ($id){
+                $data['parentid'] = $id;
+            }
+
+
+            unset($data['actions']);
+
+            if ($this->is_admin){
+
+                $data['userid'] = 0;
+                $data['agentid'] = 0;
+
+            } else {
+
+                $data['userid'] = get_client_user_id();
+                $data['agentid'] = $this->agent_scope;
+            }
+
+
+            $data['is_system'] = $this->is_admin;
+
+            /** @var $prompts
+             * Set $prompts and exclude array
+             * from @var $data
+             */
+            if (isset($data['prompts'])) {
+                $prompts = $data['prompts'];
+                unset($data['prompts']);
+            }
+
+            /** @var $usersays
+             * Set $usersays and exclude array
+             * from @var $data
+             */
+            if (isset($data['usersays'])) {
+                $usersays = $data['usersays'];
+                unset($data['usersays']);
+            }
+
+            /** @var $responses
+             * Set $responses and exclude array
+             * from @var $data
+             */
+            if (isset($data['responses'])) {
+                $responses = $data['responses'];
+                unset($data['responses']);
+            }
+
+            /** @var $parameters
+             * Set $parameters and exclude array
+             * from @var $data
+             */
+            if (isset($data['parameters'])) {
+                $parameters = $data['parameters'];
+                unset($data['parameters']);
+            }
+
+            $this->db->insert('tblintents',$data);
+            $intentid = $this->db->insert_id();
+
+            if ($this->db->affected_rows() > 0) {
+
+                return $intentid;
+            }
+
+
         }
 
         return false;
     }
 
-    public function get_responses($id = ''){
+    public function update($data = array(),$id = ""){
 
-        if (is_numeric($id)){
+        if (is_numeric($id))
+        {
+
+            unset($data['usersay']);
+            unset($data['response']);
+            unset($data['onoffswitch']);
+            unset($data['prompt']);
+            unset($data['action_row']);
+
+
+            /** Delete all intent related information
+             * We will insert new ones
+             */
+            $this->db->where('intentid',$id);
+            $this->db->delete('tblintentusersays');
 
             $this->db->where('intentid',$id);
-            $intentresponses = $this->db->get('tblintentsresponses')->result_array();
+            $this->db->delete('tblintentresponses');
 
-            return $intentresponses;
+
+            if (!isset($data['status'])){
+                $data['status'] = 0;
+            }
+
+            if (!isset($data['is_public'])){
+                $data['is_public'] = 0;
+            }
+
+            if (!isset($data['agentid'])){
+                $data['agentid'] = 0;
+            }
+
+            if (!isset($data['is_end'])){
+                $data['is_end'] = 0;
+            }
+
+            if (!isset($data['userid'])){
+                $data['userid'] = 0;
+            }
+
+            if (!isset($data['is_default'])){
+                $data['is_default'] = 0;
+            }
+
+            if (!isset($data['merge'])){
+                $data['merge'] = 0;
+            }
+
+            if (!isset($data['status'])){
+                $data['status'] = 0;
+            }
+
+            if (!isset($data['action'])){
+                $data['action'] = NULL;
+            }
+
+            if (!isset($data['actions'])){
+                $data['action_parameters'] = NULL;
+            } else {
+                $data['action_parameters'] = json_encode($data['actions']);
+            }
+
+
+            unset($data['actions']);
+
+
+            if ($this->is_admin){
+
+                $data['userid'] = 0;
+                $data['agentid'] = 0;
+
+            } else {
+
+                $data['userid'] = get_client_user_id();
+                $data['agentid'] = $this->agent_scope;
+            }
+
+            $data['is_system'] = $this->is_admin;
+
+            /** @var $prompts
+             * Set $prompts and exclude array
+             * from @var $data
+             */
+            if (isset($data['prompts'])) {
+                $prompts = $data['prompts'];
+                unset($data['prompts']);
+            }
+
+            /** @var $usersays
+             * Set $usersays and exclude array
+             * from @var $data
+             */
+            if (isset($data['usersays'])) {
+                $usersays = $data['usersays'];
+                unset($data['usersays']);
+            }
+
+            /** @var $responses
+             * Set $responses and exclude array
+             * from @var $data
+             */
+            if (isset($data['responses'])) {
+                $responses = $data['responses'];
+                unset($data['responses']);
+            }
+
+            /** @var $parameters
+             * Set $parameters and exclude array
+             * from @var $data
+             */
+            if (isset($data['parameters'])) {
+                $parameters = $data['parameters'];
+                unset($data['parameters']);
+            }
+
+            if (isset($data['input_contexts'])) {
+                $data['input_contexts'] = json_encode($data['input_contexts']);
+            } else {
+                $data['input_contexts'] = null;
+            }
+
+            if (isset($data['output_contexts'])) {
+                $data['output_contexts'] = json_encode($data['output_contexts']);
+            } else {
+                $data['output_contexts'] = null;
+            }
+
+            if (isset($data['events'])) {
+                $data['events'] = json_encode($data['events']);
+            }
+
+            if ($usersays)
+            {
+                foreach ($usersays as $key=>$usersay)
+                {
+                    $usersayData = array(
+                        'intentid'=>$id,
+                        'usersay'=>strtolower($usersay['usersay']),
+                        'parameters'=>($parameters ? json_encode($parameters[$key]) : NULL),
+                        'parse'=>$usersay['parse']
+                    );
+
+                    $this->db->insert('tblintentusersays',$usersayData);
+                }
+            }
+
+            if ($responses)
+            {
+                foreach ($responses as $response)
+                {
+                    $responseData = array(
+                        'intentid'=>$id,
+                        'response'=>strtolower($response['response'])
+                    );
+
+                    $this->db->insert('tblintentresponses',$responseData);
+                }
+            }
+
+            $this->db->where('id', $id);
+            $this->db->update('tblintents', $data);
+
+            if ($this->db->affected_rows() > 0) {
+
+                return true;
+            }
+
+            return false;
         }
 
+        return false;
+    }
+
+    public function delete($id)
+    {
+        if (is_numeric($id))
+        {
+
+            /** Delete all intent related information */
+            $this->db->where('intentid',$id);
+            $this->db->delete('tblintentusersays');
+
+            $this->db->where('intentid',$id);
+            $this->db->delete('tblintentresponses');
+
+            $this->db->where('intentid',$id);
+            $this->db->delete('tblintentactionprompts');
+
+            /** Delete Intent */
+            $this->db->where('id',$id);
+            $this->db->delete('tblintents');
+
+            if($this->db->affected_rows() > 0){
+                logActivity('Intent Delete [ID:'.$id.']');
+
+                return true;
+            }
+
+            return false;
+
+        }
+
+        return false;
+    }
+
+    public function delete_prompt($id)
+    {
+        if (is_numeric($id))
+        {
+
+            $this->db->where('id',$id);
+            $this->db->delete('tblintentactionprompts');
+
+            if($this->db->affected_rows() > 0){
+                logActivity('Intent Delete [ID:'.$id.']');
+
+                return true;
+            }
+
+            return false;
+
+        }
+
+        return false;
+    }
+
+    public function update_prompts($data=array()){
+
+        $this->db->where('entity_name',trim($data['entity'],"@"));
+        $entity = $this->db->get('tblentities')->row();
+
+        if ($entity){
+
+            $data = array(
+                'intentid'=>$data['intentid'],
+                'entityid'=>$entity->id,
+                'prompt'=>$data['prompt']
+            );
+
+            $this->db->insert('tblintentactionprompts',$data);
+
+        }
+
+        return false;
+    }
+
+    public function change_intent_status($id,$status)
+    {
+        $hook_data['id']     = $id;
+        $hook_data['status'] = $status;
+        $hook_data           = do_action('    ', $hook_data);
+        $status              = $hook_data['status'];
+        $id                  = $hook_data['id'];
+
+        $this->db->where('id', $id);
+        $this->db->update('tblintents', array(
+            'status' => $status
+        ));
+        if ($this->db->affected_rows() > 0) {
+            logActivity('Intent Status Changed [IntentID: ' . $id . ' Status(Active/Inactive): ' . $status . ']');
+            return true;
+        }
         return false;
     }
 
@@ -53,427 +479,6 @@ class Intents_model extends CRM_Model
             $intentfollowup = $this->db->get('tblintents')->result_array();
 
             return $intentfollowup;
-        }
-
-        return false;
-    }
-
-    public function get_followups(){
-
-        $this->db->where('parentid >', 0);
-        $followups = $this->db->get('tblintents')->result_array();
-
-        if ($followups) {
-            return $followups;
-        }
-
-        return false;
-    }
-
-    public function get_actionprompts($id = ''){
-
-        $this->db->where('actionid', $id);
-        $prompts = $this->db->get('tblintentactionprompts')->result_array();
-
-        if ($prompts) {
-            return $prompts;
-        }
-
-        return false;
-    }
-
-    public function get_intentsusersaysparameters($id = ''){
-
-        if (is_numeric($id)){
-
-            $this->db->where('usersayid',$id);
-            $intentsusersaysparameters = $this->db->get('tblintentsusersaysparameters')->result_array();
-
-            return $intentsusersaysparameters;
-        }
-
-        return false;
-    }
-
-    public function add($data=array(),$parentid = 0){
-
-        unset($data['events']);
-        unset($data['response']);
-        unset($data['prompt']);
-        unset($data['id']);
-        unset($data['actionid']);
-
-        $dataIntent = '';
-        $dataParameters = '';
-        $dataActions = '';
-        $dataTextresponse = '';
-        $dataPrompts = '';
-
-        if (isset($data['intent'])){
-            $dataIntent = $data['intent'];
-            unset($data['intent']);
-        }
-
-        if (isset($data['parameters'])){
-            $dataParameters = $data['parameters'];
-            unset($data['parameters']);
-        }
-
-        if (isset($data['actions'])){
-            $dataActions = $data['actions'];
-            unset($data['actions']);
-        }
-
-        if (isset($data['textresponse'])){
-            $dataTextresponse = $data['textresponse'];
-            unset($data['textresponse']);
-        }
-
-        if (isset($data['prompts'])){
-            $dataPrompts = $data['prompts'];
-            unset($data['prompts']);
-        }
-
-        // First check for all cases if the email exists.
-        $this->db->where('intent_name', $data['intent_name']);
-        $intent = $this->db->get('tblintents')->row();
-        if ($intent) {
-            return false;
-        }
-
-        if (!$data['action']){
-            $data['action'] = $data['intent_name'];
-        }
-
-        $data['parentid'] = $parentid;
-
-        if (!empty($data['context'])){
-            $data['context'] = implode(',',$data['context']);
-        } else {
-            $data['context'] = null;
-        }
-
-        if ($parentid > 0){
-            $this->db->where('id',$parentid);
-            $this->db->update('tblintents', array('has_followup'=>1));
-        } else {
-            $data['has_followup'] = 0;
-        }
-
-        $data['active'] = 0;
-
-
-        $this->db->insert('tblintents', $data);
-        $intentid = $this->db->insert_id();
-
-        if (isset($dataIntent)){
-
-            foreach ($dataIntent as $key=>$usersay){
-                $usersayData = array(
-                    'intentid'=>$intentid,
-                    'agentid'=>$this->wt_agent,
-                    'usersay'=>$usersay['usersay'],
-                    'action'=>($data['action'] ? $data['action'] : $data['intent_name'])
-                );
-                $this->db->insert('tblintentsusersays',$usersayData);
-                $usersayid = $this->db->insert_id();
-                $this->setParameters($dataParameters[$key],$usersayid,$intentid);
-            }
-        }
-
-        if (isset($dataActions)){
-
-            foreach ($dataActions as $action) {
-
-                $actionData = array(
-                    'action'=>$data['action'],
-                    'agentid'=>$this->wt_agent,
-                    'value'=>'$'.$action['parameter_name'],
-                    'is_required'=>(isset($action['_is_required']) ? $action['is_required'] : 0),
-                    'is_list'=>(isset($action['is_list']) ? $action['is_list'] : 0),
-                );
-
-                $this->db->insert('tblintentsaction',$actionData);
-                $actionid = $this->db->insert_id();
-
-                if (isset($dataPrompts)) {
-                    foreach ($dataPrompts as $key=>$dataPrompt) {
-
-                        if ($action['parameter_name'] == $key){
-
-                            foreach ($dataPrompt as $prompt) {
-                                $promptData = array(
-                                    'intentid' => $intentid,
-                                    'agentid' => $this->wt_agent,
-                                    'userid' => get_client_user_id(),
-                                    'actionid' => $actionid,
-                                    'prompt' => $prompt
-                                );
-
-                                $this->db->insert('tblintentactionprompts', $promptData);
-                            }
-                        }
-                    }
-                }
-
-            }
-        }
-
-        if (isset($dataTextresponse)){
-
-            foreach ($dataTextresponse as $reponse) {
-
-                $responseData = array(
-                    'userid'=>get_client_user_id(),
-                    'agentid'=>$this->wt_agent,
-                    'intentid'=>$intentid,
-                    'response'=>$reponse,
-                );
-
-
-
-                $this->db->insert('tblintentsresponses',$responseData);
-
-            }
-        }
-
-        if($intentid){
-
-            logActivity('New Intent Created [ID:'.$intentid.']');
-
-            return true;
-        }
-
-        return false;
-
-    }
-
-    public function update($data = array(),$id = ""){
-
-        unset($data['events']);
-        unset($data['response']);
-        unset($data['prompt']);
-        unset($data['id']);
-        unset($data['actionid']);
-
-        $dataIntent = '';
-        $dataParameters = '';
-        $dataActions = '';
-        $dataTextresponse = '';
-        $dataPrompts = '';
-
-
-        if (isset($data['intent'])){
-            $dataIntent = $data['intent'];
-            unset($data['intent']);
-        }
-
-        if (isset($data['parameters'])){
-            $dataParameters = $data['parameters'];
-            unset($data['parameters']);
-        }
-
-        if (isset($data['actions'])){
-            $dataActions = $data['actions'];
-            unset($data['actions']);
-        }
-
-        if (isset($data['textresponse'])){
-            $dataTextresponse = $data['textresponse'];
-            unset($data['textresponse']);
-        }
-
-        if (isset($data['prompts'])){
-            $dataPrompts = $data['prompts'];
-            unset($data['prompts']);
-        }
-
-        if (!empty($data['context'])){
-            $data['context'] = implode(',',$data['context']);
-        } else {
-            $data['context'] = null;
-        }
-
-        $this->db->where('id', $id);
-        $this->db->update('tblintents', $data);
-
-        $this->db->where('intentid', $id);
-        $this->db->delete('tblintentsusersays');
-
-        $this->db->where('intentid', $id);
-        $this->db->delete('tblintentsusersaysparameters');
-
-        $this->db->where('intentid', $id);
-        $this->db->delete('tblintentsresponses');
-
-        $this->db->where('intentid', $id);
-        $this->db->delete('tblintentactionprompts');
-
-        $this->db->where('action', $data['action']);
-        $this->db->delete('tblintentsaction');
-
-        if (isset($dataIntent)){
-            foreach ($dataIntent as $key=>$usersay){
-                $usersayData = array(
-                    'intentid'=>$id,
-                    'agentid'=>$this->wt_agent,
-                    'usersay'=>$usersay['usersay'],
-                    'action'=>($data['action'] ? $data['action'] : $data['intent_name'])
-                );
-                $this->db->insert('tblintentsusersays',$usersayData);
-                $usersayid = $this->db->insert_id();
-                $this->setParameters($dataParameters[$key],$usersayid,$id);
-            }
-        }
-
-        if (isset($dataActions)){
-
-            foreach ($dataActions as $action) {
-
-                $actionData = array(
-                    'action'=>$data['action'],
-                    'agentid'=>$this->wt_agent,
-                    'value'=>'$'.$action['parameter_name'],
-                    'is_required'=>(isset($action['is_required']) ? $action['is_required'] : 0),
-                    'is_list'=>(isset($action['is_list']) ? $action['is_list'] : 0),
-                );
-
-                $this->db->insert('tblintentsaction',$actionData);
-                $actionid = $this->db->insert_id();
-
-                if (isset($dataPrompts)) {
-                    foreach ($dataPrompts as $key=>$dataPrompt) {
-
-                        if ($action['parameter_name'] == $key){
-
-                            foreach ($dataPrompt as $prompt) {
-                                $promptData = array(
-                                    'intentid' => $id,
-                                    'agentid' => $this->wt_agent,
-                                    'userid' => get_client_user_id(),
-                                    'actionid' => $actionid,
-                                    'prompt' => $prompt
-                                );
-
-                                $this->db->insert('tblintentactionprompts', $promptData);
-                            }
-                        }
-                    }
-                }
-
-            }
-        }
-
-        if (isset($dataTextresponse)){
-
-            foreach ($dataTextresponse as $reponse) {
-
-                $responseData = array(
-                    'userid'=>get_client_user_id(),
-                    'agentid'=>$this->wt_agent,
-                    'intentid'=>$id,
-                    'response'=>$reponse,
-                );
-
-
-
-                $this->db->insert('tblintentsresponses',$responseData);
-
-            }
-        }
-
-        if ($this->db->affected_rows() > 0) {
-
-            return true;
-        }
-
-        return false;
-
-    }
-
-    private function setParameters($data,$usersayid,$id){
-
-
-        if (isset($data)){
-            $parameterData = array();
-
-            foreach ($data as $parameter){
-                    $parameterData = array(
-                        'usersayid'=>$usersayid,
-                        'intentid'=>$id,
-                        'agentid'=>$this->wt_agent,
-                        'parameter_name'=>$parameter['parameter_name'],
-                        'entity'=>$parameter['entity'],
-                        'resolved_value'=>trim($parameter['resolved_value']),
-                    );
-
-                    $this->db->insert('tblintentsusersaysparameters',$parameterData);
-            }
-
-        }
-    }
-
-    public function delete($id){
-
-        // Get intent
-        $this->db->where('id',$id);
-        $intent = $this->db->get('tblintents')->row();
-
-        $this->db->where('id',$id);
-        $this->db->delete('tblintents');
-
-        if($this->db->affected_rows() > 0){
-
-            // Delete all usersays of intent
-            $this->db->where('intentid',$id);
-            $this->db->delete('tblintentsusersays');
-
-            // Delete all responses of intent
-            $this->db->where('intentid',$id);
-            $this->db->delete('tblintentsresponses');
-
-            // Delete all parameters of intent
-            $this->db->where('intentid',$id);
-            $this->db->delete('tblintentsusersaysparameters');
-
-            // Delete all actions of intent
-            $this->db->where('action',$intent->action);
-            $this->db->delete('tblintentsaction');
-
-            logActivity('Intent Delete [ID:'.$id.']');
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public function delete_prompt($id){
-
-        $this->db->where('id',$id);
-        $this->db->delete('tblintentactionprompts');
-
-        if($this->db->affected_rows() > 0){
-            logActivity('Prompt Delete [ID:'.$id.']');
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public function addprompt($data=array()){
-
-        $this->db->where('id',$data['actionid']);
-        $this->db->update('tblintentsaction',array('is_required'=>1));
-
-        $this->db->insert('tblintentactionprompts',$data);
-        $id = $this->db->insert_id();
-
-        if($this->db->affected_rows() > 0){
-            logActivity('Prompt Add [ID:'.$id.']');
-
-            return true;
         }
 
         return false;

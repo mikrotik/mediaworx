@@ -143,6 +143,78 @@ function handle_project_file_uploads($project_id)
     }
     return false;
 }
+
+/**
+ * Check for staff profile image
+ * @return boolean
+ */
+function handle_agent_image_upload($agent_id = '')
+{
+
+    if (isset($_FILES['agent_image']['name']) && $_FILES['agent_image']['name'] != '') {
+        do_action('before_upload_agent_image');
+
+        $path        = get_upload_path_by_type('agent_images') . $agent_id . '/';
+        // Get the temp file path
+        $tmpFilePath = $_FILES['agent_image']['tmp_name'];
+        // Make sure we have a filepath
+        if (!empty($tmpFilePath) && $tmpFilePath != '') {
+            // Getting file extension
+            $path_parts         = pathinfo($_FILES["agent_image"]["name"]);
+            $extension          = $path_parts['extension'];
+            $extension = strtolower($extension);
+            $allowed_extensions = array(
+                'jpg',
+                'jpeg',
+                'png'
+            );
+            if (!in_array($extension, $allowed_extensions)) {
+                set_alert('warning', _l('file_php_extension_blocked'));
+                return false;
+            }
+            // Setup our new file path
+            if (!file_exists($path)) {
+                mkdir($path);
+                fopen($path . '/index.html', 'w');
+            }
+            $filename    = unique_filename($path, $_FILES["agent_image"]["name"]);
+            $newFilePath = $path . $filename;
+
+
+            // Upload the file into the company uploads dir
+            if (move_uploaded_file($tmpFilePath, $newFilePath)) {
+                $CI =& get_instance();
+                $config                   = array();
+                $config['image_library']  = 'gd2';
+                $config['source_image']   = $newFilePath;
+                $config['new_image']      = 'thumb_' . $filename;
+                $config['maintain_ratio'] = TRUE;
+                $config['width']          = 160;
+                $config['height']         = 160;
+                $CI->load->library('image_lib', $config);
+                $CI->image_lib->resize();
+                $CI->image_lib->clear();
+                $config['image_library']  = 'gd2';
+                $config['source_image']   = $newFilePath;
+                $config['new_image']      = 'small_' . $filename;
+                $config['maintain_ratio'] = TRUE;
+                $config['width']          = 32;
+                $config['height']         = 32;
+                $CI->image_lib->initialize($config);
+                $CI->image_lib->resize();
+
+                $CI->db->where('agentid', $agent_id);
+                $CI->db->update('tblagents', array(
+                    'agent_image' => $filename
+                ));
+                // Remove original image
+                unlink($newFilePath);
+                return true;
+            }
+        }
+    }
+    return false;
+}
 /**
  * Handle contract attachments if any
  * @param  mixed $contractid
@@ -542,78 +614,6 @@ function handle_company_logo_upload()
     }
     return false;
 }
-
-/**
- * Check for staff profile image
- * @return boolean
- */
-function handle_agent_image_upload($agent_id = '')
-{
-
-    if (isset($_FILES['agent_image']['name']) && $_FILES['agent_image']['name'] != '') {
-        do_action('before_upload_agent_image');
-
-        $path        = get_upload_path_by_type('agent_images') . $agent_id . '/';
-        // Get the temp file path
-        $tmpFilePath = $_FILES['agent_image']['tmp_name'];
-        // Make sure we have a filepath
-        if (!empty($tmpFilePath) && $tmpFilePath != '') {
-            // Getting file extension
-            $path_parts         = pathinfo($_FILES["agent_image"]["name"]);
-            $extension          = $path_parts['extension'];
-            $extension = strtolower($extension);
-            $allowed_extensions = array(
-                'jpg',
-                'jpeg',
-                'png'
-            );
-            if (!in_array($extension, $allowed_extensions)) {
-                set_alert('warning', _l('file_php_extension_blocked'));
-                return false;
-            }
-            // Setup our new file path
-            if (!file_exists($path)) {
-                mkdir($path);
-                fopen($path . '/index.html', 'w');
-            }
-            $filename    = unique_filename($path, $_FILES["agent_image"]["name"]);
-            $newFilePath = $path . $filename;
-
-
-            // Upload the file into the company uploads dir
-            if (move_uploaded_file($tmpFilePath, $newFilePath)) {
-                $CI =& get_instance();
-                $config                   = array();
-                $config['image_library']  = 'gd2';
-                $config['source_image']   = $newFilePath;
-                $config['new_image']      = 'thumb_' . $filename;
-                $config['maintain_ratio'] = TRUE;
-                $config['width']          = 160;
-                $config['height']         = 160;
-                $CI->load->library('image_lib', $config);
-                $CI->image_lib->resize();
-                $CI->image_lib->clear();
-                $config['image_library']  = 'gd2';
-                $config['source_image']   = $newFilePath;
-                $config['new_image']      = 'small_' . $filename;
-                $config['maintain_ratio'] = TRUE;
-                $config['width']          = 32;
-                $config['height']         = 32;
-                $CI->image_lib->initialize($config);
-                $CI->image_lib->resize();
-
-                $CI->db->where('agentid', $agent_id);
-                $CI->db->update('tblagents', array(
-                    'agent_image' => $filename
-                ));
-                // Remove original image
-                unlink($newFilePath);
-                return true;
-            }
-        }
-    }
-    return false;
-}
 /**
  * Handle company favicon upload
  * @return boolean
@@ -875,7 +875,6 @@ function get_upload_path_by_type($type){
         break;
         case 'agent_images':
         return AGENT_IMAGES_FOLDER;
-        break;
         case 'newsfeed':
         return NEWSFEED_FOLDER;
         break;

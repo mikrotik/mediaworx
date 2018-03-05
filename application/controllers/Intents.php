@@ -2,16 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Intents extends Clients_controller
 {
+    public $bodyclass= "skin-blue sidebar-mini";
+
     function __construct()
     {
         parent::__construct();
-
         $this->form_validation->set_error_delimiters('<p class="text-danger alert-validation">', '</p>');
 
         $this->load->model("intents_model");
         do_action('after_clients_area_init');
 
-        if (!isset($this->wt_agent) || empty($this->wt_agent)){
+        if (!$this->agent_scope){
             redirect(site_url('agents/agent'));
         }
     }
@@ -22,13 +23,14 @@ class Intents extends Clients_controller
             redirect(site_url('clients/login'));
         }
 
-        $data['bodyclass'] = 'sidebar-mini skin-blue-light';
-        $data['title'] = get_option('intents');
+        $data['bodyclass'] = $this->bodyclass;
+        $data['title'] = _l('intents');
         $this->data    = $data;
         $this->view    = 'intents/manage';
         $this->layout();
     }
 
+    /** List all intents */
     public function list_intents(){
 
         if (!is_client_logged_in()) {
@@ -36,55 +38,49 @@ class Intents extends Clients_controller
         }
 
         if ($this->input->is_ajax_request()) {
-
-            $aColumns = array('intent_name');
-
+            $aColumns = array(
+                'intent_name'
+            );
             $sIndexColumn = "id";
             $sTable = 'tblintents';
 
             $where = array();
-            array_push($where,' AND agentid = '.$this->wt_agent.' AND userid ='.get_client_user_id(). ' AND parentid = 0');
+            array_push($where, ' AND agentid = ' . $this->agent_scope .' AND parentid = 0');
 
-            $result = data_tables_init($aColumns,$sIndexColumn,$sTable,array(),$where,array('id','userid','is_default','parentid'));
+            $result = data_tables_init($aColumns, $sIndexColumn, $sTable, array(), $where, array('id', 'status', 'is_default', 'agentid'));
             $output = $result['output'];
             $rResult = $result['rResult'];
 
-            foreach ( $rResult as $aRow ) {
+            foreach ($rResult as $aRow) {
                 $row = array();
-                $_data = '';
-                $controllers = '';
+                $followup = '';
+                for ($i = 0; $i < count($aColumns); $i++) {
+                    $total_parents = total_rows('tblintents',array('parentid'=>$aRow['id'],'userid'=>get_client_user_id(),'agentid'=>$this->agent_scope));
 
-                $total_followups = total_rows('tblintents',array('parentid'=>$aRow['id']));
+                    if ($total_parents){
+                        $followup = '<i class="fa fa-plus-square-o row-details" data-id="'.$aRow['id'].'"></i>&nbsp;&nbsp;';
+                    } else {
+                        $followup = '';
+                    }
 
-                if ($total_followups){
-                    $controllers .= '<i class="fa fa-plus row-details" data-intent="'.$aRow['id'].'"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-                }
-
-                $row[] = $controllers;
-
-                for ( $i=0 ; $i<count($aColumns) ; $i++ )
-                {
-
-                    if ($aRow['is_default'] == 1 ) {
-                    $_data .= '<i class="fa fa-bookmark-o text-success"></i>&nbsp;&nbsp;'.$aRow[ $aColumns[$i] ];
-                } else {
-                    $_data .= '<i class="fa fa-circle-thin text-info"></i>&nbsp;&nbsp;'.$aRow[ $aColumns[$i] ];
-                }
+                    $_data = $followup.'<i class="fa fa-' . ($aRow["is_default"] ? "bookmark" : "circle-thin") . ' text-' . ($aRow["status"] ? "info" : "danger") . '"></i>&nbsp;&nbsp;' . $aRow[$aColumns[$i]];
                     $row[] = $_data;
                 }
-                $options = icon_btn(site_url().'intents/followup/'.$aRow['id'],'random','btn-warning');
-                $options .= ' '.icon_btn(site_url().'intents/intent/'.$aRow['id'],'pencil-square-o','btn-default');
-                $options .= ' '.icon_btn('#','remove','btn-danger',array('data-id'=>$aRow['id'],'data-url'=>site_url('intents/delete'),'onclick'=>'deleteIntent(this)'));
-                $row[]  = $options;
 
+                $options =  '<button type="button" data-url="'.site_url() . 'intents/followup/' . $aRow['id'].'" class="fa fa-plus btn-link" data-toggle="modal" data-target="#new-intent"> '._l('link_followup').'</button>';
+                $options .= ' ' .icon_btn(site_url() . 'intents/intent/' . $aRow['id'], 'pencil-square-o', 'btn-default');
+                $options .= ' ' . icon_btn('#', 'remove', 'btn-danger', array('data-id' => $aRow['id'], 'data-url' => site_url('intents/delete'), 'onclick' => 'deleteIntent(this)'));
+
+                $row[] = $options;
                 $output['aaData'][] = $row;
             }
-            echo json_encode( $output );
+            echo json_encode($output);
             die();
         }
     }
 
-    public function intent($id=""){
+    public function intent($id="")
+    {
 
         if (!is_client_logged_in()) {
             redirect(site_url('clients/login'));
@@ -92,28 +88,22 @@ class Intents extends Clients_controller
 
         if ($this->input->post()) {
             $this->form_validation->set_rules('intent_name', _l('intent_name'), 'required');
-            $this->form_validation->set_rules('action', _l('action'), 'required');
 
             if ($this->form_validation->run() !== FALSE) {
 
                 $data = $this->input->post(NULL, FALSE);
 
-                $data['agentid']=$this->wt_agent;
-                $data['userid']=get_client_user_id();
-
-                unset($data['usersays']);
-
                 if ($id == '') {
-                    $success = $this->intents_model->add($data);
-                    if ($success) {
+
+                    $id = $this->intents_model->add($data);
+                    if ($id) {
                         set_alert('success', _l('updated_successfuly', _l('intents')));
-                        redirect(site_url('intents/'));
+                        redirect(site_url('intents/intent/' . $id));
 
-                    } else {
-                        set_alert('warning', _l('agent_exist'));
                     }
-                } else {
 
+                } else {
+                    handle_agent_image_upload($id);
                     $success = $this->intents_model->update($data, $id);
                     if ($success) {
                         set_alert('success', _l('updated_successfuly', _l('intents')));
@@ -123,29 +113,29 @@ class Intents extends Clients_controller
             }
         }
 
-        $intents = $this->intents_model->get();
-        $data['intents'] = $intents;
-
         if ($id == '') {
-            $data['title']                  = _l('clients_intent_create');
+            $data['title']                  = _l('new_intent');
         } else {
             $intent = $this->intents_model->get($id);
-            $intentusersays = $this->intents_model->get_usersays($id);
-            $intentsusersaysparameters = $this->intents_model->get_intentsusersaysparameters($id);
             $intentresponses = $this->intents_model->get_responses($id);
+            $intentusersays = $this->intents_model->get_usersays($id);
+            $contexts = $this->intents_model->get_context();
 
+            $data['contexts'] = $contexts;
             $data['intent'] = $intent;
-            $data['followups'] = $this->intents_model->get_followups();
-            $data['intentusersays'] = $intentusersays;
-            $data['intentsusersaysparameters'] = $intentsusersaysparameters;
             $data['intentresponses'] = $intentresponses;
-            $data['title'] = _l('edit_intent');
+            $data['intentusersays'] = $intentusersays;
+            $data['title'] = _l('update_intent');
         }
 
-        $data['bodyclass'] = 'sidebar-mini skin-blue-light';
-        $this->data    = $data;
-        $this->view    = 'intents/intent';
-        $this->layout();
+        if ($id) {
+            $data['bodyclass'] = $this->bodyclass;
+            $this->data = $data;
+            $this->view = 'intents/intent';
+            $this->layout();
+        } else {
+            redirect(site_url('intents'));
+        }
     }
 
     public function followup($id=""){
@@ -155,38 +145,16 @@ class Intents extends Clients_controller
         }
 
         if ($this->input->post()) {
-            $this->form_validation->set_rules('intent_name', _l('intent_name'), 'required');
-            $this->form_validation->set_rules('action', _l('action'), 'required');
 
-            if ($this->form_validation->run() !== FALSE) {
+            $data = $this->input->post(NULL, FALSE);
 
-                $data = $this->input->post(NULL, FALSE);
+            $id = $this->intents_model->add($data,$id);
+            if ($id) {
+                set_alert('success', _l('updated_successfuly', _l('intents')));
+                redirect(site_url('intents/intent/' . $id));
 
-                $data['agentid']=$this->wt_agent;
-                $data['userid']=get_client_user_id();
-
-                unset($data['usersays']);
-
-                $success = $this->intents_model->add($data,$id);
-                if ($success) {
-                    set_alert('success', _l('updated_successfuly', _l('intents')));
-                    redirect(site_url('intents/'));
-
-                } else {
-                    set_alert('warning', _l('agent_exist'));
-                }
             }
         }
-
-        $intents = $this->intents_model->get();
-        $data['intents'] = $intents;
-
-        $data['title']                  = _l('clients_intent_create');
-
-        $data['bodyclass'] = 'sidebar-mini skin-blue-light';
-        $this->data    = $data;
-        $this->view    = 'intents/intent';
-        $this->layout();
     }
 
     public function delete($id = ""){
@@ -219,16 +187,16 @@ class Intents extends Clients_controller
         }
     }
 
-    public function addusersay(){
+    public function usersayparameters(){
 
         if($this->input->is_ajax_request()) {
 
             $usersay = $this->input->post(NULL, FALSE);
 
-            $parameters = checkSpeechContentParameters($usersay['speech'],$this->wt_agent);
+            $parameters = checkParameters($usersay['usersay']);
 
             echo json_encode(array(
-                    'usersay'=>$usersay['speech'],
+                    'usersay'=>$usersay['usersay'],
                     'parameters'=>$parameters
                 )
             );
@@ -245,39 +213,45 @@ class Intents extends Clients_controller
         }
     }
 
-    public function getactionprompts($actionid){
+    public function get_prompts($entity){
 
-        if (is_numeric($actionid) && $this->input->is_ajax_request()){
+        if ($this->input->is_ajax_request()){
 
-            $followup = $this->intents_model->get_actionprompts($actionid);
+            $prompts = $this->intents_model->get_prompts($entity);
 
-            echo json_encode($followup);
+            echo json_encode($prompts);
         }
     }
 
-    public function deleteprompt($prompt=""){
+    public function delete_prompt($id){
 
-            if (is_numeric($prompt) && $this->input->is_ajax_request()){
+        if ($this->input->is_ajax_request()){
 
-                $this->intents_model->delete_prompt($prompt);
-                return true;
-            }
+            $this->intents_model->delete_prompt($id);
+
+        }
     }
 
-    public function updateprompts(){
+    public function update_prompts(){
 
+        if($this->input->is_ajax_request()) {
+
+            $data = $this->input->post(NULL, FALSE);
+
+            $this->intents_model->update_prompts($data);
+
+        }
+    }
+
+    public function parse_string()
+    {
         if ($this->input->is_ajax_request()){
 
             $data = $this->input->post(NULL, FALSE);
 
-            $prompt = $this->intents_model->addprompt($data);
+            $parse = parseString($data['string']);
 
-            if ($prompt){
-                return true;
-            }
-            return false;
+            echo json_encode($parse);
         }
-
-        return false;
     }
 }

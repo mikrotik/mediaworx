@@ -15,7 +15,6 @@
 <script src="<?php echo base_url('assets/plugins/app-build/moment.min.js'); ?>"></script>
 <!-- Sweetalert -->
 <script src="<?php echo base_url('/assets/plugins/sweetalert/sweetalert.js')?>"></script>
-<script src="<?php echo base_url('/assets/js/taginput.js')?>"></script>
 <?php app_select_plugin_js($locale); ?>
 <script src="<?php echo base_url('assets/plugins/tinymce/tinymce.min.js'); ?>"></script>
 <?php app_jquery_validation_plugin_js($locale); ?>
@@ -25,6 +24,8 @@
 <?php if(get_option('dropbox_app_key') != ''){ ?>
 <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="<?php echo get_option('dropbox_app_key'); ?>"></script>
 <?php } ?>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.6.0/src/loadingoverlay.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.6.0/extras/loadingoverlay_progress/loadingoverlay_progress.min.js"></script>
 <?php if(isset($lightbox_assets)){ ?>
 <script id="lightbox-js" src="<?php echo base_url('assets/plugins/lightbox/js/lightbox.min.js'); ?>"></script>
 <?php } ?>
@@ -58,6 +59,7 @@
 <?php } ?>
 <?php echo app_script('assets/js','calendar.js'); ?>
 <?php } ?>
+<script src="<?php echo base_url('assets/js/taginput.js')?>"></script>
 <?php echo app_script('assets/js','main.js'); ?>
 <?php echo get_custom_fields_hyperlink_js_function(); ?>
 <?php do_action('after_js_scripts_render'); ?>

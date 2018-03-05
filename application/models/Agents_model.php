@@ -21,23 +21,50 @@ class Agents_model extends CRM_Model
 
     public function add($data=array()){
 
-        // First check for all cases if the email exists.
-        $this->db->where('agent_name', $data['agent_name']);
-        $agent = $this->db->get('tblagents')->row();
-        if ($agent) {
-            return false;
+        if (!isset($data['small_talk'])){
+            $data['small_talk'] = 0;
         }
 
         $this->db->insert('tblagents', $data);
-        $agentid = $this->db->insert_id();
-        if($agentid){
+        $id = $this->db->insert_id();
+        if($id){
 
-            logActivity('New Agent Created [ID:'.$agentid.']');
-            $this->session->set_userdata(array('wt_agent'=>$agentid));
-            setDefaultFallbackIntentsResponses($agentid,get_client_user_id());
-            setDefaultWelcomIntentsResponses($agentid,get_client_user_id());
+            $publicIntents = getPublicIntents();
 
-            return true;
+            if ($publicIntents){
+
+                foreach ($publicIntents as $publicIntent)
+                {
+                    $agentPublicIntentData = array(
+                        "agentid"=>$id,
+                        "userid"=>get_client_user_id(),
+                        "intent_name"=>$publicIntent['intent_name'],
+                        "is_default"=>$publicIntent['is_default'],
+                        "is_system"=>0,
+                        "status"=>1
+                    );
+
+                    $this->db->insert('tblintents',$agentPublicIntentData);
+                    $agentDefaultIntentId = $this->db->insert_id();
+
+                    $agentPublicIntentResponses = getPublicIntentResponses($agentDefaultIntentId);
+
+                    if ($agentPublicIntentResponses){
+
+                        foreach ($agentPublicIntentResponses as $agentPublicIntentResponse)
+                        {
+                            $agentPublicIntentResponseData = array(
+                                "intentid"=>$agentDefaultIntentId,
+                                "response"=>$agentPublicIntentResponse['response']
+                            );
+
+                            $this->db->insert('tblintentresponses',$agentPublicIntentResponseData);
+                        }
+                    }
+                }
+            }
+            logActivity('New Agent Created [ID:'.$id.']');
+            return $id;
         }
 
         return false;
@@ -45,6 +72,10 @@ class Agents_model extends CRM_Model
     }
 
     public function update($data = array(),$id = ""){
+
+        if (!isset($data['small_talk'])){
+            $data['small_talk'] = 0;
+        }
 
         $this->db->where('agentid', $id);
         $this->db->update('tblagents', $data);
@@ -64,42 +95,61 @@ class Agents_model extends CRM_Model
 
         if($this->db->affected_rows() > 0){
 
-            // Delete all entities of agent
-            $this->db->where('agentid',$id);
-            $this->db->delete('tblentities');
 
-            // Delete all entities references of agent
+            /** Get All intents belongs to the agent */
             $this->db->where('agentid',$id);
-            $this->db->delete('tblentitiesreferences');
+            $intents = $this->db->get('tblintents')->result_array();
 
-            // Delete all intents of agent
             $this->db->where('agentid',$id);
             $this->db->delete('tblintents');
 
-            // Delete all intents responses of agent
+            if ($intents){
+
+                foreach ($intents as$intent){
+
+                    $this->db->where('intentid',$intent['id']);
+                    $this->db->delete('tblintentusersays');
+
+                    $this->db->where('intentid',$intent['id']);
+                    $this->db->delete('tblintentresponses');
+                }
+            }
+
+            /** Get All entities belongs to the agent */
             $this->db->where('agentid',$id);
-            $this->db->delete('tblintentsresponses');
+            $entities = $this->db->get('tblentities')->result_array();
 
-            // Delete all intents usersays of agent
             $this->db->where('agentid',$id);
-            $this->db->delete('tblintentsusersays');
+            $this->db->delete('tblentities');
 
-            // Delete all intents parameters of agent
-            $this->db->where('agentid', $id);
-            $this->db->delete('tblintentsusersaysparameters');
+            if ($entities){
 
-            // Delete all intents parameters of actions
-            $this->db->where('agentid', $id);
-            $this->db->delete('tblintentsaction');
+                foreach ($entities as$entity){
 
-            // Delete all intents prompts of actions
-            $this->db->where('agentid', $id);
-            $this->db->delete('tblintentactionprompts');
+                    $this->db->where('entityid',$entity['id']);
+                    $this->db->delete('tblentityreferences');
+
+                }
+            }
+
+            /** Get All small talks belongs to the agent */
+            $this->db->where('agentid',$id);
+            $small_talks = $this->db->get('tblsmalltalks')->result_array();
+
+            $this->db->where('agentid',$id);
+            $this->db->delete('tblsmalltalks');
+
+            if ($small_talks){
+
+                foreach ($small_talks as$small_talk){
+
+                    $this->db->where('smalltalkid',$small_talk['id']);
+                    $this->db->delete('tblsmalltalkreferences');
+
+                }
+            }
 
             logActivity('Agent Delete [ID:'.$id.']');
-
-            $this->session->unset_userdata('wt_agent');
-
             return true;
         }
 

@@ -1486,17 +1486,86 @@ function get_tasks_where_string()
     return $_tasks_where;
 }
 
-function getActionPrompts($actionid)
-{
+/**
+ *  Get Public Intents.
+ *  This will be used when client creates Agent
+ *  Public Intents are intents for common use. Client can edit once
+ *  they are imported on new created agent.
+ */
 
+function getPublicIntents()
+{
     $CI = & get_instance();
 
-    if (is_numeric($actionid)){
-        $CI->db->where('actionid',$actionid);
-        $prompts = $CI->db->get('tblintentactionprompts')->result_array();
+    $CI->db->where('is_system',1);
+    $CI->db->where('is_public',1);
+    $results = $CI->db->get('tblintents')->result_array();
 
-        return $prompts;
+    if ($results){
+
+        return $results;
     }
 
     return false;
+}
+/**
+ *  Get Public Intents Responses.
+ *  This will be used when client creates Agent
+ *  Public Intents responses are responses for common use. Client can edit once
+ *  they are imported on new created agent.
+ */
+function getPublicIntentResponses($id)
+{
+    $CI = & get_instance();
+
+    $CI->db->where('intentid',$id);
+    $results = $CI->db->get('tblintentresponses')->result_array();
+
+    if ($results){
+
+        return $results;
+    }
+
+    return false;
+}
+
+/**
+ * Get all client agents to define the portal agent scope
+ */
+
+function getClientAgents($client_id){
+
+    $CI = & get_instance();
+
+    $CI->db->where('userid',$client_id);
+    $results = $CI->db->get('tblagents')->result_array();
+
+    if ($results){
+
+        return $results;
+    }
+
+    return false;
+}
+
+function apiAccess($access_token,$type){
+
+    $CI = & get_instance();
+
+    if ($type == '1'){
+        $field = 'client_access_token';
+    } else if ($type == '2'){
+        $field = 'developer_access_token';
+    }
+
+    $CI->db->where($field,$access_token);
+    $agent = $CI->db->get('tblagents')->row();
+
+    if ($agent){
+
+        return $agent;
+    }
+
+    return false;
+
 }

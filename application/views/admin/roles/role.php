@@ -159,6 +159,7 @@
                     </div>
                 </div>
             </div>
+    </div>
             <?php init_tail(); ?>
             <script>
                 _validate_form($('form'),{name:'required'});

@@ -16,18 +16,7 @@
         <div class="form-group">
             <select class="form-control select2" id="asidebar_dropdown"">
             <option value=""><?php echo _l('system_default_string'); ?></option>
-            <?php
-            $session = $this->session->get_userdata();
-                foreach(getAgentList(get_client_user_id()) as $agent){ ?>
-                <?php
-                if ($session['wt_agent'] == $agent['agentid']){
-                    $selected = 'selected';
-                } else {
-                    $selected = '';
-                }
-                ?>
-                <option value="<?php echo $agent['agentid']; ?>" <?php echo $selected; ?>><?php echo $agent['agent_name']; ?></option>
-            <?php } ?>
+
             <option disabled>_______________________________</option>
             <option value="new_agent">Create new agent</option>
             <option value="list_agents">View all agents</option>

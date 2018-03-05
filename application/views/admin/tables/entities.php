@@ -6,7 +6,10 @@ $aColumns     = array(
 $sIndexColumn = "id";
 $sTable       = 'tblentities';
 
-$result  = data_tables_init($aColumns, $sIndexColumn, $sTable,array(),array(),array('id'));
+$where = array();
+array_push($where,' AND agentid = 0');
+
+$result  = data_tables_init($aColumns, $sIndexColumn, $sTable,array(),$where,array('id'));
 $output  = $result['output'];
 $rResult = $result['rResult'];
 

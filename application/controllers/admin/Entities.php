@@ -6,70 +6,81 @@ class Entities extends Admin_controller
     {
         parent::__construct();
         $this->load->model('entities_model');
+        if (!is_admin()) {
+            access_denied('Entities');
+        }
     }
 
-    public function index(){
+    /**
+     *  List all @entities
+     */
+    public function index()
+    {
 
-        if (!has_permission('dialogflow', '', 'view')) {
-            access_denied('dialogflow');
-        }
         if ($this->input->is_ajax_request()) {
             $this->perfex_base->get_table_data('entities');
         }
-        $data['entities'] = $this->entities_model->get('',1);
+
         $data['title'] = _l('entities');
         $this->load->view('admin/entities/manage', $data);
     }
 
-    public function entity($id=""){
+    public function entity($id = "")
+    {
 
         if ($this->input->post()) {
-            $data = $this->input->post();
+            /** Validate Entity Form */
 
-            $data['agentid']=0;
-            $data['userid']=0;
+            $data = $this->input->post(NULL, FALSE);
+
+            /**
+             * Exclude some variables from
+             * post data
+             */
+            unset($data['reference']);
+            unset($data['synonym']);
 
             if ($id == '') {
-                if (!has_permission('dialogflow', '', 'create')) {
-                    access_denied('dialogflow');
+                if (!has_permission('entities', '', 'create')) {
+                    access_denied('entities');
                 }
                 $id = $this->entities_model->add($data);
                 if ($id) {
                     set_alert('success', _l('added_successfuly', _l('entities')));
-                    redirect(admin_url('entities/entity/' . $id));
+                    redirect(admin_url('entities'));
                 }
             } else {
-                if (!has_permission('dialogflow', '', 'edit')) {
-                    access_denied('dialogflow');
+                if (!has_permission('entities', '', 'edit')) {
+                    access_denied('entities');
                 }
 
                 $success = $this->entities_model->update($data, $id);
                 if ($success) {
                     set_alert('success', _l('updated_successfuly', _l('entities')));
                 }
-                redirect(admin_url('entities/entity/'.$id));
+                redirect(admin_url('entities/'));
             }
         }
 
         if ($id == '') {
-            $title                  = _l('clients_entity_create');
+            $title                  = _l('new_entity');
         } else {
             $entity = $this->entities_model->get($id);
-            $entity_values = $this->entities_model->get_values($id);
+            $entity_references = $this->entities_model->get_references($id);
 
             $data['entity'] = $entity;
-            $data['entity_values'] = $entity_values;
-            $title = _l('edit_entity');
+            $data['entity_references'] = $entity_references;
+            $title = _l('update_entity');
         }
 
-        $data['title']       = $title;
+        $data['title'] = $title;
         $this->load->view('admin/entities/entity', $data);
     }
 
     public function delete($id = ""){
 
-        if (!has_permission('dialogflow', '', 'delete')) {
-            access_denied('dialogflow');
+        if (!has_permission('entities', '', 'delete')) {
+            access_denied('entities');
         }
 
         if ($this->input->is_ajax_request()) {

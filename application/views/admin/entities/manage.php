@@ -1,31 +1,29 @@
 <?php init_head(); ?>
-    <div id="wrapper">
-        <div class="content">
-            <div class="row">
-                <div class="col-md-12">
-                    <?php if(has_permission('entities','','create')){ ?>
-                        <div class="panel_s">
-                            <div class="panel-body _buttons">
-                                <a href="<?php echo admin_url('entities/entity'); ?>" class="btn btn-info pull-left display-block"><?php echo _l('new_entity'); ?></a>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    <div class="panel_s">
-                        <div class="panel-body">
-                            <div class="clearfix"></div>
-                            <?php
-                            $table_data = array(
-                                _l('entity_dt_name'),
-                                _l('options')
-                            );
-                            render_datatable($table_data,'entities');
-                            ?>
-                        </div>
+<div id="wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel_s">
+                    <div class="panel-body _buttons">
+                        <?php if (has_permission('entities','','create')) { ?>
+                            <a href="<?php echo admin_url('entities/entity'); ?>" class="btn btn-info mright5 test pull-left display-block">
+                                <?php echo _l('new_entity'); ?></a>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="panel_s">
+                    <div class="panel-body">
+                        <div class="clearfix"></div>
+                        <?php render_datatable(array(
+                            _l('entities_entity_name'),
+                            _l('options')
+                        ),'entities'); ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <?php init_tail(); ?>
 <script>
     $(function(){
@@ -39,8 +37,8 @@
         var url = $(element).data('url');
 
         swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this agent!",
+                title: "<?php echo _l('confirmation');?>",
+                text: "<?php echo sprintf(_l('delete_warning'),_l('entity'));?>",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",

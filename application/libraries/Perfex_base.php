@@ -187,11 +187,6 @@ class Perfex_Base
                 'id' => 6,
                 'name' => _l('customer_permission_projects'),
                 'short_name' => 'projects'
-            ),
-            array(
-                'id' => 7,
-                'name' => _l('customer_permission_dialogflow'),
-                'short_name' => 'dialogflow'
             )
         );
         return do_action('get_contact_permissions', $permissions);

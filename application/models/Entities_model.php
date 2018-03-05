@@ -2,131 +2,206 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Entities_model extends CRM_Model
 {
+    private $is_admin;
+
     function __construct()
     {
         parent::__construct();
+        $this->is_admin = is_admin();
     }
 
-    public function get($id = '',$system = '',$where = array())
+    public function get($id="")
     {
+        if (is_numeric($id)){
 
-        if (is_int($system)) {
-            $this->db->where('is_system', $system);
-        }
-
-        $this->db->where($where);
-
-        if (is_numeric($id)) {
             $this->db->where('id', $id);
-            $agents = $this->db->get('tblentities')->row();
-            return $agents;
+            $entity = $this->db->get('tblentities')->row();
+            return $entity;
+
         }
 
         return $this->db->get('tblentities')->result_array();
     }
 
-    public function get_values($id = ''){
+    public function get_references($id = ''){
 
         if (is_numeric($id)) {
             $this->db->where('entityid',$id);
-            $entity = $this->db->get('tblentitiesreferences')->result_array();
+            $entity = $this->db->get('tblentityreferences')->result_array();
             return $entity;
         }
 
         return false;
     }
 
-    public function add($data=array()){
+    public function add($data=array())
+    {
+        if ($data){
 
-        if (isset($data['entity'])) {
-            $entityreferences = $data['entity'];
-            unset($data['entity']);
-        }
+            /** @var $entity
+             * Set $entity and exclude array
+             * from @var $data
+             */
+            if (isset($data['entity'])) {
+                $entity = $data['entity'];
+                unset($data['entity']);
+            }
 
-        unset($data['synonyms']);
-        unset($data['reference']);
+            unset($data['synonym']);
+            unset($data['reference']);
 
-        // First check for all cases if the email exists.
-        $this->db->where('entity_name', $data['entity_name']);
-        $entity = $this->db->get('tblentities')->row();
-        if ($entity) {
-            return false;
-        }
+            if (!isset($data['automatedExpansion'])){
+                $data['automatedExpansion'] = 0;
+            }
 
-        $this->db->insert('tblentities', $data);
-        $entityid = $this->db->insert_id();
+            if (!isset($data['isOverridable'])){
+                $data['isOverridable'] = 0;
+            }
 
-        foreach ($entityreferences as $reference){
-            $referenceData = array(
-                'entityid'=>$entityid,
-                'agentid'=>(isset($this->wt_agent) ? $this->wt_agent : 0),
-                'reference'=>$reference['reference'],
-                'synonym'=>$reference['synonym']
-            );
-            $this->db->insert('tblentitiesreferences', $referenceData);
-        }
+            /**
+             * TODO - Assign AgentID and UserID for entries from Portal
+             * Add some additional variables
+             * regarding to admin or client
+             * @userid
+             * @agentid
+             */
+            if ($this->is_admin){
 
-        if($entityid){
-            logActivity('New Entity Created [ID:'.$entityid.']');
-            return $entityid;
+                $data['userid'] = 0;
+                $data['agentid'] = 0;
+            } else {
+                $data['userid'] = get_client_user_id();
+                $data['agentid'] = $this->agent_scope;
+            }
+
+            $data['is_system'] = $this->is_admin;
+
+            $this->db->insert('tblentities',$data);
+            $entityid = $this->db->insert_id();
+
+            if ($this->db->affected_rows() > 0) {
+
+                /** Set new references tp an Entity */
+                if ($entity){
+
+                    foreach ($entity as $reference){
+
+                        $referenceData = array(
+                            'entityid'=>$entityid,
+                            'reference'=>strtolower($reference['reference']),
+                            'synonyms'=>strtolower($reference['synonym'])
+                        );
+
+                        $this->db->insert('tblentityreferences',$referenceData);
+                    }
+                }
+                return true;
+            }
+
+
         }
 
         return false;
-
     }
 
     public function update($data = array(),$id = ""){
 
-        $this->db->where('entityid',$id);
-        $this->db->delete('tblentitiesreferences');
-
-        if (isset($data['entity'])) {
-            $entityreferences = $data['entity'];
-            unset($data['entity']);
-        }
-
-        unset($data['synonyms']);
-        unset($data['reference']);
-
-        if (!isset($data['automatedExpansion'])){
-            $data['automatedExpansion'] = 0;
-        }
-
-        if (!isset($data['isOverridable'])){
-            $data['isOverridable'] = 0;
-        }
+        if (is_numeric($id))
+        {
+            /** Delete all references of entity
+             * We will insert new ones
+             */
+            $this->db->where('entityid',$id);
+            $this->db->delete('tblentityreferences');
 
 
-        $this->db->where('id', $id);
-        $this->db->update('tblentities', $data);
+            unset($data['synonym']);
+            unset($data['reference']);
 
-        foreach ($entityreferences as $reference){
-            $referenceData = array(
-                'entityid'=>$id,
-                'agentid'=>(isset($this->wt_agent) ? $this->wt_agent : 0),
-                'reference'=>$reference['reference'],
-                'synonym'=>$reference['synonym']
-            );
-            $this->db->insert('tblentitiesreferences', $referenceData);
-        }
+            /** @var $entity
+             * Set $entity and exclude array
+             * from @var $data
+             */
+            if (isset($data['entity'])) {
+                $entity = $data['entity'];
+                unset($data['entity']);
+            }
 
-        if ($this->db->affected_rows() > 0) {
-            return true;
+            if (!isset($data['automatedExpansion'])){
+                $data['automatedExpansion'] = 0;
+            }
+
+            if (!isset($data['isOverridable'])){
+                $data['isOverridable'] = 0;
+            }
+
+            /**
+             * TODO - Assign AgentID and UserID for entries from Portal
+             * Add some additional variables
+             * regarding to admin or client
+             * @userid
+             * @agentid
+             */
+            if ($this->is_admin){
+
+                $data['userid'] = 0;
+                $data['agentid'] = 0;
+            } else {
+                $data['userid'] = get_client_user_id();
+                $data['agentid'] = $this->agent_scope;
+            }
+
+            $data['is_system'] = $this->is_admin;
+
+            /** Set new references tp an Entity */
+            if ($entity){
+
+                foreach ($entity as $reference){
+
+                    $referenceData = array(
+                        'entityid'=>$id,
+                        'reference'=>strtolower($reference['reference']),
+                        'synonyms'=>strtolower($reference['synonym'])
+                    );
+
+                    $this->db->insert('tblentityreferences',$referenceData);
+                }
+            }
+
+            $this->db->where('id', $id);
+            $this->db->update('tblentities', $data);
+
+            if ($this->db->affected_rows() > 0) {
+
+                return true;
+            }
+
+            return false;
         }
 
         return false;
-
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
+        if (is_numeric($id))
+        {
+            /** Delete Entity all references */
+            $this->db->where('entityid',$id);
+            $this->db->delete('tblentityreferences');
 
-        $this->db->where('id',$id);
-        $this->db->delete('tblentities');
+            /** Delete Entity */
+            $this->db->where('id',$id);
+            $this->db->delete('tblentities');
 
-        if($this->db->affected_rows() > 0){
-            logActivity('Entity Delete [ID:'.$id.']');
+            if($this->db->affected_rows() > 0){
+                logActivity('Entity Delete [ID:'.$id.']');
 
-            return true;
+                return true;
+            }
+
+            return false;
+
         }
 
         return false;

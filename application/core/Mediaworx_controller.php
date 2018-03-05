@@ -15,24 +15,24 @@ abstract class Mediaworx_controller extends CRM_Controller
 
         $format = $this->input->get('format');
 
-        $session = $this->session->get_userdata();
-
-        $this->wt_agent = (isset($session['wt_agent']) ? $session['wt_agent'] : 0);
-
+        if ($_COOKIE['agent'])
+        {
+            $this->agent_scope = $_COOKIE['agent'];
+        } else {
+            $this->agent_scope = 0;
+        }
 
 
         $this->load->library('mediaworx/arraytoxml');
         $this->load->library('mediaworx/rest');
         $this->load->library('mediaworx/api');
-        $this->load->library('redis');
-
-        $this->redis = new Redis();
 
         $this->_arraytoxml = new ArrayToXML();
         $this->_api = new Api();
 
         $this->load->helper('xml_value_prep');
         $this->load->helper('perfex_string_compare');
+        $this->load->helper('perfex_api');
 
         if (isset($format)){
             $this->_format = $this->input->get('format');

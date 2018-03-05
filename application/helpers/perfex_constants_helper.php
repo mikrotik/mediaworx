@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+define('APP_VERSION','2.4.0');
+
 // Used for phpass_helper
 define('PHPASS_HASH_STRENGTH', 8);
 define('PHPASS_HASH_PORTABLE', FALSE);
@@ -24,12 +26,12 @@ define('TICKET_ATTACHMENTS_FOLDER',FCPATH .'uploads/ticket_attachments' . '/');
 define('COMPANY_FILES_FOLDER',FCPATH .'uploads/company' . '/');
 // Staff profile images
 define('STAFF_PROFILE_IMAGES_FOLDER',FCPATH .'uploads/staff_profile_images' . '/');
+// Agent images folder
+define('AGENT_IMAGES_FOLDER',FCPATH .'uploads/agent_images' . '/');
 // Contact profile images
 define('CONTACT_PROFILE_IMAGES_FOLDER',FCPATH .'uploads/client_profile_images' . '/');
 // Newsfeed attachments
 define('NEWSFEED_FOLDER',FCPATH . 'uploads/newsfeed' . '/');
-// Agent images folder
-define('AGENT_IMAGES_FOLDER',FCPATH .'uploads/agent_images' . '/');
 // Contracts attachments
 define('CONTRACTS_UPLOADS_FOLDER',FCPATH . 'uploads/contracts' . '/');
 // Tasks attachments
@@ -48,5 +50,5 @@ define('LEAD_ATTACHMENTS_FOLDER',FCPATH . 'uploads/leads' . '/');
 define('PROJECT_ATTACHMENTS_FOLDER',FCPATH . 'uploads/projects' . '/');
 // Project discussions attachments
 define('PROJECT_DISCUSSION_ATTACHMENT_FOLDER',FCPATH . 'uploads/discussions' . '/');
-// Vendor
+// Vendor Folder
 define('VENDOR_FOLDER',FCPATH . 'vendor' . '/');

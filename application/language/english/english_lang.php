@@ -20,6 +20,8 @@ $lang['go_back']              = 'Go Back';
 $lang['error_uploading_file'] = 'Error uploading file';
 $lang['load_more']            = 'Load More';
 $lang['cant_delete_default']  = 'Cant delete default %s';
+$lang['confirmation'] = 'Are you sure?';
+$lang['delete_warning'] = 'You will not be able to recover this %s !';
 
 # Invoice General
 $lang['invoice_status_paid']                = 'Paid';
@@ -105,6 +107,105 @@ $lang['clients_notes_table_addedfrom_heading']   = 'Added From';
 $lang['clients_notes_table_dateadded_heading']   = 'Date Added';
 $lang['clients_list_full_name']   = 'Full Name';
 $lang['clients_list_last_login']  = 'Last Login';
+
+# ECHELON
+$lang['als_echelon'] = 'Echelon AI';
+$lang['als_intents'] = 'Intents';
+$lang['als_entities'] = 'Entities';
+
+# Agents
+$lang['agents']                               = 'Agents';
+$lang['agent']                                = 'Agent';
+$lang['new_agent']                            = 'New Agent';
+$lang['update_agent']                            = 'Update Agent';
+$lang['agent_lowercase']                      = 'agent';
+$lang['agent_name']                   = 'Agent Name';
+$lang['agent_description']                   = 'Description';
+$lang['agents_agent_name']                   = 'Agent Name';
+$lang['agent_matchmode'] = 'Match Mode';
+$lang['agent_matchmode_note'] = 'Select the match mode that suits your agent best.';
+$lang['mlsetting_hybird'] = 'Use the <b>Hybrid (Rule-based and ML)</b> mode for agents with a small number of examples/templates in intents, especially the ones using composite entities.';
+$lang['mlsetting_ml'] = 'Use <b>ML</b> only mode for agents with a large number of examples in intents, especially the ones using @sys.any';
+$lang['mlsetting_select_hybird'] = 'Hybird (Rule-based and ML)';
+$lang['mlsetting_select_mlonly'] = 'ML Only ( Non-rule-based )';
+$lang['agent_select_new_agent'] = 'Create new agent';
+$lang['agent_select_list_agents'] = 'View all agents';
+$lang['agent_threshold'] = 'ML Classification Threshold';
+$lang['agent_threshold_note'] = 'Define the threshold value for the confidence score. If the returned value is less than the threshold value, then a fallback intent will be triggered or, if there is no fallback intents defined, no intent will be triggered.';
+$lang['agents_google_project'] = 'Google Project';
+$lang['title_api_keys'] = 'API Keys';
+$lang['title_logging'] = 'Logging';
+$lang['agents_tab_general'] = 'General';
+$lang['agents_tab_settings'] = 'ML Settings';
+$lang['agents_tab_import_export'] = 'Import and Expport';
+$lang['client_access_token'] = 'Client access token';
+$lang['developer_access_token'] = 'Developer access token';
+$lang['language_note'] = 'Primary language for your agent. Other languages can be added later.';
+$lang['timezone_note'] = 'Date and time requests are resolved using this timezone.';
+$lang['google_project_note'] = 'Enables Cloud functions, Actions on Google and permissions management.';
+
+# Entities
+$lang['entities']                               = 'Entities';
+$lang['entity']                                = 'Entity';
+$lang['new_entity']                            = 'New Entity';
+$lang['update_entity']                            = 'Update Entity';
+$lang['entity_lowercase']                      = 'entity';
+$lang['entity_name']                   = 'Entity Name';
+$lang['define_synonyms']='Define synonyms';
+$lang['allow_automated_expansion']='Allow automated expansion';
+$lang['entities_entity_name']                   = 'Entity Name';
+$lang['entities_entity_reference']                   = 'Reference';
+$lang['entities_entity_synonyms']                   = 'Synonyms';
+# Small Talks
+$lang['small_talks']                               = 'Small Talks';
+$lang['small_talk']                                = 'Small Talk';
+$lang['small_talk_name']                   = 'Small Talk Name';
+$lang['new_small_talk']                            = 'New Small Talk';
+$lang['update_small_talk']                            = 'Update Small Talk';
+$lang['small_talk_lowercase']                      = 'small talk';
+$lang['small_talk_question']                   = 'Question';
+$lang['small_talk_answer']                   = 'Answer';
+$lang['small_talk_status']                   = 'Small Talk status Active / InActive';
+
+
+# Intents
+$lang['intents']                               = 'Intents';
+$lang['intent']                                = 'Intent';
+$lang['new_intent']                            = 'New Intent';
+$lang['update_intent']                            = 'Update Intent';
+$lang['intent_lowercase']                      = 'intent';
+$lang['link_followup'] = 'Add followup';
+$lang['intent_public']='Make this intent public';
+$lang['intent_default']='Make this intent default';
+$lang['intent_merge']='Set this intent as global';
+$lang['intent_small_talk']='Small Talk';
+$lang['intent_small_talk_note']='Your agent can learn how to support small talk without any extra development. By default, it will respond with predefined phrases. Use the form below to customize responses to the most popular requests.';
+$lang['intent_name']                   = 'Intent Name';
+$lang['intent_status']                   = 'Intent status Active / InActive';
+$lang['intent_end']                   = 'Set this intent as end of conversation';
+$lang['intents_intent_name']                   = 'Intent Name';
+$lang['training_phrases']='Training phrases';
+$lang['training_phrases_help'] = 'Optional way to trigger an intent, without the need for matched text or spoken input.';
+$lang['intent_context']='Context';
+$lang['input_context']='Input Context';
+$lang['output_context']='Output Context';
+$lang['intent_context_note']='Can be used to “remember” parameter values, so they can be passed between intents.';
+$lang['intent_events']='Events';
+$lang['intent_events_note']='Optional way to trigger an intent, without the need for matched text or spoken input.';
+$lang['response']='Response';
+$lang['response_help']='Text, spoken and media rich responses the agent will deliver to a user.';
+$lang['actions_parameters']='Action and parameters';
+$lang['actions_parameters_help']='Actions are sent to fulfillment, once an intent is triggered. Parameters are specific words or phrases you’re trying to collect from users, in order to complete a task.';
+$lang['intents_parameter_name']                   = 'Parameter Name';
+$lang['intents_resolved_value']                   = 'Resolved Value';
+$lang['actions_required']                   = 'Required';
+$lang['actions_value']                   = 'Value';
+$lang['actions_is_list']                   = 'Is list';
+$lang['actions_prompt']                   = 'Prompt';
+$lang['add_new_parameter'] = 'Add new parameters';
+$lang['define_prompts'] = 'Define prompts...';
+$lang['prompt_variant'] = 'Enter a prompt variant';
+$lang['prompt_variants'] = 'Prompt variants';
 
 # Contracts
 $lang['contracts']                = 'Contracts';
@@ -3414,6 +3515,3 @@ $lang['sales_string'] = 'Sales';
 $lang['no_project_members'] = 'No members for this project';
 $lang['search_by_tags'] = 'Use # + tagname to search by tags';
 $lang['project_status_5'] = 'Cancelled';
-
-/*Dialogflow*/
-$lang['als_entities'] = 'Entities';

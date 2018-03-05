@@ -609,37 +609,8 @@ function current_full_url()
     return $_SERVER['QUERY_STRING'] ? $url . '?' . $_SERVER['QUERY_STRING'] : $url;
 }
 
-function getAgentList($userid){
-    $CI =& get_instance();
+function dumpData($data){
 
-    $CI->db->where('userid',$userid);
-    $agents = $CI->db->get('tblagents')->result_array();
-
-    if ($agents) {
-        return $agents;
-    }
-
-    return false;
-}
-
-function apiAccess($access_token,$type){
-
-    $CI = & get_instance();
-
-    if ($type == '1'){
-        $field = 'client_access_token';
-    } else if ($type == '2'){
-        $field = '2';
-    }
-
-    $CI->db->where($field,$access_token);
-    $agent = $CI->db->get('tblagents')->row();
-
-    if ($agent){
-
-        return $agent;
-    }
-
-    return false;
-
+    echo '<pre>';
+    print_r($data);
 }
