@@ -1333,6 +1333,7 @@ class Clients extends Clients_controller
 
             $res = array(
                 'speech'=>$speech->getResultObject()->result->fulfillment->speech,
+                'debug'=>$speech->getResultObject()->result->debug,
                 'obj'=>json_encode($speech->getResultObject())
             );
 

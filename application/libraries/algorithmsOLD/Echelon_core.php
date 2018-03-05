@@ -81,7 +81,7 @@ class Echelon_Core
 
         $userSaysList = array();
 
-        $sqlClientUserSays = "SELECT i.id,i.is_end,i.userid,i.intent_name,i.action,i.action_parameters,ius.usersay,ius.parameters,iur.response FROM tblintents i
+        $sqlClientUserSays = "SELECT i.id,i.is_end,i.userid,i.intent_name,i.action,i.action_parameters,ius.usersay,ius.parameters,i.input_contexts,i.output_contexts,iur.response FROM tblintents i
             LEFT JOIN tblintentusersays ius ON(i.id = ius.intentid)
             LEFT JOIN tblintentresponses iur ON(i.id = iur.intentid)
             WHERE i.agentid = '".$this->agent->agentid."' AND i.parentid = 0 AND i.status = 1 AND i.is_default = 0 AND i.userid = '".$this->agent->userid."'";
@@ -119,6 +119,8 @@ class Echelon_Core
                         "intent_name" => $agentSmallTalk['small_talk_name'],
                         "action" => $agentSmallTalk['action'],
                         "usersay" => $agentSmallTalk['question'],
+                        "input_contexts"=>null,
+                        "output_contexts"=>null,
                         "action_parameters" => null,
                         "response" => $agentSmallTalk['answer'],
                         'is_end'=>0
@@ -150,6 +152,8 @@ class Echelon_Core
                     "pattern"=>$pattern['usersay'],
                     "tags"=>explode(" ",$pattern['usersay']),
                     "action_parameters"=>$pattern['action_parameters'],
+                    "input_contexts"=>$pattern['input_contexts'],
+                    "output_contexts"=>$pattern['output_contexts'],
                     "distance" => $distance,
                     "score"=>$score,
                     "is_end"=>$pattern['is_end']
@@ -168,6 +172,8 @@ class Echelon_Core
                     "action" => $data["action"],
                     "pattern" => $data['pattern'],
                     "action_parameters" => $data['action_parameters'],
+                    "input_contexts"=>$data['input_contexts'],
+                    "output_contexts"=>$data['output_contexts'],
                     "score" => $patternThreshold,
                     "is_end"=>$data['is_end']
                 );
@@ -191,7 +197,20 @@ class Echelon_Core
             "is_end"=>$this->intent["is_end"]
         );
 
-        $CI->db->insert("tblconversation_log",$conversationData);
+
+        $log_id = $CI->db->insert("tblconversation_log",$conversationData);
+
+
+        /**
+         * Get intent input contexts
+         */
+        $input_contexts = json_decode($this->intent["input_contexts"]);
+
+        foreach ($input_contexts as $input_context){
+
+            $CI->db->where("context_name",$input_context);
+            $CI->db->update("tblcontexts",array("parameters"=>json_encode($this->action_parameters)));
+        }
 
     }
 
@@ -457,18 +476,7 @@ class Echelon_Core
 
             if ($intentResponses) {
 
-//                $pre_speech = $intentResponses[array_rand($intentResponses)]["response"];
-//
-//                $pre_speech = str_replace("$","@",$pre_speech);
-//
-//                if (substr_count($pre_speech,"@")){
-
                     $speech = $this->_stringMatch($intentResponses);
-
-//                } else {
-//
-//                    $speech = $pre_speech;
-//                }
 
             } else {
                 $speech = $this->getDefaultFallbackResponse();
@@ -482,6 +490,7 @@ class Echelon_Core
         $this->currentConversationData['pattern'] = $this->request['usersay'];
         $this->currentConversationData['action'] = $this->intent['action'];
         $this->currentConversationData['score'] = $this->intent['score'];
+        $this->currentConversationData['intent'] = $this->intent;
         $this->currentConversationData['parameters'] = $this->action_parameters;
         $this->currentConversationData['actionIncomplete'] = ($this->intent['is_end'] ? false : true);
         $this->currentConversationData['fulfillment']['suggestions'] = $this->getKeywordSuggestionsFromGoogle($this->request['usersay']);

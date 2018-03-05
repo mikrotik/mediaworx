@@ -10,17 +10,8 @@ class Mediaworx_Hybird
      */
     private $CI;
 
-    /** @var array $agent */
-    private $agent = [];
-
     /** @var array $request */
     private $request = [];
-
-    /** @var array  */
-    private $sessionData = [];
-
-    protected $echelon;
-
 
     public function __construct($request)
     {
@@ -36,23 +27,28 @@ class Mediaworx_Hybird
          * TODO
          * load our algorithm Echelon
          */
-        $this->CI->load->library('algorithms/echelon_core');
-        $this->CI->load->library('algorithms/echelon');
-        $this->echelon = new Echelon($request);
+        $this->CI->load->library('echelon/echelon_core');
+        $this->CI->load->library('echelon/echelon_exception');
+        $this->CI->load->library('echelon/echelon');
 
-        /**
-         *  Set Echelon @debug_mode
-         *  (true / false)
-         */
-        $this->echelon->_setDebugMode(true);
-        $this->echelon->_setAccessToken($this->request['access_token']);
-        $this->echelon->_setAgent();
     }
 
     public function listen()
     {
+        try {
 
-        return $this->echelon->_process();
+            $echelon = new Echelon($this->request);
+
+            $echelon->_call();
+
+            $echelon->_process();
+            return $echelon->_getResponse();
+
+        } catch(Echelon_Exception $e){
+
+            return $e;
+        }
+
     }
 
 

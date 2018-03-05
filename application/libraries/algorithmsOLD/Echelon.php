@@ -34,6 +34,8 @@ class Echelon extends  Echelon_Core
          * @action - intent action
          * @pattern - intent predefined pattern
          * @action_parameters - (json) intent action parameters
+         * @input_contexts - (json) intent input contexts
+         * @output_contexts - (json) intent output contexts
          * @score - similarity score
          * @is_end - (true/false) shows that if this intent is the end of the coversation
          */
@@ -66,16 +68,6 @@ class Echelon extends  Echelon_Core
          * we check if all parameters are ok
          */
         $this->_intentActionPrompt();
-
-        /**
-         * TODO
-         * If intent is not end of conversation
-         * continue with followups
-         */
-        if (!$this->intent['is_end']){
-
-            return $this->_intentFollowup();
-        }
 
         return $this->_echelonResponse($this->intent["id"]);
 

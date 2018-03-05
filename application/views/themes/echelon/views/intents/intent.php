@@ -1,6 +1,5 @@
 <!-- Main content -->
 <section class="content">
-
     <!-- Default box -->
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -27,6 +26,61 @@
                 <label for="intent_name"><?php echo _l('intent_name'); ?></label>
                 <input type="text" class="form-control" name="intent_name" id="intent_name" value="<?php echo set_value('intent_name',$intent->intent_name); ?>">
                 <?php echo form_error('intent_name'); ?>
+            </div>
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <?php echo _l('intent_context')?> <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('intent_context_note'); ?>"></i>
+                    </h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="input_contexts"><?php echo _l('input_context'); ?></label>
+                        <select name="input_contexts[]" class="form-control select2" multiple="multiple" data-placeholder="<?php echo _l('intent_context')?>"
+                                style="width: 100%;">
+                            <?php foreach ($contexts as $context) { ?>
+                                <option value="<?php echo $context['context_name']?>"><?php echo $context['context_name']?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="output_contexts"><?php echo _l('output_context'); ?></label>
+                        <select name="output_contexts[]" class="form-control select2" multiple="multiple" data-placeholder="<?php echo _l('intent_context')?>"
+                                style="width: 100%;">
+                            <?php foreach ($contexts as $context) { ?>
+                                <option value="<?php echo $context['context_name']?>"><?php echo $context['context_name']?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <?php echo _l('intent_events')?> <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('intent_events_note'); ?>"></i>
+                    </h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <select name="events[]" class="form-control select2" multiple="multiple" data-placeholder="<?php echo _l('intent_events')?>"
+                                style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <!-- /.box-body -->
             </div>
             <div class="clearfix"></div>
             <div class="row">
@@ -256,7 +310,11 @@
 <script>
 
     //creating new array
+    <?php if ($intent->action_parameters) { ?>
     var actions = $.parseJSON('<?php echo $intent->action_parameters?>');
+    <?php } else { ?>
+    var actions = new Array();
+    <?php } ?>
 
     var usersay_row = <?php echo $usersay_row?>;
     var response_row = <?php echo $response_row?>;
@@ -264,6 +322,9 @@
     var action_row = <?php echo $action_row;?>;
 
     $(function(){
+
+        $('select[name=\'input_contexts[]\']').val(<?php echo $intent->input_contexts ?>); $('select[name=\'input_contexts[]\']').trigger('change');
+        $('select[name=\'output_contexts[]\']').val(<?php echo $intent->output_contexts ?>); $('select[name=\'output_contexts[]\']').trigger('change');
 
         $('.btn-add-parameter').on('click',function(){
 

@@ -31,49 +31,56 @@ class Api extends Rest
             $data['session'] = session_id();
         }
 
-        $response = (object)array(
-            "MediaworxModelBasedata" => array(
-                "id" => UUID::v5(APP_ENC_KEY, UUID::random_key(16)),
-                "timestamp" => $this->_objDateTime->format(DateTime::ISO8601),
-                "lang" => "english",
-                "result" => (object)array(
-                    "source"=> $data[0]['source'],
-                    "resolvedQuery"=> $data['usersay'],
-                    "action"=>$data[0]['action'],
-                    "actionIncomplete"=>$data[0]['actionIncomplete'],
-                    "parameters"=>$data[0]['parameters'],
-                    "contexts"=>(object) array(
-                        "name"=>"",
-                        "parameters"=>"",
-                        "lifespan"=>0
+        if (!$data[0]['debug']) {
+            $response = (object)array(
+                "MediaworxModelBasedata" => array(
+                    "id" => UUID::v5(APP_ENC_KEY, UUID::random_key(16)),
+                    "timestamp" => $this->_objDateTime->format(DateTime::ISO8601),
+                    "lang" => "english",
+                    "result" => (object)array(
+                        "source" => $data[0]['source'],
+                        "resolvedQuery" => $data['usersay'],
+                        "action" => $data[0]['action'],
+                        "actionIncomplete" => $data[0]['actionIncomplete'],
+                        "parameters" => $data[0]['parameters'],
+                        "contexts" => (object)array(
+                            "name" => "",
+                            "parameters" => "",
+                            "lifespan" => 0
+                        ),
+                        "metadata" => array(
+                            "intentId" => $data[0]["intent_id"],
+                            "webhookUsed" => false,
+                            "webhookForSlotFillingUsed" => false,
+                            "intentName" => $data[0]["intent_name"]
+                        ),
+                        "fulfillment" => array(
+                            "speech" => $data[0]['speech'],
+                            "messages" => array(
+                                "type" => "simple_response",
+                                "platform" => "google",
+                                "textToSpeech" => $data[0]['fulfillment']['suggestions']
+                            )
+                        ),
+                        'score' => $data[0]['score'],
+                        "debug" => $data[0]['debug']
                     ),
-                    "metadata"=>array(
-                        "intentId"=> "",
-                        "webhookUsed"=> false,
-                        "webhookForSlotFillingUsed"=> false,
-                        "intentName"=> ""
+                    "status" => (object)array(
+                        "has_error" => $hasError,
+                        "code" => $code,
+                        "message" => $this->get_rest_status_message()
                     ),
-                    "fulfillment"=>array(
-                        "speech"=>$data[0]['fulfillment']['speech'],
-                        "messages"=>array(
-                            "type"=>"simple_response",
-                            "platform"=>"google",
-                            "textToSpeech"=>$data[0]['fulfillment']['suggestions']
-                        )
-                    ),
-                    'score'=>$data[0]['score']
-                ),
-                "status" => (object)array(
-                    "has_error"=>$hasError,
-                    "code" => $code,
-                    "message"=>$this->get_rest_status_message()
-                ),
-                "required_parameters"=>$data[0]['required_parameters'],
-                "requested_parameters"=>$data[0]['requested_parameters'],
-                "session" => $data['session'],
-                "SESS_DATA" => $data[0]['session_data'],
-            )
-        );
+                    "session" => $data['session'],
+                    "DATA" => $data[0]["data"]
+                )
+            );
+        } else {
+            $response = (object)array(
+                "MediaworxModelBasedata" => array(
+                    "DBG-DATA" => $data[0]["data"]
+                )
+            );
+        }
 
         $this->response($this->$format($response), $code);
 

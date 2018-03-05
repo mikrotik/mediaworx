@@ -69,6 +69,20 @@ class Intents_model extends CRM_Model
         return false;
     }
 
+    public function get_context($context_name="")
+    {
+        if ($context_name){
+
+            $this->db->where('context_name', $context_name);
+            $context = $this->db->get('tblcontexts')->row();
+
+            return $context;
+
+        }
+        $contexts = $this->db->get('tblcontexts')->result_array();
+        return $contexts;
+    }
+
     public function add($data=array(),$id = "")
     {
         if ($data){
@@ -174,24 +188,6 @@ class Intents_model extends CRM_Model
             if (isset($data['parameters'])) {
                 $parameters = $data['parameters'];
                 unset($data['parameters']);
-            }
-
-            /** @var $contexts
-             * Set $contexts and exclude array
-             * from @var $data
-             */
-            if (isset($data['contexts'])) {
-                $parameters = $data['contexts'];
-                unset($data['contexts']);
-            }
-
-            /** @var $events
-             * Set $events and exclude array
-             * from @var $data
-             */
-            if (isset($data['events'])) {
-                $parameters = $data['events'];
-                unset($data['events']);
             }
 
             $this->db->insert('tblintents',$data);
@@ -325,22 +321,16 @@ class Intents_model extends CRM_Model
                 unset($data['parameters']);
             }
 
-            /** @var $contexts
-             * Set $contexts and exclude array
-             * from @var $data
-             */
-            if (isset($data['contexts'])) {
-                $parameters = $data['contexts'];
-                unset($data['contexts']);
+            if (isset($data['input_contexts'])) {
+                $data['input_contexts'] = json_encode($data['input_contexts']);
             }
 
-            /** @var $events
-             * Set $events and exclude array
-             * from @var $data
-             */
+            if (isset($data['output_contexts'])) {
+                $data['output_contexts'] = json_encode($data['output_contexts']);
+            }
+
             if (isset($data['events'])) {
-                $parameters = $data['events'];
-                unset($data['events']);
+                $data['events'] = json_encode($data['events']);
             }
 
             if ($usersays)
