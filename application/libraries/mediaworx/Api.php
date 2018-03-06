@@ -31,7 +31,6 @@ class Api extends Rest
             $data['session'] = session_id();
         }
 
-        if (!$data[0]['debug']) {
             $response = (object)array(
                 "MediaworxModelBasedata" => array(
                     "id" => UUID::v5(APP_ENC_KEY, UUID::random_key(16)),
@@ -43,11 +42,7 @@ class Api extends Rest
                         "action" => $data[0]['action'],
                         "actionIncomplete" => $data[0]['actionIncomplete'],
                         "parameters" => $data[0]['parameters'],
-                        "contexts" => (object)array(
-                            "name" => "",
-                            "parameters" => "",
-                            "lifespan" => 0
-                        ),
+                        "contexts" => (object)array(),
                         "metadata" => array(
                             "intentId" => $data[0]["intent_id"],
                             "webhookUsed" => false,
@@ -74,13 +69,6 @@ class Api extends Rest
                     "ECHELON_SESSION" => $data[0]["echelon_session"]
                 )
             );
-        } else {
-            $response = (object)array(
-                "MediaworxModelBasedata" => array(
-                    "DBG-DATA" => $data[0]["data"]
-                )
-            );
-        }
 
         $this->response($this->$format($response), $code);
 

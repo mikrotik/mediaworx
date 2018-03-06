@@ -87,14 +87,106 @@ class Echelon_Helper extends Echelon_Exception
     {
         $CI = & get_instance();
 
+        $intentIds = array();
+        $intentResponses = array();
+
         if (is_numeric($id)){
 
-            $CI->db->where("intentid",$id);
-            $responses = $CI->db->get("tblintentresponses")->result_array();
+            $CI->db->where("id",$id);
+            $intent = $CI->db->get("tblintents")->row();
 
-            if ($responses) {
+            /** Check for default output context */
+            $output_contexts = json_decode($intent->output_contexts);
 
-                return ucfirst($responses[array_rand($responses)]["response"]);
+
+
+            /**
+             * Get all output intent ids
+             */
+            foreach ($output_contexts as $output_context){
+
+                $CI->db->where("context_name",$output_context);
+                $context_intent = $CI->db->get("tblcontexts")->row();
+
+                $intentIds[] = $context_intent->intentid;
+
+            }
+
+            foreach ($intentIds as $intent_id)
+            {
+                $CI->db->where("intentid",$intent_id);
+                $intent_responses = $CI->db->get("tblintentresponses")->result_array();
+
+                foreach ($intent_responses as $intent_response)
+                {
+                    $intentResponses[] = $intent_response["response"];
+                }
+            }
+            if ($intentResponses) {
+
+                $response = ucfirst($intentResponses[array_rand($intentResponses)]);
+
+            } else {
+
+                $CI->db->where("intentid",$id);
+                $intent_responses = $CI->db->get("tblintentresponses")->result_array();
+
+                foreach ($intent_responses as $intent_response)
+                {
+                    $intentResponses[] = $intent_response["response"];
+                }
+
+                $response = ucfirst($intentResponses[array_rand($intentResponses)]);
+            }
+
+            return $response;
+        }
+
+        return false;
+    }
+
+    public static function getIntentParameters($id)
+    {
+        $CI = & get_instance();
+        $intentParameters = array();
+
+        if (is_numeric($id)){
+
+            $CI->db->where("id",$id);
+            $intent = $CI->db->get("tblintents")->row();
+
+            $parameters = json_decode($intent->action_parameters);
+
+            if ($parameters) {
+
+                foreach ($parameters as $key=>$parameter)
+                {
+                    $intentParameters[$parameter->parameter_name] = "";
+                }
+
+                return $intentParameters;
+            }
+
+        }
+
+        return false;
+    }
+
+    public static function getIntentContexts($id,$type)
+    {
+        $CI = & get_instance();
+        $intentParameters = array();
+
+        if (is_numeric($id)){
+
+            $CI->db->where("id",$id);
+            $intent = $CI->db->get("tblintents")->row();
+
+            $contexts = json_decode($intent->{$type}."_contexts");
+
+            if ($contexts) {
+
+                return $contexts;
             }
 
         }

@@ -909,6 +909,9 @@ class Echelon_Core extends Echelon_Exception
         $this->_addResponseData("parameters",$userParameters);
         $CI->session->set_userdata("parameters",$userParameters);
 
+        /** Intent Parameter */
+        $this->_addResponseData("parameters",Echelon_Helper::getIntentParameters($this->intent->id));
+
         $this->_addResponseData("speech",Echelon_Helper::getIntentResponse($this->intent->id));
     }
 

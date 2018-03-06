@@ -9,6 +9,9 @@
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                             title="Collapse">
+                        <i class="fa fa-close"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                            title="Collapse">
                         <i class="fa fa-minus"></i></button>
                     <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
                         <i class="fa fa-times"></i></button>
@@ -45,12 +48,11 @@
         </div>
         <!-- /.box -->
     </div>
-
-    <div class="col-md-7 response">
+    <div class="col-md-7">
         <!-- Default box -->
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">JSON Response</h3>
+                <h3 class="box-title"><?php echo $client->company?></h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -60,8 +62,8 @@
                         <i class="fa fa-times"></i></button>
                 </div>
             </div>
-            <div class="box-body bot-json">
-                <pre></pre>
+            <div class="box-body">
+
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
@@ -71,33 +73,34 @@
         </div>
         <!-- /.box -->
     </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 response">
+            <!-- Default box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">JSON Response</h3>
 
-    <div class="col-md-7 debug">
-        <!-- Default box -->
-        <div class="box box-danger">
-            <div class="box-header with-border">
-                <h3 class="box-title">JSON Response Debug</h3>
-
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                            title="Collapse">
-                        <i class="fa fa-minus"></i></button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                        <i class="fa fa-times"></i></button>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                            <i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                            <i class="fa fa-times"></i></button>
+                    </div>
                 </div>
-            </div>
-            <div class="box-body bot-json">
-                <pre></pre>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
+                <div class="box-body bot-json">
+                    <pre></pre>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
 
+                </div>
+                <!-- /.box-footer-->
             </div>
-            <!-- /.box-footer-->
+            <!-- /.box -->
         </div>
-        <!-- /.box -->
     </div>
-
 </section>
 <script>
     $(function(){
@@ -105,8 +108,6 @@
         $('input[name=\'usersay\']').enterKey(function () {
             $('.btn-sm').trigger('click');
         });
-
-        $(".debug").hide();
 
         $('.btn-sm').on('click',function(){
 
@@ -144,14 +145,6 @@
                     },
                     success: function (json) {
                         $('.writing').remove();
-
-                        if (json.debug){
-                            $(".debug").show();
-                            $(".response").hide();
-                        } else {
-                            $(".response").show();
-                            $(".debug").hide();
-                        }
 
                         MsgRecieve = '<div class="row msg_container base_receive">';
                         MsgRecieve += '    <div class="col-md-10 col-xs-10">';
