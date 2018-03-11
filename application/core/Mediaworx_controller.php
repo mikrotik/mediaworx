@@ -19,7 +19,7 @@ abstract class Mediaworx_controller extends CRM_Controller
         {
             $this->agent_scope = $_COOKIE['agent'];
         } else {
-            $this->agent_scope = 0;
+            $this->agent_scope = 1;
         }
 
 

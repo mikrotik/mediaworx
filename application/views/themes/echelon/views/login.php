@@ -1,6 +1,6 @@
 <div class="login-box">
     <div class="login-logo">
-        <a href="/"><b>MEDIA<span style="color : #F26539 ">WOKS</span></b>.IO</a>
+        <a href="/"><b>MEDIA<span style="color : #F26539 ">WORKS</span></b>.IO</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">

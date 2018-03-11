@@ -52,3 +52,5 @@ define('PROJECT_ATTACHMENTS_FOLDER',FCPATH . 'uploads/projects' . '/');
 define('PROJECT_DISCUSSION_ATTACHMENT_FOLDER',FCPATH . 'uploads/discussions' . '/');
 // Vendor Folder
 define('VENDOR_FOLDER',FCPATH . 'vendor' . '/');
+// Training Folder
+define('TRAINING_FOLDER',FCPATH . 'backups/echelon' . '/');

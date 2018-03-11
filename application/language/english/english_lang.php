@@ -167,6 +167,26 @@ $lang['small_talk_question']                   = 'Question';
 $lang['small_talk_answer']                   = 'Answer';
 $lang['small_talk_status']                   = 'Small Talk status Active / InActive';
 
+# Echelon
+$lang['echelon']                               = 'Echelon';
+$lang['echelon_categories']                                = 'Categories';
+$lang['category']                                = 'Category';
+$lang['new_category']                            = 'New Category';
+$lang['update_category']                            = 'Update Cateory';
+$lang['echelon_lowercase']                      = 'echelon';
+$lang["pattern"]                      = 'Pattern';
+$lang["add_pattern"]                ='Add Pattern';
+$lang["training"]                ='Training';
+$lang["echelon_train"]                ='Train Echelon';
+$lang["auto_train"]                ='Auto Train';
+$lang["utility_start_new_training"]                ='Manual Training';
+$lang["utility_train_table_trainname"]                ='Training Name';
+$lang["utility_train_table_trainsize"]                ='Trained Data File Size';
+$lang["utility_train_table_traindate"]                ='Training Date';
+$lang["training_delete"]                ='Training deleted!';
+$lang["training_success"]                ='Training completed!';
+$lang['utility_echelon_train_note'] = 'Note: Due to the limited execution time and memory available to PHP, training very large database may not be possible. If your training data is very large you might need to train directly from your Application CLI console via the command line, or have your server admin do it for you if you do not have root privileges.';
+
 
 # Intents
 $lang['intents']                               = 'Intents';

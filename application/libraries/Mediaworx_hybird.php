@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+require_once VENDOR_FOLDER.'echelon/echelon_autoload.php';
+
+use Echelon_Hybird;
+
 class Mediaworx_Hybird
 {
     /**
@@ -30,31 +34,19 @@ class Mediaworx_Hybird
          */
         $this->agent = $agent;
 
-        /*
-         * TODO
-         * load our algorithm Echelon
-         */
-        $this->CI->load->library('echelon/echelon_exception');
-        $this->CI->load->library('echelon/echelon_core');
-        $this->CI->load->library('echelon/helpers/echelon_helper');
-        $this->CI->load->library('echelon/echelon');
-
     }
 
     public function listen()
     {
         try {
 
-            $echelon = new Echelon($this->request,$this->agent);
+            $echelon = new Echelon_Hybird(Echelon_Hybird::ENV_TEST,$this->agent,$this->request);
 
-            $echelon->_call();
-
-            $echelon->_process();
-            return $echelon->_getResponse();
+            return $echelon->_call();
 
         } catch(Echelon_Exception $e){
 
-            return $e;
+            return array("speech"=>$e->getMessage());
         }
 
     }

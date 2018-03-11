@@ -4,7 +4,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>M</b><span style="color : #F26539 ">WX</span></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>MEDIA<span style="color : #F26539 ">WOKS</span></b>.IO</span>
+        <span class="logo-lg"><b>MEDIA<span style="color : #F26539 ">WORKS</span></b>.IO</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">

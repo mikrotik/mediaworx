@@ -45,6 +45,7 @@ class Api extends Rest
                         "contexts" => (object)array(),
                         "metadata" => array(
                             "intentId" => $data[0]["intent_id"],
+                            "parentId"=>$data[0]["parent_id"],
                             "webhookUsed" => false,
                             "webhookForSlotFillingUsed" => false,
                             "intentName" => $data[0]["intent_name"]
@@ -66,6 +67,7 @@ class Api extends Rest
                         "message" => $this->get_rest_status_message()
                     ),
                     "session" => $data['session'],
+                    "DATA" => $data[0]['data'],
                     "ECHELON_SESSION" => $data[0]["echelon_session"]
                 )
             );

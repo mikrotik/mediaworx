@@ -34,7 +34,7 @@
                 <input type="text" class="form-control" placeholder="<?php echo _l('small_talk_question');?>" name="question" id="question" value="">
             </div>
             <div class="col-md-5 form-group">
-                <input type="text" class="form-control" placeholder="<?php echo _l('small_talk_answer');?>" name="answer" id="answer" value="">
+                <input type="text" class="form-control bootstrap-tagsinput" placeholder="<?php echo _l('small_talk_answer');?>" name="answer" id="answer" value="" data-role="tagsinput">
             </div>
             <div class="col-md-2 buttons">
                 <button type="button" class="btn btn-info pull-right" id="btnadd-dialog"><?php echo _l('add'); ?></button>
@@ -95,8 +95,8 @@
 
                 $('.dialog tbody').append(html);
                 $('input[name=\'question\']').val('');
-                $('input[name=\'answer\']').val('');
-                $('input[name=\'question\']').focus();
+                $('input[name=\'answer\']').tagsinput('removeAll');
+                $('input[name=\'answer\']').focus();
                 dialog_row++;
 
                 return true;
@@ -135,7 +135,7 @@
             $('.btnedit-values').attr('disabled','disabled');
             $('.btnremove-values').attr('disabled','disabled');
             $('input[name=\'question\']').val(question);
-            $('input[name=\'answer\']').val(answer);
+            $('input[name=\'answer\']').tagsinput('add', answer);
             $('#dialog-'+id).remove();
             return true
         }
