@@ -112,6 +112,9 @@ class Agents_model extends CRM_Model
 
                     $this->db->where('intentid',$intent['id']);
                     $this->db->delete('tblintentresponses');
+
+                    $this->db->where('intentid',$intent['id']);
+                    $this->db->delete('tblintentactionprompts');
                 }
             }
 
