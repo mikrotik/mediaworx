@@ -234,18 +234,21 @@ class Echelon_Helper
             $context = $CI->db->get("tblcontexts")->row();
             $parameters = (array) json_decode($context->parameters);
 
+            self::_addResponse("context_parameters",(array) json_decode($context->parameters));
+
             foreach ($required_parameters as $key=>$required_parameter)
             {
                 if (array_key_exists($required_parameter,$parameters) && empty($parameters[$required_parameter]))
                 {
-                    /**
-                     * TODO - Change query to CI standard
-                     */
-                    $sql = "SELECT i.id,i.action,e.entity_name,iap.prompt FROM tblintents i
-                      LEFT JOIN tblintentactionprompts iap ON (i.id = iap.intentid)
-                      LEFT JOIN tblentities e ON(e.id = iap.entityid) WHERE i.agentid = '".$intent->agentid."' AND i.userid = '".$intent->userid."' AND e.entity_name = '".$required_parameter."'";
+                    $CI->db->select('tblintents.id,tblintents.action,tblentities.entity_name,tblintentactionprompts.prompt');
+                    $CI->db->from('tblintents');
+                    $CI->db->join('tblintentactionprompts', 'tblintents.id = tblintentactionprompts.intentid');
+                    $CI->db->join('tblentities', 'tblentities.id = tblintentactionprompts.entityid');
+                    $CI->db->where('tblintents.agentid',$intent->agentid);
+                    $CI->db->where('tblintents.userid',$intent->userid);
+                    $CI->db->where('tblentities.entity_name',$required_parameter);
 
-                    $prompt = $CI->db->query($sql)->row();
+                    $prompt = $CI->db->get()->row();
 
                     if ($prompt) {
                         return $prompt;
@@ -514,8 +517,33 @@ class Echelon_Helper
 
         if ($predicted_source && !$prompt && $score >= $agent->threshold) {
 
+            $context_parameters = self::_getResponseByKey("context_parameters");
+
+            $parameter_count = 0;
+
+            foreach ($context_parameters as $context_parameter)
+            {
+                if ($context_parameter || !empty($context_parameter))
+                {
+                    $parameter_count++;
+                }
+            }
+
+            foreach ($predicted_response as $pr)
+            {
+                $variable_count = substr_count($pr["response"],"$");
+
+                if ($variable_count) {
+                    if ($parameter_count == $variable_count) {
+                        $response = $pr["response"];
+                    }
+                } else {
+                    $response = $predicted_response[array_rand($predicted_response)]['response'];
+                }
+            }
+
             self::_addResponse("source",$agent->agent_name);
-            self::_addResponse("speech",$predicted_response[array_rand($predicted_response)]['response']);
+            self::_addResponse("speech",$response);
 
             return self::__getFinalResponse();
         } elseif ($predicted_source && $prompt && $score >= $agent->threshold) {

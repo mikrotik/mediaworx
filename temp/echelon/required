@@ -1,8 +1,0 @@
-[15/Mar/2018:21:12:16] (index) "Parameters=>{\"drink\":\"coffee\",\"delivery-pickup\":false,\"size\":false,\"milk-type\":null,\"iced\":null}"
-[15/Mar/2018:21:12:16] (index) "Required Parameters=>\"drink\""
-[15/Mar/2018:21:14:54] (index) 0
-[15/Mar/2018:21:14:54] (index) 1
-[15/Mar/2018:21:14:54] (index) 2
-[15/Mar/2018:21:15:12] (index) "drink"
-[15/Mar/2018:21:15:12] (index) "delivery-pickup"
-[15/Mar/2018:21:15:12] (index) "size"
