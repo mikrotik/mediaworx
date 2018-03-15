@@ -1,7 +1,0 @@
-[15/Mar/2018:13:57:34] (index) Test message1
-[15/Mar/2018:13:57:34] (index) Test message2
-[15/Mar/2018:13:57:34] (index) Test message3
-[15/Mar/2018:13:58:44] (index) 1
-[15/Mar/2018:13:59:20] (index) {"tblintents-35-571":1}
-[15/Mar/2018:13:59:50] (index) {"tblintents-35-571":{"id":"tblintents-35-571","pattern":"hi","score":1}}
-[15/Mar/2018:14:00:45] (index) []

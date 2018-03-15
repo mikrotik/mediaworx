@@ -29,6 +29,10 @@ class Agents_model extends CRM_Model
             $data['echelon'] = 0;
         }
 
+        if (!isset($data['logging'])){
+            $data['logging'] = 0;
+        }
+
         $this->db->insert('tblagents', $data);
         $id = $this->db->insert_id();
         if($id){
@@ -84,6 +88,10 @@ class Agents_model extends CRM_Model
 
         if (!isset($data['echelon'])){
             $data['echelon'] = 0;
+        }
+
+        if (!isset($data['logging'])){
+            $data['logging'] = 0;
         }
 
         $this->db->where('agentid', $id);

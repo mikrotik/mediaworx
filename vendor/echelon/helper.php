@@ -83,13 +83,11 @@ class Echelon_Helper
             foreach ($user_says as $user_say)
             {
                 $score = $stringfy->compare($pattern,$user_say["usersay"]);
-                if ($score >= $agent->threshold) {
-                    $patterns["tblintents-" . $user_say["intentid"] . '-' . $user_say["id"]] = array(
-                        "id" => "tblintents-" . $user_say["intentid"] . '-' . $user_say["id"],
-                        "pattern" => $user_say["usersay"],
-                        "score" => round($score, 5)
-                    );
-                }
+                $patterns["tblintents-" . $user_say["intentid"] . '-' . $user_say["id"]] = array(
+                    "id" => "tblintents-" . $user_say["intentid"] . '-' . $user_say["id"],
+                    "pattern" => $user_say["usersay"],
+                    "score" => round($score, 5)
+                );
             }
         }
 
@@ -101,13 +99,11 @@ class Echelon_Helper
                 foreach ($small_talks as $small_talk) {
                     $score = $stringfy->compare($pattern, $small_talk["pattern"]);
 
-                    if ($score >= $agent->threshold) {
-                        $patterns["tblsmalltalks-" . $small_talk["smalltalkid"] . '-' . $small_talk["id"]] = array(
-                            "id" => "tblsmalltalks-" . $small_talk["smalltalkid"] . '-' . $small_talk["id"],
-                            "pattern" => $small_talk["pattern"],
-                            "score" => round($score, 5)
-                        );
-                    }
+                    $patterns["tblsmalltalks-" . $small_talk["smalltalkid"] . '-' . $small_talk["id"]] = array(
+                        "id" => "tblsmalltalks-" . $small_talk["smalltalkid"] . '-' . $small_talk["id"],
+                        "pattern" => $small_talk["pattern"],
+                        "score" => round($score, 5)
+                    );
                 }
             }
         }
@@ -120,13 +116,11 @@ class Echelon_Helper
                 foreach ($echelon_patterns as $echelon_pattern) {
                     $score = $stringfy->compare($pattern, $echelon_pattern["pattern"]);
 
-                    if ($score >= $agent->threshold) {
-                        $patterns["tblechelon-" . $echelon_pattern["categoryid"] . '-' . $echelon_pattern["id"]] = array(
-                            "id" => "tblechelon-" . $echelon_pattern["categoryid"] . '-' . $echelon_pattern["id"],
-                            "pattern" => $echelon_pattern["pattern"],
-                            "score" => round($score, 5)
-                        );
-                    }
+                    $patterns["tblechelon-" . $echelon_pattern["categoryid"] . '-' . $echelon_pattern["id"]] = array(
+                        "id" => "tblechelon-" . $echelon_pattern["categoryid"] . '-' . $echelon_pattern["id"],
+                        "pattern" => $echelon_pattern["pattern"],
+                        "score" => round($score, 5)
+                    );
                 }
             }
         }
@@ -139,25 +133,66 @@ class Echelon_Helper
         $scores = array_column($patterns, 'score','id');
         arsort($scores);
 
-        self::_log($scores);
         /**
          * @var  $intent
          * Get the highest scored pattern
          */
         $targetIntent = ($patterns[key($scores)]);
+
+        /**
+         * TODO - Last attempt to intent prediction
+         * Check if requested parameters are same as any intent action parameters
+         */
+
+        if ($targetIntent["score"] < $agent->threshold)
+        {
+            $targetIntent = self::_arrayDiff($agent);
+            self::_addResponse("score",1);
+
+            return $targetIntent;
+        }
+
         self::_addResponse("score",$targetIntent["score"]);
         return $targetIntent["id"];
 
     }
 
-    private static function _log($data)
+    private static function _arrayDiff($agent)
+    {
+        $CI = & get_instance();
+
+        $reqArray = self::getRequestedParameters($agent->agentid);
+
+        $CI->db->where("agentid",$agent->agentid);
+        $intents = $CI->db->get("tblintents")->result_array();
+
+
+        foreach ($intents as $intent){
+
+            $action_parameters = json_decode($intent["action_parameters"]);
+
+            foreach ($action_parameters as $parameter)
+            {
+                if (array_key_exists($parameter->parameter_name,$reqArray))
+                {
+                    return "tblintents-".$intent["id"];
+                }
+
+                continue;
+            }
+        }
+
+        return false;
+    }
+
+    private static function _log($data,$filename)
     {
         /**
          * TODO
          */
         require_once (VENDOR_FOLDER."echelon/log.php");
 
-        $filepath = TEMP_FOLDER."echelon/log.txt";
+        $filepath = TEMP_FOLDER."echelon/".$filename;
 
         // Logging class initialization
         $log = new Echelon_Logging();
@@ -174,25 +209,53 @@ class Echelon_Helper
 
     }
 
-    private static function _getPrompts($intent)
+    private static function _getPrompts($intent,$request)
     {
 
         $CI = & get_instance();
 
-        /**
-         * TODO - Change query to CI standard
-         */
-        $sql = "SELECT i.id,i.action,e.entity_name,iap.prompt FROM tblintents i
-          LEFT JOIN tblintentactionprompts iap ON (i.id = iap.intentid)
-          LEFT JOIN tblentities e ON(e.id = iap.entityid) WHERE i.agentid = '".$intent->agentid."' AND i.userid = '".$intent->userid."' AND e.entity_name = 'drink'";
+        $intent_output_contexts = json_decode($intent->output_contexts);
+        $intent_action_parameters = json_decode($intent->action_parameters);
 
-        $prompt = $CI->db->query($sql)->row();
+        $required_parameters = [];
 
-        if ($prompt) {
-            return $prompt;
+        foreach ($intent_action_parameters as $intent_action_parameter)
+        {
+            if ($intent_action_parameter->is_required)
+            {
+                $required_parameters[] = $intent_action_parameter->parameter_name;
+            }
         }
 
-        return false;
+        foreach ($intent_output_contexts as $intent_output_context) {
+            $CI->db->where("session_id", $request["session"]);
+            $CI->db->where("context_name", $intent_output_context);
+
+            $context = $CI->db->get("tblcontexts")->row();
+            $parameters = (array) json_decode($context->parameters);
+
+            foreach ($required_parameters as $key=>$required_parameter)
+            {
+                if (array_key_exists($required_parameter,$parameters) && empty($parameters[$required_parameter]))
+                {
+                    /**
+                     * TODO - Change query to CI standard
+                     */
+                    $sql = "SELECT i.id,i.action,e.entity_name,iap.prompt FROM tblintents i
+                      LEFT JOIN tblintentactionprompts iap ON (i.id = iap.intentid)
+                      LEFT JOIN tblentities e ON(e.id = iap.entityid) WHERE i.agentid = '".$intent->agentid."' AND i.userid = '".$intent->userid."' AND e.entity_name = '".$required_parameter."'";
+
+                    $prompt = $CI->db->query($sql)->row();
+
+                    if ($prompt) {
+                        return $prompt;
+                    }
+
+                    return false;
+                }
+            }
+
+        }
     }
 
     private static function _predictResponse($targetSource)
@@ -205,7 +268,9 @@ class Echelon_Helper
         $target = explode("-",$targetSource);
         $table = $target[0]; // target table name
         $row = $target[1]; // @id of the row
-        $targetRow = $target[2]; //target row
+        if (isset($target[2])) {
+            $targetRow = $target[2]; //target row
+        }
 
         if ($table == "tblintents")
         {
@@ -285,6 +350,10 @@ class Echelon_Helper
     public static function __getFinalResponse()
     {
 
+        $agent = self::_getAgent();
+        if ($agent->logging) {
+            self::_log(self::_getResponse(),$agent->client_access_token."-log.txt");
+        }
 
         return self::_getResponse();
     }
@@ -394,6 +463,7 @@ class Echelon_Helper
                 $requestedParameters[$parameter['parameter_name']] = $parameter['resolved_value'];
             }
         }
+
         return $requestedParameters;
     }
 
@@ -439,21 +509,23 @@ class Echelon_Helper
          * TODO
          * Check if Intent has prompt(s)
          */
-        $prompt = self::_getPrompts($intent);
+        $prompt = self::_getPrompts($intent,$request);
+        $score = self::_getResponseByKey("score");
 
-        if ($predicted_source && !$prompt) {
+        if ($predicted_source && !$prompt && $score >= $agent->threshold) {
 
             self::_addResponse("source",$agent->agent_name);
             self::_addResponse("speech",$predicted_response[array_rand($predicted_response)]['response']);
 
             return self::__getFinalResponse();
-        } elseif ($predicted_source && $prompt) {
+        } elseif ($predicted_source && $prompt && $score >= $agent->threshold) {
 
             self::_addResponse("source",$agent->agent_name);
             self::_addResponse("speech",$prompt->prompt);
 
             return self::__getFinalResponse();
         } else {
+
             return self::_getDefaultFallbackResponse($agent);
         }
 
@@ -478,7 +550,7 @@ class Echelon_Helper
 
                 foreach ($contextParameters as $key=>$contextParameter){
 
-                    if (empty($newContextParameters[$key]) || $newContextParameters[$key] == false) {
+                    if (empty($contextParameter) || $contextParameter == false) {
                         $newContextParameters[$key] = $parameters[$key];
                     } else {
                         $newContextParameters[$key] = $contextParameter;

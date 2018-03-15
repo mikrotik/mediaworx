@@ -148,7 +148,7 @@
                                         $checked = 'checked';
                                     }
                                     ?>
-                                    <input type="checkbox" data-switch-url="<?php echo site_url()?>agents/change_agent_logging" name="onoffswitch" class="onoffswitch-checkbox" id="c_<?php echo $agent->agentid?>" data-id="<?php echo $agent->agentid?>" <?php echo $checked?>>
+                                    <input type="checkbox" name="logging" value="1" class="checkbox" <?php echo $checked?>>
                                 </div>
                             </div>
                         </div>
