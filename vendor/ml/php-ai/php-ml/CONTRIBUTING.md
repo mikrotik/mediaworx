@@ -6,37 +6,56 @@ code base clean, unified and future proof.
 
 ## Branch
 
-You should only open pull requests against the develop branch.
+You should only open pull requests against the `master` branch.
 
-## Unit-Tests
+## Unit Tests
 
 Please try to add a test for your pull-request. You can run the unit-tests by calling:
 
+```bash
+vendor/bin/phpunit
 ```
-bin/phpunit
+
+## Performance Tests
+
+Before first run bootstrap script will download all necessary datasets from public repository `php-ai/php-ml-datasets`.
+
+Time performance tests:
+
+```bash
+vendor/bin/phpbench run --report=time
+```
+
+Memory performance tests:
+
+```bash
+vendor/bin/phpbench run --report=memory
 ```
 
 ## Travis
 
-GitHub automatically run your pull request through Travis CI against PHP 7. 
-If you break the tests, I cannot merge your code, so please make sure that your code is working 
-before opening up a Pull-Request.
+GitHub automatically run your pull request through Travis CI.
+If you break the tests, I cannot merge your code, so please make sure that your code is working before opening up a Pull-Request.
 
 ## Merge
 
-Please allow me time to review your pull requests. I will give my best to review everything as fast as possible, but cannot always live up to my own expectations.
+Please give me time to review your pull requests. I will give my best to review everything as fast as possible, but cannot always live up to my own expectations.
 
-## Coding Standards
+## Coding Standards & Static Analysis
 
-When contributing code to PHP-ML, you must follow its coding standards. To make a long story short, here is the golden tool:
+When contributing code to PHP-ML, you must follow its coding standards. To do that, just run:
 
+```bash
+composer fix-cs
 ```
-tools/php-cs-fixer.sh
+[More about EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard)
+
+Code has to also pass static analysis by [PHPStan](https://github.com/phpstan/phpstan):
+
+```bash
+composer phpstan
 ```
 
-This script run PHP Coding Standards Fixer with `--level=symfony` param.
-
-More about PHP-CS-Fixer: [http://cs.sensiolabs.org/](http://cs.sensiolabs.org/)
 
 ## Documentation
 

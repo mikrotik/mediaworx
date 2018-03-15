@@ -4,8 +4,8 @@ Association rule learning based on [Apriori algorithm](https://en.wikipedia.org/
 
 ### Constructor Parameters
 
-* $support - [confidence](https://en.wikipedia.org/wiki/Association_rule_learning#Support), minimum relative amount of frequent item set in train sample
-* $confidence - [confidence](https://en.wikipedia.org/wiki/Association_rule_learning#Confidence), minimum relative amount of item set in frequent item sets
+* $support - minimum threshold of [support](https://en.wikipedia.org/wiki/Association_rule_learning#Support), i.e. the ratio of samples which contain both X and Y for a rule "if X then Y"
+* $confidence - minimum threshold of [confidence](https://en.wikipedia.org/wiki/Association_rule_learning#Confidence), i.e. the ratio of samples containing both X and Y to those containing X
 
 ```
 use Phpml\Association\Apriori;
@@ -35,7 +35,7 @@ To predict sample label use `predict` method. You can provide one sample or arra
 
 ```
 $associator->predict(['alpha','theta']);
-// return [[['beta']]]
+// return [['beta']]
 
 $associator->predict([['alpha','epsilon'],['beta','theta']]);
 // return [[['beta']], [['alpha']]]
@@ -44,10 +44,10 @@ $associator->predict([['alpha','epsilon'],['beta','theta']]);
 ### Associating
 
 Get generated association rules simply use `rules` method.
- 
+
 ```
 $associator->getRules();
-// return [['antecedent' => ['alpha', 'theta'], 'consequent' => ['beta], 'support' => 1.0, 'confidence' => 1.0], ... ]
+// return [['antecedent' => ['alpha', 'theta'], 'consequent' => ['beta'], 'support' => 1.0, 'confidence' => 1.0], ... ]
 ```
 
 ### Frequent item sets

@@ -50,17 +50,11 @@
 </div>
 <?php init_tail(); ?>
 <script>
-
     var exRowTable;
     var ctrbtn;
 
-    $(function(){
+    $(function() {
         exRowTable = initDataTable('.table-intents');
-
-        /** Validate Entity Form*/
-        _validate_form($('.intent-form'),
-            {intent_name:'required'}
-        );
 
         $('#new-intent').on('show.bs.modal', function(e) {
             var invoker = $(e.relatedTarget);
@@ -88,6 +82,7 @@
                 $(this).addClass('fa-minus-square-o');
             }
         });
+
     });
 
     function format ( rowData,intentid ) {
@@ -120,7 +115,7 @@
 
                             htmlRow =     '<tr class="child-row-'+e.id+' details_control details_control_id-'+intentid+'-'+i+'" data-id="'+ e.id+'" role="row">';
                             htmlRow +=     '<td onclick="getDetails(this,\''+ e.id+'\')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="'+ctrbtn+'"></i>&nbsp;&nbsp;<i class="fa fa-level-down text-info"></i>&nbsp;&nbsp;<i class="fa fa-circle-thin text-info"></i>&nbsp;&nbsp;'+e.intent_name+'</td>';
-                            htmlRow += '<td><button type="button" data-toggle="modal" data-target="#new-intent" data-url="<?php echo admin_url().'intents/followup/'?>' + intentid + '" class="btn btn-link fa fa-plus"><?php echo _l("link_followup")?></button> ';
+                            htmlRow += '<td><button type="button" data-toggle="modal" data-target="#new-intent" data-url="<?php echo admin_url().'intents/followup/'?>' + e.id + '" class="btn btn-link fa fa-plus"><?php echo _l("link_followup")?></button> ';
                             htmlRow +=     '<a href="<?php echo admin_url().'intents/intent/'?>'+e.id+'" class="btn btn-default btn-icon"><i class="fa fa-pencil-square-o"></i></a> ' ;
                             htmlRow +=    '<a href="#" class="btn btn-danger btn-icon" data-id="'+e.id+'" data-url="<?php echo admin_url().'intents/delete'?>" onclick="deleteIntent(this)"><i class="fa fa-remove"></i></a></td>';
                             htmlRow +=     '</tr>';
@@ -137,6 +132,11 @@
         } );
 
         return div;
+    }
+
+    function new_intent()
+    {
+        $('.intent-form').submit();
     }
 
     function getDetails(element,intentid){
@@ -204,11 +204,6 @@
             $('#row-'+intentid+' td').append(div);
         }
 
-    }
-
-    function new_intent()
-    {
-        $('.intent-form').submit();
     }
 
 

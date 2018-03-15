@@ -1,5 +1,4 @@
 /vendor/
-humbuglog.*
-/bin/phpunit
-.coverage
 .php_cs.cache
+/build
+/tests/Performance/Data/*.csv

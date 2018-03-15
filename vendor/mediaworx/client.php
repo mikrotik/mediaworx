@@ -8,8 +8,8 @@ class Mediaworx_Client
     protected $_environment = NULL;
 
     protected $_mediaworx_host = array(
-        'test' => 'dev.mediaworx.io',
-        'live' => '18.195.189.153'
+        'test' => 'http://dev.mediaworx.io',
+        'live' => 'https://echelon.mastersec.net'
     );
 
     protected $_ca_certificates_file = null;
@@ -88,8 +88,7 @@ class Mediaworx_Client
 
     protected function _performRequest (Mediaworx_Operation $operation)
     {
-        $url  = 'http://' .
-            $this->_mediaworx_host[$this->_environment] .
+        $url  = $this->_mediaworx_host[$this->_environment] .
             '/mediaworx/v1/' . urlencode($operation->getAction()) . '/index/' .
             urlencode($operation->getOperationName());
 

@@ -59,6 +59,8 @@
 <?php } ?>
 <?php echo app_script('assets/js','calendar.js'); ?>
 <?php } ?>
+<!-- Select2 -->
+<script src="<?php echo base_url('assets/js/select2/dist/js//select2.full.min.js');?>"></script>
 <script src="<?php echo base_url('assets/js/taginput.js')?>"></script>
 <?php echo app_script('assets/js','main.js'); ?>
 <?php echo get_custom_fields_hyperlink_js_function(); ?>

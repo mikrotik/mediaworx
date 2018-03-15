@@ -76,4 +76,14 @@ class Tools extends CRM_Controller {
          */
         Echelon_Helper::_train();
     }
+
+    public function debug(){
+
+        /*
+         * TODO - Training
+         */
+        echo '<pre>';
+//        Echelon_Helper::_testBot();
+        print_r(Echelon_Helper::_predictIntent("yes"));
+    }
 }

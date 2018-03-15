@@ -88,17 +88,6 @@ class Echelon_model extends CRM_Model
         if (is_numeric($id))
         {
 
-            $this->db->where('categoryid',$id);
-            $this->db->delete('tblecheloncategorypatterns');
-
-            $this->db->where('categoryid',$id);
-            $this->db->delete('tblecheloncategoryresponses');
-
-
-            unset($data['response']);
-            unset($data['pattern']);
-
-
             $this->db->where('id', $id);
             $this->db->update('tblechelon', $data);
 

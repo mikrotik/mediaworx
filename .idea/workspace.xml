@@ -2,7 +2,823 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9274056-e247-49ca-ac8d-4bd0d79f2f19" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/backups/echelon/model/model.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/autoload.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/bin/google-cloud-batch" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/composer/ClassLoader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/composer/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/composer/autoload_classmap.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/composer/autoload_files.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/composer/autoload_namespaces.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/composer/autoload_psr4.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/composer/autoload_real.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/composer/installed.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/firebase/php-jwt/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/firebase/php-jwt/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/firebase/php-jwt/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/firebase/php-jwt/src/BeforeValidException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/firebase/php-jwt/src/ExpiredException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/firebase/php-jwt/src/JWT.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/firebase/php-jwt/src/SignatureInvalidException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/.editorconfig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/.php_cs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/.travis.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/CHANGELOG.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/CONTRIBUTING.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/COPYING" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/autoload.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/phpunit.xml.dist" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/ApplicationDefaultCredentials.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/Cache/InvalidArgumentException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/Cache/Item.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/Cache/MemoryCacheItemPool.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/CacheTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/Credentials/AppIdentityCredentials.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/Credentials/GCECredentials.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/Credentials/IAMCredentials.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/Credentials/ServiceAccountCredentials.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/Credentials/ServiceAccountJwtAccessCredentials.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/Credentials/UserRefreshCredentials.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/CredentialsLoader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/FetchAuthTokenCache.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/FetchAuthTokenInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/HttpHandler/Guzzle5HttpHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/HttpHandler/Guzzle6HttpHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/HttpHandler/HttpHandlerFactory.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/Middleware/AuthTokenMiddleware.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/Middleware/ScopedAccessTokenMiddleware.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/Middleware/SimpleMiddleware.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/OAuth2.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/Subscriber/AuthTokenSubscriber.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/Subscriber/ScopedAccessTokenSubscriber.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/src/Subscriber/SimpleSubscriber.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/ApplicationDefaultCredentialsTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/BaseTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/Cache/ItemTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/Cache/MemoryCacheItemPoolTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/CacheTraitTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/Credentials/AppIndentityCredentialsTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/Credentials/GCECredentialsTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/Credentials/IAMCredentialsTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/Credentials/ServiceAccountCredentialsTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/Credentials/UserRefreshCredentialsTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/FetchAuthTokenCacheTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/FetchAuthTokenTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/HttpHandler/Guzzle5HttpHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/HttpHandler/Guzzle6HttpHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/HttpHandler/HttpHandlerFactoryTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/Middleware/AuthTokenMiddlewareTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/Middleware/ScopedAccessTokenMiddlewareTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/Middleware/SimpleMiddlewareTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/OAuth2Test.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/Subscriber/AuthTokenSubscriberTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/Subscriber/ScopedAccessTokenSubscriberTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/Subscriber/SimpleSubscriberTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/bootstrap.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/fixtures/.config/gcloud/application_default_credentials.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/fixtures/private.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/fixtures/private.pem" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/fixtures/public.pem" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/fixtures2/.config/gcloud/application_default_credentials.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/fixtures2/private.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/auth/tests/mocks/AppIdentityService.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/AnonymousCredentials.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/ArrayTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Batch/BatchConfig.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Batch/BatchDaemon.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Batch/BatchDaemonTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Batch/BatchJob.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Batch/BatchRunner.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Batch/BatchTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Batch/ConfigStorageInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Batch/HandleFailureTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Batch/InMemoryConfigStorage.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Batch/ProcessItemInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Batch/Retry.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Batch/SysvConfigStorage.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Batch/SysvProcessor.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Blob.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/CONTRIBUTING.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/CallTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/ClientTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Compute/Metadata.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Compute/Metadata/Readers/ReaderInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Compute/Metadata/Readers/StreamReader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/ConcurrencyControlTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/DebugInfoTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Duration.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/EmulatorTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Exception/AbortedException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Exception/BadRequestException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Exception/ConflictException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Exception/DeadlineExceededException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Exception/FailedPreconditionException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Exception/GoogleException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Exception/NotFoundException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Exception/ServerException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Exception/ServiceException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/ExponentialBackoff.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/GeoPoint.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/GrpcRequestWrapper.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/GrpcTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Iam/Iam.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Iam/IamConnectionInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Iam/PolicyBuilder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Int64.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Iterator/ItemIterator.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Iterator/ItemIteratorTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Iterator/PageIterator.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Iterator/PageIteratorTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/JsonTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Lock/FlockLock.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Lock/LockInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Lock/LockTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Lock/SemaphoreLock.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Lock/SymfonyLockAdapter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Logger/AppEngineFlexFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Logger/AppEngineFlexHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/LongRunning/LROTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/LongRunning/LongRunningConnectionInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/LongRunning/LongRunningOperation.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/LongRunning/OperationResponseTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/PhpArray.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Report/EmptyMetadataProvider.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Report/GAEFlexMetadataProvider.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Report/MetadataProviderInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Report/MetadataProviderUtils.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Report/SimpleMetadataProvider.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/RequestBuilder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/RequestWrapper.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/RequestWrapperTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/RestTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Retry.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/RetryDeciderTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/ServiceBuilder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/SysvTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Timestamp.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Upload/AbstractUploader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Upload/MultipartUploader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Upload/ResumableUploader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Upload/SignedUrlUploader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/Upload/StreamableUploader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/UriTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/VERSION" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/ValidateTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/ValueMapperTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/WhitelistTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/bin/google-cloud-batch" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-core/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/Blob.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/CONTRIBUTING.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/Connection/ConnectionInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/Connection/Rest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/Connection/ServiceDefinition/datastore-v1.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/DatastoreClient.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/DatastoreSessionHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/DatastoreTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/Entity.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/EntityIterator.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/EntityMapper.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/EntityPageIterator.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/GeoPoint.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/Key.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/Operation.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/Query/GqlQuery.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/Query/Query.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/Query/QueryInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/Transaction.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/VERSION" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/google/cloud-datastore/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/CHANGELOG.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/UPGRADING.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Client.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/ClientInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Cookie/CookieJar.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Cookie/CookieJarInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Cookie/FileCookieJar.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Cookie/SessionCookieJar.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Cookie/SetCookie.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Exception/BadResponseException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Exception/ClientException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Exception/ConnectException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Exception/GuzzleException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Exception/RequestException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Exception/SeekException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Exception/ServerException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Exception/TooManyRedirectsException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Exception/TransferException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Handler/CurlFactory.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Handler/CurlFactoryInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Handler/CurlHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Handler/CurlMultiHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Handler/EasyHandle.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Handler/MockHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Handler/Proxy.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Handler/StreamHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/HandlerStack.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/MessageFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Middleware.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/Pool.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/PrepareBodyMiddleware.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/RedirectMiddleware.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/RequestOptions.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/RetryMiddleware.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/TransferStats.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/UriTemplate.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/functions.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/guzzle/src/functions_include.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/CHANGELOG.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/Makefile" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/src/AggregateException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/src/CancellationException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/src/Coroutine.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/src/EachPromise.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/src/FulfilledPromise.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/src/Promise.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/src/PromiseInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/src/PromisorInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/src/RejectedPromise.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/src/RejectionException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/src/TaskQueue.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/src/TaskQueueInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/src/functions.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/promises/src/functions_include.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/CHANGELOG.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/AppendStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/BufferStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/CachingStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/DroppingStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/FnStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/InflateStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/LazyOpenStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/LimitStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/MessageTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/MultipartStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/NoSeekStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/PumpStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/Request.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/Response.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/ServerRequest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/Stream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/StreamDecoratorTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/StreamWrapper.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/UploadedFile.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/Uri.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/UriNormalizer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/UriResolver.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/functions.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/guzzlehttp/psr7/src/functions_include.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/.php_cs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/CHANGELOG.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/doc/01-usage.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/doc/02-handlers-formatters-processors.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/doc/03-utilities.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/doc/04-extending.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/doc/sockets.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/phpunit.xml.dist" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/ErrorHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Formatter/ChromePHPFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Formatter/ElasticaFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Formatter/FlowdockFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Formatter/FluentdFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Formatter/FormatterInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Formatter/GelfMessageFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Formatter/HtmlFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Formatter/JsonFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Formatter/LineFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Formatter/LogglyFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Formatter/LogstashFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Formatter/MongoDBFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Formatter/ScalarFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Formatter/WildfireFormatter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/AbstractHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/AbstractProcessingHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/AbstractSyslogHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/AmqpHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/BrowserConsoleHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/BufferHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/ChromePHPHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/CouchDBHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/CubeHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/Curl/Util.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/DeduplicationHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/DoctrineCouchDBHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/DynamoDbHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/ElasticSearchHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/ErrorLogHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/FilterHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/FingersCrossed/ActivationStrategyInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/FingersCrossed/ChannelLevelActivationStrategy.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/FingersCrossed/ErrorLevelActivationStrategy.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/FingersCrossedHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/FirePHPHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/FleepHookHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/FlowdockHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/GelfHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/GroupHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/HandlerInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/HandlerWrapper.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/HipChatHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/IFTTTHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/LogEntriesHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/LogglyHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/MailHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/MandrillHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/MissingExtensionException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/MongoDBHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/NativeMailerHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/NewRelicHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/NullHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/PHPConsoleHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/PsrHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/PushoverHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/RavenHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/RedisHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/RollbarHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/RotatingFileHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/SamplingHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/Slack/SlackRecord.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/SlackHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/SlackWebhookHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/SlackbotHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/SocketHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/StreamHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/SwiftMailerHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/SyslogHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/SyslogUdp/UdpSocket.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/SyslogUdpHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/TestHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/WhatFailureGroupHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Handler/ZendMonitorHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Logger.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Processor/GitProcessor.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Processor/IntrospectionProcessor.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Processor/MemoryPeakUsageProcessor.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Processor/MemoryProcessor.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Processor/MemoryUsageProcessor.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Processor/MercurialProcessor.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Processor/ProcessIdProcessor.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Processor/PsrLogMessageProcessor.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Processor/TagProcessor.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Processor/UidProcessor.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Processor/WebProcessor.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/src/Monolog/Registry.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/ErrorHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Formatter/ChromePHPFormatterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Formatter/ElasticaFormatterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Formatter/FlowdockFormatterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Formatter/FluentdFormatterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Formatter/GelfMessageFormatterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Formatter/JsonFormatterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Formatter/LineFormatterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Formatter/LogglyFormatterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Formatter/LogstashFormatterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Formatter/MongoDBFormatterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Formatter/NormalizerFormatterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Formatter/ScalarFormatterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Formatter/WildfireFormatterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/AbstractHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/AbstractProcessingHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/AmqpHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/BrowserConsoleHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/BufferHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/ChromePHPHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/CouchDBHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/DeduplicationHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/DoctrineCouchDBHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/DynamoDbHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/ElasticSearchHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/ErrorLogHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/FilterHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/FingersCrossedHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/FirePHPHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/Fixtures/.gitkeep" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/FleepHookHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/FlowdockHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/GelfHandlerLegacyTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/GelfHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/GelfMockMessagePublisher.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/GroupHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/HandlerWrapperTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/HipChatHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/LogEntriesHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/MailHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/MockRavenClient.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/MongoDBHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/NativeMailerHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/NewRelicHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/NullHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/PHPConsoleHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/PsrHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/PushoverHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/RavenHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/RedisHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/RollbarHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/RotatingFileHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/SamplingHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/Slack/SlackRecordTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/SlackHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/SlackWebhookHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/SlackbotHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/SocketHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/StreamHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/SwiftMailerHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/SyslogHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/SyslogUdpHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/TestHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/UdpSocketTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/WhatFailureGroupHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Handler/ZendMonitorHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/LoggerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Processor/GitProcessorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Processor/IntrospectionProcessorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Processor/MemoryPeakUsageProcessorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Processor/MemoryUsageProcessorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Processor/MercurialProcessorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Processor/ProcessIdProcessorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Processor/PsrLogMessageProcessorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Processor/TagProcessorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Processor/UidProcessorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/Processor/WebProcessorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/PsrLogCompatTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/RegistryTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/monolog/monolog/tests/Monolog/TestCase.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/.php_cs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/.travis.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/CHANGELOG.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/CONTRIBUTING.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/bin/libsvm/svm-predict" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/bin/libsvm/svm-predict-osx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/bin/libsvm/svm-predict.exe" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/bin/libsvm/svm-scale" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/bin/libsvm/svm-scale-osx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/bin/libsvm/svm-scale.exe" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/bin/libsvm/svm-train" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/bin/libsvm/svm-train-osx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/bin/libsvm/svm-train.exe" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/composer.lock" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/data/glass.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/data/iris.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/data/wine.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/assets/php-ml-logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/index.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/association/apriori.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/classification/k-nearest-neighbors.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/classification/naive-bayes.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/classification/svc.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/clustering/dbscan.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/clustering/k-means.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/cross-validation/random-split.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/cross-validation/stratified-random-split.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/datasets/array-dataset.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/datasets/csv-dataset.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/datasets/demo/glass.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/datasets/demo/iris.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/datasets/demo/wine.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/datasets/files-dataset.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/feature-extraction/tf-idf-transformer.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/feature-extraction/token-count-vectorizer.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/metric/accuracy.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/metric/classification-report.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/metric/confusion-matrix.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/model-manager/persistency.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/neural-network/backpropagation.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/neural-network/multilayer-perceptron.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/preprocessing/imputation-missing-values.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/preprocessing/normalization.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/regression/least-squares.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/regression/svr.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/machine-learning/workflow/pipeline.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/math/distance.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/math/matrix.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/math/set.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/docs/math/statistic.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/humbug.json.dist" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/mkdocs.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/phpunit.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Association/Apriori.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Association/Associator.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Classification/Classifier.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Classification/DecisionTree.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Classification/DecisionTree/DecisionTreeLeaf.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Classification/Ensemble/AdaBoost.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Classification/Ensemble/Bagging.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Classification/Ensemble/RandomForest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Classification/KNearestNeighbors.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Classification/Linear/Adaline.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Classification/Linear/DecisionStump.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Classification/Linear/Perceptron.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Classification/NaiveBayes.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Classification/SVC.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Classification/WeightedClassifier.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Clustering/Clusterer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Clustering/DBSCAN.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Clustering/FuzzyCMeans.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Clustering/KMeans.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Clustering/KMeans/Cluster.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Clustering/KMeans/Point.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Clustering/KMeans/Space.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/CrossValidation/RandomSplit.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/CrossValidation/Split.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/CrossValidation/StratifiedRandomSplit.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Dataset/ArrayDataset.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Dataset/CsvDataset.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Dataset/Dataset.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Dataset/Demo/GlassDataset.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Dataset/Demo/IrisDataset.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Dataset/Demo/WineDataset.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Dataset/FilesDataset.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Estimator.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Exception/DatasetException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Exception/FileException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Exception/InvalidArgumentException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Exception/MatrixException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Exception/NormalizerException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Exception/SerializeException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/FeatureExtraction/StopWords.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/FeatureExtraction/StopWords/English.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/FeatureExtraction/StopWords/Polish.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/FeatureExtraction/TfIdfTransformer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/FeatureExtraction/TokenCountVectorizer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Helper/OneVsRest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Helper/Predictable.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Helper/Trainable.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Math/Distance.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Math/Distance/Chebyshev.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Math/Distance/Euclidean.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Math/Distance/Manhattan.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Math/Distance/Minkowski.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Math/Kernel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Math/Kernel/RBF.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Math/Matrix.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Math/Product.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Math/Set.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Math/Statistic/Correlation.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Math/Statistic/Gaussian.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Math/Statistic/Mean.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Math/Statistic/StandardDeviation.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Metric/Accuracy.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Metric/ClassificationReport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Metric/ConfusionMatrix.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/ModelManager.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/ActivationFunction.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/ActivationFunction/BinaryStep.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/ActivationFunction/Gaussian.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/ActivationFunction/HyperbolicTangent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/ActivationFunction/Sigmoid.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/Layer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/Network.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/Network/LayeredNetwork.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/Network/MultilayerPerceptron.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/Node.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/Node/Bias.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/Node/Input.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/Node/Neuron.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/Node/Neuron/Synapse.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/Training.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/Training/Backpropagation.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/NeuralNetwork/Training/Backpropagation/Sigma.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Pipeline.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Preprocessing/Imputer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Preprocessing/Imputer/Strategy.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Preprocessing/Imputer/Strategy/MeanStrategy.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Preprocessing/Imputer/Strategy/MedianStrategy.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Preprocessing/Imputer/Strategy/MostFrequentStrategy.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Preprocessing/Normalizer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Preprocessing/Preprocessor.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Regression/LeastSquares.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Regression/MLPRegressor.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Regression/Regression.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Regression/SVR.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/SupportVectorMachine/DataTransformer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/SupportVectorMachine/Kernel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/SupportVectorMachine/SupportVectorMachine.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/SupportVectorMachine/Type.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Tokenization/Tokenizer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Tokenization/WhitespaceTokenizer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Tokenization/WordTokenizer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/Transformer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Association/AprioriTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Classification/DecisionTreeTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Classification/Ensemble/AdaBoostTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Classification/Ensemble/BaggingTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Classification/Ensemble/RandomForestTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Classification/KNearestNeighborsTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Classification/Linear/AdalineTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Classification/Linear/DecisionStumpTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Classification/Linear/PerceptronTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Classification/NaiveBayesTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Classification/SVCTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Clustering/DBSCANTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Clustering/FuzzyCMeansTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Clustering/KMeansTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/CrossValidation/RandomSplitTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/CrossValidation/StratifiedRandomSplitTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/ArrayDatasetTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/CsvDatasetTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Demo/GlassDatasetTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Demo/IrisDatasetTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Demo/WineDatasetTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/FilesDatasetTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/business/001.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/business/002.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/business/003.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/business/004.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/business/005.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/business/006.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/business/007.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/business/008.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/business/009.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/business/010.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/entertainment/001.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/entertainment/002.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/entertainment/003.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/entertainment/004.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/entertainment/005.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/entertainment/006.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/entertainment/007.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/entertainment/008.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/entertainment/009.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/entertainment/010.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/politics/001.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/politics/002.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/politics/003.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/politics/004.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/politics/005.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/politics/006.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/politics/007.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/politics/008.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/politics/009.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/politics/010.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/sport/001.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/sport/002.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/sport/003.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/sport/004.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/sport/005.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/sport/006.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/sport/007.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/sport/008.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/sport/009.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/sport/010.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/tech/001.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/tech/002.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/tech/003.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/tech/004.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/tech/005.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/tech/006.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/tech/007.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/tech/008.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/tech/009.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/bbc/tech/010.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Dataset/Resources/dataset.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/FeatureExtraction/StopWordsTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/FeatureExtraction/TfIdfTransformerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/FeatureExtraction/TokenCountVectorizerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Math/Distance/ChebyshevTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Math/Distance/EuclideanTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Math/Distance/ManhattanTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Math/Distance/MinkowskiTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Math/Kernel/RBFTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Math/MatrixTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Math/ProductTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Math/SetTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Math/Statistic/CorrelationTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Math/Statistic/GaussianTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Math/Statistic/MeanTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Math/Statistic/StandardDeviationTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Metric/AccuracyTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Metric/ClassificationReportTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Metric/ConfusionMatrixTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/ModelManagerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/NeuralNetwork/ActivationFunction/BinaryStepTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/NeuralNetwork/ActivationFunction/GaussianTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/NeuralNetwork/ActivationFunction/HyperboliTangentTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/NeuralNetwork/ActivationFunction/SigmoidTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/NeuralNetwork/LayerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/NeuralNetwork/Network/LayeredNetworkTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/NeuralNetwork/Network/MultilayerPerceptronTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/NeuralNetwork/Node/BiasTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/NeuralNetwork/Node/InputTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/NeuralNetwork/Node/Neuron/SynapseTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/NeuralNetwork/Node/NeuronTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/NeuralNetwork/Training/BackpropagationTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/PipelineTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Preprocessing/ImputerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Preprocessing/NormalizerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Regression/LeastSquaresTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Regression/SVRTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/SupportVectorMachine/DataTransformerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/SupportVectorMachine/SupportVectorMachineTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Tokenization/WhitespaceTokenizerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tests/Phpml/Tokenization/WordTokenizerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tools/code-coverage.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tools/handle_brew_pkg.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tools/php-cs-fixer.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/tools/prepare_osx_env.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/var/.gitkeep" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/cache/CHANGELOG.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/cache/LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/cache/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/cache/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/cache/src/CacheException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/cache/src/CacheItemInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/cache/src/CacheItemPoolInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/cache/src/InvalidArgumentException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/http-message/CHANGELOG.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/http-message/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/http-message/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/http-message/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/http-message/src/MessageInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/http-message/src/RequestInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/http-message/src/ResponseInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/http-message/src/ServerRequestInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/http-message/src/StreamInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/http-message/src/UploadedFileInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/http-message/src/UriInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/log/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/log/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/log/Psr/Log/AbstractLogger.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/log/Psr/Log/InvalidArgumentException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/log/Psr/Log/LogLevel.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/log/Psr/Log/LoggerAwareInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/log/Psr/Log/LoggerAwareTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/log/Psr/Log/LoggerInterface.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/log/Psr/Log/LoggerTrait.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/log/Psr/Log/NullLogger.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/log/Psr/Log/Test/LoggerInterfaceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/log/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/psr/log/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/.travis.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/src/Rize/UriTemplate.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/src/Rize/UriTemplate/Node/Abstraction.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/src/Rize/UriTemplate/Node/Expression.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/src/Rize/UriTemplate/Node/Literal.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/src/Rize/UriTemplate/Node/Variable.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/src/Rize/UriTemplate/Operator/Abstraction.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/src/Rize/UriTemplate/Operator/Named.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/src/Rize/UriTemplate/Operator/UnNamed.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/src/Rize/UriTemplate/Parser.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/src/Rize/UriTemplate/UriTemplate.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/test/Rize/Uri/Node/ParserTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/test/Rize/UriTemplateTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/test/fixtures/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/test/fixtures/extended-tests.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/test/fixtures/json2xml.xslt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/test/fixtures/negative-tests.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/test/fixtures/spec-examples-by-section.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/test/fixtures/spec-examples.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/ml/rize/uri-template/test/fixtures/transform-json-tests.xslt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Agents_model.php" afterPath="$PROJECT_DIR$/application/models/Agents_model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/libraries/mediaworx/Api.php" afterPath="$PROJECT_DIR$/application/libraries/mediaworx/Api.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/CRM_Model.php" afterPath="$PROJECT_DIR$/application/core/CRM_Model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Clients.php" afterPath="$PROJECT_DIR$/application/controllers/Clients.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/Clients_controller.php" afterPath="$PROJECT_DIR$/application/core/Clients_controller.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Echelon_model.php" afterPath="$PROJECT_DIR$/application/models/Echelon_model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Intents.php" afterPath="$PROJECT_DIR$/application/controllers/Intents.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Intents_model.php" afterPath="$PROJECT_DIR$/application/models/Intents_model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/Mediaworx_controller.php" afterPath="$PROJECT_DIR$/application/core/Mediaworx_controller.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php" afterPath="$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/cli/Tools.php" afterPath="$PROJECT_DIR$/application/controllers/cli/Tools.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/themes/echelon/views/agents/agent.php" afterPath="$PROJECT_DIR$/application/views/themes/echelon/views/agents/agent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/mediaworx/client.php" afterPath="$PROJECT_DIR$/vendor/mediaworx/client.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/english/english_lang.php" afterPath="$PROJECT_DIR$/application/language/english/english_lang.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/echelon/helper.php" afterPath="$PROJECT_DIR$/vendor/echelon/helper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/echelon/hybird.php" afterPath="$PROJECT_DIR$/vendor/echelon/hybird.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/intents/intent.php" afterPath="$PROJECT_DIR$/application/views/admin/intents/intent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/tables/intents.php" afterPath="$PROJECT_DIR$/application/views/admin/tables/intents.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/intents/manage.php" afterPath="$PROJECT_DIR$/application/views/admin/intents/manage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/helpers/perfex_api_helper.php" afterPath="$PROJECT_DIR$/application/helpers/perfex_api_helper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/includes/scripts.php" afterPath="$PROJECT_DIR$/application/views/admin/includes/scripts.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/themes/echelon/views/smalltalk/smalltalk.php" afterPath="$PROJECT_DIR$/application/views/themes/echelon/views/smalltalk/smalltalk.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mediaworx.iws" />
@@ -25,11 +841,54 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Agents_model.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/models/Agents_model.php">
+      <file leaf-file-name="helper.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vendor/echelon/helper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5109244">
-              <caret line="112" column="12" selection-start-line="112" selection-start-column="12" selection-end-line="112" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.7061947">
+              <caret line="141" column="26" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="26" />
+              <folding>
+                <element signature="e#110#159#0#PHP" expanded="true" />
+                <marker date="1521118837090" expanded="true" signature="5495:5794" placeholder="SELECT i.id,..tblintents..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="log.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/temp/echelon/log.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="perfex_api_helper.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/helpers/perfex_api_helper.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-35.964287">
+              <caret line="239" column="44" selection-start-line="235" selection-start-column="6" selection-end-line="239" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Mediaworx_hybird.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.357142">
+              <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hybird.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/echelon/hybird.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.7142856">
+              <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -51,25 +910,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/vendor/echelon/helper/helper.php" />
-        <option value="$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php" />
-        <option value="$PROJECT_DIR$/application/core/Mediaworx_controller.php" />
-        <option value="$PROJECT_DIR$/vendor/ml/autoload.php" />
-        <option value="$PROJECT_DIR$/vendor/ml/bin/google-cloud-batch" />
-        <option value="$PROJECT_DIR$/application/controllers/Clients.php" />
-        <option value="$PROJECT_DIR$/vendor/mediaworx/client.php" />
-        <option value="$PROJECT_DIR$/application/views/themes/echelon/views/smalltalk/smalltalk.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/tables/entities.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/tables/echelon.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/echelon/manage.php" />
-        <option value="$PROJECT_DIR$/application/controllers/admin/Echelon.php" />
-        <option value="$PROJECT_DIR$/application/models/Echelon_model.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/echelon/category.php" />
-        <option value="$PROJECT_DIR$/cli/parse_yaml.php" />
-        <option value="$PROJECT_DIR$/application/libraries/Yaml.php" />
-        <option value="$PROJECT_DIR$/application/libraries/Spyc.php" />
-        <option value="$PROJECT_DIR$/temp/echelon/yaml/ai.yml" />
-        <option value="$PROJECT_DIR$/temp/echelon/yaml/ai.json" />
         <option value="$PROJECT_DIR$/temp/echelon/yaml/profile.json" />
         <option value="$PROJECT_DIR$/temp/echelon/yaml/computers.json" />
         <option value="$PROJECT_DIR$/temp/echelon/yaml/conversations.json" />
@@ -87,21 +927,40 @@
         <option value="$PROJECT_DIR$/temp/echelon/yaml/sports.json" />
         <option value="$PROJECT_DIR$/temp/echelon/yaml/trivia.json" />
         <option value="$PROJECT_DIR$/application/helpers/perfex_constants_helper.php" />
-        <option value="$PROJECT_DIR$/application/core/CRM_Model.php" />
         <option value="$PROJECT_DIR$/vendor/ml/php-ai/php-ml/src/Phpml/FeatureExtraction/TokenCountVectorizer.php" />
         <option value="$PROJECT_DIR$/application/views/admin/utilities/training.php" />
-        <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/application/controllers/admin/Utilities.php" />
-        <option value="$PROJECT_DIR$/application/language/english/english_lang.php" />
         <option value="$PROJECT_DIR$/application/models/Cron_model.php" />
-        <option value="$PROJECT_DIR$/application/helpers/perfex_api_helper.php" />
         <option value="$PROJECT_DIR$/vendor/stanford/php-ai/php-ml/src/Phpml/ModelManager.php" />
         <option value="$PROJECT_DIR$/predict.php" />
         <option value="$PROJECT_DIR$/train.php" />
+        <option value="$PROJECT_DIR$/application/views/themes/echelon/template_parts/intents_table.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/intents/manage.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/tables/intents.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/includes/scripts.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/intents/intent.php" />
+        <option value="$PROJECT_DIR$/application/controllers/admin/Echelon.php" />
+        <option value="$PROJECT_DIR$/application/models/Echelon_model.php" />
+        <option value="$PROJECT_DIR$/application/controllers/mediaworx/v1/Dialog.php" />
+        <option value="$PROJECT_DIR$/application/core/CRM_Model.php" />
+        <option value="$PROJECT_DIR$/application/core/Mediaworx_controller.php" />
+        <option value="$PROJECT_DIR$/application/core/Clients_controller.php" />
+        <option value="$PROJECT_DIR$/application/controllers/cli/Tools.php" />
+        <option value="$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Clients.php" />
+        <option value="$PROJECT_DIR$/application/views/themes/echelon/views/smalltalk/smalltalk.php" />
+        <option value="$PROJECT_DIR$/application/helpers/perfex_api_helper.php" />
+        <option value="$PROJECT_DIR$/application/libraries/mediaworx/Api.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Intents.php" />
+        <option value="$PROJECT_DIR$/application/models/Intents_model.php" />
+        <option value="$PROJECT_DIR$/application/views/themes/echelon/views/agents/agent.php" />
+        <option value="$PROJECT_DIR$/application/language/english/english_lang.php" />
+        <option value="$PROJECT_DIR$/application/models/Agents_model.php" />
+        <option value="$PROJECT_DIR$/vendor/echelon/log.php" />
+        <option value="$PROJECT_DIR$/vendor/mediaworx/client.php" />
+        <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/vendor/echelon/hybird.php" />
         <option value="$PROJECT_DIR$/vendor/echelon/helper.php" />
-        <option value="$PROJECT_DIR$/application/controllers/cli/Tools.php" />
-        <option value="$PROJECT_DIR$/application/models/Agents_model.php" />
       </list>
     </option>
   </component>
@@ -145,7 +1004,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -174,30 +1032,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mediaworx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mediaworx" />
+              <option name="myItemId" value="temp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
+              <option name="myItemId" value="echelon" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -216,11 +1061,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/vendor/ml" />
+      <recent name="$PROJECT_DIR$/assets/js" />
       <recent name="$PROJECT_DIR$/vendor" />
       <recent name="$PROJECT_DIR$/temp/echelon/yaml" />
       <recent name="$PROJECT_DIR$/vendor/echelon" />
-      <recent name="$PROJECT_DIR$/application/libraries/algorithms" />
-      <recent name="$PROJECT_DIR$/application/helpers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/application/controllers" />
@@ -285,13 +1130,13 @@
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2143467" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22801025" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32872504" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24935952" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32515338" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -323,297 +1168,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/helpers/perfex_themes_helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34848484">
-          <caret line="70" column="14" selection-start-line="70" selection-start-column="14" selection-end-line="70" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/admin/Echelon.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-41.392857">
-          <caret line="136" column="42" selection-start-line="136" selection-start-column="42" selection-end-line="136" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/echelon/category.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48821548">
-          <caret line="130" column="42" selection-start-line="130" selection-start-column="42" selection-end-line="130" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Echelon_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.21548821">
-          <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/echelon/exception.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06397306">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../program-o/work/echelonX/Echelon_core.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48821548">
-          <caret line="1044" column="26" selection-start-line="1042" selection-start-column="8" selection-end-line="1044" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/libraries/spyc.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="397" column="21" selection-start-line="397" selection-start-column="21" selection-end-line="397" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/libraries/Yaml.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6010101">
-          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/ai.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/computers.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="3682" selection-start-line="0" selection-start-column="3682" selection-end-line="0" selection-end-column="3682" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/general.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/emotion.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="9926" selection-start-line="0" selection-start-column="9926" selection-end-line="0" selection-end-column="9926" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/food.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="1111" selection-start-line="0" selection-start-column="1111" selection-end-line="0" selection-end-column="1111" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/gossip.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="931" selection-start-line="0" selection-start-column="931" selection-end-line="0" selection-end-column="931" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/greetings.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="991" selection-start-line="0" selection-start-column="991" selection-end-line="0" selection-end-column="991" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/history.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="777" selection-start-line="0" selection-start-column="777" selection-end-line="0" selection-end-column="777" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/humor.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/literature.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="2111" selection-start-line="0" selection-start-column="2111" selection-end-line="0" selection-end-column="2111" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/money.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="2279" selection-start-line="0" selection-start-column="2279" selection-end-line="0" selection-end-column="2279" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/movies.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="1346" selection-start-line="0" selection-start-column="1346" selection-end-line="0" selection-end-column="1346" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/politics.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="1693" selection-start-line="0" selection-start-column="1693" selection-end-line="0" selection-end-column="1693" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/profile.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="1354" selection-start-line="0" selection-start-column="1354" selection-end-line="0" selection-end-column="1354" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/psychology.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="5765" selection-start-line="0" selection-start-column="5765" selection-end-line="0" selection-end-column="5765" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/science.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="2608" selection-start-line="0" selection-start-column="2608" selection-end-line="0" selection-end-column="2608" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/sports.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="1916" selection-start-line="0" selection-start-column="1916" selection-end-line="0" selection-end-column="1916" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/echelon/yaml/trivia.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="1111" selection-start-line="0" selection-start-column="1111" selection-end-line="0" selection-end-column="1111" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/utilities/backup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.942761">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/core/CRM_Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06397306">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/stanford/php-ai/php-ml/src/Phpml/FeatureExtraction/TfIdfTransformer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57575756">
-          <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/stanford/php-ai/php-ml/src/Phpml/Classification/Ensemble/RandomForest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.942761">
-          <caret line="67" column="20" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/stanford/php-ai/php-ml/src/Phpml/Classification/DecisionTree.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9511784">
-          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/helpers/perfex_api_helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.75">
-          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/utilities/training.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="72" selection-start-line="36" selection-start-column="72" selection-end-line="36" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/stanford/php-ai/php-ml/src/Phpml/ModelManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6884817">
-          <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/ml/bin/google-cloud-batch">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/echelon/echelon_autoload.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/language/english/english_lang.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.96590906">
-          <caret line="186" column="15" selection-start-line="186" selection-start-column="15" selection-end-line="186" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Cron_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.552356">
-          <caret line="1329" column="0" selection-start-line="1329" selection-start-column="0" selection-end-line="1329" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipe.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.908377">
-          <caret line="48" column="1" selection-start-line="3" selection-start-column="0" selection-end-line="48" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.82722515">
-          <caret line="59" column="32" selection-start-line="59" selection-start-column="32" selection-end-line="59" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/helpers/perfex_constants_helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7251309">
-          <caret line="55" column="8" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/admin/Utilities.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.2508417">
@@ -621,71 +1175,380 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/echelon/hybird.php">
+    <entry file="file://$PROJECT_DIR$/application/config/config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64141417">
-          <caret line="35" column="87" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="87" />
+        <state vertical-scroll-proportion="-9.388235">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/cli/Tools.php">
+    <entry file="file://$PROJECT_DIR$/application/views/admin/intents/manage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77609426">
-          <caret line="74" column="26" selection-start-line="74" selection-start-column="26" selection-end-line="74" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.5391791">
+          <caret line="63" column="11" selection-start-line="63" selection-start-column="11" selection-end-line="63" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/echelon/helper.php">
+    <entry file="file://$PROJECT_DIR$/application/views/themes/echelon/views/intents/manage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3922559">
-          <caret line="91" column="30" selection-start-line="91" selection-start-column="30" selection-end-line="91" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.4252101">
+          <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="57" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backups/echelon/model/model.dat">
+    <entry file="file://$PROJECT_DIR$/application/views/themes/echelon/template_parts/intents_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="6.5462184">
+          <caret line="205" column="5" selection-start-line="205" selection-start-column="5" selection-end-line="205" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/tables/intents.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5671642">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/select2/src/js/select2/data/ajax.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/mediaworx/client.php">
+    <entry file="file://$PROJECT_DIR$/application/views/admin/includes/scripts.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5579832">
-          <caret line="92" column="17" selection-start-line="92" selection-start-column="17" selection-end-line="92" selection-end-column="17" />
-          <folding />
+        <state vertical-scroll-proportion="0.61680675">
+          <caret line="91" column="86" selection-start-line="91" selection-start-column="86" selection-end-line="91" selection-end-column="86" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/config/config.php">
+    <entry file="file://$PROJECT_DIR$/application/views/themes/echelon/scripts.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.388235">
+        <state vertical-scroll-proportion="0.93613446">
+          <caret line="59" column="11" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/themes/echelon/head.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Clients.php">
+    <entry file="file://$PROJECT_DIR$/application/views/admin/includes/head.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71260506">
-          <caret line="1344" column="9" selection-start-line="1316" selection-start-column="8" selection-end-line="1344" selection-end-column="9" />
-          <folding />
+        <state vertical-scroll-proportion="10.178572">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.81701446">
+          <caret line="5256" column="0" selection-start-line="5256" selection-start-column="0" selection-end-line="5256" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/intents/intent.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31932774">
+          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42054576">
+          <caret line="135" column="22" selection-start-line="135" selection-start-column="22" selection-end-line="135" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/admin/Echelon.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4789916">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Echelon_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.956229">
+          <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/libraries/Yaml.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/config/app-config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31260505">
+        <state vertical-scroll-proportion="0.9040404">
           <caret line="35" column="54" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/mediaworx/operation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34848484">
+          <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/core/CRM_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.107143">
+          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="14" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/core/Admin_controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/core/Clients_controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7037037">
+          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/admin/Misc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8080808">
+          <caret line="334" column="0" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/core/CRM_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/core/Mediaworx_controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.928572">
+          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/ml/composer/LICENSE">
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/helpers/perfex_string_parser_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12794612">
+          <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/stringfy/coduo/php-to-string/src/Coduo/ToString/StringConverter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/helpers/perfex_string_compare_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.3787879">
+          <caret line="23" column="20" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/cli/Tools.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.93613446">
+          <caret line="86" column="51" selection-start-line="86" selection-start-column="48" selection-end-line="86" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/mediaworx/v1/Dialog.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8">
+          <caret line="67" column="41" selection-start-line="67" selection-start-column="41" selection-end-line="67" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Clients.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5673401">
+          <caret line="1323" column="73" selection-start-line="1323" selection-start-column="73" selection-end-line="1323" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/themes/echelon/views/smalltalk/manage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/themes/echelon/views/smalltalk/smalltalk.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.297479">
+          <caret line="33" column="136" selection-start-line="33" selection-start-column="136" selection-end-line="33" selection-end-column="136" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/themes/echelon/views/intents/intent.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.9579832">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1520185379944" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Intents.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.56806725">
+          <caret line="121" column="62" selection-start-line="121" selection-start-column="46" selection-end-line="121" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Intents_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5529412">
+          <caret line="95" column="68" selection-start-line="95" selection-start-column="68" selection-end-line="95" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/admin/Intents.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.6823529">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/libraries/mediaworx/Api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7344538">
+          <caret line="62" column="74" selection-start-line="62" selection-start-column="74" selection-end-line="62" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/helpers/perfex_api_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-35.964287">
+          <caret line="239" column="44" selection-start-line="235" selection-start-column="6" selection-end-line="239" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/libraries/Mediaworx_hybird.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.357142">
+          <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/english/english_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3663717">
+          <caret line="168" column="34" selection-start-line="168" selection-start-column="34" selection-end-line="168" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/themes/echelon/views/agents/agent.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8302521">
+          <caret line="62" column="171" selection-start-line="62" selection-start-column="157" selection-end-line="62" selection-end-column="171" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Agents_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5109244">
-          <caret line="112" column="12" selection-start-line="112" selection-start-column="12" selection-end-line="112" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.61680675">
+          <caret line="29" column="9" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/helpers/perfex_constants_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34789917">
+          <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/echelon/log.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44705883">
+          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/mediaworx/client.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7815126">
+          <caret line="112" column="0" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.93613446">
+          <caret line="59" column="37" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/echelon/hybird.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.7142856">
+          <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/temp/echelon/log.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/echelon/helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7061947">
+          <caret line="141" column="26" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="26" />
+          <folding>
+            <element signature="e#110#159#0#PHP" expanded="true" />
+            <marker date="1521118837090" expanded="true" signature="5495:5794" placeholder="SELECT i.id,..tblintents..." />
+          </folding>
         </state>
       </provider>
     </entry>

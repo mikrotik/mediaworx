@@ -6,6 +6,4 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Rize\\UriTemplate' => array($vendorDir . '/rize/uri-template/src'),
-    'Phpml' => array($vendorDir . '/php-ai/php-ml/src'),
 );

@@ -31,10 +31,10 @@
             <br/>
             <div class="clearfix"></div>
             <div class="col-md-5 form-group">
-                <input type="text" class="form-control" placeholder="<?php echo _l('small_talk_question');?>" name="question" id="question" value="">
+                <input type="text" class="form-control" placeholder="<?php echo _l('small_talk_question');?>" name="pattern" id="pattern" value="">
             </div>
             <div class="col-md-5 form-group">
-                <input type="text" class="form-control bootstrap-tagsinput" placeholder="<?php echo _l('small_talk_answer');?>" name="answer" id="answer" value="" data-role="tagsinput">
+                <input type="text" class="form-control bootstrap-tagsinput" placeholder="<?php echo _l('small_talk_answer');?>" name="response" id="response" value="" data-role="tagsinput">
             </div>
             <div class="col-md-2 buttons">
                 <button type="button" class="btn btn-info pull-right" id="btnadd-dialog"><?php echo _l('add'); ?></button>
@@ -52,11 +52,11 @@
                     <?php if ($small_talk_references) {?>
                         <?php foreach ($small_talk_references as $small_talk_reference) { ?>
                             <tr id="dialog-<?php echo $dialog_row?>">
-                                <td><?php echo $small_talk_reference['question']?>
-                                    <input type="hidden" name="dialog[<?php echo $dialog_row?>][question]" value="<?php echo $small_talk_reference['question']?>">
+                                <td><?php echo $small_talk_reference['pattern']?>
+                                    <input type="hidden" name="dialog[<?php echo $dialog_row?>][pattern]" value="<?php echo $small_talk_reference['pattern']?>">
                                 </td>
-                                <td><?php echo $small_talk_reference['answer']?>
-                                    <input type="hidden" name="dialog[<?php echo $dialog_row?>][answer]" value="<?php echo $small_talk_reference['answer']?>">
+                                <td><?php echo $small_talk_reference['response']?>
+                                    <input type="hidden" name="dialog[<?php echo $dialog_row?>][response]" value="<?php echo $small_talk_reference['response']?>">
                                 </td>
                                 <td><button class="btn btn-info btn-icon btnedit-values" type="button" onclick="editDialog('<?php echo $dialog_row?>');" id="btnedit-values"><i class="fa fa-edit"></i> Edit </button> <button class="btn btn-danger btn-icon btnremove-values" type="button" onclick="removeDialog('<?php echo $dialog_row?>'); " id="btnremove-values"><i class="fa fa-minus-square-o"></i> Remove</td>
                             </tr>
@@ -79,8 +79,8 @@
 
         $('#btnadd-dialog').on('click', function () {
 
-            var question = $('input[name=\'question\']').val();
-            var answer = $('input[name=\'answer\']').val();
+            var question = $('input[name=\'pattern\']').val();
+            var answer = $('input[name=\'response\']').val();
 
             $('.btnedit-values').removeAttr('disabled');
             $('.btnremove-values').removeAttr('disabled');
@@ -88,15 +88,15 @@
             if (question != "") {
 
                 html = "<tr id='dialog-" + dialog_row + "'>";
-                html += '<td>' + question + '<input type="hidden" name="dialog[' + dialog_row + '][question]" value="' + question + '"></td>';
-                html += '<td>' + answer + '<input type="hidden" name="dialog[' + dialog_row + '][answer]" value="' + answer + '"></td>';
+                html += '<td>' + question + '<input type="hidden" name="dialog[' + dialog_row + '][pattern]" value="' + question + '"></td>';
+                html += '<td>' + answer + '<input type="hidden" name="dialog[' + dialog_row + '][response]" value="' + answer + '"></td>';
                 html += '<td class=""><button class="btn btn-info btn-icon btnedit-values" type="button" onclick="editDialog(\'' + dialog_row + '\');"><i class="fa fa-edit"></i> Edit </button> | <button class="btn btn-danger btn-icon btnremove-values" type="button" onclick="removeDialog(\'' + dialog_row + '\');"><i class="fa fa-minus-square-o"></i> Remove</button></td>';
                 html += '</tr>';
 
                 $('.dialog tbody').append(html);
-                $('input[name=\'question\']').val('');
-                $('input[name=\'answer\']').tagsinput('removeAll');
-                $('input[name=\'answer\']').focus();
+                $('input[name=\'pattern\']').val('');
+                $('input[name=\'response\']').tagsinput('removeAll');
+                $('input[name=\'response\']').focus();
                 dialog_row++;
 
                 return true;
@@ -127,15 +127,15 @@
     /** Edit Reference */
     function editDialog(id){
 
-        var question = $('input[name=\'dialog['+id+'][question]\']').val();
-        var answer = $('input[name=\'dialog['+id+'][answer]\']').val();
+        var question = $('input[name=\'dialog['+id+'][pattern]\']').val();
+        var answer = $('input[name=\'dialog['+id+'][response]\']').val();
 
 
         if (id){
             $('.btnedit-values').attr('disabled','disabled');
             $('.btnremove-values').attr('disabled','disabled');
-            $('input[name=\'question\']').val(question);
-            $('input[name=\'answer\']').tagsinput('add', answer);
+            $('input[name=\'pattern\']').val(question);
+            $('input[name=\'response\']').tagsinput('add', answer);
             $('#dialog-'+id).remove();
             return true
         }

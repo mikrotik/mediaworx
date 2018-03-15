@@ -33,7 +33,7 @@ class Echelon_Hybird
 
         try{
 
-            return array("speech"=>Echelon_Helper::_hybird($this->agent,$this->request));
+            return Echelon_Helper::_hybird($this->agent,$this->request);
 
         }catch(Echelon_Exception $e){
 

@@ -166,6 +166,7 @@ $lang['small_talk_lowercase']                      = 'small talk';
 $lang['small_talk_question']                   = 'Question';
 $lang['small_talk_answer']                   = 'Answer';
 $lang['small_talk_status']                   = 'Small Talk status Active / InActive';
+$lang['echelon_status'] = 'Echelon status Active / InActive';
 
 # Echelon
 $lang['echelon']                               = 'Echelon';

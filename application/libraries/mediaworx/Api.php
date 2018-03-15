@@ -38,7 +38,7 @@ class Api extends Rest
                     "lang" => "english",
                     "result" => (object)array(
                         "source" => $data[0]['source'],
-                        "resolvedQuery" => $data['usersay'],
+                        "resolvedQuery" => $data[0]['pattern'],
                         "action" => $data[0]['action'],
                         "actionIncomplete" => $data[0]['actionIncomplete'],
                         "parameters" => $data[0]['parameters'],
@@ -55,11 +55,12 @@ class Api extends Rest
                             "messages" => array(
                                 "type" => "simple_response",
                                 "platform" => "google",
-                                "textToSpeech" => $data[0]['fulfillment']['suggestions']
+                                "textToSpeech" => $data[0]['textToSpeech']
                             )
                         ),
                         'score' => $data[0]['score'],
-                        "debug" => $data[0]['debug']
+                        "debug" => $data[0]['debug'],
+                        "requiredParameters"=>$data[0]["requiredParameters"]
                     ),
                     "status" => (object)array(
                         "has_error" => $hasError,

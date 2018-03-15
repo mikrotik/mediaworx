@@ -3,8 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once VENDOR_FOLDER.'echelon/echelon_autoload.php';
 
-use Echelon_Hybird;
-
 class Mediaworx_Hybird
 {
     /**
@@ -19,7 +17,7 @@ class Mediaworx_Hybird
     public $agent = [];
 
 
-    public function __construct($request,$agent)
+    public function __construct($request=array(),$agent=array())
     {
         /** @var  CI - Load our instance */
         $this->CI = & get_instance();

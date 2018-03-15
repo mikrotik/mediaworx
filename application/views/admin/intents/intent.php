@@ -44,6 +44,36 @@
                         <div class="form-group">
                             <label for="intent_name"><?php echo _l('intent_name'); ?></label>
                             <input type="text" class="form-control" name="intent_name" id="intent_name" value="<?php echo set_value('intent_name',$intent->intent_name); ?>">
+                            <?php echo form_error('intent_name'); ?>
+                        </div>
+                        <h3 class="box-title">
+                            <?php echo _l('intent_context')?> <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('intent_context_note'); ?>"></i>
+                        </h3>
+                        <div class="form-group">
+                            <label for="input_contexts"><?php echo _l('input_context'); ?></label>
+                            <select name="input_contexts[]" class="form-control select2" multiple="multiple" data-placeholder="<?php echo _l('intent_context')?>"
+                                    style="width: 100%;">
+                                <?php foreach ($contexts as $context) { ?>
+                                    <option value="<?php echo $context['context_name']?>"><?php echo $context['context_name']?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="output_contexts"><?php echo _l('output_context'); ?></label>
+                            <select name="output_contexts[]" class="form-control select2" multiple="multiple" data-placeholder="<?php echo _l('intent_context')?>"
+                                    style="width: 100%;">
+                                <?php foreach ($contexts as $context) { ?>
+                                    <option value="<?php echo $context['context_name']?>"><?php echo $context['context_name']?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <h3 class="box-title">
+                            <?php echo _l('intent_events')?> <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('intent_events_note'); ?>"></i>
+                        </h3>
+                        <div class="form-group">
+                            <select name="events[]" class="form-control select2" multiple="multiple" data-placeholder="<?php echo _l('intent_events')?>"
+                                    style="width: 100%;">
+                            </select>
                         </div>
                         <div class="clearfix"></div>
                         <div class="row">
@@ -59,15 +89,15 @@
                                     </span>
                                 </div>
                                 <?php
-                                    $usersay_row = 0;
-                                    $btn_detail = "";
-                                    $parameter_rows = 0;
+                                $usersay_row = 0;
+                                $btn_detail = "";
+                                $parameter_rows = 0;
                                 ?>
                                 <div class="table">
                                     <table class="table stripped-table-data table-hover table-usersays">
                                         <thead class="usersays-thead">
-                                            <th colspan="2"><?php echo _l('training_phrases')?></th>
-                                            <th><?php echo _l('options')?></th>
+                                        <th colspan="2"><?php echo _l('training_phrases')?></th>
+                                        <th><?php echo _l('options')?></th>
                                         </thead>
                                         <?php if ($intentusersays) { ?>
                                             <?php foreach ($intentusersays as $key=>$intentusersay) { ?>
@@ -78,11 +108,7 @@
                                                 <?php } ?>
                                                 <tr>
                                                     <td colspan="2"><?php echo $btn_detail ?><?php echo $intentusersay['usersay']?>
-                                                        <?php
-                                                            $parse = json_decode($intentusersay['parse']);
-                                                        ?>
                                                         <input value="<?php echo $intentusersay['usersay']?>" type="hidden" name="usersays[<?php echo $usersay_row?>][usersay]">
-                                                        <input type="hidden" name="usersays[<?php echo $usersay_row?>][parse]" value="<?php echo htmlspecialchars(json_encode($parse)); ?>"/>
                                                     </td>
                                                     <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#usersay-'+<?php echo $usersay_row?>).remove()"><i class="fa fa-close"></i></button></td>
                                                 </tr>
@@ -95,12 +121,12 @@
                                                         <th><?php echo _l('intents_resolved_value')?></th>
                                                     </tr>
                                                     <?php foreach ($parameters as $parameter) { ?>
-                                                    <tr>
-                                                        <?php foreach ($parameter as $pkey=>$value) { ?>
-                                                            <td><?php echo $value?><input value="<?php echo $value?>" type="hidden" name="parameters[<?php echo $usersay_row?>][<?php echo $parameter_rows?>][<?php echo $pkey?>]"></td>
-                                                        <?php } ?>
-                                                    </tr>
-                                                    <?php $parameter_rows++;} ?>
+                                                        <tr>
+                                                            <?php foreach ($parameter as $pkey=>$value) { ?>
+                                                                <td><?php echo $value?><input value="<?php echo $value?>" type="hidden" name="parameters[<?php echo $usersay_row?>][<?php echo $parameter_rows?>][<?php echo $pkey?>]"></td>
+                                                            <?php } ?>
+                                                        </tr>
+                                                        <?php $parameter_rows++;} ?>
                                                     </tbody>
                                                 <?php } ?>
                                                 <?php $usersay_row++; } ?>
@@ -130,16 +156,16 @@
                                         </thead>
                                         <tbody>
                                         <?php
-                                            $action_parameters = json_decode($intent->action_parameters);
+                                        $action_parameters = json_decode($intent->action_parameters);
                                         ?>
                                         <?php if ($action_parameters) { ?>
-                                        <?php foreach ($action_parameters as $key=>$action_parameter) { ?>
+                                            <?php foreach ($action_parameters as $key=>$action_parameter) { ?>
                                                 <tr id="action-<?php echo $action_row?>">
                                                     <td class="text-center">
                                                         <div class=""><input value="1" class="is_required" name="actions[<?php echo $action_row?>][is_required]" type="checkbox" <?php echo ($action_parameter->is_required ? 'checked' : '')?>></div></td>
                                                     <td><?php echo $action_parameter->parameter_name?><input value="<?php echo $action_parameter->parameter_name?>" name="actions[<?php echo $action_row?>][parameter_name]" type="hidden"></td>
                                                     <td><?php echo $action_parameter->entity?> <input value="<?php echo $action_parameter->entity?>" name="actions[<?php echo $action_row?>][entity]" type="hidden"></td>
-                                                    <td><?php echo $action_parameter->resolved_value?><input value="<?php echo $action_parameter->resolved_value?>" name="actions[<?php echo $action_row?>][resolved_value]" type="hidden"></td>
+                                                    <td>$<?php echo $action_parameter->parameter_name?><input value="$<?php echo $action_parameter->parameter_name?>" name="actions[<?php echo $action_row?>][resolved_value]" type="hidden"></td>
                                                     <td class="text-center"><div class=""><input value="1" name="actions[<?php echo $action_row?>][is_list]" type="checkbox" <?php echo ($action_parameter->is_list ? 'checked' : '')?>></div></td>
                                                     <?php
                                                     $btn_prompt = "...";
@@ -149,9 +175,9 @@
                                                     }
                                                     ?>
                                                     <td><div id="prompt"><?php echo $btn_prompt?></div></td>
-                                                    <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#action-<?php echo $action_row?>').remove();$('#action-prompt-<?php echo $action_row?>').remove()"><i class="fa fa-close"></i></button></td>
+                                                    <td><button type="button" class="btn btn-danger btn-icon" onclick="removeAction('<?php echo $action_row?>');$('#action-prompt-<?php echo $action_row?>').remove()"><i class="fa fa-close"></i></button></td>
                                                 </tr>
-                                        <?php $action_row++;} ?>
+                                                <?php $action_row++;} ?>
                                         <?php } ?>
 
                                         </tbody>
@@ -181,19 +207,32 @@
                                         </thead>
                                         <tbody class="response-tbody">
                                         <?php if ($intentresponses) { ?>
-                                        <?php foreach ($intentresponses as $intentresponse) { ?>
-                                            <tr id="response-<?php echo $response_row?>">
-                                                <td><?php echo $intentresponse['response']?>
-                                                    <input value="<?php echo $intentresponse['response']?>" type="hidden" name="responses[<?php echo $response_row?>][response]">
-                                                </td>
-                                                <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#response-'+<?php echo $response_row?>).remove()"><i class="fa fa-close"></i></button></td>
-                                            </tr>
-                                            <?php $response_row++; } ?>
+                                            <?php foreach ($intentresponses as $intentresponse) { ?>
+                                                <tr id="response-<?php echo $response_row?>">
+                                                    <td><?php echo $intentresponse['response']?>
+                                                        <input value="<?php echo $intentresponse['response']?>" type="hidden" name="responses[<?php echo $response_row?>][response]">
+                                                    </td>
+                                                    <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#response-'+<?php echo $response_row?>).remove()"><i class="fa fa-close"></i></button></td>
+                                                </tr>
+                                                <?php $response_row++; } ?>
                                         <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
                                 <!-- /responses -->
+                                <div class="form-group">
+                                    <?php
+                                    if (isset($intent) && $intent->is_end){
+                                        $checked = 'checked';
+                                    } else {
+                                        $checked = "";
+                                    }
+                                    ?>
+                                    <input type="checkbox"  value="1" name="is_end" class="checkbox"   <?php echo $checked?>>
+                                    <label for="contact_primary">
+                                        <?php echo _l('intent_end')?>
+                                    </label>
+                                </div>
                             </div>
                             <div class="col-md-4"></div>
                         </div>
@@ -265,21 +304,21 @@
 <script>
 
     //creating new array
+    <?php if ($intent->action_parameters) { ?>
+    var actions = $.parseJSON('<?php echo $intent->action_parameters?>');
+    <?php } else { ?>
     var actions = new Array();
+    <?php } ?>
 
     var usersay_row = <?php echo $usersay_row?>;
     var response_row = <?php echo $response_row?>;
     var parameter_rows = <?php echo $parameter_rows?>;
     var action_row = <?php echo $action_row;?>;
-    var parse = new Array();
 
     $(function(){
 
-
-        /** Validate Entity Form*/
-        _validate_form($('.intent-form'),
-            {intent_name:'required'}
-        );
+        $('select[name=\'input_contexts[]\']').val(<?php echo $intent->input_contexts ?>); $('select[name=\'input_contexts[]\']').trigger('change');
+        $('select[name=\'output_contexts[]\']').val(<?php echo $intent->output_contexts ?>); $('select[name=\'output_contexts[]\']').trigger('change');
 
         $('.btn-add-parameter').on('click',function(){
 
@@ -296,9 +335,14 @@
 
 
             $('.table-actions tbody').append(html);
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
         });
 
-        $( ".is_required" ).on('change',function() {
+        $( ".is_required" ).on('ifChanged',function() {
 
             $('.target-action').html('');
             var checked = $(this).is(":checked");
@@ -415,7 +459,6 @@
             var btn_details = '';
 
             if (usersays != ""){
-                // Show full page LoadingOverlay
                 $.LoadingOverlay("show");
                 $.ajax({
                     type: 'POST',
@@ -423,6 +466,7 @@
                     data : "usersay="+usersays.toString(),
                     dataType: 'json',
                     success: function (json) {
+
 
                         if (json.parameters.length > 0){
 
@@ -463,11 +507,8 @@
                         $('input[name=\'usersays\']').focus();
 
                         $('.usersays-thead').after(usersayHtml);
-
                         parse_string(usersays.toString(),usersay_row);
                         usersay_row++;
-
-
 
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
@@ -499,28 +540,10 @@
                 response_row++;
             }
         });
+
+        //Initialize Select2 Elements
+        $('.select2').select2();
     });
-
-    function parse_string(string,row)
-    {
-        $.ajax({
-            type: 'POST',
-            url: admin_url + 'intents/parse_string/',
-            data: "string=" + string.toString(),
-            dataType: 'json',
-            success: function (json) {
-
-                $('input[name=\'usersays['+row+'][parse]\']').val(JSON.stringify(json[0]));
-                $.LoadingOverlay("hide");
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                if (xhr.status != 0) {
-                    alert(xhr.status + "\r\n" + thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                }
-            }
-        });
-
-    }
 
     function removePrompt(id){
         $.ajax({
@@ -546,6 +569,27 @@
             $('#usersay-parameters-'+row).show();
             $('#usersay-parameters-'+row).addClass('active');
         }
+
+    }
+
+    function parse_string(string,row)
+    {
+        $.ajax({
+            type: 'POST',
+            url: admin_url + 'intents/parse_string/',
+            data: "string=" + string.toString(),
+            dataType: 'json',
+            success: function (json) {
+
+                $('input[name=\'usersays['+row+'][parse]\']').val(JSON.stringify(json[0]));
+                $.LoadingOverlay("hide");
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                if (xhr.status != 0) {
+                    alert(xhr.status + "\r\n" + thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            }
+        });
 
     }
 
@@ -578,42 +622,59 @@
 
     function addAction(parameters)
     {
-        if (!action_row){
 
-            $.each(parameters, function (i, e) {
-                var matchingItems = $.grep(actions, function (item) {
-                    return item.parameter_name === e.parameter_name;
-                });
 
-                if (matchingItems.length === 0) {
-                    actions.push(e);
-                    action_row++;
-
-                    html = '<tr id="action-'+action_row+'" data-row="'+action_row+'">';
-                    html += '<td class="text-center">';
-                    html += '<div class=""><input type="checkbox" value="1" name="actions['+action_row+'][is_required]"></div>';
-                    html +='</td>';
-                    $.each(this, function (index, value) {
-
-                        if (index == 'resolved_value'){
-                            var varvalue = '$'+actions[i].parameter_name;
-                        } else {
-                            var varvalue = value;
-                        }
-                        html += '<td>' + varvalue + '<input value="' + varvalue + '" type="hidden" name="actions['+action_row+'][' + index + ']"></td>';
-                    });
-                    html += '<td class="text-center">';
-                    html += '<div class=""><input type="checkbox" value="1" name="actions['+action_row+'][is_list]"></div>';
-                    html +='</td>';
-                    html += '<td><div id="prompt"></div></td>';
-                    html += '<td><button type="button" class="btn btn-danger btn-icon" onclick="$(\'#action-'+action_row+'\').remove()"><i class="fa fa-close"></i></button></td>';
-                    html += '</tr>';
-
-                    $('.table-actions tbody').append(html);
-                }
+        $.each(parameters, function (i, e) {
+            var matchingItems = $.grep(actions, function (item) {
+                return item.parameter_name === e.parameter_name;
             });
 
-        }
+            if (matchingItems.length === 0) {
+                actions.push(e);
+                action_row++;
+
+                html = '<tr id="action-'+action_row+'" data-row="'+action_row+'">';
+                html += '<td class="text-center">';
+                html += '<div class=""><input type="checkbox" value="1" name="actions['+action_row+'][is_required]"></div>';
+                html +='</td>';
+                $.each(this, function (index, value) {
+
+                    if (index == 'resolved_value'){
+                        var varvalue = '$'+actions[i].parameter_name;
+                    } else {
+                        var varvalue = value;
+                    }
+                    html += '<td>' + varvalue + '<input value="' + varvalue + '" type="hidden" name="actions['+action_row+'][' + index + ']"></td>';
+                });
+                html += '<td class="text-center">';
+                html += '<div class=""><input type="checkbox" value="1" name="actions['+action_row+'][is_list]"></div>';
+                html +='</td>';
+                html += '<td><div id="prompt"></div></td>';
+                html += '<td><button type="button" class="btn btn-danger btn-icon" onclick="removeAction(\''+action_row+'\');"><i class="fa fa-close"></i></button></td>';
+                html += '</tr>';
+
+                $('.table-actions tbody').append(html);
+
+                $('input').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    radioClass: 'iradio_square-blue',
+                    increaseArea: '20%' /* optional */
+                });
+            }
+        });
+    }
+
+    function removeAction(row)
+    {
+        var line = row;
+
+        $('#action-'+row).remove();
+
+        line--;
+        actions.splice(line, 1);
+
+        console.log(row);
+        console.log(actions);
     }
 </script>
 </body>

@@ -15,9 +15,11 @@ class Clients_controller extends CRM_Controller
     function __construct()
     {
         parent::__construct();
-        if ($_COOKIE['agent'])
+        if (isset($_COOKIE['agent']) && !empty($_COOKIE['agent']))
         {
             $this->agent_scope = $_COOKIE['agent'];
+        } else {
+            $this->agent_scope = 1;
         }
 
         $language = load_client_language();

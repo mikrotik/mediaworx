@@ -83,6 +83,26 @@ class Intents_model extends CRM_Model
         return $contexts;
     }
 
+    public function generateContexts()
+    {
+        $contexts = [];
+        $intents = $this->db->get("tblintents")->result_array();
+
+        if ($intents)
+        {
+            foreach ($intents as $intent)
+            {
+                $contexts[] = array(
+                    "context_name"=>strtolower($intent["intent_name"]."-followup")
+                );
+            }
+
+            return $contexts;
+        }
+
+        return false;
+    }
+
     public function add($data=array(),$id = "")
     {
         if ($data){
@@ -365,6 +385,15 @@ class Intents_model extends CRM_Model
                 }
             }
 
+            $intentContext = array(
+                "intentid"=>$id,
+                "context_name"=>str_replace(" ","",$data['intent_name'].'-followup'),
+                "parameters"=>null
+            );
+
+            $this->db->where('intentid', $id);
+            $this->db->update('tblcontexts',$intentContext);
+
             $this->db->where('id', $id);
             $this->db->update('tblintents', $data);
 
@@ -393,6 +422,9 @@ class Intents_model extends CRM_Model
 
             $this->db->where('intentid',$id);
             $this->db->delete('tblintentactionprompts');
+
+            $this->db->where('intentid',$id);
+            $this->db->delete('tblcontexts');
 
             /** Delete Intent */
             $this->db->where('id',$id);

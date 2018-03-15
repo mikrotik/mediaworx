@@ -15,7 +15,7 @@ abstract class Mediaworx_controller extends CRM_Controller
 
         $format = $this->input->get('format');
 
-        if ($_COOKIE['agent'])
+        if (isset($_COOKIE['agent']) && !empty($_COOKIE['agent']))
         {
             $this->agent_scope = $_COOKIE['agent'];
         } else {

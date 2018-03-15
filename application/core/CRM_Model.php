@@ -7,11 +7,11 @@ class CRM_Model extends CI_Model {
 
 	function __construct(){
        parent::__construct();
-        if ($_COOKIE['agent'])
+        if (isset($_COOKIE['agent']) && !empty($_COOKIE['agent']))
         {
             $this->agent_scope = $_COOKIE['agent'];
         } else {
-            $this->agent_scope = 0;
+            $this->agent_scope = 1;
         }
           $this->db->reconnect();
           $timezone = get_option('default_timezone');

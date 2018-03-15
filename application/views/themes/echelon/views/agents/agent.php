@@ -57,6 +57,13 @@
                                     </label>
                                 </div>
                             </label>
+                            <label class="checkbox-inline">
+                                <div class="checkbox icheck">
+                                    <label>
+                                        <input type="checkbox" name="echelon" value="1" <?php echo ($agent->echelon == 1) ? 'checked' : ''?>> <?php echo _l('echelon_status')?>
+                                    </label>
+                                </div>
+                            </label>
                         </div>
                         <div class="form-input">
                             <label for="agent_name"><?php echo _l('agent_name'); ?></label>

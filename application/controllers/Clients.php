@@ -1321,7 +1321,7 @@ class Clients extends Clients_controller
 
             $speech = new Mediaworx_Dialogflow_Speech();
 
-            $speech->setAccessToken('e55d612b-9ad9-5b5a-bf0c-4499887efe30');
+            $speech->setAccessToken('07af09e3-b68b-5a2b-af35-2eb8249a4f90');
             $speech->setType(1); // "1"-Client Access Token "2"->Developer Access Token
             $speech->setFormat('json');
             $speech->setSession();

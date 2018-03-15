@@ -25,6 +25,10 @@ class Agents_model extends CRM_Model
             $data['small_talk'] = 0;
         }
 
+        if (!isset($data['echelon'])){
+            $data['echelon'] = 0;
+        }
+
         $this->db->insert('tblagents', $data);
         $id = $this->db->insert_id();
         if($id){
@@ -61,6 +65,7 @@ class Agents_model extends CRM_Model
                             $this->db->insert('tblintentresponses',$agentPublicIntentResponseData);
                         }
                     }
+
                 }
             }
             logActivity('New Agent Created [ID:'.$id.']');
@@ -75,6 +80,10 @@ class Agents_model extends CRM_Model
 
         if (!isset($data['small_talk'])){
             $data['small_talk'] = 0;
+        }
+
+        if (!isset($data['echelon'])){
+            $data['echelon'] = 0;
         }
 
         $this->db->where('agentid', $id);
@@ -102,6 +111,9 @@ class Agents_model extends CRM_Model
 
             $this->db->where('agentid',$id);
             $this->db->delete('tblintents');
+
+            $this->db->where('agentid',$id);
+            $this->db->delete('tblcontexts');
 
             if ($intents){
 

@@ -18,6 +18,13 @@ $predictedLabels = ['cat', 'cat', 'bird', 'bird', 'ant'];
 $report = new ClassificationReport($actualLabels, $predictedLabels);
 ```
 
+Optionally you can provide the following parameter:
+
+* $average - (int) averaging method for multi-class classification
+    * `ClassificationReport::MICRO_AVERAGE` = 1
+    * `ClassificationReport::MACRO_AVERAGE` = 2 (default)
+    * `ClassificationReport::WEIGHTED_AVERAGE` = 3
+
 ### Metrics
 
 After creating the report you can draw its individual metrics:
@@ -29,7 +36,6 @@ After creating the report you can draw its individual metrics:
 
 ```
 $precision = $report->getPrecision();
-
 // $precision = ['cat' => 0.5, 'ant' => 0.0, 'bird' => 1.0];
 ```
 
@@ -56,6 +62,5 @@ $report->getSupport();
 // ['cat' => 1, 'ant' => 1, 'bird' => 3]
 
 $report->getAverage();
-// ['precision' => 0.75, 'recall' => 0.83, 'f1score' => 0.73]
-
+// ['precision' => 0.5, 'recall' => 0.56, 'f1score' => 0.49]
 ```
