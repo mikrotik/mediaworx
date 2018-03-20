@@ -13,7 +13,7 @@ class Staff extends Admin_controller
             access_denied('staff');
         }
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('staff');
+            $this->echelon_base->get_table_data('staff');
         }
         $data['staff_members'] = $this->staff_model->get('',1);
         $data['title'] = _l('staff_members');
@@ -115,7 +115,7 @@ class Staff extends Admin_controller
         }
 
         if($this->input->is_ajax_request()){
-            $this->perfex_base->get_table_data('staff_timesheets',array('view_all'=>$data['view_all']));
+            $this->echelon_base->get_table_data('staff_timesheets',array('view_all'=>$data['view_all']));
         }
 
         if($data['view_all'] == false){

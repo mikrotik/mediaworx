@@ -60,7 +60,7 @@ class Currencies_model extends CRM_Model
      */
     public function delete($id)
     {
-        foreach ($this->perfex_base->get_tables_with_currency() as $tt) {
+        foreach ($this->echelon_base->get_tables_with_currency() as $tt) {
             if (is_reference_in_table($tt['field'], $tt['table'], $id)) {
                 return array(
                     'referenced' => true
@@ -89,7 +89,7 @@ class Currencies_model extends CRM_Model
     public function make_base_currency($id)
     {
         $base = $this->get_base_currency();
-        foreach ($this->perfex_base->get_tables_with_currency() as $tt) {
+        foreach ($this->echelon_base->get_tables_with_currency() as $tt) {
             if (is_reference_in_table($tt['field'], $tt['table'], $base->id)) {
                 return array(
                     'has_transactions_currency' => true

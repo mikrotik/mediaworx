@@ -88,9 +88,9 @@
         ?>
         <?php if(get_option('show_help_on_setup_menu') == 1 && is_admin()){ $total_setup_items++; ?>
         <li>
-            <a href="http://mediaworks.io/documentations" target="_blank"><?php echo _l('setup_help'); ?></a>
+            <a href="http://perfexcrm.com/documentations" target="_blank"><?php echo _l('setup_help'); ?></a>
         </li>
         <?php } ?>
     </ul>
 </div>
-<?php $this->perfex_base->set_setup_menu_visibility($total_setup_items); ?>
+<?php $this->echelon_base->set_setup_menu_visibility($total_setup_items); ?>

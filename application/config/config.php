@@ -11,8 +11,8 @@ function __autoload($class)
 if(file_exists(APPPATH.'config/app-config.php')){
     include_once(APPPATH.'config/app-config.php');
 } else {
-    echo '<h1>Mediaworx CRM not installed</h1>';
-    echo '<p>1. To you use the automatic Mediaworx CRM installed navigate to eq. http://yourdomain.com/crm/install</p>';
+    echo '<h1>Perfex CRM not installed</h1>';
+    echo '<p>1. To you use the automatic Perfex CRM installed navigate to eq. http://yourdomain.com/crm/install</p>';
     echo '<p>2. If you are installing manually rename the config file located in application/config/app-config-sample.php to app-config.php and populate the defined fields.</p>';
     die;
 }

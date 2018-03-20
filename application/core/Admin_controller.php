@@ -75,7 +75,7 @@ class Admin_controller extends CRM_Controller
         $auto_loaded_vars = array(
             '_staff' => $this->staff_model->get(get_staff_user_id()),
             '_notifications' => $this->misc_model->get_user_notifications(false),
-            '_quick_actions' => $this->perfex_base->get_quick_actions_links(),
+            '_quick_actions' => $this->echelon_base->get_quick_actions_links(),
             '_started_timers' => $this->misc_model->get_staff_started_timers(),
             'google_api_key' => get_option('google_api_key'),
             'total_pages_newsfeed' => total_rows('tblposts') / 10,
@@ -118,38 +118,38 @@ class Admin_controller extends CRM_Controller
     private function init_quick_actions_links()
     {
 
-        $this->perfex_base->add_quick_actions_link(array(
+        $this->echelon_base->add_quick_actions_link(array(
             'name' => _l('qa_create_invoice'),
             'permission' => 'invoices',
             'url' => 'invoices/invoice'
         ));
 
-        $this->perfex_base->add_quick_actions_link(array(
+        $this->echelon_base->add_quick_actions_link(array(
             'name' => _l('qa_create_estimate'),
             'permission' => 'estimates',
             'url' => 'estimates/estimate'
         ));
 
-        $this->perfex_base->add_quick_actions_link(array(
+        $this->echelon_base->add_quick_actions_link(array(
             'name' => _l('qa_new_expense'),
             'permission' => 'expenses',
             'url' => 'expenses/expense'
         ));
 
-        $this->perfex_base->add_quick_actions_link(array(
+        $this->echelon_base->add_quick_actions_link(array(
             'name' => _l('new_proposal'),
             'permission' => 'proposals',
             'url' => 'proposals/proposal'
         ));
 
-        $this->perfex_base->add_quick_actions_link(array(
+        $this->echelon_base->add_quick_actions_link(array(
             'name' => _l('new_project'),
             'url' => 'projects/project',
             'permission' => 'projects'
         ));
 
 
-        $this->perfex_base->add_quick_actions_link(array(
+        $this->echelon_base->add_quick_actions_link(array(
             'name' => _l('qa_create_task'),
             'url' => '#',
             'custom_url' => true,
@@ -159,19 +159,19 @@ class Admin_controller extends CRM_Controller
             'permission' => 'tasks'
         ));
 
-        $this->perfex_base->add_quick_actions_link(array(
+        $this->echelon_base->add_quick_actions_link(array(
             'name' => _l('qa_create_client'),
             'permission' => 'customers',
             'url' => 'clients/client'
         ));
 
-        $this->perfex_base->add_quick_actions_link(array(
+        $this->echelon_base->add_quick_actions_link(array(
             'name' => _l('qa_create_contract'),
             'permission' => 'contracts',
             'url' => 'contracts/contract'
         ));
 
-        $this->perfex_base->add_quick_actions_link(array(
+        $this->echelon_base->add_quick_actions_link(array(
             'name' => _l('qa_create_lead'),
             'url' => '#',
             'custom_url' => true,
@@ -181,19 +181,19 @@ class Admin_controller extends CRM_Controller
             )
         ));
 
-        $this->perfex_base->add_quick_actions_link(array(
+        $this->echelon_base->add_quick_actions_link(array(
             'name' => _l('qa_new_goal'),
             'url' => 'goals/goal',
             'permission' => 'goals'
         ));
 
-        $this->perfex_base->add_quick_actions_link(array(
+        $this->echelon_base->add_quick_actions_link(array(
             'name' => _l('qa_create_kba'),
             'permission' => 'knowledge_base',
             'url' => 'knowledge_base/article'
         ));
 
-        $this->perfex_base->add_quick_actions_link(array(
+        $this->echelon_base->add_quick_actions_link(array(
             'name' => _l('qa_create_survey'),
             'permission' => 'surveys',
             'url' => 'surveys/survey'
@@ -206,15 +206,15 @@ class Admin_controller extends CRM_Controller
         if (get_option('access_tickets_to_none_staff_members') == 0 && !is_staff_member()) {
             $tickets['permission'] = 'is_staff_member';
         }
-        $this->perfex_base->add_quick_actions_link($tickets);
+        $this->echelon_base->add_quick_actions_link($tickets);
 
-        $this->perfex_base->add_quick_actions_link(array(
+        $this->echelon_base->add_quick_actions_link(array(
             'name' => _l('qa_create_staff'),
             'url' => 'staff/member',
             'permission' => 'staff'
         ));
 
-        $this->perfex_base->add_quick_actions_link(array(
+        $this->echelon_base->add_quick_actions_link(array(
             'name' => _l('utility_calendar_new_event_title'),
             'url' => 'utilities/calendar?new_event=true&date='.date('Y-m-d'),
             'permission' => ''

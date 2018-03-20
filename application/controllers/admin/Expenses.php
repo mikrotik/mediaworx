@@ -17,7 +17,7 @@ class Expenses extends Admin_controller
             access_denied('expenses');
         }
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('expenses', array(
+            $this->echelon_base->get_table_data('expenses', array(
                 'id' => $id,
                 'clientid' => $clientid
             ));
@@ -281,7 +281,7 @@ class Expenses extends Admin_controller
             access_denied('expenses');
         }
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('expenses_categories');
+            $this->echelon_base->get_table_data('expenses_categories');
         }
         $data['title'] = _l('expense_categories');
         $this->load->view('admin/expenses/manage_categories', $data);

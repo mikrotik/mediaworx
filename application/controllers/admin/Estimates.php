@@ -39,7 +39,7 @@ class Estimates extends Admin_controller
             }
 
             if ($this->input->is_ajax_request()) {
-                $this->perfex_base->get_table_data('estimates', array(
+                $this->echelon_base->get_table_data('estimates', array(
                     'clientid' => $clientid,
                     'id' => $id
                 ));

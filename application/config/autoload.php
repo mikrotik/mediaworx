@@ -58,17 +58,11 @@ $autoload['packages'] = array();
 |
 |   $autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array(
-    'user_agent',
-    'encryption',
-    'email',
-    'encoding_lib',
-    'action_hooks',
-    'perfex_base');
+$autoload['libraries'] = array( 'user_agent', 'encryption','email', 'encoding_lib', 'action_hooks', 'echelon_base' );
 $CI = &get_instance();
 
 array_unshift($autoload['libraries'],'database');
-$CI->load->helper('perfex_files');
+$CI->load->helper('echelon_files');
 $gateways = list_files(APPPATH.'/libraries/gateways');
 foreach($gateways as $gateway){
     $pathinfo =  pathinfo($gateway);
@@ -78,16 +72,6 @@ foreach($gateways as $gateway){
         array_push($autoload['libraries'],'gateways/'.strtolower($pathinfo['filename']));
     }
 }
-/** Load Algorithms */
-//$algorithms = list_files(APPPATH.'/libraries/algorithms');
-//foreach($algorithms as $algorithm){
-//    $pathinfo =  pathinfo($algorithms);
-//    // Check if file is .php and do not starts with .dot
-//    // Offen happens Mac os user to have underscore prefixed files while unzipping the zip file.
-//    if($pathinfo['extension'] == 'php' && 0 !== strpos($algorithms, '.')){
-//        array_push($autoload['libraries'],'algorithms/'.strtolower($pathinfo['filename']));
-//    }
-//}
 /*
 | -------------------------------------------------------------------
 |  Auto-load Drivers
@@ -117,23 +101,19 @@ $autoload['helper'] = array(
         'url',
         'file',
         'form',
-        'perfex_action_hooks',
-        'perfex_general',
-        'perfex_misc',
-        'perfex_func',
-        'perfex_custom_fields',
-        'perfex_merge_fields',
-        'perfex_html',
-        'perfex_db',
-        'perfex_upload',
-        'perfex_sales',
-        'perfex_themes',
-        'perfex_theme_style',
-        'perfex_constants',
-        'perfex_speech',
-        'perfex_uuid',
-        'perfex_string_parser',
-        'perfex_string_compare'
+        'echelon_action_hooks',
+        'echelon_general',
+        'echelon_misc',
+        'echelon_func',
+        'echelon_custom_fields',
+        'echelon_merge_fields',
+        'echelon_html',
+        'echelon_db',
+        'echelon_upload',
+        'echelon_sales',
+        'echelon_themes',
+        'echelon_theme_style',
+        'echelon_constants',
     );
 
 if(file_exists(APPPATH.'helpers/my_functions_helper.php')){

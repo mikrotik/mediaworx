@@ -348,7 +348,7 @@ class Clients_model extends CRM_Model
                 $permissions = array();
             } else if ($not_manual_request == true) {
                 $permissions         = array();
-                $_permissions        = $this->perfex_base->get_contact_permissions();
+                $_permissions        = $this->echelon_base->get_contact_permissions();
                 $default_permissions = @unserialize(get_option('default_contact_permissions'));
                 foreach ($_permissions as $permission) {
                     if (is_array($default_permissions) && in_array($permission['id'], $default_permissions)) {

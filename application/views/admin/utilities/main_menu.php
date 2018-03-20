@@ -108,7 +108,11 @@
           </div>
         </div>
         <div class="col-md-6">
-         <h4 class="bold"><?php echo _l('inactive_menu_items'); ?></h4>
+         <h4 class="bold"><?php echo _l('inactive_menu_items'); ?>
+             <div class="buttons pull-right">
+                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-menu-modal"><?php echo _l("add_new")?></button>
+             </div>
+         </h4>
          <hr />
          <div class="dd inactive">
           <?php
@@ -201,6 +205,27 @@
 </div>
 </div>
 </div>
+<!-- Add new menu modal -->
+<div class="modal fade" id="new-menu-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><?php echo _l("add_new")?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ./add new menu modal -->
 <?php init_tail(); ?>
 <script src="<?php echo base_url(); ?>assets/plugins/jquery-nestable/jquery.nestable.js"></script>
 <link href="<?php echo base_url(); ?>assets/plugins/font-awesome-icon-picker/css/fontawesome-iconpicker.min.css" rel="stylesheet">
@@ -224,7 +249,9 @@
      $('.icon-picker').iconpicker()
     .on({'iconpickerSetSourceValue': function(e){
         _formatMenuIconInput(e);
-    }})
+    }});
+
+      /** TODO - Add new Menu */
 
   });
 

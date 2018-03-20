@@ -86,7 +86,7 @@ class Settings extends Admin_controller
             $data['current_version'] = $this->db->get('tblmigrations')->row()->version;
         }
 
-        $data['contacts_permissions'] = $this->perfex_base->get_contact_permissions();
+        $data['contacts_permissions'] = $this->echelon_base->get_contact_permissions();
         $this->load->library('pdf');
         $data['payment_gateways'] = $this->payment_modes_model->get_online_payment_modes(true);
         $data['group']            = $this->input->get('group');

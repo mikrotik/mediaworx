@@ -12,7 +12,7 @@ class Projects extends Admin_controller
     public function index($clientid = '')
     {
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('projects', array(
+            $this->echelon_base->get_table_data('projects', array(
                 'clientid' => $clientid
             ));
         }
@@ -23,14 +23,14 @@ class Projects extends Admin_controller
     public function staff_projects()
     {
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('staff_projects');
+            $this->echelon_base->get_table_data('staff_projects');
         }
     }
     public function expenses($id)
     {
         if ($this->input->is_ajax_request()) {
             $this->load->model('expenses_model');
-            $this->perfex_base->get_table_data('project_expenses', array(
+            $this->echelon_base->get_table_data('project_expenses', array(
                 'project_id' => $id
             ));
         }
@@ -392,7 +392,7 @@ class Projects extends Admin_controller
     {
         if ($this->projects_model->is_member($project_id) || has_permission('projects', '', 'view')) {
             if ($this->input->is_ajax_request()) {
-                $this->perfex_base->get_table_data('project_discussions', array(
+                $this->echelon_base->get_table_data('project_discussions', array(
                     'project_id' => $project_id
                 ));
             }
@@ -495,7 +495,7 @@ class Projects extends Admin_controller
     {
         if ($this->projects_model->is_member($project_id) || has_permission('projects', '', 'view')) {
             if ($this->input->is_ajax_request()) {
-                $this->perfex_base->get_table_data('milestones', array(
+                $this->echelon_base->get_table_data('milestones', array(
                     'project_id' => $project_id
                 ));
             }
@@ -536,7 +536,7 @@ class Projects extends Admin_controller
     {
         if ($this->projects_model->is_member($project_id) || has_permission('projects', '', 'view')) {
             if ($this->input->is_ajax_request()) {
-                $this->perfex_base->get_table_data('timesheets', array(
+                $this->echelon_base->get_table_data('timesheets', array(
                     'project_id' => $project_id
                 ));
             }

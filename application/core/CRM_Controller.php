@@ -14,7 +14,7 @@ class CRM_Controller extends CI_Controller
         $this->db->reconnect();
         $timezone = get_option('default_timezone');
         date_default_timezone_set($timezone);
-        do_action('perfex_init');
+        do_action('echelon_init');
     }
     private function check_installation()
     {

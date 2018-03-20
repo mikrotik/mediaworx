@@ -33,7 +33,7 @@ define('APP_BASE_URL','http://dev.mediaworx.io/');
 | Auto updated added on install
 */
 
-define('APP_ENC_KEY','f38a4108b9a46d9fcd728945dd1ba635');
+define('APP_ENC_KEY','48389890b7810a7b93bafaf1067f7800');
 
 /* Database credentials - Auto added on install */
 
@@ -44,7 +44,7 @@ define('APP_DB_USERNAME','root');
 /* The password used to connect to the database */
 define('APP_DB_PASSWORD','ipower');
 /* The name of the database you want to connect to */
-define('APP_DB_NAME','echelon');
+define('APP_DB_NAME','mw_apptatooine');
 
 /* Session Handler */
 

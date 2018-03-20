@@ -22,7 +22,7 @@ class Invoices extends Admin_controller
         $this->load->model('payment_modes_model');
         $data['payment_modes'] = $this->payment_modes_model->get('', array(), true);
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('invoices', array(
+            $this->echelon_base->get_table_data('invoices', array(
                 'id' => $id,
                 'clientid' => $clientid,
                 'data' => $data

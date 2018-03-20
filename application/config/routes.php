@@ -82,5 +82,3 @@ $route['knowledge_base/(:any)']  = "clients/knowledge_base/$1";
 $route['knowledge-base']  = "clients/knowledge_base";
 $route['knowledge-base/(:any)']  = "clients/knowledge_base/$1";
 
-/** API Route */
-$route['mediaworx/v1/(:any)/(:any)']  = "mediaworx/v1/$1/index/$2";

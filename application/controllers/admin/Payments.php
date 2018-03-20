@@ -20,7 +20,7 @@ class Payments extends Admin_controller
         }
 
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('payments', array(
+            $this->echelon_base->get_table_data('payments', array(
                 'clientid' => $clientid
             ));
         }

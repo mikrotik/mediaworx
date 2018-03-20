@@ -7,7 +7,6 @@ if (!extension_loaded('suhosin')) {
 
 define('CRON', true);
 
-
 class Cron_model extends CRM_Model
 {
     function __construct()
@@ -38,7 +37,6 @@ class Cron_model extends CRM_Model
         $this->events();
         $this->recurring_invoices();
         $this->recurring_expenses();
-        $this->make_training();
 
         $this->auto_import_imap_tickets();
         $this->check_leads_email_integration();
@@ -1323,10 +1321,5 @@ class Cron_model extends CRM_Model
                 fclose($fp);
             }
         }
-    }
-
-    public function make_training($manual = false)
-    {
-
     }
 }

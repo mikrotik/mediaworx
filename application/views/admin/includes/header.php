@@ -77,7 +77,7 @@ ob_end_clean();
                    <a href="#" tabindex="-1"><?php echo _l('language'); ?></a>
                    <ul class="dropdown-menu dropdown-menu-left">
                       <li class="<?php if($_staff->default_language == ""){echo 'active';} ?>"><a href="<?php echo admin_url('staff/change_language'); ?>"><?php echo _l('system_default_string'); ?></a></li>
-                      <?php foreach($this->perfex_base->get_available_languages() as $user_lang) { ?>
+                      <?php foreach($this->echelon_base->get_available_languages() as $user_lang) { ?>
                       <li <?php if($_staff->default_language == $user_lang){echo 'class="active"';} ?>>
                        <a href="<?php echo admin_url('staff/change_language/'.$user_lang); ?>"><?php echo ucfirst($user_lang); ?></a>
                    </li>

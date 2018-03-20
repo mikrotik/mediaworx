@@ -13,7 +13,7 @@ class Tickets extends Admin_controller
     public function index($status = '', $userid = '')
     {
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('tickets', array(
+            $this->echelon_base->get_table_data('tickets', array(
                 'status' => $status,
                 'userid' => $userid
             ));
@@ -100,7 +100,7 @@ class Tickets extends Admin_controller
                 unset($tickets_params['userid']);
                 $tickets_params['by_email'] = $data['ticket']->ticket_email;
             }
-            $this->perfex_base->get_table_data('tickets', $tickets_params);
+            $this->echelon_base->get_table_data('tickets', $tickets_params);
         }
         if (get_option('staff_access_only_assigned_departments') == 1) {
             if (!is_admin()) {

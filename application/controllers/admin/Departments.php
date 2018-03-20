@@ -14,7 +14,7 @@ class Departments extends Admin_controller
     public function index()
     {
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('departments');
+            $this->echelon_base->get_table_data('departments');
         }
         $data['title'] = _l('departments');
         $this->load->view('admin/departments/manage', $data);

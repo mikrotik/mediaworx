@@ -14,7 +14,7 @@ class Contracts extends Admin_controller
             access_denied('contracts');
         }
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('contracts', array(
+            $this->echelon_base->get_table_data('contracts', array(
                 'clientid' => $clientid
             ));
         }
@@ -264,7 +264,7 @@ class Contracts extends Admin_controller
             access_denied('contracts');
         }
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('contract_types');
+            $this->echelon_base->get_table_data('contract_types');
         }
         $data['title'] = _l('contract_types');
         $this->load->view('admin/contracts/manage_types', $data);

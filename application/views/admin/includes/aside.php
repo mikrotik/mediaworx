@@ -143,7 +143,7 @@ $m++;
 do_action('after_render_single_aside_menu',$m); ?>
 <?php } ?>
 <?php do_action('after_render_aside_menu'); ?>
-<?php if((is_staff_member() || is_admin()) && $this->perfex_base->show_setup_menu() == true){ ?>
+<?php if((is_staff_member() || is_admin()) && $this->echelon_base->show_setup_menu() == true){ ?>
 <li<?php if(get_option('show_setup_menu_item_only_on_hover') == 1) { echo ' style="display:none;"'; } ?> id="setup-menu-item">
 <a href="#" class="open-customizer"><i class="fa fa-cog menu-icon"></i>
  <?php echo _l('setting_bar_heading'); ?></a>

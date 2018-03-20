@@ -27,7 +27,7 @@ class Tasks extends Admin_controller
                 echo $this->load->view('admin/tasks/kan_ban', $data, true);
                 die();
             } else {
-                $this->perfex_base->get_table_data('tasks');
+                $this->echelon_base->get_table_data('tasks');
 
             }
         }
@@ -158,7 +158,7 @@ class Tasks extends Admin_controller
     public function init_relation_tasks($rel_id, $rel_type)
     {
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('tasks_relations', array(
+            $this->echelon_base->get_table_data('tasks_relations', array(
                 'rel_id' => $rel_id,
                 'rel_type' => $rel_type
             ));

@@ -18,7 +18,7 @@ class Leads extends Admin_controller
                 echo $this->load->view('admin/leads/kan-ban', $data, true);
                 die();
             } else if ($this->input->get('table_leads')) {
-                $this->perfex_base->get_table_data('leads');
+                $this->echelon_base->get_table_data('leads');
             }
         }
         $data['switch_kanban'] = true;
@@ -289,7 +289,7 @@ class Leads extends Admin_controller
             'is_not_staff' => 0
         ));
 
-        $data['languages']           = $this->perfex_base->get_available_languages();
+        $data['languages']           = $this->echelon_base->get_available_languages();
         $data['cfields']             = $cfields;
         $data['form_builder_assets'] = true;
 
@@ -376,7 +376,7 @@ class Leads extends Admin_controller
         }
 
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('web_to_lead');
+            $this->echelon_base->get_table_data('web_to_lead');
         }
 
         $data['title'] = _l('web_to_lead');

@@ -17,7 +17,7 @@ class Clients extends Admin_controller
             }
         }
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('clients');
+            $this->echelon_base->get_table_data('clients');
         }
         $this->load->model('contracts_model');
         $data['contract_types'] = $this->contracts_model->get_contract_types();
@@ -107,7 +107,7 @@ class Clients extends Admin_controller
             $this->load->model('staff_model');
             $data['members'] = $this->staff_model->get('', 1);
             if ($this->input->is_ajax_request()) {
-                $this->perfex_base->get_table_data('tickets', array(
+                $this->echelon_base->get_table_data('tickets', array(
                     'userid' => $id
                 ));
             }
@@ -253,7 +253,7 @@ class Clients extends Admin_controller
             $title = $data['contact']->firstname . ' ' . $data['contact']->lastname;
         }
 
-        $data['customer_permissions'] = $this->perfex_base->get_contact_permissions();
+        $data['customer_permissions'] = $this->echelon_base->get_contact_permissions();
         $data['title']                = $title;
         $this->load->view('admin/clients/modals/contact', $data);
     }
@@ -380,7 +380,7 @@ class Clients extends Admin_controller
     }
     public function contacts($client_id)
     {
-        $this->perfex_base->get_table_data('contacts', array(
+        $this->echelon_base->get_table_data('contacts', array(
             'client_id' => $client_id
         ));
     }
@@ -825,7 +825,7 @@ class Clients extends Admin_controller
             access_denied('Customer Groups');
         }
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('customers_groups');
+            $this->echelon_base->get_table_data('customers_groups');
         }
         $data['title'] = _l('customer_groups');
         $this->load->view('admin/clients/groups_manage', $data);

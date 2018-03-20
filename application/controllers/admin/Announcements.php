@@ -11,7 +11,7 @@ class Announcements extends Admin_controller
     public function index()
     {
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('announcements');
+            $this->echelon_base->get_table_data('announcements');
         }
         $data['title'] = _l('announcements');
         $this->load->view('admin/announcements/manage', $data);

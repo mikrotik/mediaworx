@@ -7,7 +7,7 @@ $sIndexColumn = "id";
 $sTable       = 'tblentities';
 
 $where = array();
-array_push($where,' AND agentid = 0');
+array_push($where,' AND is_admin = '.is_admin());
 
 $result  = data_tables_init($aColumns, $sIndexColumn, $sTable,array(),$where,array('id'));
 $output  = $result['output'];

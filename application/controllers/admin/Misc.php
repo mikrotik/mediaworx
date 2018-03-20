@@ -158,7 +158,7 @@ class Misc extends Admin_controller
     public function get_reminders($id, $rel_type)
     {
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('reminders', array(
+            $this->echelon_base->get_table_data('reminders', array(
                 'id' => $id,
                 'rel_type' => $rel_type
             ));

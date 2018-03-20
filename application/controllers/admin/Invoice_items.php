@@ -15,7 +15,7 @@ class Invoice_items extends Admin_controller
             access_denied('Invoice Items');
         }
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('invoice_items');
+            $this->echelon_base->get_table_data('invoice_items');
         }
         $this->load->model('taxes_model');
         $data['taxes']        = $this->taxes_model->get();

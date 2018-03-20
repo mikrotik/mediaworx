@@ -40,7 +40,7 @@ class Proposals extends Admin_controller
             }
 
             if ($this->input->is_ajax_request()) {
-                $this->perfex_base->get_table_data('proposals');
+                $this->echelon_base->get_table_data('proposals');
             }
             $data['proposal_id'] = '';
             if (is_numeric($proposal_id)) {
@@ -58,7 +58,7 @@ class Proposals extends Admin_controller
     public function proposal_relations($rel_id, $rel_type)
     {
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('proposals_relations', array(
+            $this->echelon_base->get_table_data('proposals_relations', array(
                 'rel_id' => $rel_id,
                 'rel_type' => $rel_type
             ));

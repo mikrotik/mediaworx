@@ -87,13 +87,6 @@ class Authentication_model extends CRM_Model
      */
     function logout($staff = true)
     {
-
-        /**
-         *  TODO
-         *  Unset agent cookie
-         */
-        unset($_COOKIE['agent']);
-
         $this->delete_autologin($staff);
         if (is_client_logged_in()) {
             do_action('before_client_logout', get_client_user_id());
@@ -105,7 +98,6 @@ class Authentication_model extends CRM_Model
             $this->session->unset_userdata('staff_user_id');
             $this->session->unset_userdata('staff_logged_in');
         }
-
         $this->session->sess_destroy();
     }
     /**

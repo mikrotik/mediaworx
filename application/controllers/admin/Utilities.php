@@ -20,7 +20,7 @@ class Utilities extends Admin_controller
             access_denied('activityLog');
         }
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('activity_log');
+            $this->echelon_base->get_table_data('activity_log');
         }
         $data['title'] = _l('utility_activity_log');
         $this->load->view('admin/utilities/activity_log', $data);
@@ -33,7 +33,7 @@ class Utilities extends Admin_controller
             access_denied('Ticket Pipe Log');
         }
         if ($this->input->is_ajax_request()) {
-            $this->perfex_base->get_table_data('ticket_pipe_log');
+            $this->echelon_base->get_table_data('ticket_pipe_log');
         }
         $data['title'] = _l('ticket_pipe_log');
         $this->load->view('admin/utilities/ticket_pipe_log', $data);
@@ -125,7 +125,7 @@ class Utilities extends Admin_controller
     }
     public function elfinder_init()
     {
-        $media_folder = $this->perfex_base->get_media_folder();
+        $media_folder = $this->echelon_base->get_media_folder();
 
         if (!is_dir(FCPATH . $media_folder)) {
             mkdir(FCPATH . $media_folder);
@@ -513,61 +513,5 @@ class Utilities extends Admin_controller
         update_option('setup_menu_inactive', json_encode(array(
             'setup_menu_inactive' => $data_inactive
         )));
-    }
-
-    public function train()
-    {
-        // Only full admin have permission to activity log
-        if (!is_admin()) {
-            access_denied('Echelon Training');
-        }
-
-        $data['title']                 = _l('training');
-        $this->load->view('admin/utilities/training', $data);
-    }
-
-    public function make_training()
-    {
-        do_action('before_make_training');
-        // Only full admin can make training
-        if (!is_admin()) {
-            access_denied('echelonTraining');
-        }
-        if (!is_really_writable(TRAINING_FOLDER)) {
-            show_error('/backups/echelon folder is not writable. You need to change the permissions to 755');
-        }
-        $this->load->model('cron_model');
-        $success = $this->cron_model->make_training(true);
-        if ($success) {
-            set_alert('success', _l('train_success'));
-        }
-        redirect(admin_url('utilities/train'));
-    }
-//    public function update_auto_backup_options()
-//    {
-//        do_action('before_update_backup_options');
-//        if (!is_admin()) {
-//            access_denied('databaseBackup');
-//        }
-//        if ($this->input->post()) {
-//            $_post     = $this->input->post();
-//            $updated_1 = update_option('auto_backup_enabled', $_post['settings']['auto_backup_enabled']);
-//            $updated_2 = update_option('auto_backup_every', $this->input->post('auto_backup_every'));
-//            $updated_3 = update_option('delete_backups_older_then', $this->input->post('delete_backups_older_then'));
-//            if ($updated_2 || $updated_1 || $updated_3) {
-//                set_alert('success', _l('auto_backup_options_updated'));
-//            }
-//        }
-//        redirect(admin_url('utilities/backup'));
-//    }
-    public function delete_training($training)
-    {
-        if (!is_admin()) {
-            access_denied('echelonTraining');
-        }
-        if (unlink(TRAINING_FOLDER .'model/'. $training)) {
-            set_alert('success', _l('training_delete'));
-        }
-        redirect(admin_url('utilities/train'));
     }
 }
