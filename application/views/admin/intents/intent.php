@@ -94,6 +94,40 @@
         </div>
     </div>
 </div>
+<!-- Prompts modal -->
+<div class="modal fade" id="define-prompts" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><?php echo _l('action_prompts_title')?> '<span class="target-action"></span>'</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="parameter_name"><?php echo _l('intents_dt_parameter_name');?></label>
+                        <input type="text" class="form-control" name="parameter_name" id="parameter_name" value="" disabled>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="entity"><?php echo _l('intents_dt_entity');?></label>
+                        <input type="text" class="form-control" name="entity" id="entity" value="" disabled>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="value"><?php echo _l('intents_dt_resolved_value');?></label>
+                        <input type="text" class="form-control" name="value" id="value" value="" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ./prompts modal-->
 <?php init_tail(); ?>
 <script>
 
@@ -233,7 +267,7 @@
                         $.each( action_parameters, function( key, value ) {
 
                                 intentActionParams = '<tr id="intent-action-parameter-' + user_expression_row + '-row-' + key + '">';
-                                intentActionParams += '<td><input class="is_required" type="checkbox" data-id="'+key+'" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][is_required]" value="1" id="show_primary_contact"></td>';
+                                intentActionParams += '<td><input class="is_required" type="checkbox" data-parameter="'+value+'" data-entity="@'+value+'" data-value="$'+value+'" data-id="'+key+'" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][is_required]" value="1" id="show_primary_contact"></td>';
                                 intentActionParams += '<td>' + value + '<input type="hidden" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][parameter_name]" value="'+value+'"></td>';
                                 intentActionParams += '<td>@' + value + '<input type="hidden" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][entity]" value="@'+value+'"></td>';
                                 intentActionParams += '<td>$' + value + '<input type="hidden" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][value]" value="$'+value+'"></td>';
@@ -249,12 +283,16 @@
                                 increaseArea: '20%' /* optional */
                             });
 
-                            $( ".is_required" ).on('ifChanged',function() {
+                            $( ".is_required" ).on('ifChanged',function(e) {
                                 var id = $(this).data("id");
+                                var parameter_name = $(this).data('parameter');
+                                var entity = $(this).data('entity');
+                                var value = $(this).data('value');
+
                                 var checked = $(this).is(":checked");
 
                                 if (checked) {
-                                    $('#prompts-' + id).html('prompt here...');
+                                    $('#prompts-' + id).html('<a href="#" class="btn btn-icon btn-post-options" data-parameter="'+parameter_name+'" data-entity="'+entity+'" data-value="'+value+'" data-toggle="modal" data-id="'+id+'" data-target="#define-prompts"><?php echo _l('define_prompts')?></a>');
                                 } else {
                                     $('#prompts-' + id).html('');
                                 }
@@ -277,6 +315,25 @@
                     }
                 }
             });
+        });
+
+
+        $('#define-prompts').on('show.bs.modal', function(e) {
+
+            var invoker = $(e.relatedTarget);
+            /** Data related data values*/
+            var parameter_name = $(invoker).data('parameter');
+            var entity = $(invoker).data('entity');
+            var value = $(invoker).data('value');
+
+            /** Set data values*/
+            $('#define-prompts input[name="parameter_name"]').val(parameter_name);
+            $('#define-prompts input[name="entity"]').val(entity);
+            $('#define-prompts input[name="value"]').val(value);
+
+            $('.target-action').html(parameter_name);
+
+
         });
 
     });

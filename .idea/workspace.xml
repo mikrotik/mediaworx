@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9274056-e247-49ca-ac8d-4bd0d79f2f19" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/admin/Entities.php" afterPath="$PROJECT_DIR$/application/controllers/admin/Entities.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/admin/Intents.php" afterPath="$PROJECT_DIR$/application/controllers/admin/Intents.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Intents_model.php" afterPath="$PROJECT_DIR$/application/models/Intents_model.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/english/english_lang.php" afterPath="$PROJECT_DIR$/application/language/english/english_lang.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/entities/entity.php" afterPath="$PROJECT_DIR$/application/views/admin/entities/entity.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/includes/head.php" afterPath="$PROJECT_DIR$/application/views/admin/includes/head.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/intents/intent.php" afterPath="$PROJECT_DIR$/application/views/admin/intents/intent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/includes/scripts.php" afterPath="$PROJECT_DIR$/application/views/admin/includes/scripts.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mediaworx.iws" />
@@ -35,8 +29,8 @@
       <file leaf-file-name="english_lang.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/language/english/english_lang.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.74138">
-              <caret line="214" column="131" selection-start-line="214" selection-start-column="131" selection-end-line="214" selection-end-column="131" />
+            <state vertical-scroll-proportion="-9.068966">
+              <caret line="216" column="44" selection-start-line="216" selection-start-column="44" selection-end-line="216" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -65,10 +59,14 @@
       <file leaf-file-name="intent.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/admin/intents/intent.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7037037">
-              <caret line="258" column="62" selection-start-line="258" selection-start-column="62" selection-end-line="258" selection-end-column="62" />
+            <state vertical-scroll-proportion="0.45622894">
+              <caret line="294" column="185" selection-start-line="294" selection-start-column="185" selection-end-line="294" selection-end-column="185" />
               <folding>
                 <element signature="n#style#0;n#thead#0;n#table#0;n#div#7;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <marker date="1521660170634" expanded="true" signature="7895:7981" placeholder="..." />
+                <marker date="1521660170634" expanded="true" signature="8037:8957" placeholder="..." />
+                <marker date="1521660170634" expanded="true" signature="8996:9199" placeholder="..." />
+                <marker date="1521660170634" expanded="true" signature="9287:9521" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -147,11 +145,11 @@
         <option value="$PROJECT_DIR$/application/views/admin/entities/entity.php" />
         <option value="$PROJECT_DIR$/vendor/echelon/helper.php" />
         <option value="$PROJECT_DIR$/application/controllers/admin/Entities.php" />
-        <option value="$PROJECT_DIR$/application/language/english/english_lang.php" />
         <option value="$PROJECT_DIR$/application/models/Intents_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/admin/Intents.php" />
         <option value="$PROJECT_DIR$/application/views/admin/includes/head.php" />
         <option value="$PROJECT_DIR$/application/views/admin/includes/scripts.php" />
+        <option value="$PROJECT_DIR$/application/language/english/english_lang.php" />
         <option value="$PROJECT_DIR$/application/views/admin/intents/intent.php" />
       </list>
     </option>
@@ -492,6 +490,10 @@
           <caret line="134" column="20" selection-start-line="134" selection-start-column="20" selection-end-line="134" selection-end-column="38" />
           <folding>
             <element signature="n#style#0;n#thead#0;n#table#0;n#div#7;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1521660170634" expanded="true" signature="7895:7981" placeholder="..." />
+            <marker date="1521660170634" expanded="true" signature="8037:8957" placeholder="..." />
+            <marker date="1521660170634" expanded="true" signature="8996:9199" placeholder="..." />
+            <marker date="1521660170634" expanded="true" signature="9287:9521" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -779,14 +781,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/language/english/english_lang.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.74138">
-          <caret line="214" column="131" selection-start-line="214" selection-start-column="131" selection-end-line="214" selection-end-column="131" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Intents_model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.964286">
@@ -851,12 +845,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/english/english_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.068966">
+          <caret line="216" column="44" selection-start-line="216" selection-start-column="44" selection-end-line="216" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/admin/intents/intent.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7037037">
-          <caret line="258" column="62" selection-start-line="258" selection-start-column="62" selection-end-line="258" selection-end-column="62" />
+        <state vertical-scroll-proportion="0.45622894">
+          <caret line="294" column="185" selection-start-line="294" selection-start-column="185" selection-end-line="294" selection-end-column="185" />
           <folding>
             <element signature="n#style#0;n#thead#0;n#table#0;n#div#7;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1521660170634" expanded="true" signature="7895:7981" placeholder="..." />
+            <marker date="1521660170634" expanded="true" signature="8037:8957" placeholder="..." />
+            <marker date="1521660170634" expanded="true" signature="8996:9199" placeholder="..." />
+            <marker date="1521660170634" expanded="true" signature="9287:9521" placeholder="..." />
           </folding>
         </state>
       </provider>

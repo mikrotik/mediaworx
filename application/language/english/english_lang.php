@@ -213,6 +213,8 @@ $lang['intents_dt_is_list'] = 'Is list';
 $lang['intents_dt_is_list_note'] = 'Check this box for getting a list of values for the corresponding parameter.';
 $lang['intents_dt_prompts'] = 'Prompts';
 $lang['intents_dt_prompts_note'] = 'Type questions that the agent will ask your users, if a request doesn’t contain this parameter.';
+$lang['define_prompts'] = 'Define prompts';
+$lang['action_prompts_title'] = 'Prompts for';
 
 # Email Templates
 $lang['email_templates']                        = 'Email Templates';
