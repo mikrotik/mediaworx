@@ -1,0 +1,59 @@
+[
+    {
+        "name": "php-ai/php-ml",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-ai/php-ml.git",
+            "reference": "a36fe086d3d4cbdac625740c703fc51530ab58d9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-ai/php-ml/zipball/a36fe086d3d4cbdac625740c703fc51530ab58d9",
+            "reference": "a36fe086d3d4cbdac625740c703fc51530ab58d9",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1"
+        },
+        "require-dev": {
+            "phpbench/phpbench": "^0.14.0",
+            "phpstan/phpstan-phpunit": "^0.9.4",
+            "phpstan/phpstan-shim": "^0.9",
+            "phpstan/phpstan-strict-rules": "^0.9.0",
+            "phpunit/phpunit": "^7.0.0",
+            "symplify/coding-standard": "^3.1",
+            "symplify/easy-coding-standard": "^3.1"
+        },
+        "time": "2018-03-10 20:48:16",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Phpml\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Arkadiusz Kondas",
+                "email": "arkadiusz.kondas@gmail.com"
+            }
+        ],
+        "description": "PHP-ML - Machine Learning library for PHP",
+        "homepage": "https://github.com/php-ai/php-ml",
+        "keywords": [
+            "Neural network",
+            "artificial intelligence",
+            "computational learning theory",
+            "data science",
+            "feature extraction",
+            "machine learning",
+            "pattern recognition"
+        ]
+    }
+]

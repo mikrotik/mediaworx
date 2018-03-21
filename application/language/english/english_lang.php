@@ -21,7 +21,9 @@ $lang['error_uploading_file'] = 'Error uploading file';
 $lang['load_more']            = 'Load More';
 $lang['cant_delete_default']  = 'Cant delete default %s';
 $lang['confirmation']  = 'Are you sure ?';
-$lang['delete_confirmation']  = 'Deleting this entity %s is not recoverable!';
+$lang['delete_confirmation']  = 'Deleting this object %s is not recoverable!';
+$lang['tag_placeholder'] = 'Place your synonyms here...';
+$lang['link_followup'] = 'Follow up';
 
 # Invoice General
 $lang['invoice_status_paid']                = 'Paid';
@@ -164,6 +166,33 @@ $lang['entity']           = 'Entity';
 $lang['new_entity']       = 'New Entity';
 $lang['entity_lowercase'] = 'entity';
 $lang['entities_dt_entity_name'] = 'Entity Name';
+$lang['entities_dt_reference'] = 'References';
+$lang['entities_dt_synonym'] = 'Synonyms';
+$lang['entities_tag_info'] = 'Separate synonyms by pressing the enter, tab or ; key.';
+$lang['entity_name'] = 'Entity Name';
+$lang['define_synonyms'] = 'Define synonyms';
+$lang['define_synonyms_note'] = 'You can choose to define synonyms that will map to reference values. Or just list values, including references to other entities.';
+$lang['allow_automated_expansion'] = 'Allow automated expansion';
+
+# Intents
+$lang["als_intents"] = 'Intents';
+$lang['intents']          = 'Intents';
+$lang['intent']           = 'Intent';
+$lang['new_intent']       = 'New Intent';
+$lang['intent_lowercase'] = 'intent';
+$lang['intents_dt_intent_name'] = 'Intent Name';
+$lang['intent_name'] = 'Intent Name';
+$lang['intent_context'] = 'Contexts';
+$lang['intent_context_note'] = 'Can be used to “remember” parameter values, so they can be passed between intents.';
+$lang['context_input'] = 'Add input context';
+$lang['context_output'] = 'Add output context';
+$lang['intent_event'] = 'Events';
+$lang['intent_event_note'] = 'Optional way to trigger intent without the need for matched text or spoken input. Use predefined platform specific events or define your custom ones.';
+$lang['add_event'] = 'Add event';
+$lang['training_phrases'] = 'Training phrases';
+$lang['training_phrases_user_expression'] = 'Add user expression';
+$lang['training_phrases_note'] = 'Phrases you can expect from users, that will trigger the intent.';
+$lang['pattern_note'] = 'Examle node (") contains normal speech and can be annotated by linking a word or phrase to an entity.Template mode (@) contains entity reference and can not be annotated. Click to toggle modes.';
 
 # Email Templates
 $lang['email_templates']                        = 'Email Templates';
