@@ -17,13 +17,18 @@ $lang['close']                = 'Close';
 $lang['send']                 = 'Send';
 $lang['cancel']               = 'Cancel';
 $lang['go_back']              = 'Go Back';
+$lang['yes_delete']              = 'Yes, delete it!';
+$lang['cancelled'] = 'Cancelled!';
+$lang['deleted'] = 'Deleted!';
 $lang['error_uploading_file'] = 'Error uploading file';
 $lang['load_more']            = 'Load More';
 $lang['cant_delete_default']  = 'Cant delete default %s';
 $lang['confirmation']  = 'Are you sure ?';
-$lang['delete_confirmation']  = 'Deleting this object %s is not recoverable!';
+$lang['delete_confirmation']  = 'Your will not be able to recover this %s!';
+$lang['delete_success'] = 'Delete request executed successfully';
 $lang['tag_placeholder'] = 'Place your synonyms here...';
 $lang['link_followup'] = 'Follow up';
+$lang['empty_user_expression'] = 'User Expression is empty.';
 
 # Invoice General
 $lang['invoice_status_paid']                = 'Paid';
@@ -193,6 +198,21 @@ $lang['training_phrases'] = 'Training phrases';
 $lang['training_phrases_user_expression'] = 'Add user expression';
 $lang['training_phrases_note'] = 'Phrases you can expect from users, that will trigger the intent.';
 $lang['pattern_note'] = 'Examle node (") contains normal speech and can be annotated by linking a word or phrase to an entity.Template mode (@) contains entity reference and can not be annotated. Click to toggle modes.';
+$lang['actions_parameters'] = 'Action and parameters';
+$lang['actions_parameters_note'] = 'Actions are sent to fulfillment, once an intent is triggered. Parameters are specific words or phrases you’re trying to collect from users, in order to complete a task.';
+$lang['action_name'] = 'Enter action name';
+$lang['intents_dt_parameter_name'] = 'Parameter name';
+$lang['intents_dt_parameter_name_note'] = 'This is the name of the parameter.';
+$lang['intents_dt_entity'] = 'Entity';
+$lang['intents_dt_entity_note'] = 'Specify a system or a developer entity corresponding to this parameter.';
+$lang['intents_dt_resolved_value'] = 'Resolved value';
+$lang['intents_dt_is_required'] = 'Required';
+$lang['intents_dt_is_required_note'] = 'Tick this box if the intent can’t be complete without corresponding parameter.';
+$lang['intents_dt_value'] = 'Value';
+$lang['intents_dt_is_list'] = 'Is list';
+$lang['intents_dt_is_list_note'] = 'Check this box for getting a list of values for the corresponding parameter.';
+$lang['intents_dt_prompts'] = 'Prompts';
+$lang['intents_dt_prompts_note'] = 'Type questions that the agent will ask your users, if a request doesn’t contain this parameter.';
 
 # Email Templates
 $lang['email_templates']                        = 'Email Templates';

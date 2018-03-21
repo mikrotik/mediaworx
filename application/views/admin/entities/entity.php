@@ -6,9 +6,9 @@
                 <div class="panel_s">
                     <div class="panel-body _buttons">
                         <a href="<?php echo admin_url('entities'); ?>" class="btn btn-default mright5 test pull-left display-block">
-                            <?php echo _l('back'); ?></a>
+                            <?php echo _l('go_back'); ?></a>
                         <a href="#" onclick="new_entity()" class="btn btn-info mright5 test pull-right display-block">
-                            <?php echo _l('save'); ?></a>
+                            <?php echo _l('submit'); ?></a>
                     </div>
                 </div>
                 <div class="panel_s">

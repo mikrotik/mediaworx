@@ -36,6 +36,10 @@ class Intents extends Admin_controller
 
             $data = $this->input->post(NULL, FALSE);
 
+            echo "<pre>";
+            print_r($data);
+            exit();
+
             if ($id == '') {
                 if (!has_permission('echelon', '', 'create')) {
                     access_denied('echelon');

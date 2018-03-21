@@ -17,6 +17,8 @@
 <script src="<?php echo base_url('/assets/plugins/sweetalert/sweetalert.js')?>"></script>
 <!-- Tag It -->
 <script src="<?php echo base_url('/assets/plugins/tagsinput/js/tag-it.min.js')?>"></script>
+<!-- Tag It -->
+<script src="<?php echo base_url('/assets/plugins/iCheck/icheck.min.js')?>"></script>
 <?php app_select_plugin_js($locale); ?>
 <script src="<?php echo base_url('assets/plugins/tinymce/tinymce.min.js'); ?>"></script>
 <?php app_jquery_validation_plugin_js($locale); ?>

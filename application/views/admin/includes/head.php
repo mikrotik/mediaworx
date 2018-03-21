@@ -41,6 +41,8 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert/sweetalert.css');?>">
     <!-- Tag It -->
     <link rel="stylesheet" href="<?php echo base_url('assets/plugins/tagsinput/css/jquery.tagit.css');?>">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="<?php echo base_url('assets/plugins/iCheck/all.css');?>">
     <?php if(file_exists(FCPATH.'assets/css/custom.css')){ ?>
     <link href="<?php echo base_url('assets/css/custom.css'); ?>" rel="stylesheet">
     <?php } ?>

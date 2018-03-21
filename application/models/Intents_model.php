@@ -23,6 +23,24 @@ class Intents_model extends CRM_Model
     public function add($data=array())
     {
 
+        if (isset($data['context_input'])) {
+            $data['context_input'] = json_encode($data['context_input']);
+        } else {
+            $data['context_input'] = json_encode([]);
+        }
+
+        if (isset($data['context_output'])) {
+            $data['context_output'] = json_encode($data['context_output']);
+        } else {
+            $data['context_output'] = json_encode([]);
+        }
+
+        if (isset($data['events'])) {
+            $data['events'] = json_encode($data['events']);
+        } else {
+            $data['events'] = json_encode([]);
+        }
+
         $this->db->insert('tblintents',$data);
         $intent_id = $this->db->insert_id();
 

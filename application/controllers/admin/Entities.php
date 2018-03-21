@@ -107,7 +107,7 @@ class Entities extends Admin_controller
         {
             $data = $this->input->post(NULL, FALSE);
 
-            $pattern_entities = Echelon_Helper::parse_entities($data['string']);
+            $pattern_entities = Echelon_Helper::parse_entities(trim($data['string'])," ");
             echo json_encode($pattern_entities);
             die();
         }
