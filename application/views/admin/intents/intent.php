@@ -95,11 +95,11 @@
     </div>
 </div>
 <!-- Prompts modal -->
-<div class="modal fade" id="define-prompts" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="define-prompts" tabindex="-1" style="z-index: 1100;" role="dialog" aria-labelledby="define-prompts-label" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><?php echo _l('action_prompts_title')?> '<span class="target-action"></span>'</h5>
+                <h5 class="modal-title" id="define-prompts-label"><?php echo _l('action_prompts_title')?> '<span class="target-action"></span>'</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -119,10 +119,34 @@
                         <input type="text" class="form-control" name="value" id="value" value="" disabled>
                     </div>
                 </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-terminal"></i></span>
+                            <input class="form-control" placeholder="<?php echo _l('action_prompt_variant')?>" type="text" name="prompt_variant">
+                            <span class="input-group-btn">
+                            <button type="button" class="btn btn-info btn-flat btn-add-prompt-variant"><?php echo _l('add_new')?></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table">
+                    <table class="table table-hover table-prompt-variant">
+                        <thead>
+                        <td width="1%" class="default-bg text-center"></td>
+                        <th><?php echo strtoupper(_l('prompts'))?></th>
+                        <th></th>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary btn-save-prompt-variants">Save changes</button>
             </div>
         </div>
     </div>
@@ -140,6 +164,7 @@
     var user_expression = [];
     var user_expression_row = '<?php echo $user_expression_row?>';
     var action_parameters = [];
+    var prompt_variant_row = 1;
 
     $(function(){
 
@@ -314,6 +339,35 @@
                         alert(xhr.status + "\r\n" + thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                     }
                 }
+            });
+
+            $('.btn-add-prompt-variant').on('click',function(){
+
+                var prompt_variant = $('input[name=\'prompt_variant\']').val();
+
+                if (prompt_variant == "")
+                {
+                    swal("<?php echo _l('cancelled')?>", "<?php echo _l('empty_user_expression')?>", "error");
+                    return false;
+                }
+
+                html ='<tr>';
+                html +='<td width="1%" class="default-bg text-center">'+prompt_variant_row+'</td>';
+                html +='<td>'+prompt_variant+'</td>';
+                html +='<td></td>';
+                html +='</tr>';
+
+                $('.table-prompt-variant tbody').append(html);
+
+                prompt_variant_row++;
+
+                $('input[name=\'prompt_variant\']').val('');
+                $('input[name=\'prompt_variant\']').focus();
+            });
+
+            $('.btn-save-prompt-variants').on('click',function(){
+
+                $('#define-prompts').modal('hide');
             });
         });
 
