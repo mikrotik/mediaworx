@@ -14,6 +14,7 @@ $lang['deleted']              = '%s deleted';
 $lang['problem_deleting']     = 'Problem deleting %s';
 $lang['is_referenced']        = 'The ID of the %s is already using.';
 $lang['close']                = 'Close';
+$lang['remove']                = 'Remove';
 $lang['send']                 = 'Send';
 $lang['cancel']               = 'Cancel';
 $lang['go_back']              = 'Go Back';

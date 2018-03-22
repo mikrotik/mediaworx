@@ -105,6 +105,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <input type="hidden" class="form-control" name="id" value="">
+                <input type="hidden" class="form-control" name="row" value="">
                 <div class="row">
                     <div class="col-md-4">
                         <label for="parameter_name"><?php echo _l('intents_dt_parameter_name');?></label>
@@ -145,8 +147,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary btn-save-prompt-variants">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo _l('close')?></button>
             </div>
         </div>
     </div>
@@ -292,12 +293,12 @@
                         $.each( action_parameters, function( key, value ) {
 
                                 intentActionParams = '<tr id="intent-action-parameter-' + user_expression_row + '-row-' + key + '">';
-                                intentActionParams += '<td><input class="is_required" type="checkbox" data-parameter="'+value+'" data-entity="@'+value+'" data-value="$'+value+'" data-id="'+key+'" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][is_required]" value="1" id="show_primary_contact"></td>';
+                                intentActionParams += '<td><input class="is_required" type="checkbox" data-parameter="'+value+'" data-entity="@'+value+'" data-value="$'+value+'" data-id="'+key+'" data-row="'+user_expression_row+'" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][is_required]" value="1" id="show_primary_contact"></td>';
                                 intentActionParams += '<td>' + value + '<input type="hidden" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][parameter_name]" value="'+value+'"></td>';
                                 intentActionParams += '<td>@' + value + '<input type="hidden" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][entity]" value="@'+value+'"></td>';
                                 intentActionParams += '<td>$' + value + '<input type="hidden" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][value]" value="$'+value+'"></td>';
                                 intentActionParams += '<td><input type="checkbox" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][is_list]" value="1" id="show_primary_contact"></td>';
-                                intentActionParams += '<td><span id="prompts-'+key+'"></span><input type="hidden" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][prompts][]" value=""></td>';
+                                intentActionParams += '<td><span id="prompts-'+key+'"></span></td>';
                                 intentActionParams += '</tr>';
 
                             $('.table-parameter-list tbody').append(intentActionParams);
@@ -310,6 +311,7 @@
 
                             $( ".is_required" ).on('ifChanged',function(e) {
                                 var id = $(this).data("id");
+                                var row = $(this).data("row");
                                 var parameter_name = $(this).data('parameter');
                                 var entity = $(this).data('entity');
                                 var value = $(this).data('value');
@@ -317,7 +319,7 @@
                                 var checked = $(this).is(":checked");
 
                                 if (checked) {
-                                    $('#prompts-' + id).html('<a href="#" class="btn btn-icon btn-post-options" data-parameter="'+parameter_name+'" data-entity="'+entity+'" data-value="'+value+'" data-toggle="modal" data-id="'+id+'" data-target="#define-prompts"><?php echo _l('define_prompts')?></a>');
+                                    $('#prompts-' + id).html('<a href="#" class="btn btn-icon btn-post-options" data-row="'+row+'" data-parameter="'+parameter_name+'" data-entity="'+entity+'" data-value="'+value+'" data-toggle="modal" data-id="'+id+'" data-target="#define-prompts"><?php echo _l('define_prompts')?></a>');
                                 } else {
                                     $('#prompts-' + id).html('');
                                 }
@@ -344,6 +346,12 @@
             $('.btn-add-prompt-variant').on('click',function(){
 
                 var prompt_variant = $('input[name=\'prompt_variant\']').val();
+                var id = $('#define-prompts input[name="id"]').val();
+                var row = $('#define-prompts input[name="row"]').val();
+
+                prompt_variant_row = $('.table-prompt-variant tbody tr').length;
+
+                prompt_variant_row ++;
 
                 if (prompt_variant == "")
                 {
@@ -351,23 +359,27 @@
                     return false;
                 }
 
-                html ='<tr>';
-                html +='<td width="1%" class="default-bg text-center">'+prompt_variant_row+'</td>';
-                html +='<td>'+prompt_variant+'</td>';
-                html +='<td></td>';
-                html +='</tr>';
+                html_1 ='<tr id="intent-action-parameter-prompts-modal-'+prompt_variant_row+'-'+row+'-'+id+'">';
+                html_1 +='<td width="1%" class="default-bg text-center">'+prompt_variant_row+'</td>';
+                html_1 +='<td>'+prompt_variant+'</td>';
+                html_1 +='<td class="text-center"><a href="#" class="text-danger" onclick="removePrompt(\''+row+'\',\''+id+'\',\''+prompt_variant_row+'\')"><i class="fa fa-icon fa-close"></i> <?php echo _l('remove')?></a></td>';
+                html_1 +='</tr>';
 
-                $('.table-prompt-variant tbody').append(html);
+                $('.table-prompt-variant tbody').append(html_1);
+
+                html_2 ='<tr class="action_prompts-'+row+'-'+id+'" id="intent-action-parameter-prompts-'+prompt_variant_row+'-'+row+'-'+id+'" style="display:none">';
+                html_2 +='<td width="1%" class="default-bg text-center">'+prompt_variant_row+'</td>';
+                html_2 +='<td>'+prompt_variant+'<input type="hidden" name="user_exp['+row+'][action_parameters]['+id+'][action_prompts]['+prompt_variant_row+']" value="'+prompt_variant+'"/></td>';
+                html_2 +='<td></td>';
+                html_2 +='</tr>';
+
+
+                $('#intent-action-parameter-' + row + '-row-' + id).after(html_2);
 
                 prompt_variant_row++;
 
                 $('input[name=\'prompt_variant\']').val('');
                 $('input[name=\'prompt_variant\']').focus();
-            });
-
-            $('.btn-save-prompt-variants').on('click',function(){
-
-                $('#define-prompts').modal('hide');
             });
         });
 
@@ -376,6 +388,8 @@
 
             var invoker = $(e.relatedTarget);
             /** Data related data values*/
+            var id = $(invoker).data('id');
+            var row = $(invoker).data('row');
             var parameter_name = $(invoker).data('parameter');
             var entity = $(invoker).data('entity');
             var value = $(invoker).data('value');
@@ -384,10 +398,65 @@
             $('#define-prompts input[name="parameter_name"]').val(parameter_name);
             $('#define-prompts input[name="entity"]').val(entity);
             $('#define-prompts input[name="value"]').val(value);
+            $('#define-prompts input[name="id"]').val(id);
+            $('#define-prompts input[name="row"]').val(row);
 
             $('.target-action').html(parameter_name);
 
+            prompt_variant_row = 1;
 
+            $('.action_prompts-'+row+'-'+id).each(function(key,tr) {
+
+
+                html_1 ='<tr id="intent-action-parameter-prompts-modal-'+prompt_variant_row+'-'+row+'-'+id+'">';
+                html_1 +='<td width="1%" class="default-bg text-center">'+prompt_variant_row+'</td>';
+                html_1 +='<td>'+$(tr).find("td:eq(1)").text()+'</td>';
+                html_1 +='<td class="text-center"><a href="#" class="text-danger" onclick="removePrompt(\''+row+'\',\''+id+'\',\''+prompt_variant_row+'\')"><i class="fa fa-icon fa-close"></i> <?php echo _l('remove')?></a></td>';
+                html_1 +='</tr>';
+
+                $('.table-prompt-variant tbody').append(html_1);
+
+                html_2 ='<tr class="action_prompts-'+row+'-'+id+'" id="intent-action-parameter-prompts-'+prompt_variant_row+'-'+row+'-'+id+'" style="display:none">';
+                html_2 +='<td width="1%" class="default-bg text-center">'+prompt_variant_row+'</td>';
+                html_2 +='<td>'+$(tr).find("td:eq(1)").text()+'<input type="hidden" name="user_exp['+row+'][action_parameters]['+id+'][action_prompts]['+prompt_variant_row+']" value="'+$(tr).find("td:eq(1)").text()+'"/></td>';
+                html_2 +='<td></td>';
+                html_2 +='</tr>';
+
+
+                $('#intent-action-parameter-' + row + '-row-' + id).after(html_2);
+
+                prompt_variant_row++;
+            });
+
+            $('.action_prompts-'+row+'-'+id).remove();
+
+
+        });
+
+        $('#define-prompts').on('hidden.bs.modal', function () {
+
+            var id = $('#define-prompts input[name="id"]').val();
+            var row = $('#define-prompts input[name="row"]').val();
+
+            $('.action_prompts-'+row+'-'+id).remove();
+
+            prompt_variant_row = 1;
+
+            $('.table-prompt-variant tbody > tr').each(function(key,tr) {
+
+                html_2 ='<tr class="action_prompts-'+row+'-'+id+'" id="intent-action-parameter-prompts-'+prompt_variant_row+'-'+row+'-'+id+'" style="display:none">';
+                html_2 +='<td width="1%" class="default-bg text-center">'+prompt_variant_row+'</td>';
+                html_2 +='<td>'+$(tr).find("td:eq(1)").text()+'<input type="hidden" name="user_exp['+row+'][action_parameters]['+id+'][action_prompts]['+prompt_variant_row+']" value="'+$(tr).find("td:eq(1)").text()+'"/></td>';
+                html_2 +='<td></td>';
+                html_2 +='</tr>';
+
+
+                $('#intent-action-parameter-' + row + '-row-' + id).after(html_2);
+
+                prompt_variant_row++;
+            });
+
+            $('.table-prompt-variant tbody').html('');
         });
 
     });
@@ -407,6 +476,30 @@
             $('#user-expression-child-'+row).addClass('active');
         }
 
+    }
+
+    function removePrompt(row,id,pr_row)
+    {
+        if ($.isNumeric(row) && $.isNumeric(id) && $.isNumeric(pr_row))
+        {
+            swal({
+                    title: "<?php echo _l('confirmation')?>",
+                    text: "<?php echo _l('delete_confirmation')?>",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "<?php echo _l('yes_delete')?>",
+                    closeOnConfirm: false
+                },
+                function(){
+                    $('#intent-action-parameter-prompts-modal-'+pr_row+'-'+row+'-'+id).remove();
+                    $('#intent-action-parameter-prompts-'+pr_row+'-'+row+'-'+id).remove();
+
+                    swal("<?php echo _l('deleted')?>", "<?php echo _l('delete_success')?>", "success");
+                });
+        }
+
+        return false;
     }
 
     function removePattern(row)
