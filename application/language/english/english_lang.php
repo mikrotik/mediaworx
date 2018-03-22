@@ -218,6 +218,7 @@ $lang['define_prompts'] = 'Define prompts';
 $lang['action_prompts_title'] = 'Prompts for';
 $lang['action_prompt_variant'] = 'Enter a prompt variant...';
 $lang['prompts'] = 'Prompts';
+$lang['new_parameter'] = 'New parameter';
 
 # Email Templates
 $lang['email_templates']                        = 'Email Templates';

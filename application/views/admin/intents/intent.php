@@ -15,7 +15,7 @@
                 <input type="hidden" name="is_admin" value="<?php echo is_admin()?>"/>
                 <input type="hidden" name="agent_id" value="0"/>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="panel_s">
                             <div class="panel-body">
                                 <input type="hidden" name="is_admin" value="<?php echo is_admin()?>"/>
@@ -79,13 +79,11 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="buttons">
+                                    <a href="#" class="btn btn-icon btn-post-options btn-add-parameter"><i class="fa fa-plus"></i> <?php echo _l('new_parameter')?></a>
+                                </div>
                                 <!-- ./action and parameters-->
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="panel_s">
-                            <div class="panel-body"></div>
                         </div>
                     </div>
                 </div>
@@ -292,13 +290,13 @@
 
                         $.each( action_parameters, function( key, value ) {
 
-                                intentActionParams = '<tr id="intent-action-parameter-' + user_expression_row + '-row-' + key + '">';
-                                intentActionParams += '<td><input class="is_required" type="checkbox" data-parameter="'+value+'" data-entity="@'+value+'" data-value="$'+value+'" data-id="'+key+'" data-row="'+user_expression_row+'" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][is_required]" value="1" id="show_primary_contact"></td>';
+                                intentActionParams = '<tr class="action_parameters" id="intent-action-parameter-' + user_expression_row + '-row-' + key + '">';
+                                intentActionParams += '<td class="text-center"><input class="is_required" type="checkbox" data-parameter="'+value+'" data-entity="@'+value+'" data-value="$'+value+'" data-id="'+key+'" data-row="'+user_expression_row+'" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][is_required]" value="1" id="show_primary_contact"></td>';
                                 intentActionParams += '<td>' + value + '<input type="hidden" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][parameter_name]" value="'+value+'"></td>';
                                 intentActionParams += '<td>@' + value + '<input type="hidden" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][entity]" value="@'+value+'"></td>';
                                 intentActionParams += '<td>$' + value + '<input type="hidden" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][value]" value="$'+value+'"></td>';
-                                intentActionParams += '<td><input type="checkbox" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][is_list]" value="1" id="show_primary_contact"></td>';
-                                intentActionParams += '<td><span id="prompts-'+key+'"></span></td>';
+                                intentActionParams += '<td class="text-center"><input type="checkbox" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][is_list]" value="1" id="show_primary_contact"></td>';
+                                intentActionParams += '<td class="text-center"><span id="prompts-'+key+'"></span></td>';
                                 intentActionParams += '</tr>';
 
                             $('.table-parameter-list tbody').append(intentActionParams);
@@ -457,6 +455,50 @@
             });
 
             $('.table-prompt-variant tbody').html('');
+        });
+
+        $('.btn-add-parameter').on('click',function() {
+
+            var key = 0;
+            user_expression_row = 999;
+
+            if ($('.action_parameters').length){
+                key = $('.action_parameters').length;
+            }
+
+            intentActionParams = '<tr class="action_parameters" id="intent-action-parameter-' + user_expression_row + '-row-' + key + '">';
+            intentActionParams += '<td class="text-center"><input class="is_required" type="checkbox" data-parameter="'+value+'" data-entity="@'+value+'" data-value="$'+value+'" data-id="'+key+'" data-row="'+user_expression_row+'" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][is_required]" value="1" id="show_primary_contact"></td>';
+            intentActionParams += '<td><input type="text" style="width: 100px" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][parameter_name]" value=""></td>';
+            intentActionParams += '<td><input type="text" style="width: 100px" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][entity]" value=""></td>';
+            intentActionParams += '<td><input type="text" style="width: 100px" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][value]" value=""></td>';
+            intentActionParams += '<td class="text-center"><input type="checkbox" name="user_exp[' + user_expression_row + '][action_parameters]['+key+'][is_list]" value="1" id="show_primary_contact"></td>';
+            intentActionParams += '<td class="text-center"><span id="prompts-'+key+'" style="width: 100px"></span></td>';
+            intentActionParams += '</tr>';
+
+            $('.table-parameter-list tbody').append(intentActionParams);
+
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
+
+            $( ".is_required" ).on('ifChanged',function(e) {
+                var id = $(this).data("id");
+                var row = $(this).data("row");
+                var parameter_name = $(this).data('parameter');
+                var entity = $(this).data('entity');
+                var value = $(this).data('value');
+
+                var checked = $(this).is(":checked");
+
+                if (checked) {
+                    $('#prompts-' + id).html('<a href="#" class="btn btn-icon btn-post-options" data-row="'+row+'" data-parameter="'+parameter_name+'" data-entity="'+entity+'" data-value="'+value+'" data-toggle="modal" data-id="'+id+'" data-target="#define-prompts"><?php echo _l('define_prompts')?></a>');
+                } else {
+                    $('#prompts-' + id).html('');
+                }
+            });
+
         });
 
     });
