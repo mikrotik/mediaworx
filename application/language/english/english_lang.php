@@ -30,6 +30,7 @@ $lang['delete_success'] = 'Delete request executed successfully';
 $lang['tag_placeholder'] = 'Place your synonyms here...';
 $lang['link_followup'] = 'Follow up';
 $lang['empty_user_expression'] = 'User Expression is empty.';
+$lang['action_parameter_required'] = 'One or more parameters values are empty!';
 
 # Invoice General
 $lang['invoice_status_paid']                = 'Paid';
@@ -185,6 +186,7 @@ $lang["als_intents"] = 'Intents';
 $lang['intents']          = 'Intents';
 $lang['intent']           = 'Intent';
 $lang['new_intent']       = 'New Intent';
+$lang['update_intent']       = 'Update Intent';
 $lang['intent_lowercase'] = 'intent';
 $lang['intents_dt_intent_name'] = 'Intent Name';
 $lang['intent_name'] = 'Intent Name';
