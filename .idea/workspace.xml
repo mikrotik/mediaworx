@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9274056-e247-49ca-ac8d-4bd0d79f2f19" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/english/english_lang.php" afterPath="$PROJECT_DIR$/application/language/english/english_lang.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/intents/intent.php" afterPath="$PROJECT_DIR$/application/views/admin/intents/intent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mediaworx.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,13 +57,13 @@
       <file leaf-file-name="intent.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/admin/intents/intent.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.83164984">
-              <caret line="443" column="51" selection-start-line="443" selection-start-column="51" selection-end-line="443" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.97306395">
+              <caret line="503" column="110" selection-start-line="503" selection-start-column="110" selection-end-line="503" selection-end-column="110" />
               <folding>
-                <marker date="1521792215680" expanded="true" signature="10649:10883" placeholder="..." />
-                <marker date="1521792215680" expanded="true" signature="26607:26619" placeholder="..." />
-                <marker date="1521792215680" expanded="true" signature="26775:26787" placeholder="..." />
-                <marker date="1521792215680" expanded="true" signature="26935:26947" placeholder="..." />
+                <marker date="1521795524836" expanded="true" signature="10649:10883" placeholder="..." />
+                <marker date="1521795524836" expanded="true" signature="26616:26628" placeholder="..." />
+                <marker date="1521795524836" expanded="true" signature="26770:26782" placeholder="..." />
+                <marker date="1521795524836" expanded="true" signature="26916:26928" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -716,13 +714,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/admin/intents/intent.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.83164984">
-          <caret line="443" column="51" selection-start-line="443" selection-start-column="51" selection-end-line="443" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.97306395">
+          <caret line="503" column="110" selection-start-line="503" selection-start-column="110" selection-end-line="503" selection-end-column="110" />
           <folding>
-            <marker date="1521792215680" expanded="true" signature="10649:10883" placeholder="..." />
-            <marker date="1521792215680" expanded="true" signature="26607:26619" placeholder="..." />
-            <marker date="1521792215680" expanded="true" signature="26775:26787" placeholder="..." />
-            <marker date="1521792215680" expanded="true" signature="26935:26947" placeholder="..." />
+            <marker date="1521795524836" expanded="true" signature="10649:10883" placeholder="..." />
+            <marker date="1521795524836" expanded="true" signature="26616:26628" placeholder="..." />
+            <marker date="1521795524836" expanded="true" signature="26770:26782" placeholder="..." />
+            <marker date="1521795524836" expanded="true" signature="26916:26928" placeholder="..." />
           </folding>
         </state>
       </provider>
