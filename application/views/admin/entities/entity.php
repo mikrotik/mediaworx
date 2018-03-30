@@ -23,18 +23,21 @@
                         <input type="hidden" name="agent_id" value="0"/>
                         <div class="form-group">
                             <label for="entity_name"><?php echo _l('entity_name'); ?></label>
-                            <input type="text" class="form-control" name="entity_name" id="entity_name" value="<?php echo set_value('entity_name',$entity->entity_name); ?>">
+                            <?php $value=( isset($entity) ? $entity->entity_name : '');?>
+                            <input type="text" class="form-control" name="entity_name" id="entity_name" value="<?php echo $value ?>">
                         </div>
                         <div class="form-group">
                             <div class="checkbox checkbox-primary checkbox-inline">
-                                <input type="checkbox" name="isOverridable" value="1" <?php echo ($entity->isOverridable == 1) ? 'checked' : ''?>>
+                                <?php $checked=((isset($entity) && $entity->isOverridable == 1) ? 'checked' : '');?>
+                                <input type="checkbox" name="isOverridable" value="1" <?php echo $checked?>>
                                 <label for="contact_primary">
                                     <?php echo _l('define_synonyms')?>
                                     <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('define_synonyms_note'); ?>"></i>
                                 </label>
                             </div>
                             <div class="checkbox checkbox-primary checkbox-inline">
-                                <input type="checkbox" name="automatedExpansion" value="1" <?php echo ($entity->automatedExpansion == 1) ? 'checked' : ''?>>
+                                <?php $checked=((isset($entity) && $entity->automatedExpansion == 1) ? 'checked' : '');?>
+                                <input type="checkbox" name="automatedExpansion" value="1" <?php echo $checked ?>>
                                 <label for="contact_primary">
                                     <?php echo _l('allow_automated_expansion')?>
                                 </label>
@@ -62,7 +65,7 @@
                                 </thead>
                                 <?php $reference_row = 0?>
                                 <tbody>
-                                <?php if ($entity_references) {?>
+                                <?php if (isset($entity_references)) {?>
                                     <?php foreach ($entity_references as $entity_reference) { ?>
                                         <tr id="reference-<?php echo $reference_row?>">
                                             <td><?php echo $entity_reference['reference']?>

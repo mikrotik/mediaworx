@@ -25,6 +25,7 @@
                                     <input type="text" class="form-control" name="intent_name" id="intent_name" value="<?php echo set_value('intent_name',$intent->intent_name); ?>">
                                 </div>
                                 <h4 class="bold no-margin font-medium"><?php echo _l('intent_context')?> <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('intent_context_note'); ?>"></i></h4>
+                                <br/>
                                 <div class="form-group">
                                     <input name="context_input[]" class="form-control" id="context_input">
                                 </div>
@@ -33,12 +34,14 @@
                                 </div>
                                 <hr/>
                                 <h4 class="bold no-margin font-medium"><?php echo _l('intent_event')?> <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('intent_event_note'); ?>"></i></h4>
+                                <br/>
                                 <div class="form-group">
                                     <input name="events[]" class="form-control" id="events">
                                 </div>
                                 <hr/>
                                 <!-- training phrases-->
                                 <h4 class="bold no-margin font-medium"><?php echo _l('training_phrases')?> <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('training_phrases_note'); ?>"></i></h4>
+                                <br/>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-quote-right" data-toggle="tooltip" data-title="<?php echo _l('pattern_note'); ?>"></i></span>
                                     <input class="form-control" placeholder="<?php echo _l('training_phrases_user_expression')?>" type="text" name="pattern">
@@ -60,6 +63,7 @@
                                 <!-- ./training phrases-->
                                 <!-- action and parameters -->
                                 <h4 class="bold no-margin font-medium"><?php echo _l('actions_parameters')?> <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('actions_parameters_note'); ?>"></i></h4>
+                                <br/>
                                 <div class="form-group">
                                     <?php $value = (isset($intent) ? $intent->action : "")?>
                                     <input type="text" name="action" class="form-control" value="<?php echo $value?>" placeholder="<?php echo _l('action_name')?>">
@@ -82,7 +86,48 @@
                                 <div class="buttons">
                                     <a href="#" class="btn btn-icon btn-post-options btn-add-parameter"><i class="fa fa-plus"></i> <?php echo _l('new_parameter')?></a>
                                 </div>
+                                <br/>
                                 <!-- ./action and parameters-->
+                                <!-- intent responses-->
+                                <h4 class="bold no-margin font-medium"><?php echo _l('intent_response')?> <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('intent_response_note'); ?>"></i></h4>
+                                <br/>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-comments-o"></i></span>
+                                    <input class="form-control" placeholder="<?php echo _l('intent_response_variant')?>" type="text" name="response">
+                                    <span class="input-group-btn">
+                                      <button type="button" class="btn btn-info btn-flat btn-add-response"><i class="fa fa-plus"></i></button>
+                                    </span>
+                                </div>
+                                <?php $response_row = 0;?>
+                                <div class="table">
+                                    <table class="table stripped-table-data table-hover table-response">
+                                        <thead>
+                                        <th><?php echo _l('text_response')?></th>
+                                        <th><?php echo _l('options')?></th>
+                                        </thead>
+                                        <tbody class="response-tbody">
+                                        <?php if (isset($intent_responses)) { ?>
+                                            <?php foreach ($intent_responses as $intent_response) { ?>
+                                                <tr id="response-<?php echo $response_row?>">
+                                                    <td><?php echo $intent_response['response']?>
+                                                        <input value="<?php echo $intent_response['response']?>" type="hidden" name="responses[<?php echo $response_row?>][response]">
+                                                    </td>
+                                                    <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#response-'+<?php echo $response_row?>).remove()"><i class="fa fa-close"></i></button></td>
+                                                </tr>
+                                                <?php $response_row++; } ?>
+                                        <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- ./intent responses -->
+                                <div class="form-group">
+                                        <?php $checked=((isset($intent) && $intent->is_end == 1) ? 'checked' : '');?>
+                                        <input type="checkbox" name="is_end" value="1" <?php echo $checked?>>
+                                        <label for="contact_primary">
+                                            <?php echo _l('intent_end')?>
+                                            <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('intent_end_note'); ?>"></i>
+                                        </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -164,6 +209,7 @@
     var user_expression_row = $('.action_parameters').length;
     var action_parameters = [];
     var prompt_variant_row = 1;
+    var response_row = <?php echo $response_row?>;
 
     $(function(){
 
@@ -297,7 +343,7 @@
                                 intentActionParams += '<td>$' + value + '<input type="hidden" name="intent[action_parameters]['+key+'][value]" value="$'+value+'"></td>';
                                 intentActionParams += '<td class="text-center"><input type="checkbox" name="intent[action_parameters]['+key+'][is_list]" value="1" id="show_primary_contact"></td>';
                                 intentActionParams += '<td class="text-center"><span id="prompts-'+key+'"></span></td>';
-                                intentActionParams += '<td><a href="#" class="btn btn-danger"><i class="fa fa-icon fa-close"></i></a> | <a href="#" class="btn btn-warning">Default value</a></td>';
+                                intentActionParams += '<td><a href="#" class="btn btn-danger" onclick="removeIntentAction(\''+key+'\')"><i class="fa fa-icon fa-close"></i></a> | <a href="#" class="btn btn-warning" onclick="defaultValue()">Default value</a></td>';
                                 intentActionParams += '</tr>';
 
                             $('.table-parameter-list tbody').append(intentActionParams);
@@ -406,30 +452,34 @@
 
             prompt_variant_row = 1;
 
-            $('.prompts-'+id).each(function(key,tr) {
+            var total_prompts = $('.prompts-'+id).length;
+
+            if (total_prompts) {
+
+                $('.prompts-'+id).each(function(key,tr) {
+
+                    html_1 ='<tr id="intent-action-parameter-prompts-modal-'+prompt_variant_row+'-'+row+'-'+id+'">';
+                    html_1 +='<td width="1%" class="default-bg text-center">'+prompt_variant_row+'</td>';
+                    html_1 +='<td>'+$(tr).find("td:eq(1)").text()+'</td>';
+                    html_1 +='<td class="text-center"><a href="#" class="text-danger" onclick="removePrompt(\''+prompt_variant_row+'\',\''+row+'\',\''+id+'\')"><i class="fa fa-icon fa-close"></i> <?php echo _l('remove')?></a></td>';
+                    html_1 +='</tr>';
+
+                    $('.table-prompt-variant tbody').append(html_1);
+
+                    html_2 ='<tr class="prompts-'+id+' action_prompts-'+id+'-'+prompt_variant_row+'" id="intent-action-parameter-prompts-'+id+'-'+prompt_variant_row+'" style="display:none">';
+                    html_2 +='<td width="1%" class="default-bg text-center">'+prompt_variant_row+'</td>';
+                    html_2 +='<td>'+$(tr).find("td:eq(1)").text()+'<input type="hidden" name="intent[action_parameters]['+id+'][action_prompts]['+prompt_variant_row+']" value="'+$(tr).find("td:eq(1)").text()+'"/></td>';
+                    html_2 +='<td></td>';
+                    html_2 +='</tr>';
 
 
-                html_1 ='<tr id="intent-action-parameter-prompts-modal-'+prompt_variant_row+'-'+row+'-'+id+'">';
-                html_1 +='<td width="1%" class="default-bg text-center">'+prompt_variant_row+'</td>';
-                html_1 +='<td>'+$(tr).find("td:eq(1)").text()+'</td>';
-                html_1 +='<td class="text-center"><a href="#" class="text-danger" onclick="removePrompt(\''+prompt_variant_row+'\',\''+row+'\',\''+id+'\')"><i class="fa fa-icon fa-close"></i> <?php echo _l('remove')?></a></td>';
-                html_1 +='</tr>';
+                    $('#intent-action-parameter-' + id).after(html_2);
 
-                $('.table-prompt-variant tbody').append(html_1);
+                    prompt_variant_row++;
+                });
 
-                html_2 ='<tr class="prompts-'+id+' action_prompts-'+id+'-'+prompt_variant_row+'" id="intent-action-parameter-prompts-'+id+'-'+prompt_variant_row+'" style="display:none">';
-                html_2 +='<td width="1%" class="default-bg text-center">'+prompt_variant_row+'</td>';
-                html_2 +='<td>'+$(tr).find("td:eq(1)").text()+'<input type="hidden" name="intent[action_parameters]['+id+'][action_prompts]['+prompt_variant_row+']" value="'+$(tr).find("td:eq(1)").text()+'"/></td>';
-                html_2 +='<td></td>';
-                html_2 +='</tr>';
-
-
-                $('#intent-action-parameter-' + id).after(html_2);
-
-                prompt_variant_row++;
-            });
-
-            $('.prompts-'+id).remove();
+                $('.prompts-' + id).remove();
+            }
         });
 
         $('#define-prompts').on('hidden.bs.modal', function () {
@@ -472,7 +522,7 @@
             intentActionParams += '<td><input type="text" style="width: 100px" name="intent[action_parameters]['+key+'][value]" value=""></td>';
             intentActionParams += '<td class="text-center"><input type="checkbox" name="intent[action_parameters]['+key+'][is_list]" value="1" id="show_primary_contact"></td>';
             intentActionParams += '<td class="text-center"><span id="prompts-'+key+'"></span></td>';
-            intentActionParams += '<td><a href="#" class="btn btn-danger"><i class="fa fa-icon fa-close"></i></a> | <a href="#" class="btn btn-warning">Default value</a></td>';
+            intentActionParams += '<td><a href="#" class="btn btn-danger" onclick="removeIntentAction(\''+key+'\')"><i class="fa fa-icon fa-close"></i></a> | <a href="#" class="btn btn-warning">Default value</a></td>';
             intentActionParams += '</tr>';
 
             $('.table-parameter-list tbody').append(intentActionParams);
@@ -511,7 +561,80 @@
 
         });
 
+        /** Add Responses*/
+        $('.btn-add-response').on('click', function () {
+
+            var response = $('input[name=\'response\']').val();
+
+            if (response != ""){
+
+                responseHtml = '<tr id="response-'+response_row+'">';
+                responseHtml +='<td>'+response+'<input type="hidden" name="intent[responses]['+response_row+']" value="'+response+'"></td>';
+                responseHtml +='<td><button class="btn btn-danger btn-icon" type="button" onclick="removeResponse(\''+response_row+'\');"><i class="fa fa-close"></i></td>';
+                responseHtml +='</tr>';
+
+                $('input[name=\'response\']').val("");
+                $('input[name=\'response\']').focus();
+
+                $('.response-tbody').append(responseHtml);
+
+                response_row++;
+            }
+        });
+
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' /* optional */
+        });
+
     });
+
+    function removeResponse(id){
+
+
+        if ($.isNumeric(id))
+        {
+            swal({
+                    title: "<?php echo _l('confirmation')?>",
+                    text: "<?php echo _l('delete_confirmation')?>",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "<?php echo _l('yes_delete')?>",
+                    closeOnConfirm: false
+                },
+                function(){
+                    $('#response-'+id).remove();
+
+                    swal("<?php echo _l('deleted')?>", "<?php echo _l('delete_success')?>", "success");
+                });
+        }
+
+        return false;
+    }
+
+    function removeIntentAction(key)
+    {
+        if ($.isNumeric(key))
+        {
+            swal({
+                    title: "<?php echo _l('confirmation')?>",
+                    text: "<?php echo _l('delete_confirmation')?>",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "<?php echo _l('yes_delete')?>",
+                    closeOnConfirm: false
+                },
+                function(){
+                    $('#intent-action-parameter-'+key).remove();
+                    $('.prompts-'+key).remove();
+
+                    swal("<?php echo _l('deleted')?>", "<?php echo _l('delete_success')?>", "success");
+                });
+        }
+    }
 
     function getPatternParameters(element,row){
 
