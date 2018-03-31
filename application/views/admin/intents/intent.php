@@ -58,6 +58,46 @@
                                             <th colspan="2"><?php echo _l('training_phrases')?></th>
                                             <th><?php echo _l('options')?></th>
                                         </thead>
+                                        <?php if (isset($patterns)) { ?>
+                                            <?php foreach ($patterns as $pattern) { ?>
+
+                                                <?php
+                                                $btn_details = '';
+                                                $parameters = json_decode($pattern['parameters']);
+
+                                                if ($parameters) {
+                                                    $btn_details = '<i class="fa fa-plus btn-details" onclick="getPatternParameters(this,' . $user_expression_row . ')"></i>&nbsp;&nbsp;';
+                                                }
+                                                ?>
+
+                                                <tbody id="user-expression-<?php echo $user_expression_row?>">
+                                                <tr>
+                                                    <td colspan="2"><?php echo $btn_details?><?php echo $pattern['pattern']?>
+                                                        <input type="hidden" name="intent[user_exp][<?php echo $user_expression_row?>][pattern]" value="<?php echo $pattern['pattern']?>">
+                                                        <input type="hidden" name="intent[user_exp][<?php echo $user_expression_row?>][stanford]" value="<?php echo htmlspecialchars($pattern['stanford'])?>"></td>
+                                                    <td><button class="btn btn-danger btn-icon" type="button" onclick="removePattern('<?php echo $user_expression_row?>');"><i class="fa fa-close"></i></button></td>
+                                                </tr>
+                                                </tbody>
+                                                <?php if ($parameters) { ?>
+                                                <?php $round = 0;?>
+                                                <tbody class="" id="user-expression-child-<?php echo $user_expression_row?>" style="display : none">
+                                                    <tr class="alert-info">
+                                                        <th><?php echo strtoupper(_l('intents_dt_parameter_name'))?></th>
+                                                        <th><?php echo strtoupper(_l('intents_dt_entity'))?></th>
+                                                        <th><?php echo strtoupper(_l('intents_dt_resolved_value'))?></th>
+                                                    </tr>
+                                                    <?php foreach ($parameters as $parameter) { ?>
+                                                    <tr>
+                                                        <td><?php echo $parameter->parameter_name?><input type="hidden" name="intent[user_exp][<?php echo $user_expression_row?>][parameters][<?php echo $round?>][parameter_name]" value="<?php echo $parameter->parameter_name?>"></td>
+                                                        <td><?php echo $parameter->entity?><input type="hidden" name="intent[user_exp][<?php echo $user_expression_row?>][parameters][<?php echo $round?>][entity]" value="<?php echo $parameter->entity?>"></td>
+                                                        <td><?php echo $parameter->resolved_value?><input type="hidden" name="intent[user_exp][<?php echo $user_expression_row?>][parameters][<?php echo $round?>][resolved_value]" value="<?php echo $parameter->resolved_value?>"></td>
+                                                    </tr>
+                                                    <?php $round++; } ?>
+                                                </tbody>
+                                                <?php } ?>
+
+                                            <?php $user_expression_row++; } ?>
+                                        <?php } ?>
                                     </table>
                                 </div>
                                 <!-- ./training phrases-->
@@ -110,7 +150,7 @@
                                             <?php foreach ($intent_responses as $intent_response) { ?>
                                                 <tr id="response-<?php echo $response_row?>">
                                                     <td><?php echo $intent_response['response']?>
-                                                        <input value="<?php echo $intent_response['response']?>" type="hidden" name="responses[<?php echo $response_row?>][response]">
+                                                        <input value="<?php echo $intent_response['response']?>" type="hidden" name="intent[responses][<?php echo $response_row?>]">
                                                     </td>
                                                     <td><button type="button" class="btn btn-danger btn-icon" onclick="$('#response-'+<?php echo $response_row?>).remove()"><i class="fa fa-close"></i></button></td>
                                                 </tr>
@@ -121,12 +161,28 @@
                                 </div>
                                 <!-- ./intent responses -->
                                 <div class="form-group">
-                                        <?php $checked=((isset($intent) && $intent->is_end == 1) ? 'checked' : '');?>
-                                        <input type="checkbox" name="is_end" value="1" <?php echo $checked?>>
-                                        <label for="contact_primary">
-                                            <?php echo _l('intent_end')?>
-                                            <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('intent_end_note'); ?>"></i>
-                                        </label>
+                                    <?php $checked=((isset($intent) && $intent->is_end == 1) ? 'checked' : '');?>
+                                    <input type="checkbox" name="is_end" value="1" <?php echo $checked?>>
+                                    <label for="contact_primary">
+                                        <?php echo _l('intent_end')?>
+                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('intent_end_note'); ?>"></i>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <?php $checked=((isset($intent) && $intent->status == 1) ? 'checked' : '');?>
+                                    <input type="checkbox" name="status" value="1" <?php echo $checked?>>
+                                    <label for="contact_primary">
+                                        <?php echo _l('intent_status')?>
+                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('intent_status_note'); ?>"></i>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <?php $checked=((isset($intent) && $intent->is_default == 1) ? 'checked' : '');?>
+                                    <input type="checkbox" name="is_default" value="1" <?php echo $checked?>>
+                                    <label for="contact_primary">
+                                        <?php echo _l('intent_is_default')?>
+                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('intent_is_default_note'); ?>"></i>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -206,7 +262,7 @@
     var context_output = [];
     var stanford_result = [];
     var user_expression = [];
-    var user_expression_row = $('.action_parameters').length;
+    var user_expression_row = <?php echo $user_expression_row?>;
     var action_parameters = [];
     var prompt_variant_row = 1;
     var response_row = <?php echo $response_row?>;

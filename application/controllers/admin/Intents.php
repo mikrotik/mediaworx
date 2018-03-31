@@ -36,10 +36,6 @@ class Intents extends Admin_controller
 
             $data = $this->input->post(NULL, FALSE);
 
-            echo "<pre>";
-            print_r($data);
-            exit();
-
             if ($id == '') {
                 if (!has_permission('echelon', '', 'create')) {
                     access_denied('echelon');
@@ -68,6 +64,8 @@ class Intents extends Admin_controller
         } else {
 
             $intent = $this->intents_model->get($id);
+            $intent_responses = $this->intents_model->get_responses($id);
+            $patterns = $this->intents_model->get_patterns($id);
             $contexts = [];
             $events = [];
 
@@ -78,6 +76,8 @@ class Intents extends Admin_controller
             }
 
             $data['intent'] = $intent;
+            $data['intent_responses'] = $intent_responses;
+            $data['patterns'] = $patterns;
             $data['contexts'] = $contexts;
             $data['events'] = $events;
 
@@ -89,6 +89,36 @@ class Intents extends Admin_controller
             $this->load->view('admin/intents/intent', $data);
         } else {
             redirect(admin_url('intents'));
+        }
+    }
+
+    public function delete($id = "")
+    {
+        if (!has_permission('echelon', '', 'delete')) {
+            access_denied('echelon');
+        }
+
+        if ($this->input->is_ajax_request()) {
+
+            if (is_numeric($id)){
+
+                $success = $this->intents_model->delete($id);
+                $message = '';
+                if ($success == true) {
+                    $message = _l('deleted', _l('intents'));
+                    echo json_encode(array(
+                        'success' => $success,
+                        'message' => $message
+                    ));
+                } else {
+                    $message =  _l('problem_deleting', _l('intents'));
+                    echo json_encode(array(
+                        'success' => $success,
+                        'message' => $message
+                    ));
+                }
+            }
+
         }
     }
 
