@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9274056-e247-49ca-ac8d-4bd0d79f2f19" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/admin/Intents.php" afterPath="$PROJECT_DIR$/application/controllers/admin/Intents.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Intents_model.php" afterPath="$PROJECT_DIR$/application/models/Intents_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/english/english_lang.php" afterPath="$PROJECT_DIR$/application/language/english/english_lang.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/intents/intent.php" afterPath="$PROJECT_DIR$/application/views/admin/intents/intent.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -61,13 +58,14 @@
       <file leaf-file-name="intent.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/admin/intents/intent.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.3838384">
-              <caret line="92" column="97" selection-start-line="92" selection-start-column="97" selection-end-line="92" selection-end-column="97" />
+            <state vertical-scroll-proportion="0.8080808">
+              <caret line="151" column="91" selection-start-line="151" selection-start-column="91" selection-end-line="151" selection-end-column="91" />
               <folding>
                 <element signature="n#style#0;n#tbody#1;n#table#0;n#div#5;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <marker date="1522487248681" expanded="true" signature="35636:35648" placeholder="..." />
-                <marker date="1522487248681" expanded="true" signature="35790:35802" placeholder="..." />
-                <marker date="1522487248681" expanded="true" signature="35936:35948" placeholder="..." />
+                <element signature="n#style#0;n#tr#1;n#tbody#0;n#table#0;n#div#7;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <marker date="1522516765594" expanded="true" signature="41348:41360" placeholder="..." />
+                <marker date="1522516765594" expanded="true" signature="41502:41514" placeholder="..." />
+                <marker date="1522516765594" expanded="true" signature="41648:41660" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -138,8 +136,8 @@
         <option value="$PROJECT_DIR$/application/views/admin/entities/entity.php" />
         <option value="$PROJECT_DIR$/application/language/english/english_lang.php" />
         <option value="$PROJECT_DIR$/application/controllers/admin/Intents.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/intents/intent.php" />
         <option value="$PROJECT_DIR$/application/models/Intents_model.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/intents/intent.php" />
       </list>
     </option>
   </component>
@@ -719,13 +717,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/admin/intents/intent.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.3838384">
-          <caret line="92" column="97" selection-start-line="92" selection-start-column="97" selection-end-line="92" selection-end-column="97" />
+        <state vertical-scroll-proportion="0.8080808">
+          <caret line="151" column="91" selection-start-line="151" selection-start-column="91" selection-end-line="151" selection-end-column="91" />
           <folding>
             <element signature="n#style#0;n#tbody#1;n#table#0;n#div#5;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <marker date="1522487248681" expanded="true" signature="35636:35648" placeholder="..." />
-            <marker date="1522487248681" expanded="true" signature="35790:35802" placeholder="..." />
-            <marker date="1522487248681" expanded="true" signature="35936:35948" placeholder="..." />
+            <element signature="n#style#0;n#tr#1;n#tbody#0;n#table#0;n#div#7;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <marker date="1522516765594" expanded="true" signature="41348:41360" placeholder="..." />
+            <marker date="1522516765594" expanded="true" signature="41502:41514" placeholder="..." />
+            <marker date="1522516765594" expanded="true" signature="41648:41660" placeholder="..." />
           </folding>
         </state>
       </provider>

@@ -108,6 +108,7 @@
                                     <?php $value = (isset($intent) ? $intent->action : "")?>
                                     <input type="text" name="action" class="form-control" value="<?php echo $value?>" placeholder="<?php echo _l('action_name')?>">
                                 </div>
+                                <?php $action_parameters_row = 0;?>
                                 <div class="table">
                                     <table class="table stripped-table-data table-hover table-parameter-list">
                                         <thead class="alert-info" style="font-weight: bold">
@@ -120,6 +121,42 @@
                                         <th></th>
                                         </thead>
                                         <tbody>
+                                        <?php
+
+                                        $action_parameters = json_decode($intent->action_parameters);
+
+                                        if ($action_parameters) { ?>
+                                            <?php foreach ($action_parameters as $action_parameter) { ?>
+                                                <?php
+                                                $btn_define_prompt = '';
+
+                                                if (isset($action_parameter->action_prompts))
+                                                {
+                                                    $btn_define_prompt = '<a href="#" class="btn btn-icon btn-post-options" data-row="'.$action_parameters_row.'" data-parameter="'.$action_parameter->parameter_name.'" data-entity="'.$action_parameter->entity.'" data-value="'.$action_parameter->value.'" data-toggle="modal" data-id="'.$action_parameters_row.'" data-target="#define-prompts">'._l('define_prompts').'</a>';
+                                                }
+                                                ?>
+                                                <tr class="action_parameters" id="intent-action-parameter-<?php echo $action_parameters_row?>">
+                                                    <td class="text-center"><input class="is_required" type="checkbox" data-parameter="<?php echo $action_parameter->parameter_name?>" data-entity="<?php echo $action_parameter->entity?>" data-value="<?php echo $action_parameter->value?>" data-id="<?php echo $action_parameters_row?>" data-row="0" name="intent[action_parameters][<?php echo $action_parameters_row?>][is_required]" value="1" id="show_primary_contact" <?php echo (isset($action_parameter->is_required) && $action_parameter->is_required ? "checked" : "")?>></td>
+                                                    <td><?php echo $action_parameter->parameter_name?><input type="hidden" name="intent[action_parameters][<?php echo $action_parameters_row?>][parameter_name]" value="<?php echo $action_parameter->parameter_name?>"></td>
+                                                    <td><?php echo $action_parameter->entity?><input type="hidden" name="intent[action_parameters][<?php echo $action_parameters_row?>][entity]" value="<?php echo $action_parameter->entity?>"></td>
+                                                    <td><?php echo $action_parameter->value?><input type="hidden" name="intent[action_parameters][<?php echo $action_parameters_row?>][value]" value="<?php echo $action_parameter->value?>"></td>
+                                                    <td class="text-center"><input type="checkbox" name="intent[action_parameters][<?php echo $action_parameters_row?>][is_list]" value="1" id="show_primary_contact"></td>
+                                                    <td class="text-center"><span id="prompts-<?php echo $action_parameters_row?>"><?php echo $btn_define_prompt?></span></td>
+                                                    <td><a href="#" class="btn btn-danger" onclick="removeIntentAction('<?php echo $action_parameters_row?>','<?php echo $action_parameter->parameter_name?>')"><i class="fa fa-icon fa-close"></i></a> | <a href="#" class="btn btn-warning" onclick="defaultValue()">Default value</a></td>
+                                                </tr>
+                                                <?php if (isset($action_parameter->action_prompts)) { ?>
+                                                    <?php $action_prompt_row = 1;?>
+                                                    <?php foreach ($action_parameter->action_prompts as $key=>$action_prompt) { ?>
+                                                        <tr class="prompts-<?php echo $action_parameters_row?> action_prompts-<?php echo $action_parameters_row?>-<?php echo $key?>" id="intent-action-parameter-prompts-0-1" style="display:none">
+                                                            <td width="1%" class="default-bg text-center">1</td>
+                                                            <td><?php echo $action_prompt?><input type="hidden" name="intent[action_parameters][<?php echo $action_parameters_row?>][action_prompts][<?php echo $key?>]" value="<?php echo $action_prompt?>"></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    <?php $action_prompt_row++ ; } ?>
+
+                                                <?php }?>
+                                            <?php $action_parameters_row++; } ?>
+                                        <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -269,6 +306,28 @@
 
     $(function(){
 
+        <?php if ($action_parameters) { ?>
+            <?php foreach ($action_parameters as $action_parameter) { ?>
+                action_parameters.push('<?php echo $action_parameter->parameter_name?>');
+            <?php } ?>
+        <?php } ?>
+
+
+        $( ".is_required" ).on('ifChanged',function(e) {
+            var id = $(this).data("id");
+            var row = $(this).data("row");
+            var parameter_name = $(this).data('parameter');
+            var entity = $(this).data('entity');
+            var value = $(this).data('value');
+
+            var checked = $(this).is(":checked");
+
+            if (checked) {
+                $('#prompts-' + id).html('<a href="#" class="btn btn-icon btn-post-options" data-row="'+id+'" data-parameter="'+parameter_name+'" data-entity="'+entity+'" data-value="'+value+'" data-toggle="modal" data-id="'+id+'" data-target="#define-prompts"><?php echo _l('define_prompts')?></a>');
+            } else {
+                $('#prompts-' + id).html('');
+            }
+        });
 
         available_contexts = <?php echo json_encode($contexts)?>;
         available_events = <?php echo json_encode($events)?>;
@@ -399,7 +458,7 @@
                                 intentActionParams += '<td>$' + value + '<input type="hidden" name="intent[action_parameters]['+key+'][value]" value="$'+value+'"></td>';
                                 intentActionParams += '<td class="text-center"><input type="checkbox" name="intent[action_parameters]['+key+'][is_list]" value="1" id="show_primary_contact"></td>';
                                 intentActionParams += '<td class="text-center"><span id="prompts-'+key+'"></span></td>';
-                                intentActionParams += '<td><a href="#" class="btn btn-danger" onclick="removeIntentAction(\''+key+'\')"><i class="fa fa-icon fa-close"></i></a> | <a href="#" class="btn btn-warning" onclick="defaultValue()">Default value</a></td>';
+                                intentActionParams += '<td><a href="#" class="btn btn-danger" onclick="removeIntentAction(\''+key+'\',\''+value+'\')"><i class="fa fa-icon fa-close"></i></a> | <a href="#" class="btn btn-warning" onclick="defaultValue()">Default value</a></td>';
                                 intentActionParams += '</tr>';
 
                             $('.table-parameter-list tbody').append(intentActionParams);
@@ -444,46 +503,47 @@
                 }
             });
 
-            $('.btn-add-prompt-variant').on('click',function(){
+        });
 
-                var prompt_variant = $('input[name=\'prompt_variant\']').val();
-                var id = $('#define-prompts input[name="id"]').val();
-                var row = $('#define-prompts input[name="row"]').val();
+        $('.btn-add-prompt-variant').on('click',function(){
 
-                if ($('.table-prompt-variant tbody > tr').length) {
-                    prompt_variant_row = $('.table-prompt-variant tbody > tr').length;
-                }
+            var prompt_variant = $('input[name=\'prompt_variant\']').val();
+            var id = $('#define-prompts input[name="id"]').val();
+            var row = $('#define-prompts input[name="row"]').val();
 
-                prompt_variant_row ++;
+            if ($('.table-prompt-variant tbody > tr').length) {
+                prompt_variant_row = $('.table-prompt-variant tbody > tr').length;
+            }
 
-                if (prompt_variant == "")
-                {
-                    swal("<?php echo _l('cancelled')?>", "<?php echo _l('empty_user_expression')?>", "error");
-                    return false;
-                }
+            prompt_variant_row ++;
 
-                html_1 ='<tr id="intent-action-parameter-prompts-modal-'+prompt_variant_row+'-'+row+'-'+id+'">';
-                html_1 +='<td width="1%" class="default-bg text-center">'+prompt_variant_row+'</td>';
-                html_1 +='<td>'+prompt_variant+'</td>';
-                html_1 +='<td class="text-center"><a href="#" class="text-danger" onclick="removePrompt(\''+prompt_variant_row+'\',\''+row+'\',\''+id+'\')"><i class="fa fa-icon fa-close"></i> <?php echo _l('remove')?></a></td>';
-                html_1 +='</tr>';
+            if (prompt_variant == "")
+            {
+                swal("<?php echo _l('cancelled')?>", "<?php echo _l('empty_user_expression')?>", "error");
+                return false;
+            }
 
-                $('.table-prompt-variant tbody').append(html_1);
+            html_1 ='<tr id="intent-action-parameter-prompts-modal-'+prompt_variant_row+'-'+row+'-'+id+'">';
+            html_1 +='<td width="1%" class="default-bg text-center">'+prompt_variant_row+'</td>';
+            html_1 +='<td>'+prompt_variant+'</td>';
+            html_1 +='<td class="text-center"><a href="#" class="text-danger" onclick="removePrompt(\''+prompt_variant_row+'\',\''+row+'\',\''+id+'\')"><i class="fa fa-icon fa-close"></i> <?php echo _l('remove')?></a></td>';
+            html_1 +='</tr>';
 
-                html_2 ='<tr class="action_prompts-'+prompt_variant_row+'-'+id+'" id="intent-action-parameter-prompts-'+prompt_variant_row+'-'+id+'" style="display:none">';
-                html_2 +='<td width="1%" class="default-bg text-center">'+prompt_variant_row+'</td>';
-                html_2 +='<td>'+prompt_variant+'<input type="hidden" name="intent[action_parameters]['+id+'][action_prompts]['+prompt_variant_row+']" value="'+prompt_variant+'"/></td>';
-                html_2 +='<td></td>';
-                html_2 +='</tr>';
+            $('.table-prompt-variant tbody').append(html_1);
+
+            html_2 ='<tr class="action_prompts-'+prompt_variant_row+'-'+id+'" id="intent-action-parameter-prompts-'+prompt_variant_row+'-'+id+'" style="display:none">';
+            html_2 +='<td width="1%" class="default-bg text-center">'+prompt_variant_row+'</td>';
+            html_2 +='<td>'+prompt_variant+'<input type="hidden" name="intent[action_parameters]['+id+'][action_prompts]['+prompt_variant_row+']" value="'+prompt_variant+'"/></td>';
+            html_2 +='<td></td>';
+            html_2 +='</tr>';
 
 
-                $('#intent-action-parameter-' + row + '-row-' + id).after(html_2);
+            $('#intent-action-parameter-' + row + '-row-' + id).after(html_2);
 
-                prompt_variant_row++;
+            prompt_variant_row++;
 
-                $('input[name=\'prompt_variant\']').val('');
-                $('input[name=\'prompt_variant\']').focus();
-            });
+            $('input[name=\'prompt_variant\']').val('');
+            $('input[name=\'prompt_variant\']').focus();
         });
 
 
@@ -670,7 +730,7 @@
         return false;
     }
 
-    function removeIntentAction(key)
+    function removeIntentAction(key,value)
     {
         if ($.isNumeric(key))
         {
@@ -686,6 +746,8 @@
                 function(){
                     $('#intent-action-parameter-'+key).remove();
                     $('.prompts-'+key).remove();
+
+                    action_parameters.splice(value,1);
 
                     swal("<?php echo _l('deleted')?>", "<?php echo _l('delete_success')?>", "success");
                 });
