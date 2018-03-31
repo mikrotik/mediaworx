@@ -14,6 +14,7 @@
                 <?php echo form_open_multipart($this->uri->uri_string(),array('class'=>'intent-form','autocomplete'=>'off')); ?>
                 <input type="hidden" name="is_admin" value="<?php echo is_admin()?>"/>
                 <input type="hidden" name="agent_id" value="0"/>
+                <input type="hidden" name="parent_id" value="<?php echo ((isset($intent) && $intent->parent_id) ? $intent->parent_id : 0)?>"/>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel_s">

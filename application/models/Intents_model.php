@@ -91,10 +91,6 @@ class Intents_model extends CRM_Model
             $data['status'] = 0;
         }
 
-        if (!isset($data['parent_id'])){
-            $data['parent_id'] = 0;
-        }
-
         if (!isset($data['is_default'])){
             $data['is_default'] = 0;
         }
@@ -207,6 +203,19 @@ class Intents_model extends CRM_Model
 
             return false;
 
+        }
+
+        return false;
+    }
+
+    public function get_followupintent($id = ''){
+
+        if (is_numeric($id)){
+
+            $this->db->where('parent_id',$id);
+            $intentfollowup = $this->db->get('tblintents')->result_array();
+
+            return $intentfollowup;
         }
 
         return false;

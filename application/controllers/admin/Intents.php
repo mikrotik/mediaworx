@@ -107,6 +107,16 @@ class Intents extends Admin_controller
         }
     }
 
+    public function getfollowupintent($id){
+
+        if (is_numeric($id) && $this->input->is_ajax_request()){
+
+            $followup = $this->intents_model->get_followupintent($id);
+
+            echo json_encode($followup);
+        }
+    }
+
     public function delete($id = "")
     {
         if (!has_permission('echelon', '', 'delete')) {
