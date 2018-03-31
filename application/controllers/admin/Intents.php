@@ -92,6 +92,21 @@ class Intents extends Admin_controller
         }
     }
 
+    public function followup($id=""){
+
+        if ($this->input->post()) {
+
+            $data = $this->input->post(NULL, FALSE);
+
+            $id = $this->intents_model->add($data,$id);
+            if ($id) {
+                set_alert('success', _l('updated_successfuly', _l('intents')));
+                redirect(admin_url('intents/intent/' . $id));
+
+            }
+        }
+    }
+
     public function delete($id = "")
     {
         if (!has_permission('echelon', '', 'delete')) {

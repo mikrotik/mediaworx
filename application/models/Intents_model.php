@@ -47,7 +47,7 @@ class Intents_model extends CRM_Model
         return false;
     }
 
-    public function add($data=array())
+    public function add($data=array(), $id = "")
     {
 
         if (isset($data['context_input'])) {
@@ -66,6 +66,10 @@ class Intents_model extends CRM_Model
             $data['events'] = json_encode($data['events']);
         } else {
             $data['events'] = json_encode([]);
+        }
+
+        if ($id && is_numeric($id)){
+            $data['parent_id'] = $id;
         }
 
         $this->db->insert('tblintents',$data);
@@ -128,6 +132,8 @@ class Intents_model extends CRM_Model
         if (isset($data["intent"]["action_parameters"]))
         {
             $data['action_parameters'] = json_encode($data["intent"]["action_parameters"]);
+        } else {
+            $data['action_parameters'] = NULL;
         }
 
         if (isset($data["intent"]["responses"]))

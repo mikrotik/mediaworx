@@ -107,7 +107,23 @@ class Entities extends Admin_controller
         {
             $data = $this->input->post(NULL, FALSE);
 
-            $pattern_entities = Echelon_Helper::parse_entities(trim($data['string'])," ");
+            $words = explode(" ",$data['string']);
+
+            $find = array();
+            $replace = array();
+
+            foreach ($words as $word)
+            {
+                if (Echelon_Helper::wordToNumber($word)) {
+
+                    $find[] = $word;
+                    $replace[] = Echelon_Helper::wordToNumber($word);
+                }
+            }
+
+            $string = str_replace($find,$replace,$data['string']);
+
+            $pattern_entities = Echelon_Helper::parse_entities(trim($string)," ");
             echo json_encode($pattern_entities);
             die();
         }
