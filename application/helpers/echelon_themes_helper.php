@@ -25,6 +25,21 @@ function get_template_part($name, $data = array(), $return = false)
     }
     $CI->load->view('themes/' . get_option('clients_default_theme') . '/' . 'template_parts/' . $name, $data);
 }
+
+/**
+ * Current theme view part
+ * @param  string $name file name
+ * @param  array  $data variables passed to view
+ */
+function get_template_table($name, $data = array(), $return = false)
+{
+    $CI =& get_instance();
+    if ($return == true) {
+        return $CI->load->view('themes/' . get_option('clients_default_theme') . '/' . 'template_table/' . $name, $data, TRUE);
+    }
+    $CI->load->view('themes/' . get_option('clients_default_theme') . '/' . 'template_table/' . $name, $data);
+}
+
 /**
  * Get all client themes in themes folder
  * @return array

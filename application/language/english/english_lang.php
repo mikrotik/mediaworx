@@ -4,6 +4,7 @@
 # General
 $lang['id']                   = 'ID';
 $lang['name']                 = 'Name';
+$lang['create']                 = 'Create';
 $lang['options']              = 'Options';
 $lang['submit']               = 'Save';
 $lang['added_successfuly']    = '%s added successfully.';
@@ -180,6 +181,18 @@ $lang['entity_name'] = 'Entity Name';
 $lang['define_synonyms'] = 'Define synonyms';
 $lang['define_synonyms_note'] = 'You can choose to define synonyms that will map to reference values. Or just list values, including references to other entities.';
 $lang['allow_automated_expansion'] = 'Allow automated expansion';
+
+# Agents
+$lang['agents']          = 'Agents';
+$lang['agent']           = 'Agent';
+$lang['new_agent']       = 'New Agent';
+$lang['update_agent']       = 'Update Agent';
+$lang['agent_lowercase'] = 'agent';
+$lang['agents_dt_agent_name'] = 'Agent name';
+$lang['agent_name'] = 'Agent name';
+$lang['default_language_note'] = 'Note: Language for the agent cannot be changed after agent creation.';
+$lang['default_timezone_hint'] = 'Date and time requests are resolved using this timezone.';
+$lang['default_language_hint'] = 'Primary language for your agent. Other languages can be added later.';
 
 # Intents
 $lang["als_intents"] = 'Intents';

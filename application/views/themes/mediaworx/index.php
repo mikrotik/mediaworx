@@ -14,13 +14,16 @@ if(is_client_logged_in()){?>
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Blank page
-                <small>it all starts here</small>
+                <?php if (isset($title)){ echo $title; } ?>
+                <small></small>
             </h1>
+            <!--
+            TODO - Dynamic Breadcrumbs
+            -->
+            <?php $total = $this->uri->total_segments(); ?>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Examples</a></li>
-                <li class="active">Blank page</li>
+                <li><a href="\"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li class="active"><?php if (isset($title)){ echo $title; } ?></li>
             </ol>
         </section>
 <?php } ?>
