@@ -15,7 +15,7 @@
         <ul class="nav nav-tabs">
             <?php if ($agent) {?>
                 <li class="active"><a href="#general" data-toggle="tab"><?php echo _l('agents_tab_general');?></a></li>
-                <li><a href="#mlsetting" data-toggle="tab"><?php echo _l('agents_tab_settings');?></a></li>
+                <li><a href="#settings" data-toggle="tab"><?php echo _l('agents_tab_settings');?></a></li>
                 <li><a href="#importexport" data-toggle="tab"><?php echo _l('agents_tab_import_export');?></a></li>
             <?php } ?>
         </ul>
@@ -23,56 +23,104 @@
     <!-- ./tabs-->
     <div class="tab-content">
         <div class="tab-pane active" id="general">
-            <!-- Default box -->
-            <div class="box">
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-input">
-                                <label for="default_language" class="control-label"><?php echo _l('localization_default_language'); ?>
-                                </label>
-                                <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('default_language_note'); ?>"></i>
-                                <select name="default_language" id="default_language" class="form-control selectpicker" data-none-selected-text="<?php echo _l('dropdown_non_selected_tex'); ?>">
-                                    <option value=""><?php echo _l('system_default_string'); ?></option>
-                                    <?php foreach(list_folders(APPPATH .'language') as $language){
-                                        $selected = '';
-                                        if(isset($agent)){
-                                            if($agent->default_language == $language){
-                                                $selected = 'selected';
-                                            }
-                                        }
-                                        ?>
-                                        <option value="<?php echo $language; ?>" <?php echo $selected; ?>><?php echo ucfirst($language); ?></option>
-                                    <?php } ?>
-                                </select>
-                                <span class="text-muted"><?php echo _l('default_language_hint');?></span>
-                                <?php echo form_error('default_language'); ?>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="default_timezone" class="control-label"><?php echo _l('settings_localization_default_timezone'); ?>
-                            </label>
-                            <select name="default_timezone" id="default_timezone" class="form-control selectpicker" data-none-selected-text="<?php echo _l('dropdown_non_selected_tex'); ?>">
-                                <option value=""><?php echo _l('system_default_string'); ?></option>
-                                <?php foreach(get_timezones_list() as $tkey=>$timezone){
-                                    $selected = '';
-                                    if(isset($agent)){
-                                        if($agent->default_timezone == $tkey){
-                                            $selected = 'selected';
-                                        }
-                                    }
-                                    ?>
-                                    <option value="<?php echo $tkey; ?>" <?php echo $selected; ?>><?php echo ucfirst($timezone); ?></option>
-                                <?php } ?>
-                            </select>
-                            <span class="text-muted"><?php echo _l('default_timezone_hint');?></span>
-                            <?php echo form_error('default_timezone'); ?>
+            <div class="row">
+                <?php if ($agent) { ?>
+                <div class="col-md-3">
+                    <div class="box">
+                        <div class="box-body">
                         </div>
                     </div>
                 </div>
-                <!-- /.box-body -->
+                <?php } ?>
+                <div class="<?php echo ($agent ? "col-md-9" : "col-md-12")?>">
+                    <!-- Default box -->
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="row">
+                                <?php if ($agent) { ?>
+                                    <div class="col-md-12">
+                                        <div class="form-input">
+                                            <label for="description" class="description"><?php echo _l('agent_description'); ?></label>
+                                            <?php $value=( isset($agent) ? $agent->description : ''); ?>
+                                            <textarea name="description" class="form-control" rows="10"><?php echo $value?></textarea>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                                <br/>
+                                <div class="col-md-6">
+                                    <div class="form-input">
+                                        <label for="default_language" class="control-label"><?php echo _l('localization_default_language'); ?>
+                                        </label>
+                                        <i class="fa fa-question-circle" data-toggle="tooltip" data-title="<?php echo _l('default_language_note'); ?>"></i>
+                                        <select name="default_language" id="default_language" class="form-control selectpicker" data-none-selected-text="<?php echo _l('dropdown_non_selected_tex'); ?>">
+                                            <option value=""><?php echo _l('system_default_string'); ?></option>
+                                            <?php foreach(list_folders(APPPATH .'language') as $language){
+                                                $selected = '';
+                                                if(isset($agent)){
+                                                    if($agent->default_language == $language){
+                                                        $selected = 'selected';
+                                                    }
+                                                }
+                                                ?>
+                                                <option value="<?php echo $language; ?>" <?php echo $selected; ?>><?php echo ucfirst($language); ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        <span class="text-muted"><?php echo _l('default_language_hint');?></span>
+                                        <?php echo form_error('default_language'); ?>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="default_timezone" class="control-label"><?php echo _l('settings_localization_default_timezone'); ?>
+                                    </label>
+                                    <select name="default_timezone" id="default_timezone" class="form-control selectpicker" data-none-selected-text="<?php echo _l('dropdown_non_selected_tex'); ?>">
+                                        <option value=""><?php echo _l('system_default_string'); ?></option>
+                                        <?php foreach(get_timezones_list() as $tkey=>$timezone){
+                                            $selected = '';
+                                            if(isset($agent)){
+                                                if($agent->default_timezone == $tkey){
+                                                    $selected = 'selected';
+                                                }
+                                            }
+                                            ?>
+                                            <option value="<?php echo $tkey; ?>" <?php echo $selected; ?>><?php echo ucfirst($timezone); ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <span class="text-muted"><?php echo _l('default_timezone_hint');?></span>
+                                    <?php echo form_error('default_timezone'); ?>
+                                </div>
+                                <br/>
+                                <div class="col-md-12">
+                                    <div class="form-input">
+                                        <label for="google_project"><?php echo _l('agents_google_project'); ?></label>
+                                        <input type="text" class="form-control" name="google_project" id="google_project" placeholder="<?php echo _l('agents_create_google_project')?>" value="<?php echo set_value('google_project',$agent->google_project); ?>">
+                                        <span class="text-muted"><?php echo _l('agent_google_project_hint');?></span>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="col-md-12"><h4><?php echo _l('title_api_keys')?></h4></div>
+                                <div class="col-md-6">
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon bg-blue-active"><?php echo _l('client_access_token');?></span>
+                                        <?php $value=( isset($agent) ? $agent->client_access_token : ''); ?>
+                                        <input class="form-control" value="<?php echo $value?>" disabled="" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon bg-blue-active"><?php echo _l('developer_access_token');?></span>
+                                        <?php $value=( isset($agent) ? $agent->developer_access_token : ''); ?>
+                                        <input class="form-control" value="<?php echo $value?>" disabled="" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
             </div>
-            <!-- /.box -->
+        </div>
+        <div class="tab-pane" id="settings">
         </div>
     </div>
     <?php echo form_close(); ?>

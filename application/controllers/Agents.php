@@ -81,9 +81,8 @@ class Agents extends Clients_controller
 
                 if ($id == '') {
 
-//                    $data['client_access_token'] = UUID::v5(APP_ENC_KEY,UUID::trxid(16));
-//                    $data['developer_access_token'] = UUID::v5(APP_ENC_KEY,UUID::trxid(8));
-
+                    $data['client_access_token'] = UUID::v5(APP_ENC_KEY,UUID::trxid(16));
+                    $data['developer_access_token'] = UUID::v5(APP_ENC_KEY,UUID::trxid(8));
 
                     $success = $this->agents_model->add($data);
                     if ($success) {

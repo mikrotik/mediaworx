@@ -193,6 +193,16 @@ $lang['agent_name'] = 'Agent name';
 $lang['default_language_note'] = 'Note: Language for the agent cannot be changed after agent creation.';
 $lang['default_timezone_hint'] = 'Date and time requests are resolved using this timezone.';
 $lang['default_language_hint'] = 'Primary language for your agent. Other languages can be added later.';
+$lang['agent_description'] = 'Description';
+$lang['agents_google_project'] = 'Google Project';
+$lang['agents_create_google_project'] = 'Create new Google Project';
+$lang['agent_google_project_hint'] = 'Enables Cloud functions, Actions on Google and permissions management.';
+$lang['agents_tab_general'] = 'General';
+$lang['agents_tab_settings'] = 'ML Settings';
+$lang['agents_tab_import_export'] = 'Import and Export';
+$lang['client_access_token'] = 'Client Access Token';
+$lang['developer_access_token'] = 'Developer Access Token';
+$lang['title_api_keys'] = 'Api Keys (v1)';
 
 # Intents
 $lang["als_intents"] = 'Intents';

@@ -8,6 +8,18 @@ class Agents_model extends CRM_Model
         parent::__construct();
     }
 
+    public function get($id = '')
+    {
+
+        if (is_numeric($id)) {
+            $this->db->where('id', $id);
+            $agent = $this->db->get('tblagents')->row();
+            return $agent;
+        }
+
+        return $this->db->get('tblagents')->result_array();
+    }
+
     public function add($data=array()){
 
         $this->db->insert('tblagents', $data);
@@ -16,6 +28,19 @@ class Agents_model extends CRM_Model
 
             logActivity('New Agent Created [ID:'.$id.']');
             return $id;
+        }
+
+        return false;
+
+    }
+
+    public function update($data = array(),$id = ""){
+
+        $this->db->where('id', $id);
+        $this->db->update('tblagents', $data);
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
         }
 
         return false;

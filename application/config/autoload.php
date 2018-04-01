@@ -114,6 +114,7 @@ $autoload['helper'] = array(
         'echelon_themes',
         'echelon_theme_style',
         'echelon_constants',
+        'echelon_uuid'
     );
 
 if(file_exists(APPPATH.'helpers/my_functions_helper.php')){

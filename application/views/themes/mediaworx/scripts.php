@@ -35,3 +35,31 @@
         <?php } ?>
     });
 </script>
+<?php
+$alertclass = "";
+if($this->session->flashdata('message-success')){
+    $alertclass = "success";
+} else if ($this->session->flashdata('message-warning')){
+    $alertclass = "warning";
+} else if ($this->session->flashdata('message-info')){
+    $alertclass = "info";
+} else if ($this->session->flashdata('message-danger')){
+    $alertclass = "danger";
+}
+if($alertclass != ''){
+    $alert_message = '';
+    $alert = $this->session->flashdata('message-'.$alertclass);
+    if(is_array($alert)){
+        foreach($alert as $alert_data){
+            $alert_message.= '<span>'.$alert_data . '</span><br />';
+        }
+    } else {
+        $alert_message .= $alert;
+    }
+    ?>
+    <script>
+        $(function(){
+            alert_float('<?php echo $alertclass; ?>','<?php echo $alert_message; ?>');
+        });
+    </script>
+<?php } ?>
