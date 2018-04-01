@@ -26,14 +26,15 @@
     <?php echo app_stylesheet(template_assets_path().'/plugins/iCheck/square','blue.css'); ?>
     <!-- Sweetalert -->
     <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert/sweetalert.css');?>">
+    <!-- Tag It -->
+    <link rel="stylesheet" href="<?php echo base_url('assets/plugins/tagsinput/css/jquery.tagit.css');?>">
     <!-- Select2 -->
     <link rel="stylesheet" href="<?php echo base_url(template_assets_path().'/bower_components/select2/dist/css/select2.min.css')?>">
     <!-- DataTables -->
     <link rel="stylesheet" href="<?php echo base_url(template_assets_path().'/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')?>">
     <?php render_custom_styles(array('general','tabs','buttons','customers','modals')); ?>
     <!-- jQuery 3 -->
-    <?php echo app_script(template_assets_path().'/bower_components/jquery/dist','jquery.min.js'); ?>
-    <script>
+    <?php echo app_script(template_assets_path().'/bower_components/jquery/dist','jquery.min.js'); ?><script>
         var client_id = '<?php echo get_client_user_id()?>';
     </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

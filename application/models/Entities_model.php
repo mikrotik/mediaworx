@@ -55,6 +55,8 @@ class Entities_model extends CRM_Model
             $data['isOverridable'] = 0;
         }
 
+        $data['user_id'] = get_client_user_id();
+
         $this->db->insert('tblentities',$data);
         $entity_id = $this->db->insert_id();
 
@@ -111,6 +113,8 @@ class Entities_model extends CRM_Model
             if (!isset($data['isOverridable'])){
                 $data['isOverridable'] = 0;
             }
+
+            $data['user_id'] = get_client_user_id();
 
             /** Set new references tp an Entity */
             if ($entity){

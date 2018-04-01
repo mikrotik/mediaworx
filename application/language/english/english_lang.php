@@ -19,6 +19,7 @@ $lang['remove']                = 'Remove';
 $lang['send']                 = 'Send';
 $lang['cancel']               = 'Cancel';
 $lang['browse']               = 'Browse';
+$lang['add']               = 'Add';
 $lang['go_back']              = 'Go Back';
 $lang['yes_delete']              = 'Yes, delete it!';
 $lang['cancelled'] = 'Cancelled!';

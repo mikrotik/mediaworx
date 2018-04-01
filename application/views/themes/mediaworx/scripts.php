@@ -22,6 +22,8 @@
     <script src="<?php echo base_url(template_assets_path().'/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')?>"></script>
     <!-- JQuery Cookies -->
     <?php echo app_script(template_assets_path().'/js','jquery.cookie.js'); ?>
+    <!-- Tag It -->
+    <?php echo app_script(template_assets_path().'/js','taginput.js'); ?>
 <?php } ?>
 <script>
     var agent = 0;
@@ -49,8 +51,10 @@
             var value = $(this).val();
 
             if ($.isNumeric(value)){
+                $.cookie('agent', null, { path: '/' });
+                $.cookie("agent", value,{path: '/',expires : 2});
 
-                $.cookie("agent", value,{expires : 2});
+                location.reload();
             } else {
                 window.location = site_url+'/'+value;
             }

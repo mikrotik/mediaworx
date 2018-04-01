@@ -18,7 +18,7 @@
         <!-- agent selector drop down menu -->
         <div class="form-group">
             <select class="form-control" id="asidebar_dropdown"">
-            <option value=""><?php echo _l('system_default_string'); ?></option>
+            <option value="0"><?php echo _l('system_default_string'); ?></option>
             <option disabled>_______________________________</option>
             <?php foreach (get_agents(get_client_user_id()) as $clientAgent) { ?>
                 <option value="<?php echo $clientAgent['id']?>"><?php echo $clientAgent['agent_name']?></option>
