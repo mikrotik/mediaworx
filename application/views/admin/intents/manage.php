@@ -102,7 +102,7 @@
             url: admin_url + 'intents/getfollowupintent/'+intentid,
             dataType: 'json',
             success: function ( json ) {
-                html =      '<table class="table table-hover tblchild-'+intentid+'">';
+                html =      '<table class="table table-hover tblchild-'+intentid+'" style="margin-top: 0;">';
                 html +=     '<tbody></tbody>';
                 html +=     '</table>';
                 div.html(html);
@@ -166,7 +166,7 @@
                 dataType: 'json',
                 success: function ( json ) {
 
-                    html =      '<table class="table table-hover tblchild-'+intentid+'">';
+                    html =      '<table class="table table-hover tblchild-'+intentid+'" style="margin-top: 0;">';
                     html +=     '<tbody></tbody>';
                     html +=     '</table>';
                     div.html(html);

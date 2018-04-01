@@ -48,3 +48,5 @@ define('PROJECT_ATTACHMENTS_FOLDER',FCPATH . 'uploads/projects' . '/');
 define('PROJECT_DISCUSSION_ATTACHMENT_FOLDER',FCPATH . 'uploads/discussions' . '/');
 // Vendor Folder
 define('VENDOR_FOLDER',FCPATH . 'vendor' . '/');
+// Vendor Folder
+define('APP_VERSION','<b>Version</b> v1.0.1.18');
