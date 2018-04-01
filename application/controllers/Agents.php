@@ -92,7 +92,7 @@ class Agents extends Clients_controller
                     }
 
                 } else {
-//                    handle_agent_image_upload($id);
+                    handle_agent_image_upload($id);
                     $success = $this->agents_model->update($data, $id);
                     if ($success) {
                         set_alert('success', _l('updated_successfuly', _l('agents')));
@@ -143,6 +143,24 @@ class Agents extends Clients_controller
                 }
             }
 
+        }
+    }
+
+    public function remove_agent_image($agentid)
+    {
+        if (!is_client_logged_in()) {
+            redirect(site_url('clients/login'));
+        }
+        do_action('before_remove_agent_image');
+        if (file_exists(get_upload_path_by_type('agent_images') .$agentid)) {
+            delete_dir(get_upload_path_by_type('agent_images') . $agentid);
+        }
+        $this->db->where('id', $agentid);
+        $this->db->update('tblagents', array(
+            'agent_image' => NULL
+        ));
+        if ($this->db->affected_rows() > 0) {
+            redirect(site_url('agents'));
         }
     }
 }

@@ -28,6 +28,20 @@
                 <div class="col-md-3">
                     <div class="box">
                         <div class="box-body">
+                            <img class="profile-user-img img-responsive img-circle" src="<?php echo agent_image_url($agent->id,'thumb'); ?>" alt="<?php echo _l('client_profile_image'); ?>">
+
+                            <h3 class="profile-username text-center"><?php echo ($agent ? $agent->agent_name : "") ?></h3>
+
+                            <div class="form-group">
+                                <label for="agent_image" class="agent-image"><?php echo _l('client_profile_image'); ?></label>
+                                <br/>
+                                <span class="btn btn-default btn-file btn-flat">
+                                    <i class="fa fa-upload"></i> <?php echo _l('browse')?> <input name="agent_image" type="file">
+                                </span>
+                                <span class="btn btn-flat pull-right">
+                                    <a href="<?php echo site_url('agents/remove_agent_image/'.$agent->id); ?>" class="text-danger"><i class="fa fa-remove"></i> Remove</a>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -102,15 +116,17 @@
                                     <div class="form-group input-group">
                                         <span class="input-group-addon bg-blue-active"><?php echo _l('client_access_token');?></span>
                                         <?php $value=( isset($agent) ? $agent->client_access_token : ''); ?>
-                                        <input class="form-control" value="<?php echo $value?>" disabled="" type="text">
+                                        <input class="form-control" id="client-access-token" value="<?php echo $value?>" style="pointer-events:none;" type="text">
                                     </div>
+                                    <a href="#" class="btn btn-link btn-post-options" onclick="copyToClipboard('#client-access-token')" >Copy <b><?php echo _l('client_access_token');?></b> to clipboard</a>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group input-group">
                                         <span class="input-group-addon bg-blue-active"><?php echo _l('developer_access_token');?></span>
                                         <?php $value=( isset($agent) ? $agent->developer_access_token : ''); ?>
-                                        <input class="form-control" value="<?php echo $value?>" disabled="" type="text">
+                                        <input class="form-control" id="developer-access-token" value="<?php echo $value?>" style="pointer-events:none;" type="text">
                                     </div>
+                                    <a href="#" class="btn btn-link btn-post-options" onclick="copyToClipboard('#developer-access-token')" >Copy <b><?php echo _l('developer_access_token');?></b> to clipboard</a>
                                 </div>
                             </div>
                         </div>
@@ -121,6 +137,49 @@
             </div>
         </div>
         <div class="tab-pane" id="settings">
+            <div class="box">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4><?php echo _l('agent_matchmode')?></h4>
+                            <p><?php echo _l('agent_matchmode_note')?></p>
+                            <div class="col-md-offset-1">
+                                <ul style="list-style-type:disc">
+                                    <li><?php echo _l('mlsetting_hybird')?></li>
+                                    <li><?php echo _l('mlsetting_ml')?></li>
+                                </ul>
+                            </div>
+                            <div class="form-input">
+                                <?php
+                                $hybird = "";
+                                $mlonly = "";
+                                ?>
+                                <select name="matchmode" class="form-control selectpicker" data-none-selected-text="<?php echo _l('dropdown_non_selected_tex'); ?>">
+                                    <option value=""><?php echo _l('system_default_string'); ?></option>
+                                    <?php if (isset($agent) && $agent->matchmode == "hybird") { ?>
+                                        <?php $hybird = "selected";?>
+                                    <?php } elseif (isset($agent) && $agent->matchmode == "mlonly") { ?>
+                                        <?php $mlonly = "selected"?>
+                                    <?php } ?>
+                                    <option value="hybird" <?php echo $hybird?>><?php echo _l('mlsetting_select_hybird')?></option>
+                                    <option value="mlonly" <?php echo $mlonly?>><?php echo _l('mlsetting_select_mlonly')?></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4><?php echo _l('agent_threshold')?></h4>
+                            <p><?php echo _l('agent_threshold_note')?></p>
+                            <?php $value=( isset($agent) ? $agent->threshold : ''); ?>
+                            <input name="threshold" class="form-control" value="<?php echo $value?>"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="importexport">
+            <h1>Coming soon...</h1>
         </div>
     </div>
     <?php echo form_close(); ?>
@@ -132,4 +191,12 @@
             $('#agent-form').submit();
         });
     });
+
+    function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).val()).select();
+        document.execCommand("copy");
+        $temp.remove();
+    }
 </script>

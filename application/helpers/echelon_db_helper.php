@@ -71,6 +71,23 @@ function is_empty_customer_company($id)
     return true;
 }
 /**
+ * Get client agents by passed user id
+ * @param  mixed $id
+ * @return string
+ */
+function get_agents($user_id)
+{
+    $CI =& get_instance();
+    $CI->db->select('id,agent_name');
+    $CI->db->where('user_id', $user_id);
+    $agents = $CI->db->get('tblagents')->result_array();
+    if ($agents) {
+        return $agents;
+    }
+
+    return array();
+}
+/**
  * Get project name by passed id
  * @param  mixed $id
  * @return string

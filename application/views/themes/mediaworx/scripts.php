@@ -20,8 +20,12 @@
     <!-- DataTables -->
     <script src="<?php echo base_url(template_assets_path().'/bower_components/datatables.net/js/jquery.dataTables.min.js')?>"></script>
     <script src="<?php echo base_url(template_assets_path().'/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')?>"></script>
+    <!-- JQuery Cookies -->
+    <?php echo app_script(template_assets_path().'/js','jquery.cookie.js'); ?>
 <?php } ?>
 <script>
+    var agent = 0;
+
     $(function () {
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
@@ -32,6 +36,27 @@
         <?php if (get_client_user_id()) { ?>
             $('.sidebar-menu').tree();
             $('[data-toggle="tooltip"]').tooltip();
+
+            agent = $.cookie("agent");
+
+        if (agent) {
+            $('#asidebar_dropdown').val(agent);
+            $('#asidebar_dropdown').trigger('change');
+        }
+
+        $('#asidebar_dropdown').on('change',function(){
+
+            var value = $(this).val();
+
+            if ($.isNumeric(value)){
+
+                $.cookie("agent", value,{expires : 2});
+            } else {
+                window.location = site_url+'/'+value;
+            }
+        });
+
+
         <?php } ?>
     });
 </script>

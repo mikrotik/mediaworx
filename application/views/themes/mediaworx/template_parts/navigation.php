@@ -17,7 +17,15 @@
         </div>
         <!-- agent selector drop down menu -->
         <div class="form-group">
-            <select class="form-control select2" id="asidebar_dropdown"">
+            <select class="form-control" id="asidebar_dropdown"">
+            <option value=""><?php echo _l('system_default_string'); ?></option>
+            <option disabled>_______________________________</option>
+            <?php foreach (get_agents(get_client_user_id()) as $clientAgent) { ?>
+                <option value="<?php echo $clientAgent['id']?>"><?php echo $clientAgent['agent_name']?></option>
+            <?php } ?>
+            <option disabled>_______________________________</option>
+            <option value="agents/agent"><?php echo _l('agent_select_new_agent')?></option>
+            <option value="agents"><?php echo _l('agent_select_list_agents')?></option>
             </select>
         </div>
         <!-- /.agent selector drop down menu  -->

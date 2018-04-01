@@ -18,6 +18,7 @@ $lang['close']                = 'Close';
 $lang['remove']                = 'Remove';
 $lang['send']                 = 'Send';
 $lang['cancel']               = 'Cancel';
+$lang['browse']               = 'Browse';
 $lang['go_back']              = 'Go Back';
 $lang['yes_delete']              = 'Yes, delete it!';
 $lang['cancelled'] = 'Cancelled!';
@@ -203,6 +204,16 @@ $lang['agents_tab_import_export'] = 'Import and Export';
 $lang['client_access_token'] = 'Client Access Token';
 $lang['developer_access_token'] = 'Developer Access Token';
 $lang['title_api_keys'] = 'Api Keys (v1)';
+$lang['agent_matchmode'] = 'Match Mode';
+$lang['agent_matchmode_note'] = 'Select the match mode that suits your agent best.';
+$lang['mlsetting_hybird'] = 'Use the <b>Hybrid (Rule-based and ML)</b> mode for agents with a small number of examples/templates in intents, especially the ones using composite entities.';
+$lang['mlsetting_ml'] = 'Use <b>ML</b> only mode for agents with a large number of examples in intents, especially the ones using @sys.any';
+$lang['mlsetting_select_hybird'] = 'Hybird (Rule-based and ML)';
+$lang['mlsetting_select_mlonly'] = 'ML Only ( Non-rule-based )';
+$lang['agent_threshold'] = 'ML Classification Threshold';
+$lang['agent_threshold_note'] = 'Define the threshold value for the confidence score. If the returned value is less than the threshold value, then a fallback intent will be triggered or, if there is no fallback intents defined, no intent will be triggered.';
+$lang['agent_select_new_agent'] = 'Create new agent';
+$lang['agent_select_list_agents'] = 'View all agents';
 
 # Intents
 $lang["als_intents"] = 'Intents';

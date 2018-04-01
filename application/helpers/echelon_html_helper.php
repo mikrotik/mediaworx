@@ -122,6 +122,29 @@ function app_stylesheet($path,$filename){
     }
     return '<link href="'.base_url($path.'/'.$filename).'" rel="stylesheet">'.PHP_EOL;
 }
+
+/**
+ * Return contact agent image url
+ * @param  mixed $agentid
+ * @param  string $type
+ * @return string
+ */
+function agent_image_url($agent_id, $type = 'small')
+{
+    $url = base_url('assets/images/user-placeholder.jpg');
+    $CI =& get_instance();
+    $CI->db->select('agent_image');
+    $CI->db->from('tblagents');
+    $CI->db->where('id', $agent_id);
+    $agent = $CI->db->get()->row();
+    if ($agent) {
+        if (!is_null($agent->agent_image)) {
+            $url = base_url('uploads/agent_profile_images/' . $agent_id . '/' . $type . '_' . $agent->agent_image);
+        }
+    }
+    return $url;
+}
+
 /**
  * Load app script based on option
  * Can load minified stylesheet and non minified
