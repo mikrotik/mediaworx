@@ -20,6 +20,7 @@ $lang['send']                 = 'Send';
 $lang['cancel']               = 'Cancel';
 $lang['browse']               = 'Browse';
 $lang['add']               = 'Add';
+$lang['upload']               = 'Upload';
 $lang['go_back']              = 'Go Back';
 $lang['yes_delete']              = 'Yes, delete it!';
 $lang['cancelled'] = 'Cancelled!';
@@ -270,6 +271,9 @@ $lang['new_parameter'] = 'New parameter';
 # Integrations
 $lang['integrations']          = 'Integrations';
 $lang['integration']           = 'Integration';
+
+# Training
+$lang['training']          = 'Training';
 
 
 # Email Templates
