@@ -122,7 +122,9 @@ class Intents extends Clients_controller
             $intents = $this->intents_model->get();
             foreach ($intents as $context)
             {
-                $contexts[] = $context['intent_name'].'-followup';
+                if ($context['agent_id'] == $this->agent_scope) {
+                    $contexts[] = $context['intent_name'] . '-followup';
+                }
             }
 
             $data['intent'] = $intent;
@@ -134,7 +136,6 @@ class Intents extends Clients_controller
         }
 
         if ($id) {
-            $data['bodyclass'] = $this->bodyclass;
             $this->data = $data;
             $this->view = 'intents/intent';
             $this->layout();

@@ -145,6 +145,11 @@ class Entities extends Clients_controller
         }
     }
 
+    /**
+     * TODO
+     * Not fully accurate
+     * ex: coffee can not be found
+     */
     public function parse_entities()
     {
         if ($this->input->post() && $this->input->is_ajax_request())
