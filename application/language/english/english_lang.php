@@ -267,6 +267,11 @@ $lang['action_prompt_variant'] = 'Enter a prompt variant...';
 $lang['prompts'] = 'Prompts';
 $lang['new_parameter'] = 'New parameter';
 
+# Integrations
+$lang['integrations']          = 'Integrations';
+$lang['integration']           = 'Integration';
+
+
 # Email Templates
 $lang['email_templates']                        = 'Email Templates';
 $lang['email_template']                         = 'Email Template';

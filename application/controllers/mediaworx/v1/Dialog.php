@@ -17,6 +17,7 @@ class Dialog extends Mediaworx_controller
         $this->_objDateTime = new DateTime('NOW');
 
         $this->_format='json';
+
     }
 
     public function index($action){
@@ -24,7 +25,6 @@ class Dialog extends Mediaworx_controller
         // grab the request
         $this->_request = array();
         parse_str(file_get_contents('php://input'), $this->_request);
-
 
         if (is_array($this->_request) && isset($this->_request['session'])) {
             $this->_format = $this->_request['format'];

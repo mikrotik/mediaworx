@@ -4,7 +4,105 @@ require_once VENDOR_FOLDER . 'stanford/autoload.php';
 
 class Echelon_Helper
 {
-    const EVAL_RELEVANCE = 0; // Evaluation threshold limit
+    const EVAL_RELEVANCE = 3; // Evaluation threshold limit
+
+    static private $_request = [];
+    static private $_agent = [];
+    static private $_response = [];
+
+    /** Set Request */
+    public static function _setRequest($request)
+    {
+        self::$_request = $request;
+    }
+
+    /** Get Request */
+    private static function _getRequest()
+    {
+        return self::$_request;
+    }
+
+    /** Set Agent */
+    public static function _setAgent($agent)
+    {
+        self::$_agent = $agent;
+    }
+
+    /** Get Agent */
+    private static function _getAgent()
+    {
+        return self::$_agent;
+    }
+
+    /** Set Bot Response */
+    private static function _setResponse($key,$value)
+    {
+        self::$_response[$key] = $value;
+    }
+
+    /** Get Bot Response */
+    private static function _getResponse()
+    {
+        return self::$_response;
+    }
+
+    public static function _process()
+    {
+
+        /**
+         * Load the request
+         * @var $request
+         */
+        $request = self::_getRequest();
+
+        /**
+         * Load the agent
+         * @car $agent
+         */
+        $agent = self::_getAgent();
+
+        self::_setResponse("speech","I can hear you! You said [ {$request["usersay"]} ]");
+
+    }
+
+    /** Return Echelon Response */
+    public static function response()
+    {
+        return self::_getResponse();
+    }
+
+    static public function tags_to_point($patterns) {
+        $tags = array();
+        foreach($patterns as $pattern) {
+            $tags = array_merge($tags, $pattern['tags']);
+        }
+        $tags = array_unique($tags);
+
+        $tags = array_fill_keys($tags, 0);
+        ksort($tags);
+        return $tags;
+    }
+    protected function dot_product($a, $b) {
+        $products = array_map(function($a, $b) {
+            return $a * $b;
+        }, $a, $b);
+        return array_reduce($products, function($a, $b) {
+            return $a + $b;
+        });
+    }
+    protected function magnitude($point) {
+        $squares = array_map(function($x) {
+            return pow($x, 2);
+        }, $point);
+        return sqrt(array_reduce($squares, function($a, $b) {
+            return $a + $b;
+        }));
+    }
+    static public function cosine($a, $b) {
+        ksort($a);
+        ksort($b);
+        return self::dot_product($a, $b) / (self::magnitude($a) * self::magnitude($b));
+    }
 
     public static function parse_entities($string)
     {
@@ -37,7 +135,7 @@ class Echelon_Helper
         $sql_statement = "SELECT e.id,e.entity_name,er.reference,er.synonym,MATCH(er.synonym) AGAINST ('".$string."') as Relevance
             FROM tblentityreferences er
             LEFT JOIN tblentities e ON(e.id = er.entity_id)
-            WHERE MATCH (er.synonym) AGAINST('".$against."' IN BOOLEAN MODE)
+            WHERE MATCH (er.synonym) AGAINST('".$string."' IN BOOLEAN MODE)
             GROUP BY e.id
             HAVING Relevance >= ".self::EVAL_RELEVANCE."
             ORDER BY Relevance DESC";
@@ -70,6 +168,17 @@ class Echelon_Helper
         }
 
         return $entities;
+    }
+
+    public static function stanford_string_parser($string)
+    {
+        $pos = new \StanfordNLP\POSTagger(
+            VENDOR_FOLDER . 'stanford/models/english-left3words-distsim.tagger',
+            VENDOR_FOLDER . 'stanford/stanford-postagger-3.8.0.jar'
+        );
+        $result = $pos->tag(explode(' ', $string));
+
+        return $result;
     }
 
     public static function wordToNumber($str = ""){
@@ -114,16 +223,5 @@ class Echelon_Helper
         }
 
         return false;
-    }
-
-    public static function stanford_string_parser($string)
-    {
-        $pos = new \StanfordNLP\POSTagger(
-            VENDOR_FOLDER . 'stanford/models/english-left3words-distsim.tagger',
-            VENDOR_FOLDER . 'stanford/stanford-postagger-3.8.0.jar'
-        );
-        $result = $pos->tag(explode(' ', $string));
-
-        return $result;
     }
 }
