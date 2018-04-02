@@ -10,6 +10,7 @@ class Training_model extends CRM_Model
     public function get()
     {
         $this->db->select('id,object,object_id,pattern');
+        $this->db->where('is_child',0);
         $patterns = $this->db->get('tblpatterns')->result_array();
 
         if ($patterns)

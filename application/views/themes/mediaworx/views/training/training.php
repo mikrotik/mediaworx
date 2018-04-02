@@ -37,16 +37,10 @@
             },
             success: function (json) {
 
-                var jsonObj = JSON.parse(json.prediction);
+                var jsonObj = JSON.parse(json.success);
                 var jsonPretty = JSON.stringify(jsonObj, null, '\t');
 
-                var jsonVocab = JSON.parse(json.vocab);
-                var jsonPrettyVocab = JSON.stringify(jsonVocab, null, '\t');
-
                 $('#training-result pre').html(jsonPretty);
-                $('#vocabulary').html(jsonPrettyVocab);
-
-                console.log(json.vector);
 
             },
             error: function (xhr, ajaxOptions, thrownError) {

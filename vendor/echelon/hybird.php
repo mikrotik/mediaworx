@@ -1,5 +1,4 @@
 <?php
-
 use Echelon_Helper;
 
 class Echelon_Hybird
@@ -47,6 +46,7 @@ class Echelon_Hybird
             /** Set our agent to Helper */
             Echelon_Helper::_setAgent($this->agent);
 
+            Echelon_Helper::predict_intent($this->request['usersay']);
             /**
              * Initiate bot
              */

@@ -5,6 +5,7 @@ use Phpml\FeatureExtraction\TokenCountVectorizer;
 use Phpml\Tokenization\WhitespaceTokenizer;
 use Phpml\Classification\SVC;
 use Phpml\SupportVectorMachine\Kernel;
+use Phpml\ModelManager;
 
 class Training extends Clients_controller
 {
@@ -42,7 +43,7 @@ class Training extends Clients_controller
         foreach ($patterns as $pattern)
         {
             $samples[] = strtoupper($pattern["pattern"]);
-            $labels[] = $pattern["id"].'-'.$pattern["object"].'-'.$pattern["object_id"].'-'.$pattern["pattern"];
+            $labels[] = $pattern["id"];
         }
 
         $vectorizer = new TokenCountVectorizer(new WhitespaceTokenizer());
@@ -52,13 +53,6 @@ class Training extends Clients_controller
 
         // Transform the provided text samples into a vectorized list.
         $vectorizer->transform($samples);
-
-        $usersay = [strtoupper('i want a drink')];
-        // Build the dictionary.
-        $vectorizer->fit($usersay);
-
-        // Transform the provided text samples into a vectorized list.
-        $vectorizer->transform($usersay);
 
         $classifier = new SVC(
             Kernel::LINEAR, // $kernel
@@ -74,11 +68,14 @@ class Training extends Clients_controller
 
         $classifier->train($samples, $labels);
 
+        $filepath = TRAINING_DATA_FOLDER . 'model/trained_data.txt';
+        $modelManager = new ModelManager();
+        $modelManager->saveToFile($classifier, $filepath);
+
+        /** ./training */
+
         $res = array(
-            'obj'=>json_encode($samples),
-            'vocab'=>json_encode($vectorizer->getVocabulary()),
-            'prediction'=>json_encode($classifier->predict($usersay)),
-            'vector'=>json_encode($usersay)
+            'success'=>true
         );
 
         echo json_encode($res);

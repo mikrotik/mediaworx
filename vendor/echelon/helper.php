@@ -1,6 +1,14 @@
 <?php
 
 require_once VENDOR_FOLDER . 'stanford/autoload.php';
+require_once VENDOR_FOLDER . 'ml/autoload.php';
+
+use Phpml\FeatureExtraction\TokenCountVectorizer;
+use Phpml\Tokenization\WhitespaceTokenizer;
+use Phpml\Classification\SVC;
+use Phpml\SupportVectorMachine\Kernel;
+use Phpml\ModelManager;
+use Phpml\Metric\Accuracy;
 
 class Echelon_Helper
 {
@@ -9,6 +17,8 @@ class Echelon_Helper
     static private $_request = [];
     static private $_agent = [];
     static private $_response = [];
+    static private $_intent = [];
+    static private $_accuracy = [];
 
     /** Set Request */
     public static function _setRequest($request)
@@ -22,6 +32,18 @@ class Echelon_Helper
         return self::$_request;
     }
 
+    /** Set Intent */
+    public static function _setIntent($intent)
+    {
+        self::$_intent = $intent;
+    }
+
+    /** Get Intent */
+    private static function _getIntent()
+    {
+        return self::$_intent;
+    }
+
     /** Set Agent */
     public static function _setAgent($agent)
     {
@@ -32,6 +54,18 @@ class Echelon_Helper
     private static function _getAgent()
     {
         return self::$_agent;
+    }
+
+    /** Set Accuracy */
+    public static function _setAccuracy($accuracy)
+    {
+        self::$_accuracy = $accuracy;
+    }
+
+    /** Get Accuracy */
+    private static function _getAccuracy()
+    {
+        return self::$_accuracy;
     }
 
     /** Set Bot Response */
@@ -57,11 +91,18 @@ class Echelon_Helper
 
         /**
          * Load the agent
-         * @car $agent
+         * @var $agent
          */
         $agent = self::_getAgent();
 
-        self::_setResponse("speech","I can hear you! You said [ {$request["usersay"]} ]");
+        /**
+         * Load the intent
+         * @var intent
+         */
+        $intent = self::_getIntent();
+        $accuracy = self::_getAccuracy();
+        self::_setResponse("score",$accuracy);
+        self::_setResponse("speech","I can hear you! You said [ {$intent->intent_name} ]");
 
     }
 
@@ -102,6 +143,71 @@ class Echelon_Helper
         ksort($a);
         ksort($b);
         return self::dot_product($a, $b) / (self::magnitude($a) * self::magnitude($b));
+    }
+
+    public static function predict_intent($user_pattern)
+    {
+        $CI = & get_instance();
+
+        /**
+         * Load the agent
+         * @var $agent
+         */
+        $agent = self::_getAgent();
+
+        $CI->db->select('id,object,object_id,pattern');
+        $CI->db->where('is_child',0);
+        $patterns = $CI->db->get('tblpatterns')->result_array();
+
+        $samples = [];
+        $labels = [];
+
+        foreach ($patterns as $pattern)
+        {
+            $samples[] = strtoupper($pattern["pattern"]);
+            $labels[] = $pattern["id"];
+        }
+
+        $vectorizer = new TokenCountVectorizer(new WhitespaceTokenizer());
+
+        // Build the dictionary.
+        $vectorizer->fit($samples);
+
+        // Transform the provided text samples into a vectorized list.
+        $vectorizer->transform($samples);
+
+        $usersay = [strtoupper($user_pattern)];
+        $actualLabel = strtoupper($user_pattern);
+
+        // Build the dictionary.
+        $vectorizer->fit($usersay);
+
+        // Transform the provided text samples into a vectorized list.
+        $vectorizer->transform($usersay);
+
+        $filepath = TRAINING_DATA_FOLDER . 'model/trained_data.txt';
+        $modelManager = new ModelManager();
+        $restoredClassifier = $modelManager->restoreFromFile($filepath);
+
+        $pattern_id = json_encode($restoredClassifier->predict($usersay)[0]);
+
+        $CI->db->where('id',$pattern_id);
+        $pattern = $CI->db->get('tblpatterns')->row();
+
+        $str_compare = new StringCompare(strtoupper($pattern->pattern),$actualLabel);
+        $str_compare->process();
+        $similarity = $str_compare->getSimilarityPercentage() / 100;
+        self::_setAccuracy($similarity);
+
+        if ($similarity >= $agent->threshold) {
+
+            $CI->db->where('id', $pattern->object_id);
+            $intent = $CI->db->get('tbl' . $pattern->object)->row();
+        } else {
+            $intent = self::_getDefaultFallbackResponse($agent);
+        }
+
+        self::_setIntent($intent);
     }
 
     public static function parse_entities($string)
@@ -223,5 +329,25 @@ class Echelon_Helper
         }
 
         return false;
+    }
+
+    private static function _getDefaultFallbackResponse($agent){
+
+        $CI = & get_instance();
+
+        $CI->db->where('intent_name','Default Fallback Intent');
+        $CI->db->where('agent_id',$agent->id);
+        $defaultFallbackIntent = $CI->db->get('tblintents')->row();
+
+        $CI->db->where('intent_id', $defaultFallbackIntent->id);
+        $CI->db->order_by('id', 'RANDOM');
+        $CI->db->limit(1);
+        $defaultFallback = $CI->db->get('tblintents_responses')->row();
+
+        self::_setResponse("action",$defaultFallbackIntent->action);
+        self::_setResponse("source",$agent->agent_name);
+        self::_setResponse("speech",$defaultFallback->response);
+
+        return $defaultFallbackIntent;
     }
 }
