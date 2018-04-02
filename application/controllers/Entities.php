@@ -41,7 +41,7 @@ class Entities extends Clients_controller
             $sTable = 'tblentities';
 
             $where = array();
-            array_push($where,' AND agent_id = '.$this->agent_scope.' AND user_id ='.get_client_user_id());
+            array_push($where,' AND agent_id = '.$this->agent_scope);
 
             $result = data_tables_init($aColumns,$sIndexColumn,$sTable,array(),$where,array('id','user_id'));
             $output = $result['output'];

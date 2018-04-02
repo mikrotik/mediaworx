@@ -53,6 +53,39 @@ class Agents_model extends CRM_Model
         $this->db->delete('tblagents');
 
         if($this->db->affected_rows() > 0){
+
+            /** Delete all corresponding data of Agent */
+            $this->db->select('id');
+            $this->db->where('agent_id',$id);
+            $entities = $this->db->get('tblentities')->result_array();
+
+            foreach ($entities as $entity)
+            {
+                $this->db->where('entity_id',$entity['id']);
+                $this->db->delete('tblentityreferences');
+            }
+
+            $this->db->where('agent_id',$id);
+            $this->db->delete('tblentities');
+
+            $this->db->select('id');
+            $this->db->where('agent_id',$id);
+            $intents = $this->db->get('tblintents')->result_array();
+
+            foreach ($intents as $intent)
+            {
+                $this->db->where('intent_id',$intent['id']);
+                $this->db->delete('tblintents_responses');
+
+                $this->db->where('object','intent');
+                $this->db->where('object_id',$intent['id']);
+                $this->db->delete('tblpatterns');
+            }
+
+            $this->db->where('agent_id',$id);
+            $this->db->delete('tblintents');
+
+
             logActivity('Agent Delete [ID:'.$id.']');
             return true;
         }
