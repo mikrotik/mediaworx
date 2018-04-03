@@ -11,7 +11,7 @@ function autoload_classes ($class_name)
 
     if (file_exists(__DIR__ .  '/' .$class_location . '.php'))
     {
-        require_once(__DIR__  . '/' .$class_location . '.php');
+        include_once(__DIR__  . '/' .$class_location . '.php');
     }
     else
     {

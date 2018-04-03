@@ -154,6 +154,7 @@ class Entities extends Clients_controller
      */
     public function parse_entities()
     {
+
         if ($this->input->post() && $this->input->is_ajax_request())
         {
             $data = $this->input->post(NULL, FALSE);

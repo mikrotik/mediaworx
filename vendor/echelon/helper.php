@@ -94,12 +94,16 @@ class Echelon_Helper
          * @var $agent
          */
         $agent = self::_getAgent();
+        self::_setResponse("source",$agent->agent_name);
 
         /**
          * Load the intent
          * @var intent
          */
         $intent = self::_getIntent();
+
+        self::_setResponse("action",$intent->action);
+
         $accuracy = self::_getAccuracy();
         self::_setResponse("score",$accuracy);
         self::_setResponse("speech","I can hear you! You said [ {$intent->intent_name} ]");
@@ -344,8 +348,6 @@ class Echelon_Helper
         $CI->db->limit(1);
         $defaultFallback = $CI->db->get('tblintents_responses')->row();
 
-        self::_setResponse("action",$defaultFallbackIntent->action);
-        self::_setResponse("source",$agent->agent_name);
         self::_setResponse("speech",$defaultFallback->response);
 
         return $defaultFallbackIntent;

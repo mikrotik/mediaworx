@@ -21,7 +21,7 @@ class Clients_controller extends CRM_Controller
 //        /**
 //         * Load Main Chat Bot
 //         */
-//        require_once VENDOR_FOLDER . 'echelon/echelon_autoload.php';
+        require_once VENDOR_FOLDER . 'echelon/echelon_autoload.php';
 
         if (isset($_COOKIE['agent']) && !empty($_COOKIE['agent']))
         {

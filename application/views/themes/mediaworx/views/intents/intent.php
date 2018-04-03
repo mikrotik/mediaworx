@@ -141,7 +141,7 @@
                                             <?php
                                             $btn_define_prompt = '';
 
-                                            if (isset($action_parameter->action_prompts))
+                                            if (isset($action_parameter->is_required) && $action_parameter->is_required)
                                             {
                                                 $btn_define_prompt = '<a href="#" class="btn btn-icon btn-post-options" data-row="'.$action_parameters_row.'" data-parameter="'.$action_parameter->parameter_name.'" data-entity="'.$action_parameter->entity.'" data-value="'.$action_parameter->value.'" data-toggle="modal" data-id="'.$action_parameters_row.'" data-target="#define-prompts">'._l('define_prompts').'</a>';
                                             }
@@ -280,6 +280,7 @@
                             </div>
                         </div>
                     </div>
+                    <br/>
                     <div class="table">
                         <table class="table table-hover table-prompt-variant">
                             <thead>
@@ -314,6 +315,22 @@
     $('select[name=\'context_output[]\']').val(<?php echo $intent->context_output ?>); $('select[name=\'context_output[]\']').trigger('change');
     $('select[name=\'events[]\']').val(<?php echo $intent->events ?>); $('select[name=\'events[]\']').trigger('change');
 
+    $( ".is_required" ).on('ifChanged',function(e) {
+        var id = $(this).data("id");
+        var row = $(this).data("row");
+        var parameter_name = $(this).data('parameter');
+        var entity = $(this).data('entity');
+        var value = $(this).data('value');
+
+        var checked = $(this).is(":checked");
+
+        if (checked) {
+            $('#prompts-' + id).html('<a href="#" class="btn btn-icon btn-post-options" data-row="'+id+'" data-parameter="'+parameter_name+'" data-entity="'+entity+'" data-value="'+value+'" data-toggle="modal" data-id="'+id+'" data-target="#define-prompts"><?php echo _l('define_prompts')?></a>');
+        } else {
+            $('#prompts-' + id).html('');
+        }
+    });
+
     $(function(){
 
         <?php if ($action_parameters) { ?>
@@ -321,22 +338,6 @@
             action_parameters.push('<?php echo $action_parameter->parameter_name?>');
             <?php } ?>
         <?php } ?>
-
-        $( ".is_required" ).on('ifChanged',function(e) {
-            var id = $(this).data("id");
-            var row = $(this).data("row");
-            var parameter_name = $(this).data('parameter');
-            var entity = $(this).data('entity');
-            var value = $(this).data('value');
-
-            var checked = $(this).is(":checked");
-
-            if (checked) {
-                $('#prompts-' + id).html('<a href="#" class="btn btn-icon btn-post-options" data-row="'+id+'" data-parameter="'+parameter_name+'" data-entity="'+entity+'" data-value="'+value+'" data-toggle="modal" data-id="'+id+'" data-target="#define-prompts"><?php echo _l('define_prompts')?></a>');
-            } else {
-                $('#prompts-' + id).html('');
-            }
-        });
 
         /** Validate Intent Form*/
         _validate_form($('.intent-form'),
@@ -668,11 +669,6 @@
             }
         });
 
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' /* optional */
-        });
     });
 
     function removeResponse(id){

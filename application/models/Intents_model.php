@@ -24,7 +24,7 @@ class Intents_model extends CRM_Model
     {
         if (is_numeric($id)){
 
-            $this->db->where('object', 'intent');
+            $this->db->where('object', 'intents');
             $this->db->where('object_id', $id);
             $patterns = $this->db->get('tblpatterns')->result_array();
             return $patterns;
@@ -155,18 +155,19 @@ class Intents_model extends CRM_Model
             $this->db->insert('tblintents_responses', $responseData);
         }
 
-        $this->db->where('object', 'intent');
+        $this->db->where('object', 'intents');
         $this->db->where('object_id',$id);
         $this->db->delete('tblpatterns');
 
         foreach ($user_expressions as $user_expression)
         {
             $patternData = array(
-                'object'=>'intent',
+                'object'=>'intents',
                 'object_id'=>$id,
                 'pattern'=>$user_expression['pattern'],
                 'stanford'=>$user_expression['stanford'],
-                'parameters'=>json_encode($user_expression['parameters'])
+                'parameters'=>json_encode($user_expression['parameters']),
+                'is_child'=>($data['parent_id'] ? 1 : 0)
             );
 
             $this->db->insert('tblpatterns', $patternData);
@@ -189,7 +190,7 @@ class Intents_model extends CRM_Model
             $this->db->where('id',$id);
             $this->db->delete('tblintents');
 
-            $this->db->where('object', 'intent');
+            $this->db->where('object', 'intents');
             $this->db->where('object_id',$id);
             $this->db->delete('tblpatterns');
 
