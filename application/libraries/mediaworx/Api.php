@@ -44,7 +44,9 @@ class Api extends Rest
                         "action" => $data[0]['action'],
                         "actionIncomplete" => $data[0]['actionIncomplete'],
                         "parameters" => $data[0]['parameters'],
-                        "contexts" => (object)array(),
+                        "contexts" => (object)array(
+                            "parameters"=>$data[0]["contextParameters"]
+                        ),
                         "metadata" => array(
                             "intentId" => $data[0]["intent_id"],
                             "parentId" => $data[0]["parent_id"],

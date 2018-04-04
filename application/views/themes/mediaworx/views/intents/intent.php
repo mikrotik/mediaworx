@@ -29,7 +29,7 @@
                                 <select name="context_input[]" class="form-control select2" multiple="multiple" data-placeholder="<?php echo _l("context_input")?>"
                                         style="width: 100%;">
                                     <?php foreach ($contexts as $context) { ?>
-                                        <option value="<?php echo $context?>"><?php echo $context?></option>
+                                        <option value="<?php echo str_replace(" ","",$context)?>"><?php echo $context?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -37,7 +37,7 @@
                                 <select name="context_output[]" class="form-control select2" multiple="multiple" data-placeholder="<?php echo _l("context_output")?>"
                                         style="width: 100%;">
                                     <?php foreach ($contexts as $context) { ?>
-                                        <option value="<?php echo $context?>"><?php echo $context?></option>
+                                        <option value="<?php echo str_replace(" ","",$context)?>"><?php echo $context?></option>
                                     <?php } ?>
                                 </select>
                             </div>

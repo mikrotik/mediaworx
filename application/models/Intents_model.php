@@ -184,6 +184,12 @@ class Intents_model extends CRM_Model
     public function delete($id="")
     {
 
+        /**
+         *
+         * TODO
+         *  Delete corresponding intents
+         *  to main intent
+         */
         if (is_numeric($id))
         {
 

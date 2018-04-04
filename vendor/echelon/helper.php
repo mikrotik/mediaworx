@@ -12,13 +12,15 @@ use Phpml\Metric\Accuracy;
 
 class Echelon_Helper
 {
-    const EVAL_RELEVANCE = 3; // Evaluation threshold limit
+    const EVAL_RELEVANCE = 3.07; // Evaluation threshold limit
 
     static private $_request = [];
     static private $_agent = [];
     static private $_response = [];
     static private $_intent = [];
     static private $_accuracy = [];
+    static private $_pattern = "";
+    static private $_actionIncomplete = true;
 
     /** Set Request */
     public static function _setRequest($request)
@@ -30,6 +32,30 @@ class Echelon_Helper
     private static function _getRequest()
     {
         return self::$_request;
+    }
+
+    /** Set Pattern */
+    public static function _setPattern($pattern)
+    {
+        self::$_pattern = $pattern;
+    }
+
+    /** Get Pattern */
+    private static function _getPattern()
+    {
+        return self::$_pattern;
+    }
+
+    /** Set ActionIncomplete */
+    public static function _setActionIncomplete($status)
+    {
+        self::$_actionIncomplete = $status;
+    }
+
+    /** Is ActionIncomplete */
+    public static function _isActionIncomplete()
+    {
+        return self::$_actionIncomplete;
     }
 
     /** Set Intent */
@@ -74,6 +100,12 @@ class Echelon_Helper
         self::$_response[$key] = $value;
     }
 
+    /** Get Bot Response By Key*/
+    private static function _getResponseByKey($key)
+    {
+        return self::$_response[$key];
+    }
+
     /** Get Bot Response */
     private static function _getResponse()
     {
@@ -96,6 +128,7 @@ class Echelon_Helper
         $agent = self::_getAgent();
         self::_setResponse("source",$agent->agent_name);
 
+
         /**
          * Load the intent
          * @var intent
@@ -106,47 +139,30 @@ class Echelon_Helper
 
         $accuracy = self::_getAccuracy();
         self::_setResponse("score",$accuracy);
-        self::_setResponse("speech","I can hear you! You said [ {$intent->intent_name} ]");
+
+
+        /**
+         * Check for pattern parameters
+         */
+        $patternParameters = self::patternParameters(self::_getPattern());
+
+
+        /**
+         * Check for required parameters
+         */
+        $requiredParameters = self::requiredParameters($intent);
 
     }
+
 
     /** Return Echelon Response */
     public static function response()
     {
+        /**
+         * TODO
+         * Renew the parameters
+         */
         return self::_getResponse();
-    }
-
-    static public function tags_to_point($patterns) {
-        $tags = array();
-        foreach($patterns as $pattern) {
-            $tags = array_merge($tags, $pattern['tags']);
-        }
-        $tags = array_unique($tags);
-
-        $tags = array_fill_keys($tags, 0);
-        ksort($tags);
-        return $tags;
-    }
-    protected function dot_product($a, $b) {
-        $products = array_map(function($a, $b) {
-            return $a * $b;
-        }, $a, $b);
-        return array_reduce($products, function($a, $b) {
-            return $a + $b;
-        });
-    }
-    protected function magnitude($point) {
-        $squares = array_map(function($x) {
-            return pow($x, 2);
-        }, $point);
-        return sqrt(array_reduce($squares, function($a, $b) {
-            return $a + $b;
-        }));
-    }
-    static public function cosine($a, $b) {
-        ksort($a);
-        ksort($b);
-        return self::dot_product($a, $b) / (self::magnitude($a) * self::magnitude($b));
     }
 
     public static function predict_intent($user_pattern)
@@ -207,11 +223,47 @@ class Echelon_Helper
 
             $CI->db->where('id', $pattern->object_id);
             $intent = $CI->db->get('tbl' . $pattern->object)->row();
+
         } else {
             $intent = self::_getDefaultFallbackResponse($agent);
         }
 
+        self::_setPattern($user_pattern);
         self::_setIntent($intent);
+    }
+
+    private static function patternParameters($string)
+    {
+        $CI = & get_instance();
+
+        $parameters = [];
+        $contextParameters = [];
+
+        $patternParameters = self::parse_entities($string);
+        $intent = self::_getIntent();
+
+        $intentActionParameters = json_decode($intent->action_parameters);
+
+        foreach ($intentActionParameters as $key=>$intentActionParameter){
+            $parameters[$intentActionParameter->parameter_name] = (isset($patternParameters[$intentActionParameter->parameter_name]) ? $patternParameters[$intentActionParameter->parameter_name] : "");
+        }
+
+        foreach ($intentActionParameters as $key=>$intentActionParameter){
+            $contextParameters[$intentActionParameter->parameter_name] = (isset($patternParameters[$intentActionParameter->parameter_name]) ? $patternParameters[$intentActionParameter->parameter_name] : "");
+            $contextParameters[$intentActionParameter->parameter_name.".original"] = "";
+        }
+
+        self::_setResponse("parameters",$parameters);
+        self::_setResponse("contextParameters",$contextParameters);
+
+        return true;
+    }
+
+    private static function requiredParameters($intent)
+    {
+        $CI = & get_instance();
+
+        return false;
     }
 
     public static function parse_entities($string)
@@ -242,13 +294,11 @@ class Echelon_Helper
          * CREATE FULLTEXT INDEX synonym_index ON tblentityreferences(synonym)
          * WITH QUERY EXPANSION - IN BOOLEAN MODE
          */
-        $sql_statement = "SELECT e.id,e.entity_name,er.reference,er.synonym,MATCH(er.synonym) AGAINST ('".$string."') as Relevance
-            FROM tblentityreferences er
-            LEFT JOIN tblentities e ON(e.id = er.entity_id)
-            WHERE MATCH (er.synonym) AGAINST('".$string."' IN BOOLEAN MODE)
-            GROUP BY e.id
-            HAVING Relevance >= ".self::EVAL_RELEVANCE."
-            ORDER BY Relevance DESC";
+        $sql_statement = "SELECT DISTINCT(e.id),e.entity_name,er.reference,er.synonym,MATCH(er.synonym) AGAINST ('".$string."') as relevance
+                        FROM tblentityreferences er
+                        LEFT JOIN tblentities e
+                        ON(e.id = er.entity_id)
+                        HAVING relevance >=".self::EVAL_RELEVANCE;
         $results = $CI->db->query($sql_statement)->result_array();
 
         $entities = [];
@@ -348,8 +398,11 @@ class Echelon_Helper
         $CI->db->limit(1);
         $defaultFallback = $CI->db->get('tblintents_responses')->row();
 
+        self::_setActionIncomplete(false);
+        self::_setResponse('actionIncomplete', self::_isActionIncomplete());
+
         self::_setResponse("speech",$defaultFallback->response);
 
-        return $defaultFallbackIntent;
+        return $defaultFallback->response;
     }
 }
