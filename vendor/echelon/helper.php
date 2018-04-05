@@ -2,6 +2,7 @@
 
 require_once VENDOR_FOLDER . 'stanford/autoload.php';
 require_once VENDOR_FOLDER . 'ml/autoload.php';
+require_once VENDOR_FOLDER . 'stringfy/autoload.php';
 
 use Phpml\FeatureExtraction\TokenCountVectorizer;
 use Phpml\Tokenization\WhitespaceTokenizer;
@@ -135,8 +136,6 @@ class Echelon_Helper
          */
         $intent = self::_getIntent();
 
-        self::_setResponse("action",$intent->action);
-
         $accuracy = self::_getAccuracy();
         self::_setResponse("score",$accuracy);
 
@@ -162,12 +161,19 @@ class Echelon_Helper
          * TODO
          * Renew the parameters
          */
+
+        /**
+         * TODO
+         * log the conversation to tblconversation
+         */
         return self::_getResponse();
     }
 
     public static function predict_intent($user_pattern)
     {
         $CI = & get_instance();
+
+        self::_setResponse("pattern",$user_pattern);
 
         /**
          * Load the agent
@@ -223,7 +229,9 @@ class Echelon_Helper
 
             $CI->db->where('id', $pattern->object_id);
             $intent = $CI->db->get('tbl' . $pattern->object)->row();
-
+            self::_setResponse("action",$intent->action);
+            self::_setResponse('fallback',0);
+            self::_setResponse('state',$intent->intent_name);
         } else {
             $intent = self::_getDefaultFallbackResponse($agent);
         }
@@ -250,13 +258,37 @@ class Echelon_Helper
 
         foreach ($intentActionParameters as $key=>$intentActionParameter){
             $contextParameters[$intentActionParameter->parameter_name] = (isset($patternParameters[$intentActionParameter->parameter_name]) ? $patternParameters[$intentActionParameter->parameter_name] : "");
-            $contextParameters[$intentActionParameter->parameter_name.".original"] = "";
+            $contextParameters[$intentActionParameter->parameter_name.".original"] = self::_getParameterOriginal($patternParameters[$intentActionParameter->parameter_name]);
         }
 
         self::_setResponse("parameters",$parameters);
         self::_setResponse("contextParameters",$contextParameters);
 
         return true;
+    }
+
+    private static function _getParameterOriginal($value){
+
+        $CI = & get_instance();
+        $stringfy = new \DDTextCompare\DDTextCompare();
+
+        if ($value) {
+            $CI->db->like('synonym', strtolower($value), 'both');
+            $entities = $CI->db->get('tblentityreferences')->result_array();
+
+            foreach ($entities as $entity){
+
+                $scored = round($stringfy->compare($entity['reference'],$value) , 1, PHP_ROUND_HALF_UP);
+                $entitiesArray[$scored] = array(
+                    "score"=>$scored,
+                    "reference"=>$entity['reference']
+                );
+            }
+            $score = array_column($entitiesArray, 'score');
+            return $entitiesArray[max($score)]['reference'];
+        }
+
+        return false;
     }
 
     private static function requiredParameters($intent)
@@ -392,6 +424,9 @@ class Echelon_Helper
         $CI->db->where('intent_name','Default Fallback Intent');
         $CI->db->where('agent_id',$agent->id);
         $defaultFallbackIntent = $CI->db->get('tblintents')->row();
+        self::_setResponse("action",$defaultFallbackIntent->action);
+        self::_setResponse('fallback',1);
+        self::_setResponse('state',$defaultFallbackIntent->intent_name);
 
         $CI->db->where('intent_id', $defaultFallbackIntent->id);
         $CI->db->order_by('id', 'RANDOM');
@@ -400,7 +435,6 @@ class Echelon_Helper
 
         self::_setActionIncomplete(false);
         self::_setResponse('actionIncomplete', self::_isActionIncomplete());
-
         self::_setResponse("speech",$defaultFallback->response);
 
         return $defaultFallback->response;

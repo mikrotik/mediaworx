@@ -42,9 +42,11 @@ class Api extends Rest
                         "source" => $data[0]['source'],
                         "resolvedQuery" => $data[0]['pattern'],
                         "action" => $data[0]['action'],
+                        "state" => $data[0]['state'],
                         "actionIncomplete" => $data[0]['actionIncomplete'],
                         "parameters" => $data[0]['parameters'],
                         "contexts" => (object)array(
+                            "context"=>$data[0]["context"],
                             "parameters"=>$data[0]["contextParameters"]
                         ),
                         "metadata" => array(
@@ -64,7 +66,6 @@ class Api extends Rest
                         ),
                         'score' => $data[0]['score'],
                         "debug" => $data[0]['debug'],
-                        "requiredParameters" => $data[0]["requiredParameters"]
                     ),
                     "status" => (object)array(
                         "has_error" => $hasError,
@@ -72,8 +73,7 @@ class Api extends Rest
                         "message" => $this->get_rest_status_message()
                     ),
                     "session" => $data['session'],
-                    "DATA" => $data[0]['data'],
-                    "ECHELON_SESSION" => $data[0]["echelon_session"]
+                    "fallback" => $data[0]['fallback'],
                 )
             );
 
