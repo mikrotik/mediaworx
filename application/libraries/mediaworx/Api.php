@@ -46,26 +46,26 @@ class Api extends Rest
                         "actionIncomplete" => $data[0]['actionIncomplete'],
                         "parameters" => $data[0]['parameters'],
                         "contexts" => (object)array(
-                            "context"=>$data[0]["context"],
+//                            "context"=>$data[0]["context"],
                             "parameters"=>$data[0]["contextParameters"]
                         ),
                         "metadata" => array(
-                            "intentId" => $data[0]["intent_id"],
-                            "parentId" => $data[0]["parent_id"],
+//                            "intentId" => $data[0]["intent_id"],
+//                            "parentId" => $data[0]["parent_id"],
                             "webhookUsed" => false,
                             "webhookForSlotFillingUsed" => false,
-                            "intentName" => $data[0]["intent_name"]
+//                            "intentName" => $data[0]["intent_name"]
                         ),
                         "fulfillment" => array(
                             "speech" => $data[0]['speech'],
                             "messages" => array(
                                 "type" => "simple_response",
                                 "platform" => "google",
-                                "textToSpeech" => $data[0]['textToSpeech']
+//                                "textToSpeech" => $data[0]['textToSpeech']
                             )
                         ),
                         'score' => $data[0]['score'],
-                        "debug" => $data[0]['debug'],
+//                        "debug" => $data[0]['debug'],
                     ),
                     "status" => (object)array(
                         "has_error" => $hasError,

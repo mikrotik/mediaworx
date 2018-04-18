@@ -157,15 +157,6 @@ class Echelon_Helper
     /** Return Echelon Response */
     public static function response()
     {
-        /**
-         * TODO
-         * Renew the parameters
-         */
-
-        /**
-         * TODO
-         * log the conversation to tblconversation
-         */
         return self::_getResponse();
     }
 
@@ -244,6 +235,8 @@ class Echelon_Helper
     {
         $CI = & get_instance();
 
+        $conversationParameters = self::getLastConversation();
+
         $parameters = [];
         $contextParameters = [];
 
@@ -258,13 +251,40 @@ class Echelon_Helper
 
         foreach ($intentActionParameters as $key=>$intentActionParameter){
             $contextParameters[$intentActionParameter->parameter_name] = (isset($patternParameters[$intentActionParameter->parameter_name]) ? $patternParameters[$intentActionParameter->parameter_name] : "");
-            $contextParameters[$intentActionParameter->parameter_name.".original"] = self::_getParameterOriginal($patternParameters[$intentActionParameter->parameter_name]);
+            $contextParameters[$intentActionParameter->parameter_name.".original"] = self::_getParameterOriginal($contextParameters[$intentActionParameter->parameter_name]);
         }
+
+//        foreach ($conversationParameters as $key=>$conversationParameter){
+//
+//            if (isset($conversationParameters[$key]) && array_key_exists($conversationParameters[$key],$parameters) && !empty($conversationParameters[$key])){
+//                $parameters[$key] = $conversationParameters[$key];
+//            }
+//        }
+
 
         self::_setResponse("parameters",$parameters);
         self::_setResponse("contextParameters",$contextParameters);
 
         return true;
+    }
+
+    private static function getLastConversation()
+    {
+        $CI = & get_instance();
+        $request = self::_getRequest();
+
+        $CI->db->where('session_id',$request["session"]);
+        $CI->db->where('date',date('Y-m-d'));
+        $CI->db->where('fallback',0);
+        $CI->db->order_by("id","desc");
+
+        $conversation = $CI->db->get("tblconversation")->row();
+
+        if ($conversation) {
+            return json_decode($conversation->parameters);
+        }
+
+        return false;
     }
 
     private static function _getParameterOriginal($value){

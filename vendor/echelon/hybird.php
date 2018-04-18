@@ -1,6 +1,4 @@
 <?php
-use Echelon_Helper;
-
 class Echelon_Hybird
 {
 

@@ -26,8 +26,6 @@
     <?php echo app_stylesheet(template_assets_path().'/plugins/iCheck/square','blue.css'); ?>
     <!-- Sweetalert -->
     <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert/sweetalert.css');?>">
-    <!-- Tag It -->
-    <?php echo app_stylesheet(template_assets_path().'/css','bootstrap-tagsinput.css'); ?>
     <!-- Select2 -->
     <link rel="stylesheet" href="<?php echo base_url(template_assets_path().'/bower_components/select2/dist/css/select2.min.css')?>">
     <!-- DataTables -->

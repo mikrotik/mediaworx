@@ -865,8 +865,8 @@ function get_upload_path_by_type($type){
         return STAFF_PROFILE_IMAGES_FOLDER;
         break;
         case 'agent_images':
-            return AGENT_IMAGES_FOLDER;
-            break;
+        return AGENT_IMAGES_FOLDER;
+        break;
         case 'company':
         return COMPANY_FILES_FOLDER;
         break;
